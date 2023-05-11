@@ -1,0 +1,4 @@
+PHYSICS_LANGUAGE_PAIR("project_name", U"Greek 10th Grade Physics in C++"),
+PHYSICS_LANGUAGE_PAIR("select_language", U"Select preferred language"),
+PHYSICS_LANGUAGE_PAIR("dropdown_placeholder", U"Please choose"),
+PHYSICS_LANGUAGE_PAIR("continue", U"Continue"),

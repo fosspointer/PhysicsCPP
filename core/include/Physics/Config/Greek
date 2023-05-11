@@ -1,0 +1,4 @@
+PHYSICS_LANGUAGE_PAIR("project_name", U"Ελληνική Φυσική Πρώτης Λυκείου σε C++"),
+PHYSICS_LANGUAGE_PAIR("select_language", U"Επιλογή προτεινόμενης γλώσσας"),
+PHYSICS_LANGUAGE_PAIR("dropdown_placeholder", U"Παρακαλείσθε να επιλέξετε"),
+PHYSICS_LANGUAGE_PAIR("continue", U"Συνέχεια"),
