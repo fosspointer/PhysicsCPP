@@ -1,0 +1,40 @@
+\doxysection{Value.\+hpp}
+\hypertarget{Value_8hpp_source}{}\label{Value_8hpp_source}\index{/home/nephele/dev/physics/core/include/Physics/UI/Value.hpp@{/home/nephele/dev/physics/core/include/Physics/UI/Value.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <Physics/System/Exception.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/System/Application.hpp>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }physics}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Value}{Value}}}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ Type\ :\ uint8\_t}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ Pixels,\ PercentageX,\ PercentageY,\ PercentageAVG}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Value}{Value}}(\textcolor{keywordtype}{float}\ amount,\ Type\ type)}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ :m\_Amount(amount),\ m\_Type(type)}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ Get(\mbox{\hyperlink{classphysics_1_1Application}{Application}}*\ application)}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(m\_Type)}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Type::Pixels:\ \textcolor{keywordflow}{return}\ m\_Amount;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Type::PercentageX:\ \textcolor{keywordflow}{return}\ (m\_Amount\ *\ 0.01f)\ /\ (float)application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().getSize().x;\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Type::PercentageY:\ \textcolor{keywordflow}{return}\ (m\_Amount\ *\ 0.01f)\ /\ (float)application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().getSize().y;\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Type::PercentageAVG:\ \textcolor{keywordflow}{return}\ (m\_Amount\ *\ 0.01f)\ /\ (0.5f\ *\ ((float)application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().getSize().y\ +\ (float)application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().getSize().x));\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{throw}\ PHYSICS\_EXCEPTION(\textcolor{stringliteral}{"{}Value\ type\ not\ in\ enum\ range"{}});}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Amount;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ Type\ m\_Type;}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ \}}
+
+\end{DoxyCode}

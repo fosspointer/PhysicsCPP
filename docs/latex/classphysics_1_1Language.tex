@@ -1,0 +1,94 @@
+\doxysection{physics\+::Language Class Reference}
+\hypertarget{classphysics_1_1Language}{}\label{classphysics_1_1Language}\index{physics::Language@{physics::Language}}
+Inheritance diagram for physics\+::Language\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classphysics_1_1Language}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}\label{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982} 
+enum \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}} \{ {\bfseries Greek}
+, {\bfseries English}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing all supported languages. \end{DoxyCompactList}\item 
+\Hypertarget{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}\label{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246} 
+using {\bfseries String} = std\+::u32string
+\begin{DoxyCompactList}\small\item\em String representing std\+::u32string, implementation may or may not change. \end{DoxyCompactList}\item 
+\Hypertarget{classphysics_1_1Language_a8703731766e1b9ac9ae7c80a745ce756}\label{classphysics_1_1Language_a8703731766e1b9ac9ae7c80a745ce756} 
+using {\bfseries Char\+Map} = std\+::unordered\+\_\+map$<$ const char \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}} $>$
+\item 
+\Hypertarget{classphysics_1_1Language_a8c36a01876ef9c9816c4b562842a282d}\label{classphysics_1_1Language_a8c36a01876ef9c9816c4b562842a282d} 
+using {\bfseries Map\+Array} = std\+::array$<$ Char\+Map, PHYSICS\+\_\+\+LANGUAGES\+\_\+\+SUPPORTED $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}} \mbox{\hyperlink{classphysics_1_1Language_a7815e2cff8743b6eb8b7a018adb6352a}{Get\+Text\+STD}} (const char \texorpdfstring{$\ast$}{*}name, const \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}} \&language=Selected\+Language)
+\begin{DoxyCompactList}\small\item\em Get a language property, as set in \"{}\+Physics/\+Config/$<$\+Language$>$\"{} (relative path), where $<$\+Language$>$ is the supported language. \end{DoxyCompactList}\item 
+static sf\+::\+String \mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{Get\+Text\+SFML}} (const char \texorpdfstring{$\ast$}{*}name, const \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}} \&language=Selected\+Language)
+\begin{DoxyCompactList}\small\item\em Does the same as Get\+String\+STD(), but converts the string to the sfml format before returning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classphysics_1_1Language_ad3091b375b648ab26432458c5ff443d1}\label{classphysics_1_1Language_ad3091b375b648ab26432458c5ff443d1} 
+static \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}} {\bfseries Selected\+Language} = Option\+::\+Greek
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classphysics_1_1NonCopyable}{physics\+::\+Non\+Copyable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Non\+Copyable} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
+\item 
+\mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \& {\bfseries operator=} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}\label{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd} 
+\index{physics::Language@{physics::Language}!GetTextSFML@{GetTextSFML}}
+\index{GetTextSFML@{GetTextSFML}!physics::Language@{physics::Language}}
+\doxysubsubsection{\texorpdfstring{GetTextSFML()}{GetTextSFML()}}
+{\footnotesize\ttfamily static sf\+::\+String physics\+::\+Language\+::\+Get\+Text\+SFML (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{const \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}} \&}]{language = {\ttfamily SelectedLanguage} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Does the same as Get\+String\+STD(), but converts the string to the sfml format before returning. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the relative in snake\+\_\+case and lowercase alphanumeric (plus \textquotesingle{}\+\_\+\textquotesingle{}) characters \\
+\hline
+{\em language} & Enumerator representing the language for which to return the property \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sf\+::\+String representing the property\textquotesingle{}s value 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Language_a7815e2cff8743b6eb8b7a018adb6352a}\label{classphysics_1_1Language_a7815e2cff8743b6eb8b7a018adb6352a} 
+\index{physics::Language@{physics::Language}!GetTextSTD@{GetTextSTD}}
+\index{GetTextSTD@{GetTextSTD}!physics::Language@{physics::Language}}
+\doxysubsubsection{\texorpdfstring{GetTextSTD()}{GetTextSTD()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}} physics\+::\+Language\+::\+Get\+Text\+STD (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{const \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}} \&}]{language = {\ttfamily SelectedLanguage} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get a language property, as set in \"{}\+Physics/\+Config/$<$\+Language$>$\"{} (relative path), where $<$\+Language$>$ is the supported language. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the relative in snake\+\_\+case and lowercase alphanumeric (plus \textquotesingle{}\+\_\+\textquotesingle{}) characters \\
+\hline
+{\em language} & Enumerator representing the language for which to return the property \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String representing the property\textquotesingle{}s value 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/nephele/dev/physics/core/include/\+Physics/\+System/Language.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,76 @@
+\doxysection{Background\+Demo.\+hpp}
+\hypertarget{BackgroundDemo_8hpp_source}{}\label{BackgroundDemo_8hpp_source}\index{/home/nephele/dev/physics/demo/BackgroundDemo.hpp@{/home/nephele/dev/physics/demo/BackgroundDemo.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}Physics/System/Application.hpp"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Physics/System/Colors.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Physics/System/Mouse.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Physics/UI/Button.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Physics/UI/UIElementAbstract.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <Physics/UI/LabeledImage.hpp>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <Physics/UI/Slider.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBackgroundDemo}{BackgroundDemo}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{physics::Application::State}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classBackgroundDemo}{\string~BackgroundDemo}}()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_Info;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_ExitButton;}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBackgroundDemo_a834658df73fe7725ed8a5493cd3560c3}{OnCreate}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ m\_Info\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}(m\_Application);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ m\_Info-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Center);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ m\_ExitButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}X"{}},\ \{50,\ 50\});}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ m\_ExitButton}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::TopLeft);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ btn,\ MouseButton)}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ app-\/>\mbox{\hyperlink{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}{GetState}}()-\/>\mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ physics::UIElementAbstract::DisplayBounds\ =\ true;}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ red\_slider\ =\ m\_Info-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 0.0f,\ 255.0f));}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ green\_slider\ =\ m\_Info-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 0.0f,\ 255.0f));}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ blue\_slider\ =\ m\_Info-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 0.0f,\ 255.0f));}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ red\_slider-\/>SetSliderColors(physics::Colors::Red)}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutlineThickness(5.0f)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(sf::Vector2f\{200.0f,\ 50.0f\},\ 20.0f,\ 10.0f);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ green\_slider-\/>SetSliderColors(physics::Colors::Green)}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutlineThickness(5.0f)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(sf::Vector2f\{200.0f,\ 50.0f\},\ 20.0f,\ 10.0f);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ blue\_slider-\/>SetSliderColors(physics::Colors::Blue)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutlineThickness(5.0f)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(sf::Vector2f\{200.0f,\ 50.0f\},\ 20.0f,\ 10.0f);}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBackgroundDemo_afefb9edf2266cb6114ed7575fd3d09f2}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00056\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ m\_Application-\/>SetBackgroundColor(sf::Color\{(uint8\_t)red\_slider-\/>GetValue(),\ (uint8\_t)green\_slider-\/>GetValue(),\ (uint8\_t)blue\_slider-\/>GetValue()\});}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ m\_Info-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ m\_Info-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_ExitButton;}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ red\_slider;}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ green\_slider;}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ blue\_slider;}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}*\ m\_Info;}
+\DoxyCodeLine{00070\ \};}
+
+\end{DoxyCode}

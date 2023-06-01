@@ -1,0 +1,44 @@
+\doxysection{Body.\+hpp}
+\hypertarget{Body_8hpp_source}{}\label{Body_8hpp_source}\index{/home/nephele/dev/physics/core/include/Physics/Physics/Body.hpp@{/home/nephele/dev/physics/core/include/Physics/Physics/Body.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }physics}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Body}{Body}}}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Body}{Body}}(sf::Texture\&\ texture)}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Sprite.setTexture(\&m\_Texture);}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetTexture(\textcolor{keyword}{const}\ sf::String\&\ filepath)}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Texture.loadFromFile(filepath);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetPosition(\textcolor{keyword}{const}\ sf::Vector2f\&\ position)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Sprite.setPosition(position);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetSize(\textcolor{keyword}{const}\ sf::Vector2f\&\ size)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Sprite.setScale(size);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Sprite.setOrigin(size\ /\ 2.0f);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Mass\ =\ 1.0f;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ sf::Sprite\ m\_Sprite;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ sf::Texture\ m\_Texture;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ sf::Vector2f\ m\_Velocity;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ sf::Vector2f\ m\_Acceleration;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::vector<sf::Vector2f>\ m\_Forces;}
+\DoxyCodeLine{00037\ \ \ \ \ \};}
+\DoxyCodeLine{00038\ \}}
+
+\end{DoxyCode}

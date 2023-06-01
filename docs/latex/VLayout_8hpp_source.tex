@@ -1,0 +1,57 @@
+\doxysection{VLayout.\+hpp}
+\hypertarget{VLayout_8hpp_source}{}\label{VLayout_8hpp_source}\index{/home/nephele/dev/physics/core/include/Physics/UI/VLayout.hpp@{/home/nephele/dev/physics/core/include/Physics/UI/VLayout.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}SFML/System/Vector2.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/UI/Layout.hpp>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }physics}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1VLayout}{VLayout}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Layout}{Layout}}}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1VLayout}{VLayout}}(\mbox{\hyperlink{classphysics_1_1Application}{Application}}*\ application,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ margin\ =\ sf::Vector2f\{25.0f,\ 25.0f\})}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ :\mbox{\hyperlink{classphysics_1_1Layout}{Layout}}(application,\ margin)}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ UpdateSize()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(m\_Children.size()\ ==\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ ElementList::size\_type\ max\_size\_x\_index\ =\ 0;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ size\_y\ =\ 0.0f;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(ElementList::size\_type\ i\ =\ 0;\ i\ <\ m\_Children.size();\ i++)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ child\ =\ m\_Children[i];}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ max\_x\_child\ =\ m\_Children[max\_size\_x\_index];}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(child-\/>GetSize().x\ +\ child-\/>GetMargin().x\ >\ max\_x\_child-\/>GetSize().x\ +\ max\_x\_child-\/>GetMargin().x)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_size\_x\_index\ =\ i;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size\_y\ +=\ m\_Children[i]-\/>GetSize().y;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(i\ ==\ m\_Children.size()\ -\/\ 1\ ||\ i\ ==\ 0)}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size\_y\ +=\ m\_Children[i]-\/>GetMargin().y\ /\ 2.0f;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ size\_y\ +=\ m\_Children[i]-\/>GetMargin().y;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ max\_x\_child\ =\ m\_Children[max\_size\_x\_index];}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Size\ =\ sf::Vector2f\{max\_x\_child-\/>GetSize().x\ +\ max\_x\_child-\/>GetMargin().x,\ size\_y\};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ UpdatePositions()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00038\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(m\_Children.size()\ ==\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ child\_position\_y\ =\ m\_Position.y\ -\/\ m\_Size.y\ /\ 2.0f\ +\ m\_Children[0]-\/>GetSize().y\ /\ 2.0f;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(ElementList::size\_type\ i\ =\ 0;\ i\ <\ m\_Children.size();\ i++)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_Children[i]-\/>AbstractSetPosition(sf::Vector2f\{m\_Position.x,\ child\_position\_y\});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ next\_size\_y\ =\ m\_Children.size()\ >\ i\ +\ 1\ ?\ m\_Children[i\ +\ 1]-\/>GetSize().y\ /\ 2.0f\ :\ 0.0f;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ child\_position\_y\ +=\ m\_Children[i]-\/>GetSize().y\ /\ 2.0f\ +\ m\_Children[i]-\/>GetMargin().y\ +\ next\_size\_y;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}

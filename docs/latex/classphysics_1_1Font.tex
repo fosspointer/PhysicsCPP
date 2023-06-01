@@ -1,0 +1,94 @@
+\doxysection{physics\+::Font Class Reference}
+\hypertarget{classphysics_1_1Font}{}\label{classphysics_1_1Font}\index{physics::Font@{physics::Font}}
+Inheritance diagram for physics\+::Font\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classphysics_1_1Font}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classphysics_1_1Font_a3efff1511c85a3eed803b9d6d6902b03}{Font}} (const sf\+::\+String \&filepath)
+\begin{DoxyCompactList}\small\item\em sf\+::\+Font abstraction class \end{DoxyCompactList}\item 
+sf\+::\+Font \& \mbox{\hyperlink{classphysics_1_1Font_a2571e7b9d6ea09c3a240a37000fed9ff}{Get}} ()
+\begin{DoxyCompactList}\small\item\em Get the sf\+::\+Font object (mutable) \end{DoxyCompactList}\item 
+const sf\+::\+Font \& \mbox{\hyperlink{classphysics_1_1Font_a2f7162f36f117394e79e0fbfa21a327a}{Get}} () const
+\begin{DoxyCompactList}\small\item\em Get the sf\+::\+Font object (immutable) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classphysics_1_1NonCopyable}{physics\+::\+Non\+Copyable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Non\+Copyable} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
+\item 
+\mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \& {\bfseries operator=} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classphysics_1_1Font}{Font}} \& \mbox{\hyperlink{classphysics_1_1Font_a2c10caa38fefd6d1f040794d2a0257cf}{Get\+Default}} ()
+\begin{DoxyCompactList}\small\item\em Loads and returns the default font as set in \"{}\+Physics/\+Config/\+Font\"{} (relative filepath) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classphysics_1_1Font_a3efff1511c85a3eed803b9d6d6902b03}\label{classphysics_1_1Font_a3efff1511c85a3eed803b9d6d6902b03} 
+\index{physics::Font@{physics::Font}!Font@{Font}}
+\index{Font@{Font}!physics::Font@{physics::Font}}
+\doxysubsubsection{\texorpdfstring{Font()}{Font()}}
+{\footnotesize\ttfamily physics\+::\+Font\+::\+Font (\begin{DoxyParamCaption}\item[{const sf\+::\+String \&}]{filepath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+sf\+::\+Font abstraction class 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & the filepath of the font to be loaded \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classphysics_1_1Font_a2571e7b9d6ea09c3a240a37000fed9ff}\label{classphysics_1_1Font_a2571e7b9d6ea09c3a240a37000fed9ff} 
+\index{physics::Font@{physics::Font}!Get@{Get}}
+\index{Get@{Get}!physics::Font@{physics::Font}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily sf\+::\+Font \& physics\+::\+Font\+::\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the sf\+::\+Font object (mutable) 
+
+\begin{DoxyReturn}{Returns}
+Mutable reference to the font 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Font_a2f7162f36f117394e79e0fbfa21a327a}\label{classphysics_1_1Font_a2f7162f36f117394e79e0fbfa21a327a} 
+\index{physics::Font@{physics::Font}!Get@{Get}}
+\index{Get@{Get}!physics::Font@{physics::Font}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const sf\+::\+Font \& physics\+::\+Font\+::\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the sf\+::\+Font object (immutable) 
+
+\begin{DoxyReturn}{Returns}
+Immutable reference to the font 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Font_a2c10caa38fefd6d1f040794d2a0257cf}\label{classphysics_1_1Font_a2c10caa38fefd6d1f040794d2a0257cf} 
+\index{physics::Font@{physics::Font}!GetDefault@{GetDefault}}
+\index{GetDefault@{GetDefault}!physics::Font@{physics::Font}}
+\doxysubsubsection{\texorpdfstring{GetDefault()}{GetDefault()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classphysics_1_1Font}{Font}} \& physics\+::\+Font\+::\+Get\+Default (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Loads and returns the default font as set in \"{}\+Physics/\+Config/\+Font\"{} (relative filepath) 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classphysics_1_1Font}{Font}\& 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/nephele/dev/physics/core/include/\+Physics/\+System/Font.\+hpp\end{DoxyCompactItemize}

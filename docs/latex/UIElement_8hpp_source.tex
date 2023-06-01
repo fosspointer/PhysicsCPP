@@ -1,0 +1,149 @@
+\doxysection{UIElement.\+hpp}
+\hypertarget{UIElement_8hpp_source}{}\label{UIElement_8hpp_source}\index{/home/nephele/dev/physics/core/include/Physics/UI/UIElement.hpp@{/home/nephele/dev/physics/core/include/Physics/UI/UIElement.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <Physics/UI/UIElementAbstract.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Physics/System/Application.hpp>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Physics/System/Mouse.hpp>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }physics}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ UIElementImpl>}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }UIElement;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ UIElementImpl>}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{using\ }HoverCallbackFunc\ =\ std::function<void(Application*,\ UIElementImpl*,\ \textcolor{keywordtype}{bool})>;}
+\DoxyCodeLine{00020\ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ UIElementImpl>}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{using\ }ClickCallbackFunc\ =\ std::function<void(Application*,\ UIElementImpl*,\ MouseButton)>;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ UIElementImpl>}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1UIElement}{UIElement}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElementAbstract}}}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1UIElement_a61899a607de56d34bd0ecfa4f03edeed}{UIElement}}(\mbox{\hyperlink{classphysics_1_1Application}{Application}}*\ application,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ size,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ margin\ =\ sf::Vector2f\{25.0f,\ 25.0f\},\ \textcolor{keyword}{const}\ sf::Color\&\ color\ =\ sf::Color::White)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ :\mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElementAbstract}}(application,\ size,\ margin,\ color)}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Debug\ specific\ code,\ ignored\ by\ the\ preprocessor\ on\ release\ builds}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \#ifdef\ PHYSICS\_DEBUG\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ ,\ m\_DebugModeColor(rand()\ \%\ 255,\ rand()\ \%\ 255,\ rand()\ \%\ 255,\ 255)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \#endif}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \string~UIElement()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(\textcolor{keywordtype}{float}\ delta\_time)\ \textcolor{keyword}{override}\ \textcolor{keyword}{final}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PreviousHovered\ =\ m\_CurrentHovered;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ m\_CurrentHovered\ =\ \mbox{\hyperlink{classphysics_1_1UIElementAbstract_ae6d693836d88fe535483001c67fb68c9}{IsHovered}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Debug\ specific\ code,\ ignored\ by\ the\ preprocessor\ on\ release\ builds}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ PHYSICS\_DEBUG}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(DisplayBounds)\ \textcolor{comment}{//If\ the\ DisplayBounds\ 'flag'\ is\ set}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Render\ a\ rectangle\ representing\ the\ element's\ bounds}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::RectangleShape\ aabb;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aabb.setFillColor(sf::Color::Transparent);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aabb.setOutlineColor(m\_DebugModeColor);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//AABB\ is\ only\ drawn\ in\ debug\ mode-\/\ this\ hardcoded\ number\ is\ ok\ here}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aabb.setOutlineThickness(10);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aabb.setPosition(m\_Position\ -\/\ m\_Size\ /\ 2.0f);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aabb.setSize(m\_Size);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(aabb);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Configuration\ done\ by\ deriving\ classes}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ CustomUpdate(delta\_time);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd}{GetResized}}())}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1UIElementAbstract_af85ec98859213308a970839c975d1ee6}{CalculateAnchor}}();}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{classphysics_1_1UIElementAbstract_ae6d693836d88fe535483001c67fb68c9}{IsHovered}}()\ \&\&\ !StoppedHover())\ \textcolor{keywordflow}{return};\ \textcolor{comment}{//The\ below\ code\ is\ for\ handling\ click\ and\ hover\ events.}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Hence,\ if\ IsHovered()\ returns\ false,\ execution\ is\ stopped}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ func\ :\ m\_HoverCallbackFunctions)}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func(m\_Application,\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this}),\ StoppedHover());}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ mouse\_state\ =\ Mouse::GetInstance().ClickState;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Bitwise\ arithmetic\ and\ function\ callback\ iterators}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Note:\ State\ \&\ MOUSE\_<BUTTON>\ means\ that\ <BUTTON>\ is\ 'enabled'\ for\ the\ state}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(mouse\_state\ \&\ MOUSE\_LEFT)}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ func\ :\ m\_ClickCallbackFunctions)}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func(m\_Application,\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this}),\ MOUSE\_LEFT);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(mouse\_state\ \&\ MOUSE\_MIDDLE)}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ func\ :\ m\_ClickCallbackFunctions)}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func(m\_Application,\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this}),\ MOUSE\_MIDDLE);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(mouse\_state\ \&\ MOUSE\_RIGHT)}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ func\ :\ m\_ClickCallbackFunctions)}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func(m\_Application,\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this}),\ MOUSE\_RIGHT);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PragmaUpdated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_a0c0ad15428099e643fc2c99cfd8837bd}{AddHoverCallback}}(HoverCallbackFunc<UIElementImpl>\ func)}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ m\_HoverCallbackFunctions.push\_back(func);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}(ClickCallbackFunc<UIElementImpl>\ func)}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ m\_ClickCallbackFunctions.push\_back(func);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_a307678f2f8e648872476c1bc8a4e071c}{SetPosition}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ position)}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PragmaUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Position\ =\ position;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Anchor\ =\ Anchor::None;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_a1dd03e310eee7d1a76c42f161491433b}{SetSize}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ size)}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PragmaUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Size\ =\ size;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_a39d2cd63aed51171b54560ad7c3df6e7}{SetMargin}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ margin)}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PragmaUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Margin\ =\ margin;}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_aa96d9c2f5ae603aaaa416e28dc635735}{SetColor}}(\textcolor{keyword}{const}\ sf::Color\&\ color)}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PragmaUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Color\ =\ color;}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ UIElementImpl*\ \mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(\textcolor{keyword}{const}\ Anchor\&\ anchor)}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PragmaUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Anchor\ =\ anchor;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1UIElementAbstract_af85ec98859213308a970839c975d1ee6}{CalculateAnchor}}();}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}UIElementImpl*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ CustomUpdate(\textcolor{keywordtype}{float}\ delta\_time)\ \{\}}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ PHYSICS\_DEBUG}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ sf::Color\ m\_DebugModeColor;}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ std::vector<HoverCallbackFunc<UIElementImpl>>\ m\_HoverCallbackFunctions;}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ std::vector<ClickCallbackFunc<UIElementImpl>>\ m\_ClickCallbackFunctions;}
+\DoxyCodeLine{00201\ \ \ \ \ \};}
+\DoxyCodeLine{00202\ \}}
+
+\end{DoxyCode}

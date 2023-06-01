@@ -1,0 +1,56 @@
+\doxysection{Language.\+hpp}
+\hypertarget{Language_8hpp_source}{}\label{Language_8hpp_source}\index{/home/nephele/dev/physics/core/include/Physics/System/Language.hpp@{/home/nephele/dev/physics/core/include/Physics/System/Language.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}SFML/System/String.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/System/NonCopyable.hpp>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/System/Exception.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ PHYSICS\_LANGUAGES\_SUPPORTED\ 2}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ PHYSICS\_LANGUAGE\_PAIR(key,\ map)\ \{key,\ map\}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }physics}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Language}{Language}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1NonCopyable}{NonCopyable}}}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}}\ =\ std::u32string;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }CharMap\ =\ std::unordered\_map<const\ char*,\ String>;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }MapArray\ =\ std::array<CharMap,\ PHYSICS\_LANGUAGES\_SUPPORTED>;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ Greek,\ English}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}}\ \mbox{\hyperlink{classphysics_1_1Language_a7815e2cff8743b6eb8b7a018adb6352a}{GetTextSTD}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}}\&\ language\ =\ SelectedLanguage)}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ CharMap\ greek\_map\ =\ \{}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#include\ <Physics/Config/Greek>}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ CharMap\ english\_map\ =\ \{}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#include\ <Physics/Config/English>}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(language)}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Option::Greek:\ \textcolor{keywordflow}{return}\ greek\_map.at(name);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Option::English:\ \textcolor{keywordflow}{return}\ english\_map.at(name);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{throw}\ PHYSICS\_EXCEPTION(\textcolor{stringliteral}{"{}Invalid\ language!\ No\ language\ with\ index\ '"{}}\ +\ std::to\_string(SelectedLanguage)\ +\ \textcolor{stringliteral}{"{}'\ exists!"{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ sf::String\ \mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{GetTextSFML}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}}\&\ language\ =\ SelectedLanguage)}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}}\ str\ =\ \mbox{\hyperlink{classphysics_1_1Language_a7815e2cff8743b6eb8b7a018adb6352a}{GetTextSTD}}(name,\ language);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sf::String::fromUtf32(str.begin(),\ str.end());}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Option}}\ SelectedLanguage;}
+\DoxyCodeLine{00066\ \ \ \ \ \};}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{Language::Option}}\ Language::SelectedLanguage\ =\ Option::Greek;}
+\DoxyCodeLine{00068\ \}}
+
+\end{DoxyCode}

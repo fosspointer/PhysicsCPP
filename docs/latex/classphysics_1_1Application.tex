@@ -1,0 +1,199 @@
+\doxysection{physics\+::Application Class Reference}
+\hypertarget{classphysics_1_1Application}{}\label{classphysics_1_1Application}\index{physics::Application@{physics::Application}}
+Inheritance diagram for physics\+::Application\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classphysics_1_1Application}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classphysics_1_1Application_a7b9ba5d8f39cc6daba206c88d1fe4ec3}{On\+Create}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classphysics_1_1Application}{Application}\textquotesingle{}s create event, override to handle. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classphysics_1_1Application_ae968f0c3e9c94881fd4f04c487b8873a}{On\+Update}} (float delta\+\_\+time)
+\begin{DoxyCompactList}\small\item\em \doxylink{classphysics_1_1Application}{Application}\textquotesingle{}s update event, override to handle. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classphysics_1_1Application_a35b3bee9592e11dba37e4de6dc2c0eee}{Start}} (const sf\+::\+Vector2u \&size, const sf\+::\+String \&title, sf\+::\+Uint32 style=sf\+::\+Style\+::\+Default)
+\begin{DoxyCompactList}\small\item\em Starts the application. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classphysics_1_1Application_ad36aa7f44d8d6c0495c2ea8e12c00212}{Rename}} (const sf\+::\+String \&title)
+\begin{DoxyCompactList}\small\item\em Renames the application window. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{Push\+State}} (\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*}state)
+\begin{DoxyCompactList}\small\item\em Pushes application state to the state-\/stack, as well as calling the required functions. \end{DoxyCompactList}\item 
+\Hypertarget{classphysics_1_1Application_a9ef260b6f8f08c4d7f69cedaf2870055}\label{classphysics_1_1Application_a9ef260b6f8f08c4d7f69cedaf2870055} 
+\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*} {\bfseries Change\+State} (\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*}state)
+\item 
+\Hypertarget{classphysics_1_1Application_a116c64ad3e868f9d9dea94fbfa071c76}\label{classphysics_1_1Application_a116c64ad3e868f9d9dea94fbfa071c76} 
+void {\bfseries Pop\+State} ()
+\begin{DoxyCompactList}\small\item\em Pops the application state at the top of the state-\/stack, as well as calling the required functions. \end{DoxyCompactList}\item 
+sf\+::\+Render\+Window \& \mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{Get\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Get the Window object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}{Get\+State}} ()
+\begin{DoxyCompactList}\small\item\em Get the \doxylink{classphysics_1_1Application_1_1State}{State} object at the top of the state-\/stack. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd}{Get\+Resized}} () const
+\begin{DoxyCompactList}\small\item\em Get the boolean corresponding to the window resize event. \end{DoxyCompactList}\item 
+const sf\+::\+Color \& \mbox{\hyperlink{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8}{Get\+Background\+Color}} () const
+\begin{DoxyCompactList}\small\item\em Get the Background Color object. \end{DoxyCompactList}\item 
+\Hypertarget{classphysics_1_1Application_a2236239617122bd28c1546207fd3d214}\label{classphysics_1_1Application_a2236239617122bd28c1546207fd3d214} 
+void {\bfseries Set\+Background\+Color} (const sf\+::\+Color \&color)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classphysics_1_1NonCopyable}{physics\+::\+Non\+Copyable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Non\+Copyable} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
+\item 
+\mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \& {\bfseries operator=} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8}\label{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8} 
+\index{physics::Application@{physics::Application}!GetBackgroundColor@{GetBackgroundColor}}
+\index{GetBackgroundColor@{GetBackgroundColor}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{GetBackgroundColor()}{GetBackgroundColor()}}
+{\footnotesize\ttfamily const sf\+::\+Color \& physics\+::\+Application\+::\+Get\+Background\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Background Color object. 
+
+\begin{DoxyReturn}{Returns}
+Immutable reference to the window\textquotesingle{}s background color 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd}\label{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd} 
+\index{physics::Application@{physics::Application}!GetResized@{GetResized}}
+\index{GetResized@{GetResized}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{GetResized()}{GetResized()}}
+{\footnotesize\ttfamily bool physics\+::\+Application\+::\+Get\+Resized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the boolean corresponding to the window resize event. 
+
+\begin{DoxyReturn}{Returns}
+Copy of the boolean 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}\label{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314} 
+\index{physics::Application@{physics::Application}!GetState@{GetState}}
+\index{GetState@{GetState}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*} physics\+::\+Application\+::\+Get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the \doxylink{classphysics_1_1Application_1_1State}{State} object at the top of the state-\/stack. 
+
+\begin{DoxyReturn}{Returns}
+Mutable pointer to the state 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}\label{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b} 
+\index{physics::Application@{physics::Application}!GetWindow@{GetWindow}}
+\index{GetWindow@{GetWindow}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{GetWindow()}{GetWindow()}}
+{\footnotesize\ttfamily sf\+::\+Render\+Window \& physics\+::\+Application\+::\+Get\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Window object. 
+
+\begin{DoxyReturn}{Returns}
+Mutable reference to the window 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Application_a7b9ba5d8f39cc6daba206c88d1fe4ec3}\label{classphysics_1_1Application_a7b9ba5d8f39cc6daba206c88d1fe4ec3} 
+\index{physics::Application@{physics::Application}!OnCreate@{OnCreate}}
+\index{OnCreate@{OnCreate}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{OnCreate()}{OnCreate()}}
+{\footnotesize\ttfamily virtual void physics\+::\+Application\+::\+On\+Create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxylink{classphysics_1_1Application}{Application}\textquotesingle{}s create event, override to handle. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classDemo_a113aa54f0ff1b066b2ce99dcf1c59ad6}{Demo}}.
+
+\Hypertarget{classphysics_1_1Application_ae968f0c3e9c94881fd4f04c487b8873a}\label{classphysics_1_1Application_ae968f0c3e9c94881fd4f04c487b8873a} 
+\index{physics::Application@{physics::Application}!OnUpdate@{OnUpdate}}
+\index{OnUpdate@{OnUpdate}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{OnUpdate()}{OnUpdate()}}
+{\footnotesize\ttfamily virtual void physics\+::\+Application\+::\+On\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxylink{classphysics_1_1Application}{Application}\textquotesingle{}s update event, override to handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+\_\+time} & time elapsed since the previous frame \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classDemo_a1057b906a2fa1cbc2c4800906ddd8d75}{Demo}}.
+
+\Hypertarget{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}\label{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8} 
+\index{physics::Application@{physics::Application}!PushState@{PushState}}
+\index{PushState@{PushState}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{PushState()}{PushState()}}
+{\footnotesize\ttfamily auto physics\+::\+Application\+::\+Push\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}} \texorpdfstring{$\ast$}{*}}]{state }\end{DoxyParamCaption})}
+
+
+
+Pushes application state to the state-\/stack, as well as calling the required functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & the state to be appended, should be used with new(), delete handled by the application \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+State\texorpdfstring{$\ast$}{*} the state provided as a parameter, for chaining purposes 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Application_ad36aa7f44d8d6c0495c2ea8e12c00212}\label{classphysics_1_1Application_ad36aa7f44d8d6c0495c2ea8e12c00212} 
+\index{physics::Application@{physics::Application}!Rename@{Rename}}
+\index{Rename@{Rename}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{Rename()}{Rename()}}
+{\footnotesize\ttfamily void physics\+::\+Application\+::\+Rename (\begin{DoxyParamCaption}\item[{const sf\+::\+String \&}]{title }\end{DoxyParamCaption})}
+
+
+
+Renames the application window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The new title of the window \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classphysics_1_1Application_a35b3bee9592e11dba37e4de6dc2c0eee}\label{classphysics_1_1Application_a35b3bee9592e11dba37e4de6dc2c0eee} 
+\index{physics::Application@{physics::Application}!Start@{Start}}
+\index{Start@{Start}!physics::Application@{physics::Application}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily int physics\+::\+Application\+::\+Start (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2u \&}]{size,  }\item[{const sf\+::\+String \&}]{title,  }\item[{sf\+::\+Uint32}]{style = {\ttfamily sf\+:\+:Style\+:\+:Default} }\end{DoxyParamCaption})}
+
+
+
+Starts the application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The initial window size for the application \\
+\hline
+{\em title} & The title of the window \\
+\hline
+{\em style} & The sfml style properties the window accepts (i.\+e. sf\+::\+Style\+::\+Close) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The application\textquotesingle{}s return value -\/ to be returned by main() 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/nephele/dev/physics/core/include/\+Physics/\+System/Application.\+hpp\item 
+/home/nephele/dev/physics/core/src/\+System/Application.\+cpp\end{DoxyCompactItemize}

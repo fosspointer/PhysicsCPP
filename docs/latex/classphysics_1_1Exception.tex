@@ -1,0 +1,73 @@
+\doxysection{physics\+::Exception Class Reference}
+\hypertarget{classphysics_1_1Exception}{}\label{classphysics_1_1Exception}\index{physics::Exception@{physics::Exception}}
+
+
+Base of this library\textquotesingle{}s exception handling system.  
+
+
+
+
+{\ttfamily \#include $<$Exception.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classphysics_1_1Exception_adf9165bef2f47c720f7de286827ec31e}{Exception}} (const std\+::string \&function, const std\+::string \&file, int line, const std\+::string \&message=\"{}\"{}) noexcept
+\begin{DoxyCompactList}\small\item\em This constructor should NOT be used manually. Instead, use the PHYSICS\+\_\+\+EXCEPTION macro, indirectly calling the constructor via the preprocessor. \end{DoxyCompactList}\item 
+\Hypertarget{classphysics_1_1Exception_a0f59a0645b7a42fc63d32b183e4ecec5}\label{classphysics_1_1Exception_a0f59a0645b7a42fc63d32b183e4ecec5} 
+std\+::string {\bfseries Info} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets information about the exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classphysics_1_1Exception_aa2bd9b70f5eeea4586cc97570102013e}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{classphysics_1_1Exception}{Exception}} \&exception) noexcept
+\begin{DoxyCompactList}\small\item\em Used to append the exception\textquotesingle{}s information to a standard output stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base of this library\textquotesingle{}s exception handling system. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classphysics_1_1Exception_adf9165bef2f47c720f7de286827ec31e}\label{classphysics_1_1Exception_adf9165bef2f47c720f7de286827ec31e} 
+\index{physics::Exception@{physics::Exception}!Exception@{Exception}}
+\index{Exception@{Exception}!physics::Exception@{physics::Exception}}
+\doxysubsubsection{\texorpdfstring{Exception()}{Exception()}}
+{\footnotesize\ttfamily physics\+::\+Exception\+::\+Exception (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{function,  }\item[{const std\+::string \&}]{file,  }\item[{int}]{line,  }\item[{const std\+::string \&}]{message = {\ttfamily \"{}\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+This constructor should NOT be used manually. Instead, use the PHYSICS\+\_\+\+EXCEPTION macro, indirectly calling the constructor via the preprocessor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & The signature of the function where the exception is thrown \\
+\hline
+{\em file} & The path to the file throwing the exception \\
+\hline
+{\em line} & Line where the exception is thrown \\
+\hline
+{\em message} & Message to be displayed (optional) ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classphysics_1_1Exception_aa2bd9b70f5eeea4586cc97570102013e}\label{classphysics_1_1Exception_aa2bd9b70f5eeea4586cc97570102013e} 
+\index{physics::Exception@{physics::Exception}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!physics::Exception@{physics::Exception}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{classphysics_1_1Exception}{Exception}} \&}]{exception }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Used to append the exception\textquotesingle{}s information to a standard output stream. 
+
+\begin{DoxyReturn}{Returns}
+A reference to the resulting ostream so it can be chained with \textquotesingle{}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\textquotesingle{} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/nephele/dev/physics/core/include/\+Physics/\+System/Exception.\+hpp\end{DoxyCompactItemize}
