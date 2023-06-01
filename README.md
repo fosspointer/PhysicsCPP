@@ -42,4 +42,6 @@ See my user repository
 
 ## Future plans
 
-- Add support for modern OpenGL using GLFW/GLEW
+- Allow usage of different rendering/audio engines and implementing such cases
+- Expand demonstration capabilites of the software
+- Optimize for ease-of-use of client-implementation, simplifying the proccess further 
