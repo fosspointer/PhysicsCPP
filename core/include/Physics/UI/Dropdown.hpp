@@ -116,7 +116,7 @@ namespace physics
             m_Color = color;
             m_OptionColor = sf::Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f, color.a);
             m_HoverColor = sf::Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
-            m_SelectionBox.setOutlineColor(sf::Color(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a));
+            m_OutlineColor = sf::Color(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a);
             UpdateColors();
             return this;
         }

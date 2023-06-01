@@ -27,13 +27,13 @@ public:
         m_TitleLabel = m_Layout->PushElement(new physics::Label(m_Application, "project_title_tmp", 34u))
             ->SetStyle((sf::Text::Style)(sf::Text::Bold | sf::Text::Underlined));
 
-        m_LanguageDropdown = m_Layout->PushElement(new physics::Dropdown(m_Application, "select_language_dropdown_tmp", 25.0f, "dropdown_placeholder_tmp", 250.0f, 20.0f))
+        m_LanguageDropdown = m_Layout->PushElement(new physics::Dropdown(m_Application, "select_language_dropdown_tmp", 25.0f, "dropdown_placeholder_tmp", 300.0f, 20.0f, 20.0f))
             ->AddOption(L"Ελληνικά")
             ->AddOption("English")
             ->SetDropdownColors(physics::Colors::White)
             ->SetOutline(5.0f)
             ->SetDirection(physics::Dropdown::Direction::Down)
-            ->SetMargin(sf::Vector2f{25.0f, 100.0f})
+            ->SetMargin(sf::Vector2f{25.0f, 250.0f})
             ->AddClickCallback([this](physics::Application* app, physics::Dropdown* dropdown, MouseButton)
             {
                 auto index = dropdown->GetSelectionIndex();
