@@ -1,5 +1,6 @@
 #pragma once
 #include "Physics/System/AABB.hpp"
+#include "Physics/System/Colors.hpp"
 #include "Physics/System/Mouse.hpp"
 #include "SFML/System/String.hpp"
 #include "SFML/System/Vector2.hpp"
@@ -34,6 +35,7 @@ namespace physics
             m_TitleLabel.SetStyle(sf::Text::Bold);
             UpdateSize();
             AddOption(placeholder);
+            SetDropdownColors(Colors::White);
             AddClickCallback([&](Application*, Dropdown*, MouseButton)
             {
                 if(m_Hovered)

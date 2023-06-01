@@ -28,9 +28,11 @@ namespace physics
          */
         UIElementAbstract(Application* application, const sf::Vector2f& size, const sf::Vector2f& margin, const sf::Color& color)
             :m_Application(application), m_Position(), m_Size(size), m_Margin(margin),
-            m_Anchor(Anchor::None), m_Color(color)
+            m_Anchor{Anchor::None}, m_Color(color), m_PragmaUpdated{true}, m_PreviousHovered{false}, m_CurrentHovered{false}
         {}
         
+        virtual ~UIElementAbstract() = default;
+
         /**
          * @brief Draws the element, utilizing the main application's window
          */
@@ -41,6 +43,11 @@ namespace physics
          * @return The result of the test
          */
         virtual bool IsHovered() const = 0;
+
+        inline bool StoppedHover() const 
+        {
+            return !m_CurrentHovered && m_PreviousHovered;
+        }
 
         /**
          * @brief The element's update function
@@ -53,7 +60,7 @@ namespace physics
          */
         virtual void CalculateAnchor()
         {
-            sf::Vector2f size = (sf::Vector2f)m_Application->GetWindow().getSize();
+            auto size = (sf::Vector2f)m_Application->GetWindow().getSize();
             auto center = size / 2.0f;
             auto space = m_Margin + m_Size / 2.0f;
             auto space_inverse = size - space;
@@ -108,13 +115,20 @@ namespace physics
          * @return Immutable reference to the element's anchor
          */
         inline const Anchor& GetAnchor() const { return m_Anchor; }
-    protected:
+
+        /**
+        * @brief Get the boolean corresponding to the pragma(size, position, anchor) updated 'event'
+        * @return Copy of the boolean member
+        */
+        inline bool GetPragmaUpdated() const { return m_PragmaUpdated; }
+
         /**
          * @brief (INTERNAL FUNCTION) Sets the element's position
          * @param position The new position
          */
         inline void AbstractSetPosition(const sf::Vector2f& position)
         {
+            m_PragmaUpdated = true;
             m_Position = position;
             m_Anchor = Anchor::None;  
         }
@@ -125,6 +139,7 @@ namespace physics
          */
         inline void AbstractSetSize(const sf::Vector2f& size)
         {
+            m_PragmaUpdated = true;
             m_Size = size;
         }
 
@@ -134,6 +149,7 @@ namespace physics
          */
         inline void AbstractSetMargin(const sf::Vector2f& margin)
         {
+            m_PragmaUpdated = true;
             m_Margin = margin;
         }
 
@@ -152,13 +168,23 @@ namespace physics
          */
         inline void AbstractSetAnchor(const Anchor& anchor)
         {
+            m_PragmaUpdated = true;
             m_Anchor = anchor;
             CalculateAnchor();
         }
-
+    protected:
+        bool m_PragmaUpdated, m_PreviousHovered, m_CurrentHovered;
         Application* m_Application;
         sf::Vector2f m_Position, m_Size, m_Margin;
         sf::Color m_Color;
         Anchor m_Anchor;
+        friend class Layout;
+        friend class HLayout;
+        friend class VLayout;
+    public:
+        //Debug specific code, ignored by the preprocessor on release builds
+    #ifdef PHYSICS_DEBUG
+        static bool DisplayBounds;
+    #endif
     };
 }

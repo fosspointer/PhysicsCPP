@@ -1,6 +1,8 @@
 #pragma once
+#include "SFML/System/Vector2.hpp"
 #include <Physics/UI/UIElement.hpp>
 #include <Physics/System/Font.hpp>
+#include <cmath>
 
 namespace physics
 {
@@ -23,6 +25,8 @@ namespace physics
         {
             //Size is initially set to (-1, -1) and updated when appropriate
             UpdateSize();
+
+            m_Text.setLineSpacing(0.0f);
         }
 
         /**
@@ -31,7 +35,7 @@ namespace physics
          */
         bool IsHovered() const override
         {
-            return m_Text.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(m_Application->GetWindow()));
+            return m_Text.getGlobalBounds().contains(Mouse::GetPosition());
         }
 
         Label* SetFontSize(unsigned int size)
@@ -55,7 +59,7 @@ namespace physics
             return this;
         }
 
-        Label* SetStyle(const sf::Text::Style& style)
+        Label* SetStyle(sf::Text::Style style)
         {
             m_Text.setStyle(style);
             return this;
@@ -67,15 +71,27 @@ namespace physics
 
         void Draw() override
         {
-            m_Text.setPosition(m_Position - m_Size / 2.0f);
+            m_Text.setPosition(m_Position);
             m_Text.setFillColor(m_Color);
+            m_Text.setOrigin(GetBoundSize() / 2.0f + GetBoundPosition());
+
             m_Application->GetWindow().draw(m_Text);
         }   
     private:
         void UpdateSize()
         {
-            m_Size = sf::Vector2f{m_Text.getGlobalBounds().width, m_Text.getGlobalBounds().height};
+            m_Size = GetBoundSize();
             CalculateAnchor();
+        }
+
+        sf::Vector2f GetBoundSize()
+        {
+            return sf::Vector2f{m_Text.getLocalBounds().width, m_Text.getLocalBounds().height};
+        }
+
+        sf::Vector2f GetBoundPosition()
+        {
+            return sf::Vector2f{m_Text.getLocalBounds().left, m_Text.getLocalBounds().top};
         }
 
         sf::Text m_Text; 

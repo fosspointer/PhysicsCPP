@@ -97,6 +97,24 @@ namespace physics
         return state;
     }
 
+    auto Application::ChangeState(State* state) -> State*
+    {
+        if(!m_States.empty())
+        {
+            m_States.top()->OnHide();
+            m_States.top()->OnDestroy();
+            delete m_States.top();
+            m_States.pop();
+        }
+
+        m_States.push(state);
+        state->m_Application = this;
+        state->OnCreate();
+        state->OnShow();
+
+        return state;
+    }
+
     void Application::PopState()
     {
         if(!m_States.empty())

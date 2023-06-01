@@ -83,6 +83,7 @@ namespace physics
          * @return State* the state provided as a parameter, for chaining purposes
          */
         State* PushState(State* state);
+        State* ChangeState(State* state);
 
         /**
          * @brief Pops the application state at the top of the state-stack, as well as calling the required functions

@@ -21,7 +21,12 @@
 #include <Physics/System/Exception.hpp>
 #include <Physics/System/Mouse.hpp>
 #include <Physics/System/MessageBox.hpp>
-#include <Physics/System/Value.hpp>
-#include <Physics/System/Tools.hpp>
 
 #include <Physics/UI/UIElement.hpp>
+#include <Physics/UI/Layout.hpp>
+#include <Physics/UI/VLayout.hpp>
+#include <Physics/UI/HLayout.hpp>
+#include <Physics/UI/Label.hpp>
+#include <Physics/UI/Button.hpp>
+#include <Physics/UI/Dropdown.hpp>
+#include <Physics/UI/Image.hpp>

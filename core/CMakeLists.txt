@@ -12,4 +12,6 @@ target_compile_definitions(physicslib PUBLIC
     $<$<CONFIG:RelWithDebInfo>:-DPHYSICS_DEBUG>
     $<$<CONFIG:Release>:-DPHYSICS_RELEASE>
     $<$<CONFIG:MinSizeRel>:-DPHYSICS_RELEASE>
+    PHYSICS_WORKING_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/\"
+    PHYSICS_ASSETS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/assets/\"
 )

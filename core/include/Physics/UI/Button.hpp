@@ -23,7 +23,9 @@ namespace physics
          */
         Button(Application* application, const sf::String text, const sf::Vector2f& size, const sf::Vector2f margin = sf::Vector2f{25.0f, 25.0f})
             :m_Label(application, text, 25.0f, sf::Vector2f{0.0f, 0.0f}), UIElement(application, size, margin)
-        {}
+        {
+            SetButtonColors(physics::Colors::White);
+        }
 
         /**
          * @brief Get the Label object

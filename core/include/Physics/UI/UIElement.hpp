@@ -16,7 +16,7 @@ namespace physics
      * @tparam UIElementImpl 
      */
     template <class UIElementImpl>
-    using HoverCallbackFunc = std::function<void(Application*, UIElementImpl*)>;
+    using HoverCallbackFunc = std::function<void(Application*, UIElementImpl*, bool)>;
     
     /**
      * @brief UIElement click callback function pointer type
@@ -48,21 +48,25 @@ namespace physics
         #endif
         {}
 
+        virtual ~UIElement() = default;
+
         /**
          * @brief The element's update function
          * @param delta_time Time elapsed since previous frame
          */
         void Update(float delta_time) override final
         {
+            m_PreviousHovered = m_CurrentHovered;
+            m_CurrentHovered = IsHovered();
         //Debug specific code, ignored by the preprocessor on release builds
         #ifdef PHYSICS_DEBUG
             if(DisplayBounds) //If the DisplayBounds 'flag' is set
-            //Render a rectangle representating the element's bounds
+            //Render a rectangle representing the element's bounds
             {
                 sf::RectangleShape aabb;
                 aabb.setFillColor(sf::Color::Transparent);
                 aabb.setOutlineColor(m_DebugModeColor);
-                //aabb is drawn only in debug- this hardcoded number is ok here
+                //AABB is only drawn in debug mode- this hardcoded number is ok here
                 aabb.setOutlineThickness(10);
                 aabb.setPosition(m_Position - m_Size / 2.0f);
                 aabb.setSize(m_Size);
@@ -70,17 +74,17 @@ namespace physics
             }
         #endif
 
-            //Configuration done by classes deriving
+            //Configuration done by deriving classes
             CustomUpdate(delta_time);
 
             if(m_Application->GetResized())
                 CalculateAnchor();
 
-            if(!IsHovered()) return; //The below code is for handling click and hover events.
+            if(!IsHovered() && !StoppedHover()) return; //The below code is for handling click and hover events.
             //Hence, if IsHovered() returns false, execution is stopped
 
             for(const auto& func : m_HoverCallbackFunctions)
-                func(m_Application, dynamic_cast<UIElementImpl*>(this));
+                func(m_Application, dynamic_cast<UIElementImpl*>(this), StoppedHover());
             
             auto& mouse_state = Mouse::GetInstance().ClickState;
 
@@ -98,6 +102,8 @@ namespace physics
             if(mouse_state & MOUSE_RIGHT)
                 for(const auto& func : m_ClickCallbackFunctions)
                     func(m_Application, dynamic_cast<UIElementImpl*>(this), MOUSE_RIGHT);
+
+            m_PragmaUpdated = false;
         }
 
         /**
@@ -129,6 +135,7 @@ namespace physics
          */
         UIElementImpl* SetPosition(const sf::Vector2f& position)
         {
+            m_PragmaUpdated = true;
             m_Position = position;
             m_Anchor = Anchor::None;
             return dynamic_cast<UIElementImpl*>(this);  
@@ -141,6 +148,7 @@ namespace physics
          */
         UIElementImpl* SetSize(const sf::Vector2f& size)
         {
+            m_PragmaUpdated = true;
             m_Size = size;
             return dynamic_cast<UIElementImpl*>(this);  
         }
@@ -152,6 +160,7 @@ namespace physics
          */
         UIElementImpl* SetMargin(const sf::Vector2f& margin)
         {
+            m_PragmaUpdated = true;
             m_Margin = margin;
             return dynamic_cast<UIElementImpl*>(this);  
         }
@@ -163,6 +172,7 @@ namespace physics
          */
         UIElementImpl* SetColor(const sf::Color& color)
         {
+            m_PragmaUpdated = true;
             m_Color = color;
             return dynamic_cast<UIElementImpl*>(this);  
         }
@@ -174,15 +184,12 @@ namespace physics
          */
         UIElementImpl* SetAnchor(const Anchor& anchor)
         {
+            m_PragmaUpdated = true;
             m_Anchor = anchor;
             CalculateAnchor();
             return dynamic_cast<UIElementImpl*>(this);  
         }
 
-    //Debug specific code, ignored by the preprocessor on release builds
-    #ifdef PHYSICS_DEBUG
-        static bool DisplayBounds;
-    #endif
     protected:
         virtual void CustomUpdate(float delta_time) {}
     private:
@@ -192,9 +199,4 @@ namespace physics
         std::vector<HoverCallbackFunc<UIElementImpl>> m_HoverCallbackFunctions;
         std::vector<ClickCallbackFunc<UIElementImpl>> m_ClickCallbackFunctions;
     };
-
-#ifdef PHYSICS_DEBUG
-    template <class T>
-    bool UIElement<T>::DisplayBounds = false;
-#endif
 }
