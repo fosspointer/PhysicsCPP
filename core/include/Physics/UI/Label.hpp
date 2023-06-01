@@ -35,7 +35,7 @@ namespace physics
          */
         bool IsHovered() const override
         {
-            return m_Text.getGlobalBounds().contains(Mouse::GetPosition());
+            return AABB::RectangleToPoint(m_Text.getGlobalBounds(), Mouse::GetPosition());
         }
 
         Label* SetFontSize(unsigned int size)
@@ -84,12 +84,12 @@ namespace physics
             CalculateAnchor();
         }
 
-        sf::Vector2f GetBoundSize()
+        sf::Vector2f GetBoundSize() const
         {
             return sf::Vector2f{m_Text.getLocalBounds().width, m_Text.getLocalBounds().height};
         }
 
-        sf::Vector2f GetBoundPosition()
+        sf::Vector2f GetBoundPosition() const
         {
             return sf::Vector2f{m_Text.getLocalBounds().left, m_Text.getLocalBounds().top};
         }

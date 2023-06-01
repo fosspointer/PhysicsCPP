@@ -1,10 +1,9 @@
 #pragma once
-#include "SFML/Graphics/Texture.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace physics
 {
-    class Texture
+    class Textures
     {
     public:
         static const sf::Texture* LoadTexture(const sf::String& filepath) 

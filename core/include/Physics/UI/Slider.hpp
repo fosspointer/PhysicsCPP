@@ -25,10 +25,7 @@ namespace physics
 
         virtual bool IsHovered() const override
         {
-            sf::RectangleShape rect;
-            rect.setPosition(m_Position - m_Size / 2.0f);
-            rect.setSize(m_Size);
-            return AABB::RectangleToPoint(rect, Mouse::GetPosition());
+            return AABB::RectangleToPoint(this, Mouse::GetPosition());
         }
 
         virtual void Draw() override
@@ -72,7 +69,7 @@ namespace physics
             return this;
         }
 
-        inline const float GetValue() const { return m_CurrentValue; }
+        inline const float& GetValue() const { return m_CurrentValue; }
     private:
         void UpdateSize()
         {

@@ -1,18 +1,17 @@
 #include <Physics/System/AABB.hpp>
 
-bool physics::AABB::RectangleToPoint(const sf::RectangleShape &rect, const sf::Vector2f &point)
+bool physics::AABB::RectangleToPoint(const AABB& rect, const sf::Vector2f& point)
 {
-    auto rect_actual_position = rect.getPosition() - rect.getOrigin();
-    return point.x > rect_actual_position.x && point.x < rect_actual_position.x + rect.getSize().x
-        && point.y > rect_actual_position.y && point.y < rect_actual_position.y + rect.getSize().y;
+    return point.x > rect.Position.x - rect.Size.x / 2.0f
+        && point.x < rect.Position.x + rect.Size.x / 2.0f
+        && point.y > rect.Position.y - rect.Size.y / 2.0f
+        && point.y < rect.Position.y + rect.Size.y / 2.0f;
 }
     
-bool physics::AABB::RectangleToRectangle(const sf::RectangleShape &first, const sf::RectangleShape &second)
+bool physics::AABB::RectangleToRectangle(const AABB& first, const AABB& second)
 {
-    auto first_actual_position = first.getPosition() - first.getOrigin();
-    auto second_actual_position = second.getPosition() - second.getOrigin();
-    return first_actual_position.x + first.getSize().x > second_actual_position.x 
-        && first_actual_position.x < second_actual_position.x + second.getSize().x
-        && first_actual_position.y + first.getSize().y > second_actual_position.y 
-        && first_actual_position.y < second_actual_position.y + second.getSize().y;
+    return first.Position.x + first.Size.x / 2.0f > second.Position.x - second.Size.x / 2.0f
+        && first.Position.x - first.Size.x / 2.0f < second.Position.x + second.Size.x / 2.0f
+        && first.Position.y + first.Size.y / 2.0f > second.Position.y - second.Size.y / 2.0f
+        && first.Position.y - first.Size.y / 2.0f < second.Position.y + second.Size.y / 2.0f;
 }

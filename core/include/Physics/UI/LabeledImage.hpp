@@ -19,10 +19,7 @@ namespace physics
 
         bool IsHovered() const override
         {
-            sf::RectangleShape rect(m_Size);
-            rect.setPosition(m_Position);
-            rect.setOrigin(m_Size / 2.0f);
-            return AABB::RectangleToPoint(rect, Mouse::GetPosition());
+            return AABB::RectangleToPoint(this, Mouse::GetPosition());
         }
 
         void CustomUpdate(float delta_time) override

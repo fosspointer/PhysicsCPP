@@ -143,9 +143,7 @@ namespace physics
 
         virtual bool IsHovered() const override
         {
-            sf::RectangleShape bounds(m_Size);
-            bounds.setPosition(m_Position - m_Size / 2.0f);
-            return AABB::RectangleToPoint(bounds, Mouse::GetPosition());
+            return AABB::RectangleToPoint(this, Mouse::GetPosition());
         }
 
         Layout* SetBackgroundVisible(bool option = true)
