@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>10th Grade Physics Demonstration: Main Page</title>
+<title>10th Grade Physics Demonstration: Physics school project</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,10 +69,54 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">10th Grade Physics Demonstration Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Physics school project </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__2home_2nephele_2dev_2physics_2README"></a> </p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Dependencies</h1>
+<ul>
+<li>SFML 2.5.1 for rendering graphics (packaged as submodule)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Requirements</h1>
+<ul>
+<li>System that supports legacy OpenGL (graphics only)</li>
+<li>CMake 3.16 or greater</li>
+<li>Ninja/GNU Make</li>
+<li>A c++ compiler such as clang or g++ with c++ 17 support (standard c++ support, no need for extension support)</li>
+<li>Git for cloning recursively (optional, *.zip downloads are not encouraged)</li>
+<li>(All of the mentioned tools must be in the PATH in order for the instructions to work properly)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Build instructions for bash/powershell</h1>
+<div class="fragment"><div class="line">git clone --recursive https://github.com/undefinedpp/physics.git</div>
+<div class="line">cd physics &amp;&amp; mkdir build &amp;&amp; cd build &amp;&amp; cmake -G [name of generator] ..</div>
+</div><!-- fragment --><p>For CMake generator examples, see <a href="https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html">Link to the CMake manual</a></p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Pros for developers</h1>
+<ul>
+<li>Modular and extensible</li>
+<li>Simple, easy to understand UI library</li>
+<li>Easy to code demonstrations in</li>
+<li>Well organized source control</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+UI Element library elements</h1>
+<ul>
+<li>Labels</li>
+<li>Buttons</li>
+<li>Layouts (HLayout, VLayout, HGrid)</li>
+<li>Sliders</li>
+<li>Dropdowns</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Future plans</h1>
+<ul>
+<li>Add support for modern OpenGL using GLFW/GLEW </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

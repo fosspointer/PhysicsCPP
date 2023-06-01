@@ -5,7 +5,8 @@ var indexSectionsWithContent =
   2: "abcdefgilmoprsu",
   3: "s",
   4: "o",
-  5: "o"
+  5: "o",
+  6: "p"
 };
 
 var indexSectionNames =
@@ -15,7 +16,8 @@ var indexSectionNames =
   2: "functions",
   3: "typedefs",
   4: "enums",
-  5: "related"
+  5: "related",
+  6: "pages"
 };
 
 var indexSectionLabels =
@@ -25,6 +27,7 @@ var indexSectionLabels =
   2: "Functions",
   3: "Typedefs",
   4: "Enumerations",
-  5: "Friends"
+  5: "Friends",
+  6: "Pages"
 };
 

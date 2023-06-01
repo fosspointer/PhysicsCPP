@@ -22,7 +22,12 @@ cd physics && mkdir build && cd build && cmake -G [name of generator] ..
 
 For CMake generator examples, see [Link to the CMake manual](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html)
 
+## Personal coding environment
+
+See my user repository
+
 ## Pros for developers
+
 - Modular and extensible
 - Simple, easy to understand UI library
 - Easy to code demonstrations in
