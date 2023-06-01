@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classphysics_1_1Label.html#aa1ce5634ffb84f3c49a171d43088c802">   36</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classphysics_1_1Label.html#aa1ce5634ffb84f3c49a171d43088c802">IsHovered</a>()<span class="keyword"> const override</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">        </span>{</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">return</span> m_Text.getGlobalBounds().contains(Mouse::GetPosition());</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="structphysics_1_1AABB.html#aeb12061170a65d00ae00baec2112d4b1">AABB::RectangleToPoint</a>(m_Text.getGlobalBounds(), Mouse::GetPosition());</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_class" href="classphysics_1_1Label.html">Label</a>* SetFontSize(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size)</div>
@@ -149,13 +149,13 @@ $(function() {
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <a class="code hl_function" href="classphysics_1_1UIElementAbstract.html#af85ec98859213308a970839c975d1ee6">CalculateAnchor</a>();</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        sf::Vector2f GetBoundSize()</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        sf::Vector2f GetBoundSize()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">return</span> sf::Vector2f{m_Text.getLocalBounds().width, m_Text.getLocalBounds().height};</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        sf::Vector2f GetBoundPosition()</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        sf::Vector2f GetBoundPosition()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">return</span> sf::Vector2f{m_Text.getLocalBounds().left, m_Text.getLocalBounds().top};</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
@@ -171,6 +171,7 @@ $(function() {
 <div class="ttc" id="aclassphysics_1_1Label_html_aa1ce5634ffb84f3c49a171d43088c802"><div class="ttname"><a href="classphysics_1_1Label.html#aa1ce5634ffb84f3c49a171d43088c802">physics::Label::IsHovered</a></div><div class="ttdeci">bool IsHovered() const override</div><div class="ttdoc">Checks if the label is hovered by the mouse cursor, must be called after Update()</div><div class="ttdef"><b>Definition</b> Label.hpp:36</div></div>
 <div class="ttc" id="aclassphysics_1_1UIElementAbstract_html_af85ec98859213308a970839c975d1ee6"><div class="ttname"><a href="classphysics_1_1UIElementAbstract.html#af85ec98859213308a970839c975d1ee6">physics::UIElementAbstract::CalculateAnchor</a></div><div class="ttdeci">virtual void CalculateAnchor()</div><div class="ttdoc">Calculates the element's position for the specified Anchor enumerator.</div><div class="ttdef"><b>Definition</b> UIElementAbstract.hpp:61</div></div>
 <div class="ttc" id="aclassphysics_1_1UIElement_html"><div class="ttname"><a href="classphysics_1_1UIElement.html">physics::UIElement</a></div><div class="ttdoc">Forward declaration of the UIElement&lt;Impl&gt; class.</div><div class="ttdef"><b>Definition</b> UIElement.hpp:34</div></div>
+<div class="ttc" id="astructphysics_1_1AABB_html_aeb12061170a65d00ae00baec2112d4b1"><div class="ttname"><a href="structphysics_1_1AABB.html#aeb12061170a65d00ae00baec2112d4b1">physics::AABB::RectangleToPoint</a></div><div class="ttdeci">static bool RectangleToPoint(const AABB &amp;rect, const sf::Vector2f &amp;point)</div><div class="ttdoc">Function to test collision-intersection between a rectangle and a point.</div><div class="ttdef"><b>Definition</b> AABB.cpp:3</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

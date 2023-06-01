@@ -1,5 +1,8 @@
 # Physics school project
 
+![First Screenshot](./docs/screenshot_1.png)
+![Second Screenshot](./docs/screenshot_2.png)
+
 ## Dependencies
 
 - SFML 2.5.1 for rendering graphics (packaged as submodule)

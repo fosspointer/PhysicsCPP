@@ -25,7 +25,7 @@
 \DoxyCodeLine{00031\ }
 \DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classphysics_1_1Label_aa1ce5634ffb84f3c49a171d43088c802}{IsHovered}}()\textcolor{keyword}{\ const\ override}}
 \DoxyCodeLine{00037\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_Text.getGlobalBounds().contains(Mouse::GetPosition());}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{AABB::RectangleToPoint}}(m\_Text.getGlobalBounds(),\ Mouse::GetPosition());}
 \DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00040\ }
 \DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{Label}}*\ SetFontSize(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size)}
@@ -74,13 +74,13 @@
 \DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1UIElementAbstract_af85ec98859213308a970839c975d1ee6}{CalculateAnchor}}();}
 \DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ sf::Vector2f\ GetBoundSize()}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ sf::Vector2f\ GetBoundSize()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00088\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
 \DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sf::Vector2f\{m\_Text.getLocalBounds().width,\ m\_Text.getLocalBounds().height\};}
 \DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ sf::Vector2f\ GetBoundPosition()}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ sf::Vector2f\ GetBoundPosition()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00093\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
 \DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sf::Vector2f\{m\_Text.getLocalBounds().left,\ m\_Text.getLocalBounds().top\};}
 \DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00096\ }

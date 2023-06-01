@@ -2,14 +2,14 @@
 \hypertarget{ShowcaseSelector_8hpp_source}{}\label{ShowcaseSelector_8hpp_source}\index{/home/nephele/dev/physics/demo/ShowcaseSelector.hpp@{/home/nephele/dev/physics/demo/ShowcaseSelector.hpp}}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}ConfigDemo.hpp"{}}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}BackgroundDemo.hpp"{}}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/UI/LabeledImage.hpp>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Physics/UI/HGrid.hpp>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Physics/UI/Slider.hpp>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <algorithm>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <Physics/System/Language.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/UI/LabeledImage.hpp>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/UI/HGrid.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Physics/UI/Slider.hpp>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}ConfigDemo.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}BackgroundDemo.hpp"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Showcase.hpp"{}}}
 \DoxyCodeLine{00009\ }
 \DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classShowcaseSelector}{ShowcaseSelector}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{physics::Application::State}}}
 \DoxyCodeLine{00011\ \{}
@@ -22,47 +22,51 @@
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcaseSelector_a023769de78aec1aeb400256950ba1185}{OnShow}}()\textcolor{keyword}{\ override\ }}
 \DoxyCodeLine{00019\ \textcolor{keyword}{\ \ \ \ }\{}
 \DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ m\_Application-\/>SetBackgroundColor(physics::Colors::LightGray);}
-\DoxyCodeLine{00021\ \ \ \ \ \}}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcaseSelector_a02caf579b8c9593de159cf6e68d753a8}{OnCreate}}()\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00024\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ m\_Grid\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1HGrid}{physics::HGrid}}(m\_Application,\ 3);}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ m\_Grid-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Center);}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/bg\_demo.png"{}},\ \textcolor{stringliteral}{"{}Background\ Demo"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/cfg\_demo.png"{}},\ \textcolor{stringliteral}{"{}Config\ Demo"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}Showcase"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable"{}}));\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00037\ \ \ \ \ }
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ m\_Grid-\/>AddElementHoverCallback([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*,\ \mbox{\hyperlink{classphysics_1_1Layout}{physics::Layout}}*\ grid,\ physics::ElementListSize\ index,\ \textcolor{keywordtype}{bool}\ stopped)}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ grid-\/>GetElement(index)-\/>AbstractSetColor(stopped\ ?\ sf::Color::White\ :\ physics::Colors::Gray);}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ m\_Grid-\/>AddElementClickCallback([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Layout}{physics::Layout}}*\ grid,\ physics::ElementListSize\ index,\ MouseButton\ btn)}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!(btn\ \&\ MOUSE\_LEFT))\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (index)}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:\ app-\/>\mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classBackgroundDemo}{BackgroundDemo}}());\ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ app-\/>\mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classConfigDemo}{ConfigDemo}}());\ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00053\ \ \ \ \ \}}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcaseSelector_a7608da52cb440bfac6ee56426647ec77}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00056\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ m\_Grid-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ m\_Grid-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
-\DoxyCodeLine{00059\ \ \ \ \ \}}
-\DoxyCodeLine{00060\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1HGrid}{physics::HGrid}}*\ m\_Grid;}
-\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ 3;\ i\ <\ 9;\ i++)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}*\textcolor{keyword}{>}(m\_Grid-\/>GetElement(i))-\/>GetLabel()-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}unavailable"{}}));}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcaseSelector_a02caf579b8c9593de159cf6e68d753a8}{OnCreate}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ m\_Grid\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1HGrid}{physics::HGrid}}(m\_Application,\ 3);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ m\_Grid-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Center);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/bg\_demo.png"{}},\ \textcolor{stringliteral}{"{}Background\ Demo"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/cfg\_demo.png"{}},\ \textcolor{stringliteral}{"{}Config\ Demo"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/showcase.png"{}},\ \textcolor{stringliteral}{"{}Showcase"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable\_tmp"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable\_tmp"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable\_tmp"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable\_tmp"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable\_tmp"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ m\_Grid-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1LabeledImage}{physics::LabeledImage}}(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/test.png"{}},\ \textcolor{stringliteral}{"{}unavailable\_tmp"{}}));\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ m\_Grid-\/>AddElementHoverCallback([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*,\ \mbox{\hyperlink{classphysics_1_1Layout}{physics::Layout}}*\ grid,\ physics::ElementListSize\ index,\ \textcolor{keywordtype}{bool}\ stopped)}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ grid-\/>GetElement(index)-\/>AbstractSetColor(stopped\ ?\ sf::Color::White\ :\ physics::Colors::Gray);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ m\_Grid-\/>AddElementClickCallback([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Layout}{physics::Layout}}*\ grid,\ physics::ElementListSize\ index,\ MouseButton\ btn)}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!(btn\ \&\ MOUSE\_LEFT))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (index)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:\ app-\/>\mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classBackgroundDemo}{BackgroundDemo}}());\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:\ app-\/>\mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classConfigDemo}{ConfigDemo}}());\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:\ app-\/>\mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classShowcase}{Showcase}}());\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcaseSelector_a7608da52cb440bfac6ee56426647ec77}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ m\_Grid-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ m\_Grid-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1HGrid}{physics::HGrid}}*\ m\_Grid;}
+\DoxyCodeLine{00066\ \};}
 
 \end{DoxyCode}

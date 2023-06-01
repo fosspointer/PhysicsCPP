@@ -3,97 +3,98 @@
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}SFML/Graphics/Text.hpp"{}}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/System/Language.hpp>}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTitleScreen}{TitleScreen}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{physics::Application::State}}}
-\DoxyCodeLine{00007\ \{}
-\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{classTitleScreen}{TitleScreen}}()}
-\DoxyCodeLine{00010\ \ \ \ \ \{\}}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{classTitleScreen}{\string~TitleScreen}}()}
-\DoxyCodeLine{00013\ \ \ \ \ \{}
-\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_Layout;}
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_ExitButton;}
-\DoxyCodeLine{00016\ \ \ \ \ \}}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_a33b8dfb7bad671b0d17671715a92e7d4}{OnShow}}()\textcolor{keyword}{\ override\ }}
-\DoxyCodeLine{00019\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ m\_Application-\/>SetBackgroundColor(physics::Colors::LightGray);}
-\DoxyCodeLine{00021\ \ \ \ \ \}}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_afd9ef8a17e3fa9d916f9666ddd394a94}{OnCreate}}()\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00024\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ m\_Layout\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}(m\_Application);}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ m\_TitleLabel\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}project\_title\_tmp"{}},\ 34u))}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetStyle((sf::Text::Style)(sf::Text::Bold\ |\ sf::Text::Underlined));}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ m\_LanguageDropdown\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}(m\_Application,\ \textcolor{stringliteral}{"{}select\_language\_dropdown\_tmp"{}},\ 25.0f,\ \textcolor{stringliteral}{"{}dropdown\_placeholder\_tmp"{}},\ 300.0f,\ 20.0f,\ 20.0f))}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddOption(L\textcolor{stringliteral}{"{}Ελληνικά"{}})}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddOption(\textcolor{stringliteral}{"{}English"{}})}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDropdownColors(physics::Colors::White)}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5.0f)}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDirection(physics::Dropdown::Direction::Down)}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetMargin(sf::Vector2f\{25.0f,\ 250.0f\})}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddClickCallback([\textcolor{keyword}{this}](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}*\ dropdown,\ MouseButton)}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ index\ =\ dropdown-\/>GetSelectionIndex();}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(index\ <=\ 0)\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ physics::Language::SelectedLanguage\ =\ (\mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{physics::Language::Option}})(dropdown-\/>GetSelectionIndex()\ -\/\ 1);}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UpdateLanguages();}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ m\_NextButton\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}next\_button\_tmp"{}},\ sf::Vector2f\{300.0f,\ 70.0f\}))}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddClickCallback([\&](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ application,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*,\ MouseButton)}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}();}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ m\_Layout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Center);}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ m\_ExitButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}X"{}},\ \{50,\ 50\});}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ m\_ExitButton}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::TopLeft);}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ btn,\ MouseButton)}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ app-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().close();}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ UpdateLanguages();}
-\DoxyCodeLine{00067\ \ \ \ \ \}}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_afb315eaac3de97e5fe5f51875d089d73}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00070\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ m\_Layout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ m\_Layout-\/>UpdateSize();}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ m\_Layout-\/>UpdatePositions();}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ m\_Layout-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
-\DoxyCodeLine{00078\ \ \ \ \ \}}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateLanguages()}
-\DoxyCodeLine{00081\ \ \ \ \ \{}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ m\_LanguageDropdown-\/>SetPlaceHolder(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}dropdown\_placeholder"{}}));}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ m\_LanguageDropdown-\/>SetTitle(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}select\_language"{}}));}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ m\_TitleLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}project\_name"{}}));}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ m\_NextButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}{GetLabel}}().SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}continue"{}}));}
-\DoxyCodeLine{00086\ \ \ \ \ \}}
-\DoxyCodeLine{00087\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_TitleLabel;}
-\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}*\ m\_LanguageDropdown;}
-\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_NextButton;}
-\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}*\ m\_Layout;}
-\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_ExitButton;}
-\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Physics/UI/UIElementAbstract.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}SFML/Graphics/Text.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Physics/System/Language.hpp>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTitleScreen}{TitleScreen}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{physics::Application::State}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{classTitleScreen}{TitleScreen}}()}
+\DoxyCodeLine{00011\ \ \ \ \ \{\}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{classTitleScreen}{\string~TitleScreen}}()}
+\DoxyCodeLine{00014\ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_Layout;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_ExitButton;}
+\DoxyCodeLine{00017\ \ \ \ \ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_a33b8dfb7bad671b0d17671715a92e7d4}{OnShow}}()\textcolor{keyword}{\ override\ }}
+\DoxyCodeLine{00020\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ m\_Application-\/>SetBackgroundColor(physics::Colors::LightGray);}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_afd9ef8a17e3fa9d916f9666ddd394a94}{OnCreate}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ m\_Layout\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}(m\_Application);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ m\_TitleLabel\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}project\_title\_tmp"{}},\ 34u))}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetStyle((sf::Text::Style)(sf::Text::Bold\ |\ sf::Text::Underlined));}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ m\_LanguageDropdown\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}(m\_Application,\ \textcolor{stringliteral}{"{}select\_language\_dropdown\_tmp"{}},\ 25.0f,\ \textcolor{stringliteral}{"{}dropdown\_placeholder\_tmp"{}},\ 300.0f,\ 20.0f,\ 20.0f))}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddOption(L\textcolor{stringliteral}{"{}Ελληνικά"{}})}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddOption(\textcolor{stringliteral}{"{}English"{}})}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDropdownColors(physics::Colors::White)}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5.0f)}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDirection(physics::Dropdown::Direction::Down)}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetMargin(sf::Vector2f\{25.0f,\ 250.0f\})}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddClickCallback([\textcolor{keyword}{this}](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}*\ dropdown,\ MouseButton)}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ index\ =\ dropdown-\/>GetSelectionIndex();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(index\ <=\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ physics::Language::SelectedLanguage\ =\ (\mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f982}{physics::Language::Option}})(dropdown-\/>GetSelectionIndex()\ -\/\ 1);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UpdateLanguages();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ m\_NextButton\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}next\_button\_tmp"{}},\ sf::Vector2f\{300.0f,\ 70.0f\}))}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddClickCallback([\&](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ application,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*,\ MouseButton)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ m\_Layout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Center);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ m\_ExitButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}X"{}},\ \{50,\ 50\});}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ m\_ExitButton}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::TopLeft);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ btn,\ MouseButton)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ app-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().close();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ UpdateLanguages();}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_afb315eaac3de97e5fe5f51875d089d73}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00071\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ m\_Layout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ m\_Layout-\/>UpdateSize();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ m\_Layout-\/>UpdatePositions();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ m\_Layout-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateLanguages()}
+\DoxyCodeLine{00082\ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ m\_LanguageDropdown-\/>SetPlaceHolder(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}dropdown\_placeholder"{}}));}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ m\_LanguageDropdown-\/>SetTitle(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}select\_language"{}}));}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ m\_TitleLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}project\_name"{}}));}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ m\_NextButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}{GetLabel}}().SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}continue"{}}));}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_TitleLabel;}
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}*\ m\_LanguageDropdown;}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_NextButton;}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}*\ m\_Layout;}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_ExitButton;}
+\DoxyCodeLine{00094\ \};}
 
 \end{DoxyCode}

@@ -59,8 +59,8 @@
 \DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classphysics_1_1Dropdown_ada39c31b4b1b9a5c2ea7f48ddb9f65cb}{IsHovered}}()\textcolor{keyword}{\ const\ override}}
 \DoxyCodeLine{00060\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
 \DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ mouse\ =\ (sf::Vector2f)sf::Mouse::getPosition(m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}());}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ AABB::RectangleToPoint(m\_SelectionBox,\ Mouse::GetPosition())\ }
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ (m\_Expanded\ \&\&\ AABB::RectangleToPoint(m\_OptionBox,\ Mouse::GetPosition()));}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{AABB::RectangleToPoint}}(m\_SelectionBox,\ Mouse::GetPosition())\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ (m\_Expanded\ \&\&\ \mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{AABB::RectangleToPoint}}(m\_OptionBox,\ Mouse::GetPosition()));}
 \DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00065\ }
 \DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Dropdown_a1efd06a9f800cfbd9f540d00e88d9830}{Draw}}()\textcolor{keyword}{\ override}}
@@ -165,7 +165,7 @@
 \DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\&\ option\ :\ m\_Options)}
 \DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ option.\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
 \DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(AABB::RectangleToPoint(m\_SelectionBox,\ Mouse::GetPosition()))}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{AABB::RectangleToPoint}}(m\_SelectionBox,\ Mouse::GetPosition()))}
 \DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectionBox.setFillColor(m\_HoverColor);}
 \DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ m\_SelectionBox.setFillColor(m\_Color);}
 \DoxyCodeLine{00171\ }
@@ -213,7 +213,7 @@
 \DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00215\ }
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(AABB::RectangleToPoint(m\_OptionBox,\ Mouse::GetPosition()))}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{AABB::RectangleToPoint}}(m\_OptionBox,\ Mouse::GetPosition()))}
 \DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_Hovered\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ hover\_index\ =\ GetHoverIndexFloat();}

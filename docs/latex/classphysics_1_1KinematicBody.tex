@@ -1,0 +1,144 @@
+\doxysection{physics\+::Kinematic\+Body Class Reference}
+\hypertarget{classphysics_1_1KinematicBody}{}\label{classphysics_1_1KinematicBody}\index{physics::KinematicBody@{physics::KinematicBody}}
+Inheritance diagram for physics\+::Kinematic\+Body\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classphysics_1_1KinematicBody}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classphysics_1_1KinematicBody_a1f4e27cca49438bff3ce9c3fad069054}\label{classphysics_1_1KinematicBody_a1f4e27cca49438bff3ce9c3fad069054} 
+{\bfseries Kinematic\+Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+Color \&color)
+\item 
+\Hypertarget{classphysics_1_1KinematicBody_a0d5c569f87ec57ade7e722dd3b7a504b}\label{classphysics_1_1KinematicBody_a0d5c569f87ec57ade7e722dd3b7a504b} 
+{\bfseries Kinematic\+Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+String \&filepath)
+\item 
+\Hypertarget{classphysics_1_1KinematicBody_abb4b74f306074599d47661b1f37b5df8}\label{classphysics_1_1KinematicBody_abb4b74f306074599d47661b1f37b5df8} 
+void {\bfseries Set\+Mass} (float mass)
+\item 
+\Hypertarget{classphysics_1_1KinematicBody_a6b33eebd4d0733b4df53f2c6528fceb4}\label{classphysics_1_1KinematicBody_a6b33eebd4d0733b4df53f2c6528fceb4} 
+void {\bfseries Set\+Gravity\+Acceleration} (float g)
+\item 
+virtual const sf\+::\+Vector2f \mbox{\hyperlink{classphysics_1_1KinematicBody_a106ab766895ac5ab4574f6135ecab956}{Get\+Total\+Force}} () override
+\item 
+\Hypertarget{classphysics_1_1KinematicBody_a62521a34a59e9b5c9c42259f49814ccd}\label{classphysics_1_1KinematicBody_a62521a34a59e9b5c9c42259f49814ccd} 
+sf\+::\+Vector2f {\bfseries Get\+Weight} () const
+\item 
+virtual void \mbox{\hyperlink{classphysics_1_1KinematicBody_a56bfb5da11937838abf585bec3c7e53b}{Update}} (float delta\+\_\+time) override
+\item 
+virtual void \mbox{\hyperlink{classphysics_1_1KinematicBody_a10e2d08fda01514c8ee26ac141853289}{Draw\+Forces}} (float thickness=5.\+0f) const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+Color \&color)
+\item 
+{\bfseries Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+String \&filepath)
+\item 
+void {\bfseries Set\+Texture} (const sf\+::\+String \&filepath)
+\item 
+void {\bfseries Set\+Position} (const sf\+::\+Vector2f \&position)
+\item 
+void {\bfseries Set\+Velocity} (const sf\+::\+Vector2f \&velocity)
+\item 
+void {\bfseries Set\+Acceleration} (const sf\+::\+Vector2f \&acceleration)
+\item 
+void {\bfseries Set\+Size} (const sf\+::\+Vector2f \&size, bool set\+\_\+collider=true)
+\item 
+void {\bfseries Set\+Collider} (const sf\+::\+Vector2f \&offset, const sf\+::\+Vector2f \&size)
+\item 
+bool {\bfseries Collides\+With} (const \mbox{\hyperlink{classphysics_1_1Body}{Body}} \texorpdfstring{$\ast$}{*}other) const
+\item 
+void {\bfseries Add\+Force} (const sf\+::\+Vector2f \&force, sf\+::\+String name=\"{}default\"{})
+\item 
+const sf\+::\+Vector2f \& {\bfseries Get\+Position} () const
+\item 
+const sf\+::\+Vector2f \& {\bfseries Get\+Size} () const
+\item 
+const sf\+::\+Vector2f \& {\bfseries Get\+Velocity} () const
+\item 
+const sf\+::\+Vector2f \& {\bfseries Get\+Acceleration} () const
+\item 
+sf\+::\+Vector2f \& {\bfseries Get\+Velocity} ()
+\item 
+sf\+::\+Vector2f \& {\bfseries Get\+Acceleration} ()
+\item 
+\mbox{\hyperlink{structphysics_1_1AABB}{AABB}} {\bfseries Get\+Outter\+AABB} () const
+\item 
+\mbox{\hyperlink{structphysics_1_1AABB}{AABB}} {\bfseries Get\+Inner\+AABB} () const
+\item 
+virtual const sf\+::\+Vector2f {\bfseries Get\+Total\+Force} ()
+\item 
+virtual void {\bfseries Draw\+Forces} (float thickness=5.\+0f) const
+\item 
+void {\bfseries Draw} ()
+\item 
+virtual void {\bfseries Update} (float delta\+\_\+time)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Vector2f {\bfseries Get\+Bound\+Size} (const sf\+::\+Text \&text) const
+\item 
+sf\+::\+Vector2f {\bfseries Get\+Bound\+Position} (const sf\+::\+Text \&text) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structphysics_1_1AABB}{AABB}} {\bfseries m\+\_\+\+Collider}
+\item 
+\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*} {\bfseries m\+\_\+\+Application}
+\item 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+\+Rectangle}
+\item 
+sf\+::\+Texture {\bfseries m\+\_\+\+Texture}
+\item 
+sf\+::\+Vector2f {\bfseries m\+\_\+\+Velocity}
+\item 
+sf\+::\+Vector2f {\bfseries m\+\_\+\+Acceleration}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structphysics_1_1Force}{Force}} $>$ {\bfseries m\+\_\+\+Forces}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structphysics_1_1Force}{Force}} $>$ {\bfseries m\+\_\+\+Previous\+Forces}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classphysics_1_1KinematicBody_a10e2d08fda01514c8ee26ac141853289}\label{classphysics_1_1KinematicBody_a10e2d08fda01514c8ee26ac141853289} 
+\index{physics::KinematicBody@{physics::KinematicBody}!DrawForces@{DrawForces}}
+\index{DrawForces@{DrawForces}!physics::KinematicBody@{physics::KinematicBody}}
+\doxysubsubsection{\texorpdfstring{DrawForces()}{DrawForces()}}
+{\footnotesize\ttfamily virtual void physics\+::\+Kinematic\+Body\+::\+Draw\+Forces (\begin{DoxyParamCaption}\item[{float}]{thickness = {\ttfamily 5.0f} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}.
+
+\Hypertarget{classphysics_1_1KinematicBody_a106ab766895ac5ab4574f6135ecab956}\label{classphysics_1_1KinematicBody_a106ab766895ac5ab4574f6135ecab956} 
+\index{physics::KinematicBody@{physics::KinematicBody}!GetTotalForce@{GetTotalForce}}
+\index{GetTotalForce@{GetTotalForce}!physics::KinematicBody@{physics::KinematicBody}}
+\doxysubsubsection{\texorpdfstring{GetTotalForce()}{GetTotalForce()}}
+{\footnotesize\ttfamily virtual const sf\+::\+Vector2f physics\+::\+Kinematic\+Body\+::\+Get\+Total\+Force (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}.
+
+\Hypertarget{classphysics_1_1KinematicBody_a56bfb5da11937838abf585bec3c7e53b}\label{classphysics_1_1KinematicBody_a56bfb5da11937838abf585bec3c7e53b} 
+\index{physics::KinematicBody@{physics::KinematicBody}!Update@{Update}}
+\index{Update@{Update}!physics::KinematicBody@{physics::KinematicBody}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily virtual void physics\+::\+Kinematic\+Body\+::\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/nephele/dev/physics/core/include/\+Physics/\+Physics/Kinematic\+Body.\+hpp\end{DoxyCompactItemize}

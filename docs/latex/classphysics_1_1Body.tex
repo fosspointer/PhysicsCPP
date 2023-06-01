@@ -1,10 +1,19 @@
 \doxysection{physics\+::Body Class Reference}
 \hypertarget{classphysics_1_1Body}{}\label{classphysics_1_1Body}\index{physics::Body@{physics::Body}}
+Inheritance diagram for physics\+::Body\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classphysics_1_1Body}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classphysics_1_1Body_a5cb296d4ac4f97a25a9c2fbf96aae020}\label{classphysics_1_1Body_a5cb296d4ac4f97a25a9c2fbf96aae020} 
-{\bfseries Body} (sf\+::\+Texture \&texture)
+\Hypertarget{classphysics_1_1Body_ad87e02ebf14f643899fc4229672d739e}\label{classphysics_1_1Body_ad87e02ebf14f643899fc4229672d739e} 
+{\bfseries Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+Color \&color)
+\item 
+\Hypertarget{classphysics_1_1Body_aecbf9dbee313f53826066c3db35df378}\label{classphysics_1_1Body_aecbf9dbee313f53826066c3db35df378} 
+{\bfseries Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+String \&filepath)
 \item 
 \Hypertarget{classphysics_1_1Body_a8c6214615db6fbbe732203772d055c04}\label{classphysics_1_1Body_a8c6214615db6fbbe732203772d055c04} 
 void {\bfseries Set\+Texture} (const sf\+::\+String \&filepath)
@@ -12,8 +21,95 @@ void {\bfseries Set\+Texture} (const sf\+::\+String \&filepath)
 \Hypertarget{classphysics_1_1Body_a81e9df0892e89f7eadbb78aea386d5cf}\label{classphysics_1_1Body_a81e9df0892e89f7eadbb78aea386d5cf} 
 void {\bfseries Set\+Position} (const sf\+::\+Vector2f \&position)
 \item 
-\Hypertarget{classphysics_1_1Body_aaa8e7e3b3101af3230f1350e5deea3ca}\label{classphysics_1_1Body_aaa8e7e3b3101af3230f1350e5deea3ca} 
-void {\bfseries Set\+Size} (const sf\+::\+Vector2f \&size)
+\Hypertarget{classphysics_1_1Body_aa866c9efcb0540d9b991683fe2290f3d}\label{classphysics_1_1Body_aa866c9efcb0540d9b991683fe2290f3d} 
+void {\bfseries Set\+Velocity} (const sf\+::\+Vector2f \&velocity)
+\item 
+\Hypertarget{classphysics_1_1Body_a4b08693c3a5b17b7facf39a87cfa9e66}\label{classphysics_1_1Body_a4b08693c3a5b17b7facf39a87cfa9e66} 
+void {\bfseries Set\+Acceleration} (const sf\+::\+Vector2f \&acceleration)
+\item 
+\Hypertarget{classphysics_1_1Body_aa803f425ec155512712a3fde882b06b6}\label{classphysics_1_1Body_aa803f425ec155512712a3fde882b06b6} 
+void {\bfseries Set\+Size} (const sf\+::\+Vector2f \&size, bool set\+\_\+collider=true)
+\item 
+\Hypertarget{classphysics_1_1Body_ac6faeee35f275ded905d98de71ca66ab}\label{classphysics_1_1Body_ac6faeee35f275ded905d98de71ca66ab} 
+void {\bfseries Set\+Collider} (const sf\+::\+Vector2f \&offset, const sf\+::\+Vector2f \&size)
+\item 
+\Hypertarget{classphysics_1_1Body_a116581ce3f3f48d89a634e547a416390}\label{classphysics_1_1Body_a116581ce3f3f48d89a634e547a416390} 
+bool {\bfseries Collides\+With} (const \mbox{\hyperlink{classphysics_1_1Body}{Body}} \texorpdfstring{$\ast$}{*}other) const
+\item 
+\Hypertarget{classphysics_1_1Body_a5323ba652e61620c2487b01bfb7f76af}\label{classphysics_1_1Body_a5323ba652e61620c2487b01bfb7f76af} 
+void {\bfseries Add\+Force} (const sf\+::\+Vector2f \&force, sf\+::\+String name=\"{}default\"{})
+\item 
+\Hypertarget{classphysics_1_1Body_a8efc553ee7e5909c395b69a1caeb8cc6}\label{classphysics_1_1Body_a8efc553ee7e5909c395b69a1caeb8cc6} 
+const sf\+::\+Vector2f \& {\bfseries Get\+Position} () const
+\item 
+\Hypertarget{classphysics_1_1Body_afdbbdff5a6efa39176d8920c3a84e356}\label{classphysics_1_1Body_afdbbdff5a6efa39176d8920c3a84e356} 
+const sf\+::\+Vector2f \& {\bfseries Get\+Size} () const
+\item 
+\Hypertarget{classphysics_1_1Body_a672b7ff1022c6133b0302799639aaa7b}\label{classphysics_1_1Body_a672b7ff1022c6133b0302799639aaa7b} 
+const sf\+::\+Vector2f \& {\bfseries Get\+Velocity} () const
+\item 
+\Hypertarget{classphysics_1_1Body_ab31c470e2381341ff249b423739e0c3f}\label{classphysics_1_1Body_ab31c470e2381341ff249b423739e0c3f} 
+const sf\+::\+Vector2f \& {\bfseries Get\+Acceleration} () const
+\item 
+\Hypertarget{classphysics_1_1Body_af05ecd4af78bbb5a60a846f9a9f8ceb9}\label{classphysics_1_1Body_af05ecd4af78bbb5a60a846f9a9f8ceb9} 
+sf\+::\+Vector2f \& {\bfseries Get\+Velocity} ()
+\item 
+\Hypertarget{classphysics_1_1Body_a81ca5f47405442d42edbacf5cadbddfa}\label{classphysics_1_1Body_a81ca5f47405442d42edbacf5cadbddfa} 
+sf\+::\+Vector2f \& {\bfseries Get\+Acceleration} ()
+\item 
+\Hypertarget{classphysics_1_1Body_a7c8c3dcd7ea68c11c5f8f2b70f865e77}\label{classphysics_1_1Body_a7c8c3dcd7ea68c11c5f8f2b70f865e77} 
+\mbox{\hyperlink{structphysics_1_1AABB}{AABB}} {\bfseries Get\+Outter\+AABB} () const
+\item 
+\Hypertarget{classphysics_1_1Body_a282584b2ef56af7e4bd71eaefc7803d2}\label{classphysics_1_1Body_a282584b2ef56af7e4bd71eaefc7803d2} 
+\mbox{\hyperlink{structphysics_1_1AABB}{AABB}} {\bfseries Get\+Inner\+AABB} () const
+\item 
+\Hypertarget{classphysics_1_1Body_a9de541484c84f140b35b5719ed763871}\label{classphysics_1_1Body_a9de541484c84f140b35b5719ed763871} 
+virtual const sf\+::\+Vector2f {\bfseries Get\+Total\+Force} ()
+\item 
+\Hypertarget{classphysics_1_1Body_ac50a7d75d9c9f5499112891a4ec47550}\label{classphysics_1_1Body_ac50a7d75d9c9f5499112891a4ec47550} 
+virtual void {\bfseries Draw\+Forces} (float thickness=5.\+0f) const
+\item 
+\Hypertarget{classphysics_1_1Body_a246c38f78d3609f138c666ef114fa3ba}\label{classphysics_1_1Body_a246c38f78d3609f138c666ef114fa3ba} 
+void {\bfseries Draw} ()
+\item 
+\Hypertarget{classphysics_1_1Body_aa88760d30fdcda225c436828bedfb760}\label{classphysics_1_1Body_aa88760d30fdcda225c436828bedfb760} 
+virtual void {\bfseries Update} (float delta\+\_\+time)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classphysics_1_1Body_a491a6703f639775969106d6f0c974c40}\label{classphysics_1_1Body_a491a6703f639775969106d6f0c974c40} 
+sf\+::\+Vector2f {\bfseries Get\+Bound\+Size} (const sf\+::\+Text \&text) const
+\item 
+\Hypertarget{classphysics_1_1Body_a4f67aa45b770c1f15505c0a8ff2ad521}\label{classphysics_1_1Body_a4f67aa45b770c1f15505c0a8ff2ad521} 
+sf\+::\+Vector2f {\bfseries Get\+Bound\+Position} (const sf\+::\+Text \&text) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classphysics_1_1Body_afbeb060db24d9379a0b01a395f2938f5}\label{classphysics_1_1Body_afbeb060db24d9379a0b01a395f2938f5} 
+\mbox{\hyperlink{structphysics_1_1AABB}{AABB}} {\bfseries m\+\_\+\+Collider}
+\item 
+\Hypertarget{classphysics_1_1Body_af74edf338217ad2dd6d38b59793021d5}\label{classphysics_1_1Body_af74edf338217ad2dd6d38b59793021d5} 
+\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*} {\bfseries m\+\_\+\+Application}
+\item 
+\Hypertarget{classphysics_1_1Body_a557b01ed1168b0453c6e380f72cca3ab}\label{classphysics_1_1Body_a557b01ed1168b0453c6e380f72cca3ab} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+\+Rectangle}
+\item 
+\Hypertarget{classphysics_1_1Body_a7cc856252670dce9afdeaf976749b405}\label{classphysics_1_1Body_a7cc856252670dce9afdeaf976749b405} 
+sf\+::\+Texture {\bfseries m\+\_\+\+Texture}
+\item 
+\Hypertarget{classphysics_1_1Body_a8d1d6c9a8a3174d409606be575d59bcf}\label{classphysics_1_1Body_a8d1d6c9a8a3174d409606be575d59bcf} 
+sf\+::\+Vector2f {\bfseries m\+\_\+\+Velocity}
+\item 
+\Hypertarget{classphysics_1_1Body_ab3b7a05676303346650796cfc7e3a0f9}\label{classphysics_1_1Body_ab3b7a05676303346650796cfc7e3a0f9} 
+sf\+::\+Vector2f {\bfseries m\+\_\+\+Acceleration}
+\item 
+\Hypertarget{classphysics_1_1Body_a8b2f310fb0d0469b7e8add67e54bb541}\label{classphysics_1_1Body_a8b2f310fb0d0469b7e8add67e54bb541} 
+std\+::vector$<$ \mbox{\hyperlink{structphysics_1_1Force}{Force}} $>$ {\bfseries m\+\_\+\+Forces}
+\item 
+\Hypertarget{classphysics_1_1Body_a54ec6bc2bf86e9caaa698c2be33b16ad}\label{classphysics_1_1Body_a54ec6bc2bf86e9caaa698c2be33b16ad} 
+std\+::vector$<$ \mbox{\hyperlink{structphysics_1_1Force}{Force}} $>$ {\bfseries m\+\_\+\+Previous\+Forces}
 \end{DoxyCompactItemize}
 
 

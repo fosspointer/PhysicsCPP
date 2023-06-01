@@ -29,96 +29,93 @@
 \DoxyCodeLine{00025\ }
 \DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classphysics_1_1Slider_a9a9cc4e1c9dab07fc0666882fcb70fe2}{IsHovered}}()\textcolor{keyword}{\ const\ override}}
 \DoxyCodeLine{00027\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ sf::RectangleShape\ rect;}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ rect.setPosition(m\_Position\ -\/\ m\_Size\ /\ 2.0f);}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ rect.setSize(m\_Size);}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ AABB::RectangleToPoint(rect,\ Mouse::GetPosition());}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Slider_a03af79b8a1cf648ba1c972bcdc6c60ba}{Draw}}()\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00035\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(m\_Rectangle);}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(m\_SelectedRectangle);}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(m\_Knob);}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.\mbox{\hyperlink{classphysics_1_1Label_a9f65214bc6fca519abce4516dbb4ac4f}{Draw}}();}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CustomUpdate(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00043\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aa318a9f37cb926cfd7b420cebc5f6b4b}{IsPressed}}())}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UpdatePercentage();}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ UpdateSize();}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ UpdatePositions();}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ Slider*\ SetSliderColors(\textcolor{keyword}{const}\ sf::Color\&\ color)}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Color\ =\ color;}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ m\_KnobColor\ =\ sf::Color(color.r\ *\ 0.5f,\ color.g\ *\ 0.5f,\ color.b\ *\ 0.5f,\ color.a);}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ m\_UnselectedColor\ =\ sf::Color(color.r\ *\ 0.25f,\ color.g\ *\ 0.25f,\ color.b\ *\ 0.25f,\ color.a);}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ m\_OutlineColor\ =\ sf::Color(color.r\ *\ 0.125f,\ color.g\ *\ 0.125f,\ color.b\ *\ 0.125f,\ color.a);}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElement_aa96d9c2f5ae603aaaa416e28dc635735}{SetColor}}(Colors::Black);}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ UpdateColors();}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ Slider*\ SetOutlineThickness(\textcolor{keywordtype}{float}\ thickness)}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setOutlineThickness(thickness);}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ Slider*\ SetSliderSize(\textcolor{keyword}{const}\ sf::Vector2f\&\ size,\ \textcolor{keywordtype}{float}\ label\_font\_size,\ \textcolor{keywordtype}{float}\ control\_knob\_width)}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.SetFontSize(label\_font\_size);}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Size\ =\ sf::Vector2f\{size.x,\ size.y\ +\ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea48fdbb54e564e287390f0d8226a91f}{GetSize}}().y\ +\ 20.0f\};}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ m\_KnobWidth\ =\ control\_knob\_width;}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ GetValue()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_CurrentValue;\ \}}
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateSize()}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setSize(sf::Vector2f\{m\_Size.x,\ m\_Size.y\ -\/\ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea48fdbb54e564e287390f0d8226a91f}{GetSize}}().y\ -\/\ 20.0f\});}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setSize(\{m\_SelectedRectangle.getSize().x,\ m\_Rectangle.getSize().y\});}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setSize(sf::Vector2f\{m\_KnobWidth,\ m\_Rectangle.getSize().y\ *\ 1.5f\});}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdatePositions()}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setPosition(m\_Position\ -\/\ m\_Size\ /\ 2.0f);}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setPosition(m\_Position\ -\/\ m\_Size\ /\ 2.0f);}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setPosition(m\_Rectangle.getPosition()\ +\ sf::Vector2f\{m\_SelectedRectangle.getSize().x,\ m\_SelectedRectangle.getSize().y\ /\ 2.0f\});}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setOrigin(m\_Knob.getSize()\ /\ 2.0f);}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElement_a307678f2f8e648872476c1bc8a4e071c}{SetPosition}}(sf::Vector2f\{m\_Position.x,\ m\_Position.y\ +\ m\_Rectangle.getSize().y\ /\ 2.0f\});}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdatePercentage()}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \{\ \ \ }
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ size\ =\ std::clamp(Mouse::GetPosition().x\ -\/\ m\_Rectangle.getPosition().x,\ 0.0f,\ m\_Rectangle.getSize().x);}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ size\ =\ size\ <\ m\_Rectangle.getSize().x\ *\ 0x1p-\/5f\ ?\ 0.0f\ :\ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size\ >\ m\_Rectangle.getSize().x\ *\ (1.0f\ -\/\ 0x1p-\/5f)\ ?\ m\_Rectangle.getSize().x\ :\ size;}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setSize(sf::Vector2f\{}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size,}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20.0f\});}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ m\_CurrentValue\ =\ (m\_SelectedRectangle.getSize().x\ /\ m\_Rectangle.getSize().x)\ *\ (m\_MaxValue\ -\/\ m\_MinValue)\ +\ m\_MinValue;}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.SetText(to\_string(m\_CurrentValue));}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00104\ }
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateColors()}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setFillColor(m\_UnselectedColor);}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setOutlineColor(m\_OutlineColor);}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setFillColor(m\_KnobColor);}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setFillColor(m\_Color);\ }
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ sf::Color\ m\_KnobColor,\ m\_OutlineColor,\ m\_UnselectedColor;}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_MinValue,\ m\_MaxValue,\ m\_CurrentValue,\ m\_KnobWidth;}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ sf::RectangleShape\ m\_Rectangle,\ m\_SelectedRectangle,\ m\_Knob;}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ Label\ m\_Label;}
-\DoxyCodeLine{00117\ \ \ \ \ \};}
-\DoxyCodeLine{00118\ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{AABB::RectangleToPoint}}(\textcolor{keyword}{this},\ Mouse::GetPosition());}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Slider_a03af79b8a1cf648ba1c972bcdc6c60ba}{Draw}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00032\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(m\_Rectangle);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(m\_SelectedRectangle);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Application-\/>\mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}().draw(m\_Knob);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.\mbox{\hyperlink{classphysics_1_1Label_a9f65214bc6fca519abce4516dbb4ac4f}{Draw}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CustomUpdate(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00040\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aa318a9f37cb926cfd7b420cebc5f6b4b}{IsPressed}}())}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UpdatePercentage();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ UpdateSize();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ UpdatePositions();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Slider*\ SetSliderColors(\textcolor{keyword}{const}\ sf::Color\&\ color)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Color\ =\ color;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ m\_KnobColor\ =\ sf::Color(color.r\ *\ 0.5f,\ color.g\ *\ 0.5f,\ color.b\ *\ 0.5f,\ color.a);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ m\_UnselectedColor\ =\ sf::Color(color.r\ *\ 0.25f,\ color.g\ *\ 0.25f,\ color.b\ *\ 0.25f,\ color.a);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ m\_OutlineColor\ =\ sf::Color(color.r\ *\ 0.125f,\ color.g\ *\ 0.125f,\ color.b\ *\ 0.125f,\ color.a);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElement_aa96d9c2f5ae603aaaa416e28dc635735}{SetColor}}(Colors::Black);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ UpdateColors();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ Slider*\ SetOutlineThickness(\textcolor{keywordtype}{float}\ thickness)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setOutlineThickness(thickness);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ Slider*\ SetSliderSize(\textcolor{keyword}{const}\ sf::Vector2f\&\ size,\ \textcolor{keywordtype}{float}\ label\_font\_size,\ \textcolor{keywordtype}{float}\ control\_knob\_width)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.SetFontSize(label\_font\_size);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Size\ =\ sf::Vector2f\{size.x,\ size.y\ +\ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea48fdbb54e564e287390f0d8226a91f}{GetSize}}().y\ +\ 20.0f\};}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ m\_KnobWidth\ =\ control\_knob\_width;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ GetValue()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_CurrentValue;\ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateSize()}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setSize(sf::Vector2f\{m\_Size.x,\ m\_Size.y\ -\/\ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea48fdbb54e564e287390f0d8226a91f}{GetSize}}().y\ -\/\ 20.0f\});}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setSize(\{m\_SelectedRectangle.getSize().x,\ m\_Rectangle.getSize().y\});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setSize(sf::Vector2f\{m\_KnobWidth,\ m\_Rectangle.getSize().y\ *\ 1.5f\});}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdatePositions()}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setPosition(m\_Position\ -\/\ m\_Size\ /\ 2.0f);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setPosition(m\_Position\ -\/\ m\_Size\ /\ 2.0f);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setPosition(m\_Rectangle.getPosition()\ +\ sf::Vector2f\{m\_SelectedRectangle.getSize().x,\ m\_SelectedRectangle.getSize().y\ /\ 2.0f\});}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setOrigin(m\_Knob.getSize()\ /\ 2.0f);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.\mbox{\hyperlink{classphysics_1_1UIElement_a307678f2f8e648872476c1bc8a4e071c}{SetPosition}}(sf::Vector2f\{m\_Position.x,\ m\_Position.y\ +\ m\_Rectangle.getSize().y\ /\ 2.0f\});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdatePercentage()}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ size\ =\ std::clamp(Mouse::GetPosition().x\ -\/\ m\_Rectangle.getPosition().x,\ 0.0f,\ m\_Rectangle.getSize().x);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ size\ =\ size\ <\ m\_Rectangle.getSize().x\ *\ 0x1p-\/5f\ ?\ 0.0f\ :\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size\ >\ m\_Rectangle.getSize().x\ *\ (1.0f\ -\/\ 0x1p-\/5f)\ ?\ m\_Rectangle.getSize().x\ :\ size;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setSize(sf::Vector2f\{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20.0f\});}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ m\_CurrentValue\ =\ (m\_SelectedRectangle.getSize().x\ /\ m\_Rectangle.getSize().x)\ *\ (m\_MaxValue\ -\/\ m\_MinValue)\ +\ m\_MinValue;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Label.SetText(to\_string(m\_CurrentValue));}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateColors()}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setFillColor(m\_UnselectedColor);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Rectangle.setOutlineColor(m\_OutlineColor);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Knob.setFillColor(m\_KnobColor);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ m\_SelectedRectangle.setFillColor(m\_Color);\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ sf::Color\ m\_KnobColor,\ m\_OutlineColor,\ m\_UnselectedColor;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_MinValue,\ m\_MaxValue,\ m\_CurrentValue,\ m\_KnobWidth;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ sf::RectangleShape\ m\_Rectangle,\ m\_SelectedRectangle,\ m\_Knob;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ Label\ m\_Label;}
+\DoxyCodeLine{00114\ \ \ \ \ \};}
+\DoxyCodeLine{00115\ \}}
 
 \end{DoxyCode}
