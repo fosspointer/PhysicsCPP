@@ -17,7 +17,6 @@ private:
 
 int main()
 {
-    srand(time(0));
     Demo application;
     return application.Start(sf::Vector2u{800, 600}, "");
 }

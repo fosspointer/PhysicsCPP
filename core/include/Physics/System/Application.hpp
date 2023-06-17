@@ -14,7 +14,7 @@ namespace physics
     class Application : public NonCopyable
     {
     public:
-        Application() = default;
+        Application();
         ~Application();
 
         class State
@@ -116,8 +116,8 @@ namespace physics
         bool m_Resized = false;
         std::stack<State*> m_States;
         sf::RenderWindow m_Window;
-        std::chrono::system_clock::time_point m_PreviousTime;
-        std::chrono::system_clock::time_point m_CurrentTime;
+        std::chrono::steady_clock::time_point m_PreviousTime;
+        std::chrono::steady_clock::time_point m_CurrentTime;
         float m_DeltaTime = 0.0f;
         sf::Color m_BackgroundColor = sf::Color::Black;
     };

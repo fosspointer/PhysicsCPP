@@ -8,31 +8,16 @@ namespace physics
     struct AABB
     {
     public:
-        AABB(const sf::Vector2f& position, const sf::Vector2f& size)
-            :Position(position), Size(size)
-        {}
-
-        AABB(const UIElementAbstract* element)
-            :Position(element->GetPosition()), Size(element->GetSize())
-        {}
-
-        AABB(UIElementAbstract* element)
-            :Position(element->GetPosition()), Size(element->GetSize())
-        {}
-
-        AABB(const sf::RectangleShape& rectangle_shape)
-            :Position(rectangle_shape.getPosition() - rectangle_shape.getOrigin() + rectangle_shape.getSize() / 2.0f),
-            Size(rectangle_shape.getSize())
-        {}
+        AABB(const sf::Vector2f& position, const sf::Vector2f& size);
+        AABB(const UIElementAbstract* element);
+        AABB(UIElementAbstract* element);
+        AABB(const sf::RectangleShape& rectangle_shape);
+        AABB();
 
         template <class T>
         AABB(const sf::Rect<T>& rectangle)
             :Position((float)rectangle.left + (float)rectangle.width / 2.0f, (float)rectangle.top + (float)rectangle.height / 2.0f),
             Size((float)rectangle.width, (float)rectangle.height)
-        {}
-
-        AABB()
-            :Position(0.0f, 0.0f), Size(0.0f, 0.0f)
         {}
 
         /**

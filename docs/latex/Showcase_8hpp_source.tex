@@ -2,131 +2,145 @@
 \hypertarget{Showcase_8hpp_source}{}\label{Showcase_8hpp_source}\index{/home/nephele/dev/physics/demo/Showcase.hpp@{/home/nephele/dev/physics/demo/Showcase.hpp}}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}Physics/System/Colors.hpp"{}}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/UI/LabeledImage.hpp>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/UI/Slider.hpp>}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Physics/System/Language.hpp>}}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <Physics/Physics/Body.hpp>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <Physics/Physics/KinematicBody.hpp>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <Physics/Physics/StaticBody.hpp>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <Physics/Physics/BodyHandler.hpp>}}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classShowcase}{Showcase}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{physics::Application::State}}}
-\DoxyCodeLine{00014\ \{}
-\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classShowcase}{\string~Showcase}}()\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{00017\ \ \ \ \ \{}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_ExitButton;}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_PropertiesButton;}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_PropertiesLayout;}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_BodyHandler;}
-\DoxyCodeLine{00022\ \ \ \ \ \}}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcase_acc7ec2d8e97b2257ab15d9ccfa4456d8}{OnCreate}}()\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00025\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ physics::Units::SetPixelsPerMeter(150.0f\ /\ 1.7f);}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ m\_ExitButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}X"{}},\ \{50,\ 50\});}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ m\_ExitButton}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::TopLeft);}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ btn,\ MouseButton)}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ app-\/>\mbox{\hyperlink{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}{GetState}}()-\/>\mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}();}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ m\_PropertiesLayout\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}(m\_Application);}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ m\_MassLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}mass\_tmp"{}},\ 25u));}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ m\_MassSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 1,\ 10))}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkGreen)}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ m\_GravityAccelerationLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}gravity\_accel\_tmp"{}},\ 25u));}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ m\_GravityAccelerationSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 1.62f,\ physics::Units::GetGravityAcceleration()))}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkBlue)}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ m\_AirResistanceLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}air\_resistance\_tmp"{}},\ 25u));}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ m\_AirResistanceSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 0.0f,\ 100.0f))}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkYellow)}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ m\_PropertiesLayout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Right);}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ m\_PropertiesButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}properties\_tmp"{}},\ sf::Vector2f\{512.0f,\ 100.0f\});}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ m\_PropertiesButton}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::BottomRight)}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([\textcolor{keyword}{this}](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*,\ MouseButton)}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_ViewProperties\ =\ !m\_ViewProperties;}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ m\_BodyHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1BodyHandler}{physics::BodyHandler}};}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ m\_Body\ =\ m\_BodyHandler-\/>AddKinematicBody(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/person.png"{}});}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ m\_Body-\/>SetCollider(\{0.0f,\ 0.0f\},\ \{20.0f,\ 150.0f\});}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ m\_Ground\ =\ m\_BodyHandler-\/>AddStaticBody(m\_Application,\ physics::Colors::DarkRed);}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ m\_Ground-\/>SetSize(\{500,\ 300\});}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ m\_Ground-\/>SetPosition(m\_Body-\/>GetPosition()\ +\ sf::Vector2f\{0.0f,\ 300.0f\});}
-\DoxyCodeLine{00075\ \ \ \ \ \}}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcase_a5373956872c5d997214193b55fea306f}{OnShow}}()\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00078\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ m\_PropertiesButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}{GetLabel}}().SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}properties"{}}));}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ m\_MassLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}mass"{}}));}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ m\_GravityAccelerationLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}gravitational\_acceleration"{}}));}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ m\_AirResistanceLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}air\_resistance"{}}));}
-\DoxyCodeLine{00083\ \ \ \ \ \}}
-\DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcase_af0b431785ab8114f3a59036c4cef2ab2}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00086\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Demo}}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ m\_BodyHandler-\/>Draw();}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ m\_BodyHandler-\/>Update(delta\_time);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}Physics/Physics/Units.hpp"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Physics/System/Colors.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics.hpp>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/UI/LabeledImage.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Physics/UI/Slider.hpp>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <Physics/System/Language.hpp>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <Physics/Physics/Body.hpp>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <Physics/Physics/KinematicBody.hpp>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <Physics/Physics/StaticBody.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <Physics/Physics/BodyHandler.hpp>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classShowcase}{Showcase}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{physics::Application::State}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classShowcase}{\string~Showcase}}()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_ExitButton;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_PropertiesButton;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_PropertiesLayout;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_BodyHandler;}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcase_acc7ec2d8e97b2257ab15d9ccfa4456d8}{OnCreate}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ physics::Units::SetPixelsPerMeter(150.0f\ /\ 1.7f);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ m\_ExitButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}X"{}},\ \{50,\ 50\});}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ m\_ExitButton}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::TopLeft);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ app,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ btn,\ MouseButton)}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ app-\/>\mbox{\hyperlink{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}{GetState}}()-\/>\mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ m\_PropertiesLayout\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}(m\_Application);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ m\_MassLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}mass\_tmp"{}},\ 25u));}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ m\_MassSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 40,\ 100))}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkGreen)}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ m\_GravityAccelerationLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}gravity\_accel\_tmp"{}},\ 25u));}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ m\_GravityAccelerationSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 1.62f,\ physics::Units::GetGravityAcceleration()))}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkBlue)}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ m\_AirResistanceLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}air\_resistance\_tmp"{}},\ 25u));}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ m\_AirResistanceSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 0.0f,\ 100.0f))}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkYellow)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ m\_FrictionLabel\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}(m\_Application,\ \textcolor{stringliteral}{"{}friction\_tmp"{}},\ 25u));}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ m\_FrictionSlider\ =\ m\_PropertiesLayout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}(m\_Application,\ 0.0f,\ 0.7f))}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderColors(physics::Colors::DarkRed)}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetSliderSize(\{100,\ 30\},\ 20u,\ 20.0f);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ m\_PropertiesLayout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::Right);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ m\_PropertiesButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}properties\_tmp"{}},\ sf::Vector2f\{512.0f,\ 100.0f\});}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ m\_PropertiesButton}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::BottomRight)}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_a19e0d0a5e83f0eeb73df889e236f0c29}{AddClickCallback}}([\textcolor{keyword}{this}](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*,\ MouseButton)}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_ViewProperties\ =\ !m\_ViewProperties;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ m\_BodyHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1BodyHandler}{physics::BodyHandler}};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ m\_Body\ =\ m\_BodyHandler-\/>AddKinematicBody(m\_Application,\ PHYSICS\_ASSETS\_DIR\ \textcolor{stringliteral}{"{}images/person.png"{}});}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ m\_Body-\/>SetCollider(\{0.0f,\ 0.0f\},\ \{20.0f,\ 150.0f\});}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ m\_Ground\ =\ m\_BodyHandler-\/>AddStaticBody(m\_Application,\ physics::Colors::DarkRed);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ m\_Ground-\/>SetSize(\{700,\ 300\});}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ m\_Ground-\/>SetPosition(m\_Body-\/>GetPosition()\ +\ sf::Vector2f\{0.0f,\ 300.0f\});}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcase_a5373956872c5d997214193b55fea306f}{OnShow}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00084\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ m\_PropertiesButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}{GetLabel}}().SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}properties"{}}));}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ m\_MassLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}mass"{}}));}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ m\_GravityAccelerationLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}gravitational\_acceleration"{}}));}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ m\_AirResistanceLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}air\_resistance"{}}));}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ m\_FrictionLabel-\/>SetText(\mbox{\hyperlink{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}{physics::Language::GetTextSFML}}(\textcolor{stringliteral}{"{}friction\_coefficient"{}}));}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
 \DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UI}}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShowcase_af0b431785ab8114f3a59036c4cef2ab2}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00093\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ m\_Body-\/>SetMass(m\_MassSlider-\/>GetValue());}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ m\_Body-\/>SetGravityAcceleration(m\_GravityAccelerationSlider-\/>GetValue());}
 \DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(m\_ViewProperties)}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PropertiesLayout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PropertiesLayout-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ m\_PropertiesButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ m\_PropertiesButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
-\DoxyCodeLine{00105\ }
-\DoxyCodeLine{00106\ \ \ \ \ \}}
-\DoxyCodeLine{00107\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_ViewProperties\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_ExitButton;}
-\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}*\ m\_PropertiesLayout;}
-\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_PropertiesButton;}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_MassLabel;}
-\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_MassSlider;}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_GravityAccelerationLabel;}
-\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_GravityAccelerationSlider;}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_AirResistanceLabel;}
-\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_AirResistanceSlider;}
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1KinematicBody}{physics::KinematicBody}}*\ m\_Body;}
-\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1StaticBody}{physics::StaticBody}}*\ m\_Ground;}
-\DoxyCodeLine{00124\ \ \ \ \ }
-\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1BodyHandler}{physics::BodyHandler}}*\ m\_BodyHandler;}
-\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Demo}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ m\_BodyHandler-\/>Draw();}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ m\_BodyHandler-\/>Update(delta\_time);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UI}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ m\_ExitButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(m\_ViewProperties)}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PropertiesLayout-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ m\_PropertiesLayout-\/>\mbox{\hyperlink{classphysics_1_1Layout_af10e8f1c045c8825941dcaff188d26e0}{Draw}}();}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Body-\/>DrawForces();}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ m\_PropertiesButton-\/>\mbox{\hyperlink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update}}(delta\_time);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ m\_PropertiesButton-\/>\mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}}();}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_ViewProperties\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_ExitButton;}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1VLayout}{physics::VLayout}}*\ m\_PropertiesLayout;}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*\ m\_PropertiesButton;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_MassLabel;}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_MassSlider;}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_GravityAccelerationLabel;}
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_GravityAccelerationSlider;}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_AirResistanceLabel;}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_AirResistanceSlider;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Label}{physics::Label}}*\ m\_FrictionLabel;}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Slider}{physics::Slider}}*\ m\_FrictionSlider;}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1KinematicBody}{physics::KinematicBody}}*\ m\_Body;}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1StaticBody}{physics::StaticBody}}*\ m\_Ground;}
+\DoxyCodeLine{00138\ \ \ \ \ }
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{classphysics_1_1BodyHandler}{physics::BodyHandler}}*\ m\_BodyHandler;}
+\DoxyCodeLine{00140\ \};}
 
 \end{DoxyCode}

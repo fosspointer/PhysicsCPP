@@ -14,6 +14,8 @@ Inheritance diagram for physics\+::Static\+Body\+:\begin{figure}[H]
 \item 
 \Hypertarget{classphysics_1_1StaticBody_a6fd469d5c39cb5988a73d72a55fed666}\label{classphysics_1_1StaticBody_a6fd469d5c39cb5988a73d72a55fed666} 
 {\bfseries Static\+Body} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, const sf\+::\+String \&filepath)
+\item 
+void \mbox{\hyperlink{classphysics_1_1StaticBody_a0618ab6be48fc6a5c24698e06c704b5b}{Update}} (float delta\+\_\+time) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}}
 \begin{DoxyCompactItemize}
@@ -36,7 +38,7 @@ void {\bfseries Set\+Collider} (const sf\+::\+Vector2f \&offset, const sf\+::\+V
 \item 
 bool {\bfseries Collides\+With} (const \mbox{\hyperlink{classphysics_1_1Body}{Body}} \texorpdfstring{$\ast$}{*}other) const
 \item 
-void {\bfseries Add\+Force} (const sf\+::\+Vector2f \&force, sf\+::\+String name=\"{}default\"{})
+void {\bfseries Add\+Force} (const sf\+::\+Vector2f \&force, sf\+::\+String name=\"{}\+\_\+\+\_\+default\"{})
 \item 
 const sf\+::\+Vector2f \& {\bfseries Get\+Position} () const
 \item 
@@ -60,11 +62,13 @@ virtual void {\bfseries Draw\+Forces} (float thickness=5.\+0f) const
 \item 
 void {\bfseries Draw} ()
 \item 
-virtual void {\bfseries Update} (float delta\+\_\+time)
+virtual void {\bfseries Update} (float delta\+\_\+time)=0
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}}
 \begin{DoxyCompactItemize}
+\item 
+void {\bfseries Draw\+Force} (const \mbox{\hyperlink{structphysics_1_1Force}{Force}} \&force, const sf\+::\+Color \&color=sf\+::\+Color\+::\+White) const
 \item 
 sf\+::\+Vector2f {\bfseries Get\+Bound\+Size} (const sf\+::\+Text \&text) const
 \item 
@@ -89,6 +93,19 @@ std\+::vector$<$ \mbox{\hyperlink{structphysics_1_1Force}{Force}} $>$ {\bfseries
 \item 
 std\+::vector$<$ \mbox{\hyperlink{structphysics_1_1Force}{Force}} $>$ {\bfseries m\+\_\+\+Previous\+Forces}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classphysics_1_1StaticBody_a0618ab6be48fc6a5c24698e06c704b5b}\label{classphysics_1_1StaticBody_a0618ab6be48fc6a5c24698e06c704b5b} 
+\index{physics::StaticBody@{physics::StaticBody}!Update@{Update}}
+\index{Update@{Update}!physics::StaticBody@{physics::StaticBody}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void physics\+::\+Static\+Body\+::\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classphysics_1_1Body}{physics\+::\+Body}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -7,3 +7,4 @@ PHYSICS_LANGUAGE_PAIR("properties", U"Εμφάνιση/Εξαφάνιση Ιδι
 PHYSICS_LANGUAGE_PAIR("mass", U"Μάζα:"),
 PHYSICS_LANGUAGE_PAIR("gravitational_acceleration", U"Επιτάχυνση Βαρύτητας:"),
 PHYSICS_LANGUAGE_PAIR("air_resistance", U"Αντίσταση Αέρα:"),
+PHYSICS_LANGUAGE_PAIR("friction_coefficient", U"Συντελεστής Τριβής:"),

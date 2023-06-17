@@ -4,6 +4,14 @@
 
 namespace physics
 {
+    Application::Application()
+        :m_BackgroundColor(physics::Colors::Black), m_DeltaTime(0.0f), m_Resized(true)
+    {
+        srand(time(0));
+        Mouse::s_Application = this;
+        m_PreviousTime = m_CurrentTime = std::chrono::steady_clock::now();
+    }
+
     Application::~Application()
     {
         while(!m_States.empty())
@@ -18,8 +26,6 @@ namespace physics
 
             Mouse::s_Application = this;
             OnCreate();
-
-            m_PreviousTime = m_CurrentTime = std::chrono::high_resolution_clock::now();
 
             while(m_Window.isOpen()) [[likely]]
             {
@@ -48,7 +54,7 @@ namespace physics
                 mouse.ClickState = mouse.PreviousState & ~mouse.CurrentState;
 
                 m_PreviousTime = m_CurrentTime;
-                m_CurrentTime = std::chrono::high_resolution_clock::now();
+                m_CurrentTime = std::chrono::steady_clock::now();
                         
                 m_DeltaTime = std::chrono::duration<float>(m_CurrentTime - m_PreviousTime).count();    
 

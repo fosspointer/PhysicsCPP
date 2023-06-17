@@ -27,7 +27,7 @@ For CMake generator examples, see [Link to the CMake manual](https://cmake.org/c
 
 ## Personal coding environment
 
-See my user repository
+See [my user repository](https://github.com/undefinedpp)
 
 ## Pros for developers
 
@@ -36,7 +36,7 @@ See my user repository
 - Easy to code demonstrations in
 - Well organized source control
 
-## UI Element library elements
+## UI library elements
 - Labels
 - Buttons
 - Layouts (HLayout, VLayout, HGrid)

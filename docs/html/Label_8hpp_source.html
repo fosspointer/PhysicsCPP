@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>10th Grade Physics Demonstration: /home/nephele/dev/physics/core/include/Physics/UI/Label.hpp Source File</title>
+<title>PhysicsCPP: /home/nephele/dev/physics/core/include/Physics/UI/Label.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">10th Grade Physics Demonstration<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">PhysicsCPP<span id="projectnumber">&#160;0.2</span>
    </div>
    <div id="projectbrief">Tool for demonstrating 10th greek grade physics in C++/SFML</div>
   </td>
@@ -89,7 +89,7 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classphysics_1_1Label.html#a50cb9046940b37ae8ddc89074e490a3e">   22</a></span>        <a class="code hl_function" href="classphysics_1_1Label.html#a50cb9046940b37ae8ddc89074e490a3e">Label</a>(<a class="code hl_class" href="classphysics_1_1Application.html">Application</a>* application, <span class="keyword">const</span> sf::String&amp; text, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> font_size, <span class="keyword">const</span> sf::Vector2f&amp; margin = {25.0f, 25.0f})</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            :<a class="code hl_class" href="classphysics_1_1UIElement.html">UIElement</a>(application, sf::Vector2f{-1.0f, -1.0f}, margin, sf::Color::Black),</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            :<a class="code hl_class" href="classphysics_1_1UIElement.html">UIElement</a>(application, sf::<a class="code hl_struct" href="structphysics_1_1Vector2.html">Vector2f</a>{-1.0f, -1.0f}, margin, sf::Color::Black),</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            m_Text(text, <a class="code hl_class" href="classphysics_1_1Font.html">Font</a>::GetDefault().Get(), font_size)</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="comment">//Size is initially set to (-1, -1) and updated when appropriate</span></div>
@@ -171,7 +171,8 @@ $(function() {
 <div class="ttc" id="aclassphysics_1_1Label_html_aa1ce5634ffb84f3c49a171d43088c802"><div class="ttname"><a href="classphysics_1_1Label.html#aa1ce5634ffb84f3c49a171d43088c802">physics::Label::IsHovered</a></div><div class="ttdeci">bool IsHovered() const override</div><div class="ttdoc">Checks if the label is hovered by the mouse cursor, must be called after Update()</div><div class="ttdef"><b>Definition</b> Label.hpp:36</div></div>
 <div class="ttc" id="aclassphysics_1_1UIElementAbstract_html_af85ec98859213308a970839c975d1ee6"><div class="ttname"><a href="classphysics_1_1UIElementAbstract.html#af85ec98859213308a970839c975d1ee6">physics::UIElementAbstract::CalculateAnchor</a></div><div class="ttdeci">virtual void CalculateAnchor()</div><div class="ttdoc">Calculates the element's position for the specified Anchor enumerator.</div><div class="ttdef"><b>Definition</b> UIElementAbstract.hpp:61</div></div>
 <div class="ttc" id="aclassphysics_1_1UIElement_html"><div class="ttname"><a href="classphysics_1_1UIElement.html">physics::UIElement</a></div><div class="ttdoc">Forward declaration of the UIElement&lt;Impl&gt; class.</div><div class="ttdef"><b>Definition</b> UIElement.hpp:34</div></div>
-<div class="ttc" id="astructphysics_1_1AABB_html_aeb12061170a65d00ae00baec2112d4b1"><div class="ttname"><a href="structphysics_1_1AABB.html#aeb12061170a65d00ae00baec2112d4b1">physics::AABB::RectangleToPoint</a></div><div class="ttdeci">static bool RectangleToPoint(const AABB &amp;rect, const sf::Vector2f &amp;point)</div><div class="ttdoc">Function to test collision-intersection between a rectangle and a point.</div><div class="ttdef"><b>Definition</b> AABB.cpp:3</div></div>
+<div class="ttc" id="astructphysics_1_1AABB_html_aeb12061170a65d00ae00baec2112d4b1"><div class="ttname"><a href="structphysics_1_1AABB.html#aeb12061170a65d00ae00baec2112d4b1">physics::AABB::RectangleToPoint</a></div><div class="ttdeci">static bool RectangleToPoint(const AABB &amp;rect, const sf::Vector2f &amp;point)</div><div class="ttdoc">Function to test collision-intersection between a rectangle and a point.</div><div class="ttdef"><b>Definition</b> AABB.cpp:26</div></div>
+<div class="ttc" id="astructphysics_1_1Vector2_html"><div class="ttname"><a href="structphysics_1_1Vector2.html">physics::Vector2</a></div><div class="ttdef"><b>Definition</b> Vector2.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

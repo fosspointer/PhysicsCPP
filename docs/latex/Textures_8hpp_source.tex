@@ -10,7 +10,7 @@
 \DoxyCodeLine{00006\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Textures}{Textures}}}
 \DoxyCodeLine{00007\ \ \ \ \ \{}
 \DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ sf::Texture*\ LoadTexture(\textcolor{keyword}{const}\ sf::String\&\ filepath)\ }
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ sf::Texture*\ LoadTexture(\textcolor{keyword}{const}\ std::string\&\ filepath)\ }
 \DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ f\ =\ s\_TextureCache.find(filepath);}
 \DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ }
@@ -35,7 +35,7 @@
 \DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ s\_TextureCache.clear();}
 \DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<sf::String,\ sf::Texture*>\ s\_TextureCache;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<std::string,\ sf::Texture*>\ s\_TextureCache;}
 \DoxyCodeLine{00035\ }
 \DoxyCodeLine{00036\ \ \ \ \ \};}
 \DoxyCodeLine{00037\ \}}

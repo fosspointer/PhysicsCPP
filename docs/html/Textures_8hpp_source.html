@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>10th Grade Physics Demonstration: /home/nephele/dev/physics/core/include/Physics/System/Textures.hpp Source File</title>
+<title>PhysicsCPP: /home/nephele/dev/physics/core/include/Physics/System/Textures.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">10th Grade Physics Demonstration<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">PhysicsCPP<span id="projectnumber">&#160;0.2</span>
    </div>
    <div id="projectbrief">Tool for demonstrating 10th greek grade physics in C++/SFML</div>
   </td>
@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="classphysics_1_1Textures.html">    6</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classphysics_1_1Textures.html">Textures</a></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    {</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        <span class="keyword">static</span> <span class="keyword">const</span> sf::Texture* LoadTexture(<span class="keyword">const</span> sf::String&amp; filepath) </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        <span class="keyword">static</span> <span class="keyword">const</span> sf::Texture* LoadTexture(<span class="keyword">const</span> std::string&amp; filepath) </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>            <span class="keyword">auto</span> f = s_TextureCache.find(filepath);</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>            </div>
@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            s_TextureCache.clear();</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        }</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">static</span> std::unordered_map&lt;sf::String, sf::Texture*&gt; s_TextureCache;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">static</span> std::unordered_map&lt;std::string, sf::Texture*&gt; s_TextureCache;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>

@@ -1,3 +1,4 @@
+#include "Physics/Physics/Units.hpp"
 #include "Physics/System/Colors.hpp"
 #include <Physics.hpp>
 #include <Physics/UI/LabeledImage.hpp>
@@ -39,7 +40,7 @@ public:
         m_PropertiesLayout = new physics::VLayout(m_Application);
 
         m_MassLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "mass_tmp", 25u));
-        m_MassSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 1, 10))
+        m_MassSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 40, 100))
             ->SetSliderColors(physics::Colors::DarkGreen)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
 
@@ -51,6 +52,11 @@ public:
         m_AirResistanceLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "air_resistance_tmp", 25u));
         m_AirResistanceSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 100.0f))
             ->SetSliderColors(physics::Colors::DarkYellow)
+            ->SetSliderSize({100, 30}, 20u, 20.0f);
+
+        m_FrictionLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "friction_tmp", 25u));
+        m_FrictionSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 0.7f))
+            ->SetSliderColors(physics::Colors::DarkRed)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
         
         m_PropertiesLayout->SetAnchor(physics::Anchor::Right);
@@ -70,7 +76,7 @@ public:
         m_Body->SetCollider({0.0f, 0.0f}, {20.0f, 150.0f});
 
         m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Colors::DarkRed);
-        m_Ground->SetSize({500, 300});
+        m_Ground->SetSize({700, 300});
         m_Ground->SetPosition(m_Body->GetPosition() + sf::Vector2f{0.0f, 300.0f});
     }
 
@@ -80,10 +86,14 @@ public:
         m_MassLabel->SetText(physics::Language::GetTextSFML("mass"));
         m_GravityAccelerationLabel->SetText(physics::Language::GetTextSFML("gravitational_acceleration"));
         m_AirResistanceLabel->SetText(physics::Language::GetTextSFML("air_resistance"));
+        m_FrictionLabel->SetText(physics::Language::GetTextSFML("friction_coefficient"));
     }
 
     void OnUpdate(float delta_time) override
     {
+        m_Body->SetMass(m_MassSlider->GetValue());
+        m_Body->SetGravityAcceleration(m_GravityAccelerationSlider->GetValue());
+        
         // Demo
 
         m_BodyHandler->Draw();
@@ -98,6 +108,7 @@ public:
         {
             m_PropertiesLayout->Update(delta_time);
             m_PropertiesLayout->Draw();
+            m_Body->DrawForces();
         }
 
         m_PropertiesButton->Update(delta_time);
@@ -118,6 +129,9 @@ private:
 
     physics::Label* m_AirResistanceLabel;
     physics::Slider* m_AirResistanceSlider;
+
+    physics::Label* m_FrictionLabel;
+    physics::Slider* m_FrictionSlider;
 
     physics::KinematicBody* m_Body;
     physics::StaticBody* m_Ground;

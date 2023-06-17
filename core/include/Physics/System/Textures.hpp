@@ -6,7 +6,7 @@ namespace physics
     class Textures
     {
     public:
-        static const sf::Texture* LoadTexture(const sf::String& filepath) 
+        static const sf::Texture* LoadTexture(const std::string& filepath) 
         {
             auto f = s_TextureCache.find(filepath);
             
@@ -31,7 +31,7 @@ namespace physics
             s_TextureCache.clear();
         }
     private:
-        static std::unordered_map<sf::String, sf::Texture*> s_TextureCache;
+        static std::unordered_map<std::string, sf::Texture*> s_TextureCache;
 
     };
 }

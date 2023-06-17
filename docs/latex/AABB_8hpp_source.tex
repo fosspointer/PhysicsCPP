@@ -12,38 +12,23 @@
 \DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structphysics_1_1AABB}{AABB}}}
 \DoxyCodeLine{00009\ \ \ \ \ \{}
 \DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ position,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ size)}
-\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ :Position(position),\ Size(size)}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \{\}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElementAbstract}}*\ element)}
-\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ :Position(element-\/>\mbox{\hyperlink{classphysics_1_1UIElementAbstract_acdec2b9c1d7cb383de03a5f0c03a3af5}{GetPosition}}()),\ Size(element-\/>\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea48fdbb54e564e287390f0d8226a91f}{GetSize}}())}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \{\}}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElementAbstract}}*\ element)}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ :Position(element-\/>\mbox{\hyperlink{classphysics_1_1UIElementAbstract_acdec2b9c1d7cb383de03a5f0c03a3af5}{GetPosition}}()),\ Size(element-\/>\mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea48fdbb54e564e287390f0d8226a91f}{GetSize}}())}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ sf::Vector2f\&\ position,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ size);}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElementAbstract}}*\ element);}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElementAbstract}}*\ element);}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ sf::RectangleShape\&\ rectangle\_shape);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ sf::Rect<T>\&\ rectangle)}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ :Position((\textcolor{keywordtype}{float})rectangle.left\ +\ (\textcolor{keywordtype}{float})rectangle.width\ /\ 2.0f,\ (\textcolor{keywordtype}{float})rectangle.top\ +\ (\textcolor{keywordtype}{float})rectangle.height\ /\ 2.0f),}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ Size((\textcolor{keywordtype}{float})rectangle.width,\ (\textcolor{keywordtype}{float})rectangle.height)}
 \DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{\}}
 \DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ sf::RectangleShape\&\ rectangle\_shape)}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ :Position(rectangle\_shape.getPosition()\ -\/\ rectangle\_shape.getOrigin()\ +\ rectangle\_shape.getSize()\ /\ 2.0f),}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ Size(rectangle\_shape.getSize())}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{\}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}(\textcolor{keyword}{const}\ sf::Rect<T>\&\ rectangle)}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ :Position((\textcolor{keywordtype}{float})rectangle.left\ +\ (\textcolor{keywordtype}{float})rectangle.width\ /\ 2.0f,\ (\textcolor{keywordtype}{float})rectangle.top\ +\ (\textcolor{keywordtype}{float})rectangle.height\ /\ 2.0f),}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ Size((\textcolor{keywordtype}{float})rectangle.width,\ (\textcolor{keywordtype}{float})rectangle.height)}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \{\}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}()}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ :Position(0.0f,\ 0.0f),\ Size(0.0f,\ 0.0f)}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{RectangleToPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}\&\ rect,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ point);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structphysics_1_1AABB_ac646d9bb59360ceca6972709fc3a3186}{RectangleToRectangle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}\&\ first,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}\&\ second);}
 \DoxyCodeLine{00037\ }
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structphysics_1_1AABB_aeb12061170a65d00ae00baec2112d4b1}{RectangleToPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}\&\ rect,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ point);}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structphysics_1_1AABB_ac646d9bb59360ceca6972709fc3a3186}{RectangleToRectangle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}\&\ first,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structphysics_1_1AABB}{AABB}}\&\ second);}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ sf::Vector2f\ Position,\ Size;}
-\DoxyCodeLine{00054\ \ \ \ \ \};}
-\DoxyCodeLine{00055\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ sf::Vector2f\ Position,\ Size;}
+\DoxyCodeLine{00039\ \ \ \ \ \};}
+\DoxyCodeLine{00040\ \}}
 
 \end{DoxyCode}

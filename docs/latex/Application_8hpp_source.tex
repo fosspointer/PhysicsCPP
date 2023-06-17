@@ -18,7 +18,7 @@
 \DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application}{Application}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1NonCopyable}{NonCopyable}}}
 \DoxyCodeLine{00015\ \ \ \ \ \{}
 \DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{Application}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{Application}}();}
 \DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{\string~Application}}();}
 \DoxyCodeLine{00019\ }
 \DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}}}
@@ -58,8 +58,8 @@
 \DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_Resized\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::stack<State*>\ m\_States;}
 \DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ sf::RenderWindow\ m\_Window;}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ m\_PreviousTime;}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ m\_CurrentTime;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ m\_PreviousTime;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ m\_CurrentTime;}
 \DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_DeltaTime\ =\ 0.0f;}
 \DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ sf::Color\ m\_BackgroundColor\ =\ sf::Color::Black;}
 \DoxyCodeLine{00123\ \ \ \ \ \};}

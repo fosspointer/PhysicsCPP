@@ -1,11 +1,11 @@
 #pragma once
 #include <SFML/Graphics/Color.hpp>
 
-#define BRIGHT_DOM_HUE 204
-#define BRIGHT_SEC_HUE 41
+#define BRIGHT_DOM_HUE 168
+#define BRIGHT_SEC_HUE 24
 
-#define DARK_DOM_HUE 102
-#define DARK_SEC_HUE 20
+#define DARK_DOM_HUE 84
+#define DARK_SEC_HUE 12
 
 #define VALUE_100 255
 #define VALUE_75 191
