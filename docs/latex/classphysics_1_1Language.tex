@@ -1,5 +1,14 @@
 \doxysection{physics\+::Language Class Reference}
 \hypertarget{classphysics_1_1Language}{}\label{classphysics_1_1Language}\index{physics::Language@{physics::Language}}
+
+
+\doxylink{classphysics_1_1Language}{Language} utility class.  
+
+
+
+
+{\ttfamily \#include $<$Language.\+hpp$>$}
+
 Inheritance diagram for physics\+::Language\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -19,9 +28,6 @@ using {\bfseries String} = std\+::u32string
 \begin{DoxyCompactList}\small\item\em String representing std\+::u32string, implementation may or may not change. \end{DoxyCompactList}\item 
 \Hypertarget{classphysics_1_1Language_a8703731766e1b9ac9ae7c80a745ce756}\label{classphysics_1_1Language_a8703731766e1b9ac9ae7c80a745ce756} 
 using {\bfseries Char\+Map} = std\+::unordered\+\_\+map$<$ const char \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classphysics_1_1Language_aecc11f75a0ae38efe2d727bc10111246}{String}} $>$
-\item 
-\Hypertarget{classphysics_1_1Language_a8c36a01876ef9c9816c4b562842a282d}\label{classphysics_1_1Language_a8c36a01876ef9c9816c4b562842a282d} 
-using {\bfseries Map\+Array} = std\+::array$<$ Char\+Map, PHYSICS\+\_\+\+LANGUAGES\+\_\+\+SUPPORTED $>$
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -45,6 +51,9 @@ static \mbox{\hyperlink{classphysics_1_1Language_ad606523dbd51c6d5700d46cc7c15f9
 \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \& {\bfseries operator=} (const \mbox{\hyperlink{classphysics_1_1NonCopyable}{Non\+Copyable}} \&)=delete
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+\doxylink{classphysics_1_1Language}{Language} utility class. 
 
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd}\label{classphysics_1_1Language_a5126c565d1e39ea09c46765db13942fd} 
@@ -85,7 +94,8 @@ Get a language property, as set in \"{}\+Physics/\+Config/$<$\+Language$>$\"{} (
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-String representing the property\textquotesingle{}s value 
+String representing the property\textquotesingle{}s value ~\newline
+ 
 \end{DoxyReturn}
 
 

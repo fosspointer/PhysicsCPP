@@ -20,7 +20,7 @@ namespace physics
             :UIElement(application, sf::Vector2f{150.0f, 20.0f}, margin), 
             m_MinValue(min), m_MaxValue(max), m_CurrentValue(min), m_Label(m_Application, to_string(min), 20u)
         {
-            m_SelectedRectangle.setFillColor(Colors::DarkGray);
+            m_SelectedRectangle.setFillColor(Color::DarkGray);
         }
 
         virtual bool IsHovered() const override
@@ -50,7 +50,7 @@ namespace physics
             m_KnobColor = sf::Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
             m_UnselectedColor = sf::Color(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a);
             m_OutlineColor = sf::Color(color.r * 0.125f, color.g * 0.125f, color.b * 0.125f, color.a);
-            m_Label.SetColor(Colors::Black);
+            m_Label.SetColor(Color::Black);
             UpdateColors();
             return this;
         }
@@ -68,6 +68,8 @@ namespace physics
             m_KnobWidth = control_knob_width;
             return this;
         }
+
+        void SetValue(float value) { m_CurrentValue = value; }
 
         inline const float& GetValue() const { return m_CurrentValue; }
     private:

@@ -17,7 +17,7 @@ public:
 
     void OnShow() override 
     {
-        m_Application->SetBackgroundColor(physics::Colors::LightGray);
+        m_Application->SetBackgroundColor(physics::Color::LightGray);
 
         for(size_t i = 3; i < 9; i++)
             dynamic_cast<physics::LabeledImage*>(m_Grid->GetElement(i))->GetLabel()->SetText(physics::Language::GetTextSFML("unavailable"));
@@ -40,7 +40,7 @@ public:
     
         m_Grid->AddElementHoverCallback([](physics::Application*, physics::Layout* grid, physics::ElementListSize index, bool stopped)
         {
-            grid->GetElement(index)->AbstractSetColor(stopped ? sf::Color::White : physics::Colors::Gray);
+            grid->GetElement(index)->AbstractSetColor(stopped ? physics::Color::White : physics::Color::Gray);
         });
 
         m_Grid->AddElementClickCallback([](physics::Application* app, physics::Layout* grid, physics::ElementListSize index, MouseButton btn)

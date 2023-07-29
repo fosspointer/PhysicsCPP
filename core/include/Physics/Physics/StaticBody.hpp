@@ -3,6 +3,7 @@
 
 namespace physics
 {
+    /// @brief A static, immutable physics body
     class StaticBody : public Body
     {
     public:

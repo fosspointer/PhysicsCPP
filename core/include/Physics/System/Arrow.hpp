@@ -3,6 +3,7 @@
 
 namespace physics
 {
+    /// @brief Arrow shape, used for displaying vectors
     class Arrow : public sf::Drawable
     {
     public:

@@ -75,7 +75,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classphysics_1_1KinematicBody-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">physics::KinematicBody Class Reference</div></div>
 </div><!--header-->
@@ -86,10 +88,16 @@ Inheritance diagram for physics::KinematicBody:</div>
  <div class="center">
   <img src="classphysics_1_1KinematicBody.png" usemap="#physics::KinematicBody_map" alt=""/>
   <map id="physics::KinematicBody_map" name="physics::KinematicBody_map">
-<area href="classphysics_1_1Body.html" alt="physics::Body" shape="rect" coords="0,0,144,24"/>
+<area href="classphysics_1_1Body.html" title="Abstract class representing a body." alt="physics::Body" shape="rect" coords="0,0,144,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a3c3180710a8e3c94fc93d03e67d43729"><td class="memItemLeft" align="right" valign="top"><a id="a3c3180710a8e3c94fc93d03e67d43729" name="a3c3180710a8e3c94fc93d03e67d43729"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateCallbackFunc</b> = std::function&lt; void(<a class="el" href="classphysics_1_1KinematicBody.html">KinematicBody</a> *, float)&gt;</td></tr>
+<tr class="separator:a3c3180710a8e3c94fc93d03e67d43729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afc808d3549035555b087c72db2a40e8f"><td class="memItemLeft" align="right" valign="top"><a id="afc808d3549035555b087c72db2a40e8f" name="afc808d3549035555b087c72db2a40e8f"></a>
@@ -116,9 +124,15 @@ const float &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetGravi
 <tr class="separator:a2ddb02c23efa3b7b59cbf962422dc326"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7e3e898f7942eaed2c165899973bff2"><td class="memItemLeft" align="right" valign="top">virtual const sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1KinematicBody.html#ab7e3e898f7942eaed2c165899973bff2">GetTotalForce</a> () override</td></tr>
 <tr class="separator:ab7e3e898f7942eaed2c165899973bff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af99b3834a12136e520ebf42f138cbb06"><td class="memItemLeft" align="right" valign="top"><a id="af99b3834a12136e520ebf42f138cbb06" name="af99b3834a12136e520ebf42f138cbb06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUpdateCallback</b> (UpdateCallbackFunc func)</td></tr>
+<tr class="separator:af99b3834a12136e520ebf42f138cbb06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62521a34a59e9b5c9c42259f49814ccd"><td class="memItemLeft" align="right" valign="top"><a id="a62521a34a59e9b5c9c42259f49814ccd" name="a62521a34a59e9b5c9c42259f49814ccd"></a>
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>GetWeight</b> () const</td></tr>
 <tr class="separator:a62521a34a59e9b5c9c42259f49814ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12497932ad55bbc234af97c1e2609c7c"><td class="memItemLeft" align="right" valign="top"><a id="a12497932ad55bbc234af97c1e2609c7c" name="a12497932ad55bbc234af97c1e2609c7c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetFree</b> () const</td></tr>
+<tr class="separator:a12497932ad55bbc234af97c1e2609c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classphysics_1_1Body"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classphysics_1_1Body')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classphysics_1_1Body.html">physics::Body</a></td></tr>
 <tr class="memitem:ad87e02ebf14f643899fc4229672d739e inherit pub_methods_classphysics_1_1Body"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>Body</b> (<a class="el" href="classphysics_1_1Application.html">Application</a> *application, const sf::Color &amp;color)</td></tr>
@@ -186,6 +200,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> ()</td></tr>
 <tr class="memitem:a60ce0a8ca43a9ee71a57e5d15bdeef23 inherit pub_methods_classphysics_1_1Body"><td class="memItemLeft" align="right" valign="top">
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> (float delta_time)=0</td></tr>
 <tr class="separator:a60ce0a8ca43a9ee71a57e5d15bdeef23 inherit pub_methods_classphysics_1_1Body"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ade119cb7cea5579c5bf14a5cec237164"><td class="memItemLeft" align="right" valign="top"><a id="ade119cb7cea5579c5bf14a5cec237164" name="ade119cb7cea5579c5bf14a5cec237164"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>BodyHandler</b></td></tr>
+<tr class="separator:ade119cb7cea5579c5bf14a5cec237164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>

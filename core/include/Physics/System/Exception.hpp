@@ -5,7 +5,7 @@
 
 namespace physics
 {
-    /// @brief Base of this library's exception handling system
+    /// @brief Base of the library's exception handling system
     class Exception
     {
     public:

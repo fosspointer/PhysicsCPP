@@ -1,5 +1,14 @@
 \doxysection{physics\+::Application Class Reference}
 \hypertarget{classphysics_1_1Application}{}\label{classphysics_1_1Application}\index{physics::Application@{physics::Application}}
+
+
+Main application class, to be overridden by the client.  
+
+
+
+
+{\ttfamily \#include $<$Application.\+hpp$>$}
+
 Inheritance diagram for physics\+::Application\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -37,7 +46,7 @@ sf\+::\+Render\+Window \& \mbox{\hyperlink{classphysics_1_1Application_ae792166e
 bool \mbox{\hyperlink{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd}{Get\+Resized}} () const
 \begin{DoxyCompactList}\small\item\em Get the boolean corresponding to the window resize event. \end{DoxyCompactList}\item 
 const sf\+::\+Color \& \mbox{\hyperlink{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8}{Get\+Background\+Color}} () const
-\begin{DoxyCompactList}\small\item\em Get the Background Color object. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the Background \doxylink{structphysics_1_1Color}{Color} object. \end{DoxyCompactList}\item 
 \Hypertarget{classphysics_1_1Application_a2236239617122bd28c1546207fd3d214}\label{classphysics_1_1Application_a2236239617122bd28c1546207fd3d214} 
 void {\bfseries Set\+Background\+Color} (const sf\+::\+Color \&color)
 \end{DoxyCompactItemize}
@@ -50,6 +59,9 @@ void {\bfseries Set\+Background\+Color} (const sf\+::\+Color \&color)
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Main application class, to be overridden by the client. 
+
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8}\label{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8} 
 \index{physics::Application@{physics::Application}!GetBackgroundColor@{GetBackgroundColor}}
@@ -59,7 +71,7 @@ void {\bfseries Set\+Background\+Color} (const sf\+::\+Color \&color)
 
 
 
-Get the Background Color object. 
+Get the Background \doxylink{structphysics_1_1Color}{Color} object. 
 
 \begin{DoxyReturn}{Returns}
 Immutable reference to the window\textquotesingle{}s background color 
@@ -129,7 +141,8 @@ Reimplemented in \mbox{\hyperlink{classDemo_a113aa54f0ff1b066b2ce99dcf1c59ad6}{D
 
 
 \begin{DoxyParams}{Parameters}
-{\em delta\+\_\+time} & time elapsed since the previous frame \\
+{\em delta\+\_\+time} & time elapsed since the previous frame ~\newline
+ \\
 \hline
 \end{DoxyParams}
 

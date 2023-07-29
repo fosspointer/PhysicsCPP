@@ -45,35 +45,22 @@ namespace physics
                 second->AddForce(-second->GetWeight(), "N'");
             }
 
-        for(size_t i = 0; i < m_KinematicBodies.size(); i++)
+        for(const auto& kinematic_body : m_KinematicBodies)
         {
-            auto& kinematic_body = m_KinematicBodies[i];
-            for(size_t j = 0; j < m_StaticBodies.size(); j++)
+            bool free = true;
+            for(const auto& static_body : m_StaticBodies)
             {
-                auto& static_Body = m_StaticBodies[j];
+                if(!kinematic_body->CollidesWith(static_body)) continue;
 
-                if(!kinematic_body->CollidesWith(static_Body)) continue;
+                free = false;
 
                 kinematic_body->AddForce(-kinematic_body->GetWeight(), "N");
 
-                auto mov = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) * 1.0f + 
-                    sf::Keyboard::isKeyPressed(sf::Keyboard::Left) * -1.0f;
-
-                auto jump = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || 
-                    sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
-
-                kinematic_body->AddForce({mov * 500.0f, 0.0f}, "F");
-
-                if(jump)
-                    kinematic_body->GetVelocity().y = -230.0f;
-                else kinematic_body->GetVelocity().y = 0.0f;
+                auto friction = CalculateFriction(0.25f, kinematic_body->GetVelocity(), length(kinematic_body->GetWeight()));
                 
-                auto f = CalculateFriction(0.25f, kinematic_body->GetVelocity(), length(kinematic_body->GetWeight()));
-                std::cout << "[" << f.x << ", " << f.y << "]\n";
-
-                kinematic_body->AddForce(
-                    f, "T");
+                kinematic_body->AddForce(friction, "T");
             }
+            kinematic_body->m_Free = free;
         }
             
         for(auto& kinematic_body : m_KinematicBodies)

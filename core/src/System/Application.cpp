@@ -5,7 +5,7 @@
 namespace physics
 {
     Application::Application()
-        :m_BackgroundColor(physics::Colors::Black), m_DeltaTime(0.0f), m_Resized(true)
+        :m_BackgroundColor(physics::Color::Black), m_DeltaTime(0.0f), m_Resized(true)
     {
         srand(time(0));
         Mouse::s_Application = this;

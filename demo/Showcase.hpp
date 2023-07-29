@@ -1,5 +1,3 @@
-#include "Physics/Physics/Units.hpp"
-#include "Physics/System/Colors.hpp"
 #include <Physics.hpp>
 #include <Physics/UI/LabeledImage.hpp>
 #include <Physics/UI/Slider.hpp>
@@ -10,6 +8,7 @@
 #include <Physics/Physics/KinematicBody.hpp>
 #include <Physics/Physics/StaticBody.hpp>
 #include <Physics/Physics/BodyHandler.hpp>
+#include <Physics/System/Box.hpp>
 
 class Showcase : public physics::Application::State
 {
@@ -28,7 +27,7 @@ public:
 
         m_ExitButton = new physics::Button(m_Application, "X", {50, 50});
         m_ExitButton
-            ->SetButtonColors(physics::Colors::White)
+            ->SetButtonColors(physics::Color::White)
             ->SetOutline(5)
             ->SetAnchor(physics::Anchor::TopLeft);
 
@@ -38,25 +37,26 @@ public:
         });
 
         m_PropertiesLayout = new physics::VLayout(m_Application);
+        m_PropertiesLayout->SetBackground(physics::Color::White.ChangeAlpha(0.25f), 10.0f);
 
         m_MassLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "mass_tmp", 25u));
         m_MassSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 40, 100))
-            ->SetSliderColors(physics::Colors::DarkGreen)
+            ->SetSliderColors(physics::Color::DarkGreen)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
 
         m_GravityAccelerationLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "gravity_accel_tmp", 25u));
         m_GravityAccelerationSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 1.62f, physics::Units::GetGravityAcceleration()))
-            ->SetSliderColors(physics::Colors::DarkBlue)
+            ->SetSliderColors(physics::Color::DarkBlue)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
 
         m_AirResistanceLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "air_resistance_tmp", 25u));
         m_AirResistanceSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 100.0f))
-            ->SetSliderColors(physics::Colors::DarkYellow)
+            ->SetSliderColors(physics::Color::DarkYellow)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
 
         m_FrictionLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "friction_tmp", 25u));
         m_FrictionSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 0.7f))
-            ->SetSliderColors(physics::Colors::DarkRed)
+            ->SetSliderColors(physics::Color::DarkRed)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
         
         m_PropertiesLayout->SetAnchor(physics::Anchor::Right);
@@ -74,8 +74,25 @@ public:
         
         m_Body = m_BodyHandler->AddKinematicBody(m_Application, PHYSICS_ASSETS_DIR "images/person.png");
         m_Body->SetCollider({0.0f, 0.0f}, {20.0f, 150.0f});
+        m_Body->SetUpdateCallback([](physics::KinematicBody* body, float delta)
+        {
+            if(body->GetFree()) return;
 
-        m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Colors::DarkRed);
+            auto mov = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) * 1.0f + 
+            sf::Keyboard::isKeyPressed(sf::Keyboard::Left) * -1.0f;
+
+            auto jump = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || 
+            sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+
+            body->AddForce({mov * 700.0f, 0.0f}, "F");
+
+            if(jump)
+                body->AddForce({0.0f, -500.0f});
+                // body->GetVelocity().y = -230.0f;
+            // else body->GetVelocity().y = 0.0f; 
+        });
+
+        m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkRed);
         m_Ground->SetSize({700, 300});
         m_Ground->SetPosition(m_Body->GetPosition() + sf::Vector2f{0.0f, 300.0f});
     }
@@ -106,9 +123,9 @@ public:
         
         if(m_ViewProperties)
         {
+            m_Body->DrawForces();
             m_PropertiesLayout->Update(delta_time);
             m_PropertiesLayout->Draw();
-            m_Body->DrawForces();
         }
 
         m_PropertiesButton->Update(delta_time);

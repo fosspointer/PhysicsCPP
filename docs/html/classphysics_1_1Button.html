@@ -127,6 +127,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a33c00b28b520fb88096d4bdeb5fe157d"><td class="memItemLeft" align="right" valign="top"><a id="a33c00b28b520fb88096d4bdeb5fe157d" name="a33c00b28b520fb88096d4bdeb5fe157d"></a>
 <a class="el" href="classphysics_1_1Button.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>SetButtonColors</b> (const sf::Color &amp;color)</td></tr>
 <tr class="separator:a33c00b28b520fb88096d4bdeb5fe157d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2959d0f137fcd387a80abd4df9191ee5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Button.html#a2959d0f137fcd387a80abd4df9191ee5">Button</a> (<a class="el" href="classphysics_1_1Application.html">Application</a> *application, sf::Texture *texture, sf::Texture *pressed_texture, const sf::Vector2f &amp;border_size, sf::String text, const sf::Vector2f &amp;size, const sf::Vector2f margin=sf::Vector2f{25.0f, 25.0f})</td></tr>
+<tr class="memdesc:a2959d0f137fcd387a80abd4df9191ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classphysics_1_1Button.html" title="Basic button element, suitable for most cases.">Button</a> object.  <br /></td></tr>
+<tr class="separator:a2959d0f137fcd387a80abd4df9191ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48bda3a29f8faf4386bfa4757abe56af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classphysics_1_1Label.html">Label</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Button.html#a48bda3a29f8faf4386bfa4757abe56af">GetLabel</a> ()</td></tr>
+<tr class="memdesc:a48bda3a29f8faf4386bfa4757abe56af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="classphysics_1_1Label.html" title="Basic label element, suitable for most cases.">Label</a> object.  <br /></td></tr>
+<tr class="separator:a48bda3a29f8faf4386bfa4757abe56af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356c33ba03827e8979f0b8daf5f1f6c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Button.html#a356c33ba03827e8979f0b8daf5f1f6c4">Draw</a> () override</td></tr>
+<tr class="memdesc:a356c33ba03827e8979f0b8daf5f1f6c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the element, utilizing the main application's window.  <br /></td></tr>
+<tr class="separator:a356c33ba03827e8979f0b8daf5f1f6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28dee4586bfc580ab3ddb685c991e35e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Button.html#a28dee4586bfc580ab3ddb685c991e35e">CustomUpdate</a> (float delta_time) override</td></tr>
+<tr class="separator:a28dee4586bfc580ab3ddb685c991e35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30c5aa38b2f1182d1c9b8725da20dcf4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Button.html#a30c5aa38b2f1182d1c9b8725da20dcf4">IsHovered</a> () const override</td></tr>
+<tr class="memdesc:a30c5aa38b2f1182d1c9b8725da20dcf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the button is hovered by the mouse cursor, must be called after <a class="el" href="classphysics_1_1UIElement.html#a2cb02faa8ecd9d64c74f1724fdf93018" title="The element&#39;s update function.">Update()</a>  <br /></td></tr>
+<tr class="separator:a30c5aa38b2f1182d1c9b8725da20dcf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad62eb47782e444a4264a574afcd2dd84"><td class="memItemLeft" align="right" valign="top"><a id="ad62eb47782e444a4264a574afcd2dd84" name="ad62eb47782e444a4264a574afcd2dd84"></a>
+<a class="el" href="classphysics_1_1Button.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>SetHoverColor</b> (const sf::Color &amp;color)</td></tr>
+<tr class="separator:ad62eb47782e444a4264a574afcd2dd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27c0ea397cf931b31f2d70e597767ac5"><td class="memItemLeft" align="right" valign="top"><a id="a27c0ea397cf931b31f2d70e597767ac5" name="a27c0ea397cf931b31f2d70e597767ac5"></a>
+<a class="el" href="classphysics_1_1Button.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>SetPressColor</b> (const sf::Color &amp;color)</td></tr>
+<tr class="separator:a27c0ea397cf931b31f2d70e597767ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c00b28b520fb88096d4bdeb5fe157d"><td class="memItemLeft" align="right" valign="top"><a id="a33c00b28b520fb88096d4bdeb5fe157d" name="a33c00b28b520fb88096d4bdeb5fe157d"></a>
+<a class="el" href="classphysics_1_1Button.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>SetButtonColors</b> (const sf::Color &amp;color)</td></tr>
+<tr class="separator:a33c00b28b520fb88096d4bdeb5fe157d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classphysics_1_1UIElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classphysics_1_1UIElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classphysics_1_1UIElement.html">physics::UIElement&lt; Button &gt;</a></td></tr>
 <tr class="memitem:a61899a607de56d34bd0ecfa4f03edeed inherit pub_methods_classphysics_1_1UIElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1UIElement.html#a61899a607de56d34bd0ecfa4f03edeed">UIElement</a> (<a class="el" href="classphysics_1_1Application.html">Application</a> *application, const sf::Vector2f &amp;size, const sf::Vector2f &amp;margin=sf::Vector2f{25.0f, 25.0f}, const sf::Color &amp;color=sf::Color::White)</td></tr>
 <tr class="memdesc:a61899a607de56d34bd0ecfa4f03edeed inherit pub_methods_classphysics_1_1UIElement"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classphysics_1_1UIElement.html" title="Forward declaration of the UIElement&lt;Impl&gt; class.">UIElement</a> constructor.  <br /></td></tr>
@@ -188,7 +211,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateAnch
 <tr class="memdesc:a0bf338f748d38d3af231d8bca98cf524 inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Margin object.  <br /></td></tr>
 <tr class="separator:a0bf338f748d38d3af231d8bca98cf524 inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae181d4b35b8a4edbf03685236c93ecbb inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1UIElementAbstract.html#ae181d4b35b8a4edbf03685236c93ecbb">GetColor</a> () const</td></tr>
-<tr class="memdesc:ae181d4b35b8a4edbf03685236c93ecbb inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Color object.  <br /></td></tr>
+<tr class="memdesc:ae181d4b35b8a4edbf03685236c93ecbb inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="structphysics_1_1Color.html">Color</a> object.  <br /></td></tr>
 <tr class="separator:ae181d4b35b8a4edbf03685236c93ecbb inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a7f3e97b44efc391a3173901711a526 inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="memItemLeft" align="right" valign="top">const Anchor &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1UIElementAbstract.html#a8a7f3e97b44efc391a3173901711a526">GetAnchor</a> () const</td></tr>
 <tr class="memdesc:a8a7f3e97b44efc391a3173901711a526 inherit pub_methods_classphysics_1_1UIElementAbstract"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Anchor object.  <br /></td></tr>
@@ -250,7 +273,7 @@ Anchor&#160;</td><td class="memItemRight" valign="bottom"><b>m_Anchor</b></td></
 <div class="textblock"><p>Basic button element, suitable for most cases. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac78f9a1b6943e998c7585699164ac8d8" name="ac78f9a1b6943e998c7585699164ac8d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac78f9a1b6943e998c7585699164ac8d8">&#9670;&#160;</a></span>Button()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac78f9a1b6943e998c7585699164ac8d8">&#9670;&#160;</a></span>Button() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -308,9 +331,114 @@ Anchor&#160;</td><td class="memItemRight" valign="bottom"><b>m_Anchor</b></td></
 
 </div>
 </div>
+<a id="a2959d0f137fcd387a80abd4df9191ee5" name="a2959d0f137fcd387a80abd4df9191ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2959d0f137fcd387a80abd4df9191ee5">&#9670;&#160;</a></span>Button() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">physics::Button::Button </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classphysics_1_1Application.html">Application</a> *&#160;</td>
+          <td class="paramname"><em>application</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Texture *&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Texture *&#160;</td>
+          <td class="paramname"><em>pressed_texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>border_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::Vector2f&#160;</td>
+          <td class="paramname"><em>margin</em> = <code>sf::Vector2f{25.0f,&#160;25.0f}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classphysics_1_1Button.html" title="Basic button element, suitable for most cases.">Button</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">application</td><td>The main application </td></tr>
+    <tr><td class="paramname">text</td><td>The title of the button </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the button </td></tr>
+    <tr><td class="paramname">margin</td><td>Margin around the <a class="el" href="classphysics_1_1Button.html" title="Basic button element, suitable for most cases.">Button</a>, used by Layouts </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a28dee4586bfc580ab3ddb685c991e35e" name="a28dee4586bfc580ab3ddb685c991e35e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28dee4586bfc580ab3ddb685c991e35e">&#9670;&#160;</a></span>CustomUpdate()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dee4586bfc580ab3ddb685c991e35e">&#9670;&#160;</a></span>CustomUpdate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void physics::Button::CustomUpdate </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classphysics_1_1UIElement.html">physics::UIElement&lt; Button &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a28dee4586bfc580ab3ddb685c991e35e" name="a28dee4586bfc580ab3ddb685c991e35e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dee4586bfc580ab3ddb685c991e35e">&#9670;&#160;</a></span>CustomUpdate() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +466,36 @@ Anchor&#160;</td><td class="memItemRight" valign="bottom"><b>m_Anchor</b></td></
 </div>
 </div>
 <a id="a356c33ba03827e8979f0b8daf5f1f6c4" name="a356c33ba03827e8979f0b8daf5f1f6c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a356c33ba03827e8979f0b8daf5f1f6c4">&#9670;&#160;</a></span>Draw()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a356c33ba03827e8979f0b8daf5f1f6c4">&#9670;&#160;</a></span>Draw() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void physics::Button::Draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draws the element, utilizing the main application's window. </p>
+
+<p>Implements <a class="el" href="classphysics_1_1UIElementAbstract.html#a710b1668d90f92015d18e291711f26a7">physics::UIElementAbstract</a>.</p>
+
+</div>
+</div>
+<a id="a356c33ba03827e8979f0b8daf5f1f6c4" name="a356c33ba03827e8979f0b8daf5f1f6c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a356c33ba03827e8979f0b8daf5f1f6c4">&#9670;&#160;</a></span>Draw() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +524,35 @@ Anchor&#160;</td><td class="memItemRight" valign="bottom"><b>m_Anchor</b></td></
 </div>
 </div>
 <a id="a48bda3a29f8faf4386bfa4757abe56af" name="a48bda3a29f8faf4386bfa4757abe56af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48bda3a29f8faf4386bfa4757abe56af">&#9670;&#160;</a></span>GetLabel()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a48bda3a29f8faf4386bfa4757abe56af">&#9670;&#160;</a></span>GetLabel() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classphysics_1_1Label.html">Label</a> &amp; physics::Button::GetLabel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the <a class="el" href="classphysics_1_1Label.html" title="Basic label element, suitable for most cases.">Label</a> object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Mutable reference to the label </dd></dl>
+
+</div>
+</div>
+<a id="a48bda3a29f8faf4386bfa4757abe56af" name="a48bda3a29f8faf4386bfa4757abe56af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48bda3a29f8faf4386bfa4757abe56af">&#9670;&#160;</a></span>GetLabel() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +580,7 @@ Anchor&#160;</td><td class="memItemRight" valign="bottom"><b>m_Anchor</b></td></
 </div>
 </div>
 <a id="a30c5aa38b2f1182d1c9b8725da20dcf4" name="a30c5aa38b2f1182d1c9b8725da20dcf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30c5aa38b2f1182d1c9b8725da20dcf4">&#9670;&#160;</a></span>IsHovered()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a30c5aa38b2f1182d1c9b8725da20dcf4">&#9670;&#160;</a></span>IsHovered() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -424,8 +609,39 @@ Anchor&#160;</td><td class="memItemRight" valign="bottom"><b>m_Anchor</b></td></
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a30c5aa38b2f1182d1c9b8725da20dcf4" name="a30c5aa38b2f1182d1c9b8725da20dcf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30c5aa38b2f1182d1c9b8725da20dcf4">&#9670;&#160;</a></span>IsHovered() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool physics::Button::IsHovered </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the button is hovered by the mouse cursor, must be called after <a class="el" href="classphysics_1_1UIElement.html#a2cb02faa8ecd9d64c74f1724fdf93018" title="The element&#39;s update function.">Update()</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>The result of the test </dd></dl>
+
+<p>Implements <a class="el" href="classphysics_1_1UIElementAbstract.html#ae6d693836d88fe535483001c67fb68c9">physics::UIElementAbstract</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/nephele/dev/physics/core/include/Physics/UI/<a class="el" href="Button_8hpp_source.html">Button.hpp</a></li>
+<li>/home/nephele/dev/physics/core/include/Physics/UI/<a class="el" href="TextureButton_8hpp_source.html">TextureButton.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

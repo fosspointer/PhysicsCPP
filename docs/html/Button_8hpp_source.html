@@ -79,7 +79,7 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;Physics/System/AABB.hpp&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;Physics/System/Colors.hpp&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;Physics/System/Color.hpp&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;Physics/UI/UIElement.hpp&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;Physics/UI/Label.hpp&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
@@ -92,7 +92,7 @@ $(function() {
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classphysics_1_1Button.html#ac78f9a1b6943e998c7585699164ac8d8">   24</a></span>        <a class="code hl_function" href="classphysics_1_1Button.html#ac78f9a1b6943e998c7585699164ac8d8">Button</a>(<a class="code hl_class" href="classphysics_1_1Application.html">Application</a>* application, <span class="keyword">const</span> sf::String text, <span class="keyword">const</span> sf::Vector2f&amp; size, <span class="keyword">const</span> sf::Vector2f margin = sf::Vector2f{25.0f, 25.0f})</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            :m_Label(application, text, 25.0f, sf::<a class="code hl_struct" href="structphysics_1_1Vector2.html">Vector2f</a>{0.0f, 0.0f}), <a class="code hl_class" href="classphysics_1_1UIElement.html">UIElement</a>(application, size, margin)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            SetButtonColors(physics::Colors::White);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            SetButtonColors(physics::Color::White);</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classphysics_1_1Button.html#a48bda3a29f8faf4386bfa4757abe56af">   34</a></span>        <span class="keyword">inline</span> <a class="code hl_class" href="classphysics_1_1Label.html">Label</a>&amp; <a class="code hl_function" href="classphysics_1_1Button.html#a48bda3a29f8faf4386bfa4757abe56af">GetLabel</a>() { <span class="keywordflow">return</span> m_Label; }</div>
@@ -160,12 +160,12 @@ $(function() {
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        Label m_Label;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        sf::Color m_HoverColor = physics::Colors::LightGray, m_PressColor = physics::Colors::Gray;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        sf::Color m_HoverColor = physics::Color::LightGray, m_PressColor = physics::Color::Gray;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        sf::RectangleShape m_ButtonBox;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    };</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
-<div class="ttc" id="aclassphysics_1_1Application_html"><div class="ttname"><a href="classphysics_1_1Application.html">physics::Application</a></div><div class="ttdef"><b>Definition</b> Application.hpp:15</div></div>
-<div class="ttc" id="aclassphysics_1_1Application_html_ae792166e36fcffb2e3eb1786bf7ef81b"><div class="ttname"><a href="classphysics_1_1Application.html#ae792166e36fcffb2e3eb1786bf7ef81b">physics::Application::GetWindow</a></div><div class="ttdeci">sf::RenderWindow &amp; GetWindow()</div><div class="ttdoc">Get the Window object.</div><div class="ttdef"><b>Definition</b> Application.hpp:97</div></div>
+<div class="ttc" id="aclassphysics_1_1Application_html"><div class="ttname"><a href="classphysics_1_1Application.html">physics::Application</a></div><div class="ttdoc">Main application class, to be overridden by the client.</div><div class="ttdef"><b>Definition</b> Application.hpp:16</div></div>
+<div class="ttc" id="aclassphysics_1_1Application_html_ae792166e36fcffb2e3eb1786bf7ef81b"><div class="ttname"><a href="classphysics_1_1Application.html#ae792166e36fcffb2e3eb1786bf7ef81b">physics::Application::GetWindow</a></div><div class="ttdeci">sf::RenderWindow &amp; GetWindow()</div><div class="ttdoc">Get the Window object.</div><div class="ttdef"><b>Definition</b> Application.hpp:98</div></div>
 <div class="ttc" id="aclassphysics_1_1Button_html"><div class="ttname"><a href="classphysics_1_1Button.html">physics::Button</a></div><div class="ttdoc">Basic button element, suitable for most cases.</div><div class="ttdef"><b>Definition</b> Button.hpp:13</div></div>
 <div class="ttc" id="aclassphysics_1_1Button_html_a30c5aa38b2f1182d1c9b8725da20dcf4"><div class="ttname"><a href="classphysics_1_1Button.html#a30c5aa38b2f1182d1c9b8725da20dcf4">physics::Button::IsHovered</a></div><div class="ttdeci">bool IsHovered() const override</div><div class="ttdoc">Checks if the button is hovered by the mouse cursor, must be called after Update()</div><div class="ttdef"><b>Definition</b> Button.hpp:64</div></div>
 <div class="ttc" id="aclassphysics_1_1Button_html_a356c33ba03827e8979f0b8daf5f1f6c4"><div class="ttname"><a href="classphysics_1_1Button.html#a356c33ba03827e8979f0b8daf5f1f6c4">physics::Button::Draw</a></div><div class="ttdeci">void Draw() override</div><div class="ttdoc">Draws the element, utilizing the main application's window.</div><div class="ttdef"><b>Definition</b> Button.hpp:36</div></div>

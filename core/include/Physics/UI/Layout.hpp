@@ -155,7 +155,21 @@ namespace physics
         Layout* SetBackgroundColor(const sf::Color& color)
         {
             m_Background.setFillColor(color);
+            m_Background.setOutlineColor(color);
             return this;
+        }
+
+        Layout* SetBackgroundGrowth(float growth)
+        {
+            m_Background.setOutlineThickness(growth);
+            return this;
+        }
+
+        Layout* SetBackground(const sf::Color& color, float growth)
+        {
+            return SetBackgroundColor(color)
+                ->SetBackgroundGrowth(growth)
+                ->SetBackgroundVisible(true);
         }
 
         Layout* SetOutline(float thickness, const sf::Color& color = sf::Color::Black)

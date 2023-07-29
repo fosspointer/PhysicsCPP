@@ -12,7 +12,7 @@ public:
 
     void OnShow() override
     {
-        m_Application->SetBackgroundColor(physics::Colors::DarkMagenta);
+        m_Application->SetBackgroundColor(physics::Color::DarkMagenta);
     }
 
     void OnCreate() override
@@ -29,7 +29,7 @@ public:
             ->AddOption("English")
             ->SetDirection(physics::Dropdown::Direction::Up)
             ->SetAnchor(physics::Anchor::BottomRight)
-            ->SetDropdownColors(physics::Colors::Magenta)
+            ->SetDropdownColors(physics::Color::Magenta)
             ->SetOutline(5)
             ->AddClickCallback([this](physics::Application* app, physics::Dropdown* dropdown, MouseButton)
             {
@@ -42,7 +42,7 @@ public:
 
         m_ExitButton = new physics::Button(m_Application, "X", {50, 50});
         m_ExitButton
-            ->SetButtonColors(physics::Colors::White)
+            ->SetButtonColors(physics::Color::White)
             ->SetOutline(5)
             ->SetAnchor(physics::Anchor::TopLeft);
 

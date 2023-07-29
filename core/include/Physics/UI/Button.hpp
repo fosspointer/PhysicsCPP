@@ -1,6 +1,6 @@
 #pragma once
 #include "Physics/System/AABB.hpp"
-#include <Physics/System/Colors.hpp>
+#include <Physics/System/Color.hpp>
 #include <Physics/UI/UIElement.hpp>
 #include <Physics/UI/Label.hpp>
 
@@ -24,7 +24,7 @@ namespace physics
         Button(Application* application, const sf::String text, const sf::Vector2f& size, const sf::Vector2f margin = sf::Vector2f{25.0f, 25.0f})
             :m_Label(application, text, 25.0f, sf::Vector2f{0.0f, 0.0f}), UIElement(application, size, margin)
         {
-            SetButtonColors(physics::Colors::White);
+            SetButtonColors(physics::Color::White);
         }
 
         /**
@@ -100,7 +100,7 @@ namespace physics
         }
     private:
         Label m_Label;
-        sf::Color m_HoverColor = physics::Colors::LightGray, m_PressColor = physics::Colors::Gray;
+        sf::Color m_HoverColor = physics::Color::LightGray, m_PressColor = physics::Color::Gray;
         sf::RectangleShape m_ButtonBox;
     };
 }

@@ -4,7 +4,7 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Physics/System/AABB.hpp"{}}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/System/Colors.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Physics/System/Color.hpp>}}
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Physics/UI/UIElement.hpp>}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Physics/UI/Label.hpp>}}
 \DoxyCodeLine{00006\ }
@@ -17,7 +17,7 @@
 \DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Button_ac78f9a1b6943e998c7585699164ac8d8}{Button}}(\mbox{\hyperlink{classphysics_1_1Application}{Application}}*\ application,\ \textcolor{keyword}{const}\ sf::String\ text,\ \textcolor{keyword}{const}\ sf::Vector2f\&\ size,\ \textcolor{keyword}{const}\ sf::Vector2f\ margin\ =\ sf::Vector2f\{25.0f,\ 25.0f\})}
 \DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ :m\_Label(application,\ text,\ 25.0f,\ sf::\mbox{\hyperlink{structphysics_1_1Vector2}{Vector2f}}\{0.0f,\ 0.0f\}),\ \mbox{\hyperlink{classphysics_1_1UIElement}{UIElement}}(application,\ size,\ margin)}
 \DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ SetButtonColors(physics::Colors::White);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ SetButtonColors(physics::Color::White);}
 \DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00029\ }
 \DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classphysics_1_1Label}{Label}}\&\ \mbox{\hyperlink{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}{GetLabel}}()\ \{\ \textcolor{keywordflow}{return}\ m\_Label;\ \}}
@@ -85,7 +85,7 @@
 \DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ Label\ m\_Label;}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ sf::Color\ m\_HoverColor\ =\ physics::Colors::LightGray,\ m\_PressColor\ =\ physics::Colors::Gray;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ sf::Color\ m\_HoverColor\ =\ physics::Color::LightGray,\ m\_PressColor\ =\ physics::Color::Gray;}
 \DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ sf::RectangleShape\ m\_ButtonBox;}
 \DoxyCodeLine{00105\ \ \ \ \ \};}
 \DoxyCodeLine{00106\ \}}

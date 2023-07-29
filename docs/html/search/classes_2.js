@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['configdemo_0',['ConfigDemo',['../classConfigDemo.html',1,'']]]
+  ['color_0',['Color',['../structphysics_1_1Color.html',1,'physics']]],
+  ['configdemo_1',['ConfigDemo',['../classConfigDemo.html',1,'']]]
 ];

@@ -18,7 +18,7 @@ public:
 
     void OnShow() override 
     {
-        m_Application->SetBackgroundColor(physics::Colors::LightGray);
+        m_Application->SetBackgroundColor(physics::Color::LightGray);
     }
 
     void OnCreate() override
@@ -31,7 +31,7 @@ public:
         m_LanguageDropdown = m_Layout->PushElement(new physics::Dropdown(m_Application, "select_language_dropdown_tmp", 25.0f, "dropdown_placeholder_tmp", 300.0f, 20.0f, 20.0f))
             ->AddOption(L"Ελληνικά")
             ->AddOption("English")
-            ->SetDropdownColors(physics::Colors::White)
+            ->SetDropdownColors(physics::Color::White)
             ->SetOutline(5.0f)
             ->SetDirection(physics::Dropdown::Direction::Down)
             ->SetMargin(sf::Vector2f{25.0f, 250.0f})
@@ -46,7 +46,7 @@ public:
         
         m_NextButton = m_Layout->PushElement(new physics::Button(m_Application, "next_button_tmp", sf::Vector2f{300.0f, 70.0f}))
             ->SetOutline(5)
-            ->SetButtonColors(physics::Colors::White)
+            ->SetButtonColors(physics::Color::White)
             ->AddClickCallback([&](physics::Application* application, physics::Button*, MouseButton)
             {
                 SetToBeDestroyed();
@@ -55,7 +55,7 @@ public:
 
         m_ExitButton = new physics::Button(m_Application, "X", {50, 50});
         m_ExitButton
-            ->SetButtonColors(physics::Colors::White)
+            ->SetButtonColors(physics::Color::White)
             ->SetOutline(5)
             ->SetAnchor(physics::Anchor::TopLeft);
 

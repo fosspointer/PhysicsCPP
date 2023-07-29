@@ -2,6 +2,7 @@
 
 namespace physics
 {
+    /// @brief Provides constants and unit conversions
     class Units
     {
     public:

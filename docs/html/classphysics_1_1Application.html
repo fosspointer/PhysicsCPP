@@ -81,6 +81,11 @@ $(function() {
   <div class="headertitle"><div class="title">physics::Application Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Main application class, to be overridden by the client.  
+ <a href="classphysics_1_1Application.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Application_8hpp_source.html">Application.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for physics::Application:</div>
 <div class="dyncontent">
@@ -100,10 +105,10 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7b9ba5d8f39cc6daba206c88d1fe4ec3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Application.html#a7b9ba5d8f39cc6daba206c88d1fe4ec3">OnCreate</a> ()</td></tr>
-<tr class="memdesc:a7b9ba5d8f39cc6daba206c88d1fe4ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classphysics_1_1Application.html">Application</a>'s create event, override to handle.  <br /></td></tr>
+<tr class="memdesc:a7b9ba5d8f39cc6daba206c88d1fe4ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classphysics_1_1Application.html" title="Main application class, to be overridden by the client.">Application</a>'s create event, override to handle.  <br /></td></tr>
 <tr class="separator:a7b9ba5d8f39cc6daba206c88d1fe4ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae968f0c3e9c94881fd4f04c487b8873a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Application.html#ae968f0c3e9c94881fd4f04c487b8873a">OnUpdate</a> (float delta_time)</td></tr>
-<tr class="memdesc:ae968f0c3e9c94881fd4f04c487b8873a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classphysics_1_1Application.html">Application</a>'s update event, override to handle.  <br /></td></tr>
+<tr class="memdesc:ae968f0c3e9c94881fd4f04c487b8873a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classphysics_1_1Application.html" title="Main application class, to be overridden by the client.">Application</a>'s update event, override to handle.  <br /></td></tr>
 <tr class="separator:ae968f0c3e9c94881fd4f04c487b8873a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35b3bee9592e11dba37e4de6dc2c0eee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Application.html#a35b3bee9592e11dba37e4de6dc2c0eee">Start</a> (const sf::Vector2u &amp;size, const sf::String &amp;title, sf::Uint32 style=sf::Style::Default)</td></tr>
 <tr class="memdesc:a35b3bee9592e11dba37e4de6dc2c0eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the application.  <br /></td></tr>
@@ -131,7 +136,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>PopState</b> ()</td><
 <tr class="memdesc:a3f23fd69106e20fa0dbca71958bd63bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the boolean corresponding to the window resize event.  <br /></td></tr>
 <tr class="separator:a3f23fd69106e20fa0dbca71958bd63bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acffaae10f1ea222b93244518a7cedfe8"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphysics_1_1Application.html#acffaae10f1ea222b93244518a7cedfe8">GetBackgroundColor</a> () const</td></tr>
-<tr class="memdesc:acffaae10f1ea222b93244518a7cedfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Background Color object.  <br /></td></tr>
+<tr class="memdesc:acffaae10f1ea222b93244518a7cedfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Background <a class="el" href="structphysics_1_1Color.html">Color</a> object.  <br /></td></tr>
 <tr class="separator:acffaae10f1ea222b93244518a7cedfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2236239617122bd28c1546207fd3d214"><td class="memItemLeft" align="right" valign="top"><a id="a2236239617122bd28c1546207fd3d214" name="a2236239617122bd28c1546207fd3d214"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetBackgroundColor</b> (const sf::Color &amp;color)</td></tr>
@@ -144,7 +149,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetBackgroundColor</b
 <a class="el" href="classphysics_1_1NonCopyable.html">NonCopyable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classphysics_1_1NonCopyable.html">NonCopyable</a> &amp;)=delete</td></tr>
 <tr class="separator:a1e9c3ff66cb396641aabf007140138cf inherit pub_methods_classphysics_1_1NonCopyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main application class, to be overridden by the client. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="acffaae10f1ea222b93244518a7cedfe8" name="acffaae10f1ea222b93244518a7cedfe8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acffaae10f1ea222b93244518a7cedfe8">&#9670;&#160;</a></span>GetBackgroundColor()</h2>
 
@@ -168,7 +175,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetBackgroundColor</b
 </table>
 </div><div class="memdoc">
 
-<p>Get the Background Color object. </p>
+<p>Get the Background <a class="el" href="structphysics_1_1Color.html">Color</a> object. </p>
 <dl class="section return"><dt>Returns</dt><dd>Immutable reference to the window's background color </dd></dl>
 
 </div>
@@ -280,7 +287,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetBackgroundColor</b
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classphysics_1_1Application.html">Application</a>'s create event, override to handle. </p>
+<p><a class="el" href="classphysics_1_1Application.html" title="Main application class, to be overridden by the client.">Application</a>'s create event, override to handle. </p>
 
 <p>Reimplemented in <a class="el" href="classDemo.html#a113aa54f0ff1b066b2ce99dcf1c59ad6">Demo</a>.</p>
 
@@ -310,10 +317,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetBackgroundColor</b
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classphysics_1_1Application.html">Application</a>'s update event, override to handle. </p>
+<p><a class="el" href="classphysics_1_1Application.html" title="Main application class, to be overridden by the client.">Application</a>'s update event, override to handle. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delta_time</td><td>time elapsed since the previous frame </td></tr>
+    <tr><td class="paramname">delta_time</td><td>time elapsed since the previous frame <br  />
+ </td></tr>
   </table>
   </dd>
 </dl>

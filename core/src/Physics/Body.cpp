@@ -115,7 +115,7 @@ namespace physics
             arrow.GetStartPoint() + vector_normalize(diff) * (vector_length(diff) + 20.0f)
         );
         force_text.setOrigin(GetBoundSize(force_text) / 2.0f + GetBoundPosition(force_text));
-        force_text.setFillColor(physics::Colors::White);
+        force_text.setFillColor(physics::Color::White);
         m_Application->GetWindow().draw(force_text);
     }
 

@@ -34,6 +34,9 @@ namespace physics
 
     void KinematicBody::Update(float delta_time)
     {
+        if(m_UpdateCallback)
+            m_UpdateCallback(this, delta_time);
+
         for(auto& force : m_Forces)
             m_Acceleration += force.Value / m_Mass;
 
@@ -48,6 +51,11 @@ namespace physics
     void KinematicBody::DrawForces(float thickness) const
     {
         Body::DrawForces(thickness);
-        DrawForce(Force{GetWeight(), "w"}, physics::Colors::Red);
+        DrawForce(Force{GetWeight(), "w"}, physics::Color::Red);
+    }
+
+    void KinematicBody::SetUpdateCallback(UpdateCallbackFunc func)
+    {
+        m_UpdateCallback = func;
     }
 }

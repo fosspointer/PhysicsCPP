@@ -1,23 +1,31 @@
 \doxysection{physics\+::AABB Struct Reference}
 \hypertarget{structphysics_1_1AABB}{}\label{structphysics_1_1AABB}\index{physics::AABB@{physics::AABB}}
+
+
+An axis-\/alined bounding box collider (\doxylink{structphysics_1_1AABB}{AABB}) that\textquotesingle{}s centered at its position.  
+
+
+
+
+{\ttfamily \#include $<$AABB.\+hpp$>$}
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{structphysics_1_1AABB_a0a1dbb10b71dd28f782bb1ba01c49524}\label{structphysics_1_1AABB_a0a1dbb10b71dd28f782bb1ba01c49524} 
-{\bfseries AABB} (const sf\+::\+Vector2f \&position, const sf\+::\+Vector2f \&size)
-\item 
-\Hypertarget{structphysics_1_1AABB_afb4f6f9294450020a15361f13fc214ae}\label{structphysics_1_1AABB_afb4f6f9294450020a15361f13fc214ae} 
-{\bfseries AABB} (const \mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElement\+Abstract}} \texorpdfstring{$\ast$}{*}element)
-\item 
-\Hypertarget{structphysics_1_1AABB_a911da86e7c30c3ce3aa84d3b112fbcf8}\label{structphysics_1_1AABB_a911da86e7c30c3ce3aa84d3b112fbcf8} 
-{\bfseries AABB} (\mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElement\+Abstract}} \texorpdfstring{$\ast$}{*}element)
-\item 
-\Hypertarget{structphysics_1_1AABB_ae9b7e3bc56b2205aa1a6d42b9818eb2c}\label{structphysics_1_1AABB_ae9b7e3bc56b2205aa1a6d42b9818eb2c} 
-{\bfseries AABB} (const sf\+::\+Rectangle\+Shape \&rectangle\+\_\+shape)
-\item 
-\Hypertarget{structphysics_1_1AABB_a2612ba34557cf4d03312fcbc66b29db5}\label{structphysics_1_1AABB_a2612ba34557cf4d03312fcbc66b29db5} 
-{\footnotesize template$<$class T $>$ }\\{\bfseries AABB} (const sf\+::\+Rect$<$ T $>$ \&rectangle)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{structphysics_1_1AABB_a0a1dbb10b71dd28f782bb1ba01c49524}{AABB}} (const sf\+::\+Vector2f \&position, const sf\+::\+Vector2f \&size)
+\begin{DoxyCompactList}\small\item\em \doxylink{structphysics_1_1AABB}{AABB} collider from two vectors ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structphysics_1_1AABB_afb4f6f9294450020a15361f13fc214ae}{AABB}} (const \mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElement\+Abstract}} \texorpdfstring{$\ast$}{*}element)
+\begin{DoxyCompactList}\small\item\em \doxylink{structphysics_1_1AABB}{AABB} collider from immutable \doxylink{classphysics_1_1UIElement}{UIElement}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structphysics_1_1AABB_a911da86e7c30c3ce3aa84d3b112fbcf8}{AABB}} (\mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElement\+Abstract}} \texorpdfstring{$\ast$}{*}element)
+\begin{DoxyCompactList}\small\item\em \doxylink{structphysics_1_1AABB}{AABB} collider from mutable \doxylink{classphysics_1_1UIElement}{UIElement}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structphysics_1_1AABB_ae9b7e3bc56b2205aa1a6d42b9818eb2c}{AABB}} (const sf\+::\+Rectangle\+Shape \&rectangle\+\_\+shape)
+\begin{DoxyCompactList}\small\item\em \doxylink{structphysics_1_1AABB}{AABB} collider from sfml rectangle shape. \end{DoxyCompactList}\item 
+\Hypertarget{structphysics_1_1AABB_a70db3d3795df9dc1f0e45f7e99a2f24d}\label{structphysics_1_1AABB_a70db3d3795df9dc1f0e45f7e99a2f24d} 
+{\bfseries AABB} ()
+\begin{DoxyCompactList}\small\item\em Default \doxylink{structphysics_1_1AABB}{AABB} collider constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{structphysics_1_1AABB_a2612ba34557cf4d03312fcbc66b29db5}{AABB}} (const sf\+::\+Rect$<$ T $>$ \&rectangle)
+\begin{DoxyCompactList}\small\item\em \doxylink{structphysics_1_1AABB}{AABB} collider from sfml rectangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,6 +42,99 @@ sf\+::\+Vector2f {\bfseries Position}
 \Hypertarget{structphysics_1_1AABB_af04e802408528d4e44f4e7c7a8bafb4a}\label{structphysics_1_1AABB_af04e802408528d4e44f4e7c7a8bafb4a} 
 sf\+::\+Vector2f {\bfseries Size}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An axis-\/alined bounding box collider (\doxylink{structphysics_1_1AABB}{AABB}) that\textquotesingle{}s centered at its position. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structphysics_1_1AABB_a0a1dbb10b71dd28f782bb1ba01c49524}\label{structphysics_1_1AABB_a0a1dbb10b71dd28f782bb1ba01c49524} 
+\index{physics::AABB@{physics::AABB}!AABB@{AABB}}
+\index{AABB@{AABB}!physics::AABB@{physics::AABB}}
+\doxysubsubsection{\texorpdfstring{AABB()}{AABB()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily physics\+::\+AABB\+::\+AABB (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{position,  }\item[{const sf\+::\+Vector2f \&}]{size }\end{DoxyParamCaption})}
+
+
+
+\doxylink{structphysics_1_1AABB}{AABB} collider from two vectors ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position-\/center of the collider \\
+\hline
+{\em size} & The size of the collider \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structphysics_1_1AABB_afb4f6f9294450020a15361f13fc214ae}\label{structphysics_1_1AABB_afb4f6f9294450020a15361f13fc214ae} 
+\index{physics::AABB@{physics::AABB}!AABB@{AABB}}
+\index{AABB@{AABB}!physics::AABB@{physics::AABB}}
+\doxysubsubsection{\texorpdfstring{AABB()}{AABB()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily physics\+::\+AABB\+::\+AABB (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElement\+Abstract}} \texorpdfstring{$\ast$}{*}}]{element }\end{DoxyParamCaption})}
+
+
+
+\doxylink{structphysics_1_1AABB}{AABB} collider from immutable \doxylink{classphysics_1_1UIElement}{UIElement}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & The element to be used ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structphysics_1_1AABB_a911da86e7c30c3ce3aa84d3b112fbcf8}\label{structphysics_1_1AABB_a911da86e7c30c3ce3aa84d3b112fbcf8} 
+\index{physics::AABB@{physics::AABB}!AABB@{AABB}}
+\index{AABB@{AABB}!physics::AABB@{physics::AABB}}
+\doxysubsubsection{\texorpdfstring{AABB()}{AABB()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily physics\+::\+AABB\+::\+AABB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classphysics_1_1UIElementAbstract}{UIElement\+Abstract}} \texorpdfstring{$\ast$}{*}}]{element }\end{DoxyParamCaption})}
+
+
+
+\doxylink{structphysics_1_1AABB}{AABB} collider from mutable \doxylink{classphysics_1_1UIElement}{UIElement}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & The element to be used ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structphysics_1_1AABB_ae9b7e3bc56b2205aa1a6d42b9818eb2c}\label{structphysics_1_1AABB_ae9b7e3bc56b2205aa1a6d42b9818eb2c} 
+\index{physics::AABB@{physics::AABB}!AABB@{AABB}}
+\index{AABB@{AABB}!physics::AABB@{physics::AABB}}
+\doxysubsubsection{\texorpdfstring{AABB()}{AABB()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily physics\+::\+AABB\+::\+AABB (\begin{DoxyParamCaption}\item[{const sf\+::\+Rectangle\+Shape \&}]{rectangle\+\_\+shape }\end{DoxyParamCaption})}
+
+
+
+\doxylink{structphysics_1_1AABB}{AABB} collider from sfml rectangle shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rectangle\+\_\+shape} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structphysics_1_1AABB_a2612ba34557cf4d03312fcbc66b29db5}\label{structphysics_1_1AABB_a2612ba34557cf4d03312fcbc66b29db5} 
+\index{physics::AABB@{physics::AABB}!AABB@{AABB}}
+\index{AABB@{AABB}!physics::AABB@{physics::AABB}}
+\doxysubsubsection{\texorpdfstring{AABB()}{AABB()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+physics\+::\+AABB\+::\+AABB (\begin{DoxyParamCaption}\item[{const sf\+::\+Rect$<$ T $>$ \&}]{rectangle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{structphysics_1_1AABB}{AABB} collider from sfml rectangle. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of the rectangle \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em rectangle} & The rectangle \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}

@@ -15,6 +15,7 @@ namespace physics
         sf::String Name;
     };
 
+    /// @brief Abstract class representing a body
     class Body
     {
     public:

@@ -22,7 +22,7 @@
 \DoxyCodeLine{00018\ }
 \DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_a33b8dfb7bad671b0d17671715a92e7d4}{OnShow}}()\textcolor{keyword}{\ override\ }}
 \DoxyCodeLine{00020\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ m\_Application-\/>SetBackgroundColor(physics::Colors::LightGray);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ m\_Application-\/>SetBackgroundColor(physics::Color::LightGray);}
 \DoxyCodeLine{00022\ \ \ \ \ \}}
 \DoxyCodeLine{00023\ }
 \DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTitleScreen_afd9ef8a17e3fa9d916f9666ddd394a94}{OnCreate}}()\textcolor{keyword}{\ override}}
@@ -35,7 +35,7 @@
 \DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ m\_LanguageDropdown\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Dropdown}{physics::Dropdown}}(m\_Application,\ \textcolor{stringliteral}{"{}select\_language\_dropdown\_tmp"{}},\ 25.0f,\ \textcolor{stringliteral}{"{}dropdown\_placeholder\_tmp"{}},\ 300.0f,\ 20.0f,\ 20.0f))}
 \DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddOption(L\textcolor{stringliteral}{"{}Ελληνικά"{}})}
 \DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddOption(\textcolor{stringliteral}{"{}English"{}})}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDropdownColors(physics::Colors::White)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDropdownColors(physics::Color::White)}
 \DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5.0f)}
 \DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetDirection(physics::Dropdown::Direction::Down)}
 \DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetMargin(sf::Vector2f\{25.0f,\ 250.0f\})}
@@ -50,7 +50,7 @@
 \DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ }
 \DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ m\_NextButton\ =\ m\_Layout-\/>PushElement(\textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}next\_button\_tmp"{}},\ sf::Vector2f\{300.0f,\ 70.0f\}))}
 \DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Color::White)}
 \DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>AddClickCallback([\&](\mbox{\hyperlink{classphysics_1_1Application}{physics::Application}}*\ application,\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}*,\ MouseButton)}
 \DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}();}
@@ -59,7 +59,7 @@
 \DoxyCodeLine{00055\ }
 \DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ m\_ExitButton\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classphysics_1_1Button}{physics::Button}}(m\_Application,\ \textcolor{stringliteral}{"{}X"{}},\ \{50,\ 50\});}
 \DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ m\_ExitButton}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Colors::White)}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetButtonColors(physics::Color::White)}
 \DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetOutline(5)}
 \DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classphysics_1_1UIElement_af244a5c71600c3f54557b3e8a28d664a}{SetAnchor}}(physics::Anchor::TopLeft);}
 \DoxyCodeLine{00061\ }

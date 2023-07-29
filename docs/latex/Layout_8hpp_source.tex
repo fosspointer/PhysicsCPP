@@ -151,50 +151,64 @@
 \DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ Layout*\ SetBackgroundColor(\textcolor{keyword}{const}\ sf::Color\&\ color)}
 \DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setFillColor(color);}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00160\ }
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ Layout*\ SetOutline(\textcolor{keywordtype}{float}\ thickness,\ \textcolor{keyword}{const}\ sf::Color\&\ color\ =\ sf::Color::Black)}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineThickness(thickness);}
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineColor(color);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineColor(color);}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ Layout*\ SetBackgroundGrowth(\textcolor{keywordtype}{float}\ growth)}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineThickness(growth);}
 \DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
 \DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00167\ }
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ Layout*\ SetOutlineColor(\textcolor{keyword}{const}\ sf::Color\&\ color)}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ Layout*\ SetBackground(\textcolor{keyword}{const}\ sf::Color\&\ color,\ \textcolor{keywordtype}{float}\ growth)}
 \DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineColor(color);}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00173\ }
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ Layout*\ SetOutlineThickness(\textcolor{keywordtype}{float}\ thickness)}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineThickness(thickness);}
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00179\ }
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ Layout*\ AddElementClickCallback(ElementClickCallbackFunc\ func)}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ m\_ElementClickCallbackFunctions.push\_back(func);}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00185\ }
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ Layout*\ AddElementHoverCallback(ElementHoverCallbackFunc\ func)}
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ m\_ElementHoverCallbackFunctions.push\_back(func);}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00191\ }
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ UpdateSize()\ =\ 0;}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ UpdatePositions()\ =\ 0;}
-\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ ElementList\ m\_Children;}
-\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ std::vector<ElementClickCallbackFunc>\ m\_ElementClickCallbackFunctions;}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ std::vector<ElementHoverCallbackFunc>\ m\_ElementHoverCallbackFunctions;}
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ sf::RectangleShape\ m\_Background;}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_BackgroundVisible;}
-\DoxyCodeLine{00201\ \ \ \ \ \};}
-\DoxyCodeLine{00202\ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ SetBackgroundColor(color)}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetBackgroundGrowth(growth)}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>SetBackgroundVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ Layout*\ SetOutline(\textcolor{keywordtype}{float}\ thickness,\ \textcolor{keyword}{const}\ sf::Color\&\ color\ =\ sf::Color::Black)}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineThickness(thickness);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineColor(color);}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ Layout*\ SetOutlineColor(\textcolor{keyword}{const}\ sf::Color\&\ color)}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineColor(color);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ Layout*\ SetOutlineThickness(\textcolor{keywordtype}{float}\ thickness)}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Background.setOutlineThickness(thickness);}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ Layout*\ AddElementClickCallback(ElementClickCallbackFunc\ func)}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ m\_ElementClickCallbackFunctions.push\_back(func);}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ Layout*\ AddElementHoverCallback(ElementHoverCallbackFunc\ func)}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ m\_ElementHoverCallbackFunctions.push\_back(func);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ UpdateSize()\ =\ 0;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ UpdatePositions()\ =\ 0;}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ ElementList\ m\_Children;}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ std::vector<ElementClickCallbackFunc>\ m\_ElementClickCallbackFunctions;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ std::vector<ElementHoverCallbackFunc>\ m\_ElementHoverCallbackFunctions;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ sf::RectangleShape\ m\_Background;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_BackgroundVisible;}
+\DoxyCodeLine{00215\ \ \ \ \ \};}
+\DoxyCodeLine{00216\ \}}
 
 \end{DoxyCode}

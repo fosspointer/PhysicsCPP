@@ -15,54 +15,86 @@
 \DoxyCodeLine{00011\ }
 \DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }physics}
 \DoxyCodeLine{00013\ \{}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application}{Application}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1NonCopyable}{NonCopyable}}}
-\DoxyCodeLine{00015\ \ \ \ \ \{}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{Application}}();}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{\string~Application}}();}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}}}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a8da31edf4841a485f03dc652066cb6c9}{OnCreate}}()\ \{\}}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aa63f4c87d4ee0309dba12d7179fe70bf}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\ \{\}}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a7f5260d3901ce4604c60d29ae02ecc1c}{OnShow}}()\ \{\}}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a474989933ffbae9072364814443b151e}{OnHide}}()\ \{\}}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a6219069e5146492371c53fd354b47b5a}{OnDestroy}}()\ \{\}}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}(\textcolor{keywordtype}{bool}\ setting\ =\ \textcolor{keyword}{true})\ \{m\_ToBeDestroyed\ =\ setting;\}}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_ToBeDestroyed\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{Application}}*\ m\_Application\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application}{Application}};}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \};}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_a7b9ba5d8f39cc6daba206c88d1fe4ec3}{OnCreate}}()\ \{\}}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_ae968f0c3e9c94881fd4f04c487b8873a}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\ \{\}}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ [[nodiscard(\textcolor{stringliteral}{"{}The\ return\ value\ of\ Application::Start()\ is\ to\ be\ returned\ by\ main()"{}})]]}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classphysics_1_1Application_a35b3bee9592e11dba37e4de6dc2c0eee}{Start}}(\textcolor{keyword}{const}\ sf::Vector2u\&\ size,\ \textcolor{keyword}{const}\ sf::String\&\ title,\ sf::Uint32\ style\ =\ sf::Style::Default);}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_ad36aa7f44d8d6c0495c2ea8e12c00212}{Rename}}(\textcolor{keyword}{const}\ sf::String\&\ title);}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ State*\ \mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(State*\ state);}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ State*\ ChangeState(State*\ state);}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_a116c64ad3e868f9d9dea94fbfa071c76}{PopState}}();}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ sf::RenderWindow\&\ \mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}()\ \{\ \textcolor{keywordflow}{return}\ m\_Window;\ \}}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}}*\ \mbox{\hyperlink{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}{GetState}}()\ \{\ \textcolor{keywordflow}{return}\ m\_States.top();\ \}}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd}{GetResized}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Resized;\ \}}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ sf::Color\&\ \mbox{\hyperlink{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8}{GetBackgroundColor}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_BackgroundColor;\ \}}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetBackgroundColor(\textcolor{keyword}{const}\ sf::Color\&\ color);}
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_Resized\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::stack<State*>\ m\_States;}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ sf::RenderWindow\ m\_Window;}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ m\_PreviousTime;}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ m\_CurrentTime;}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_DeltaTime\ =\ 0.0f;}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ sf::Color\ m\_BackgroundColor\ =\ sf::Color::Black;}
-\DoxyCodeLine{00123\ \ \ \ \ \};}
-\DoxyCodeLine{00124\ \}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application}{Application}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classphysics_1_1NonCopyable}{NonCopyable}}}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{Application}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{\string~Application}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a8da31edf4841a485f03dc652066cb6c9}{OnCreate}}()\ \{\}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aa63f4c87d4ee0309dba12d7179fe70bf}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\ \{\}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a7f5260d3901ce4604c60d29ae02ecc1c}{OnShow}}()\ \{\}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a474989933ffbae9072364814443b151e}{OnHide}}()\ \{\}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_a6219069e5146492371c53fd354b47b5a}{OnDestroy}}()\ \{\}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State_aea9e0e747773e2c0111e3a4835bb51ff}{SetToBeDestroyed}}(\textcolor{keywordtype}{bool}\ setting\ =\ \textcolor{keyword}{true})\ \{m\_ToBeDestroyed\ =\ setting;\}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_ToBeDestroyed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classphysics_1_1Application}{Application}}*\ m\_Application\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphysics_1_1Application}{Application}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_a7b9ba5d8f39cc6daba206c88d1fe4ec3}{OnCreate}}()\ \{\}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_ae968f0c3e9c94881fd4f04c487b8873a}{OnUpdate}}(\textcolor{keywordtype}{float}\ delta\_time)\ \{\}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ [[nodiscard(\textcolor{stringliteral}{"{}The\ return\ value\ of\ Application::Start()\ is\ to\ be\ returned\ by\ main()"{}})]]}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classphysics_1_1Application_a35b3bee9592e11dba37e4de6dc2c0eee}{Start}}(\textcolor{keyword}{const}\ sf::Vector2u\&\ size,\ \textcolor{keyword}{const}\ sf::String\&\ title,\ sf::Uint32\ style\ =\ sf::Style::Default);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_ad36aa7f44d8d6c0495c2ea8e12c00212}{Rename}}(\textcolor{keyword}{const}\ sf::String\&\ title);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ State*\ \mbox{\hyperlink{classphysics_1_1Application_a136fb867434bab6823da54a0aedeb3b8}{PushState}}(State*\ state);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ State*\ ChangeState(State*\ state);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classphysics_1_1Application_a116c64ad3e868f9d9dea94fbfa071c76}{PopState}}();}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ sf::RenderWindow\&\ \mbox{\hyperlink{classphysics_1_1Application_ae792166e36fcffb2e3eb1786bf7ef81b}{GetWindow}}()\ \{\ \textcolor{keywordflow}{return}\ m\_Window;\ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classphysics_1_1Application_1_1State}{State}}*\ \mbox{\hyperlink{classphysics_1_1Application_abcd0b90d4351b8cc576aebd94c46a314}{GetState}}()\ \{\ \textcolor{keywordflow}{return}\ m\_States.top();\ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classphysics_1_1Application_a3f23fd69106e20fa0dbca71958bd63bd}{GetResized}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Resized;\ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ sf::Color\&\ \mbox{\hyperlink{classphysics_1_1Application_acffaae10f1ea222b93244518a7cedfe8}{GetBackgroundColor}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_BackgroundColor;\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetBackgroundColor(\textcolor{keyword}{const}\ sf::Color\&\ color);}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_Resized\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ std::stack<State*>\ m\_States;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ sf::RenderWindow\ m\_Window;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ m\_PreviousTime;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ m\_CurrentTime;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_DeltaTime\ =\ 0.0f;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ sf::Color\ m\_BackgroundColor\ =\ sf::Color::Black;}
+\DoxyCodeLine{00124\ \ \ \ \ \};}
+\DoxyCodeLine{00125\ \}}
 
 \end{DoxyCode}

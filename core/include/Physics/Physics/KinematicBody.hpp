@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <Physics/Physics/Units.hpp>
 #include <Physics/Physics/Body.hpp>
 #include <SFML/System.hpp>
@@ -8,6 +9,7 @@ namespace physics
     class KinematicBody : public Body
     {
     public: 
+        using UpdateCallbackFunc = std::function<void(KinematicBody*, float)>;
         KinematicBody(Application* application, const sf::Color& color, float gravity_acceleration = Units::GetGravityAcceleration());
         KinematicBody(Application* application, const sf::String& filepath, float gravity_acceleration = Units::GetGravityAcceleration());
 
@@ -22,12 +24,22 @@ namespace physics
 
         virtual const sf::Vector2f GetTotalForce() override;
 
+        void SetUpdateCallback(UpdateCallbackFunc func);
+
         inline sf::Vector2f GetWeight() const
         {
             return sf::Vector2f{0.0f, m_GravityAcceleration} * m_Mass;
         }
 
+        inline bool GetFree() const 
+        {
+            return m_Free;
+        }
+
     private:
+        bool m_Free = false;
+        friend class BodyHandler;
+        UpdateCallbackFunc m_UpdateCallback;
         float m_Mass = 1.0f, m_GravityAcceleration;
     };
 }

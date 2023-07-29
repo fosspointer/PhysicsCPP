@@ -48,6 +48,26 @@ namespace physics
             :x(x), y(y)
         {}
 
+        static constexpr Vector2 Zero()
+        {
+            return Vector2(0); 
+        }
+
+        static constexpr Vector2 One()
+        {
+            return Vector2(1); 
+        }
+
+        static constexpr Vector2 X(T value)
+        {
+            return Vector2(value, 0);
+        }
+
+        static constexpr Vector2 Y(T value)
+        {
+            return Vector2(0, value);
+        }
+
         template <typename U>
         constexpr operator sf::Vector2<U>()
         {
@@ -59,8 +79,8 @@ namespace physics
         constexpr operator bool() const
         {
             if constexpr (std::is_same<T, float>::value)
-                return *this != Vector2{-1.0f, -1.0f};
-            else return *this == Vector2{static_cast<T>(-1.0f), static_cast<T>(-1.0f)};
+                return *this != Vector2{-1, -1};
+            else return *this == Vector2{static_cast<T>(-1), static_cast<T>(-1)};
         }
 
         constexpr T dot(const Vector2& other) const

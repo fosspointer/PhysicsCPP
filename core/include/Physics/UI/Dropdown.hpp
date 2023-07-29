@@ -1,13 +1,8 @@
 #pragma once
-#include "Physics/System/AABB.hpp"
-#include "Physics/System/Colors.hpp"
-#include "Physics/System/Mouse.hpp"
-#include "SFML/System/String.hpp"
-#include "SFML/System/Vector2.hpp"
-#include "SFML/Window/Mouse.hpp"
 #include <Physics/UI/UIElement.hpp>
 #include <Physics/System/Application.hpp>
 #include <Physics/UI/Label.hpp>
+#include <Physics/System/Color.hpp>
 #include <cmath>
 #include <cstdlib>
 #include <vector>
@@ -27,15 +22,15 @@ namespace physics
         };
 
         Dropdown(Application* m_Application, const sf::String& title, unsigned int title_font_size, const sf::String& placeholder, float width, unsigned int font_size, float text_padding = 5.0f, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(m_Application, sf::Vector2f{width, -1.0f}, margin, physics::Colors::White),
-            m_Expanded(false), m_Hovered(false), m_OptionColor(physics::Colors::LightGray), m_HoverColor(physics::Colors::Gray), m_OutlineColor(physics::Colors::Black),
+            :UIElement(m_Application, sf::Vector2f{width, -1.0f}, margin, physics::Color::White),
+            m_Expanded(false), m_Hovered(false), m_OptionColor(physics::Color::LightGray), m_HoverColor(physics::Color::Gray), m_OutlineColor(physics::Color::Black),
             m_TitleLabel(m_Application, title, title_font_size, sf::Vector2f{0.0f, 10.0f}), m_SelectionLabel(m_Application, placeholder, font_size, sf::Vector2f{0.0f, 0.0f}),
             m_TextPadding(text_padding), m_SelectionIndex(-1), m_Direction(Direction::Down)
         {
             m_TitleLabel.SetStyle(sf::Text::Bold);
             UpdateSize();
             AddOption(placeholder);
-            SetDropdownColors(Colors::White);
+            SetDropdownColors(Color::White);
             AddClickCallback([&](Application*, Dropdown*, MouseButton)
             {
                 if(m_Hovered)

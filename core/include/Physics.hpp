@@ -18,7 +18,7 @@
 ///PHYSICS HEADERS
 #include <Physics/System/NonCopyable.hpp>
 #include <Physics/System/Vector2.hpp>
-#include <Physics/System/Colors.hpp>
+#include <Physics/System/Color.hpp>
 #include <Physics/System/Application.hpp>
 #include <Physics/System/AABB.hpp>
 #include <Physics/System/Exception.hpp>

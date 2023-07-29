@@ -42,6 +42,25 @@ bool \mbox{\hyperlink{classphysics_1_1Button_a30c5aa38b2f1182d1c9b8725da20dcf4}{
 \item 
 \Hypertarget{classphysics_1_1Button_a33c00b28b520fb88096d4bdeb5fe157d}\label{classphysics_1_1Button_a33c00b28b520fb88096d4bdeb5fe157d} 
 \mbox{\hyperlink{classphysics_1_1Button}{Button}} \texorpdfstring{$\ast$}{*} {\bfseries Set\+Button\+Colors} (const sf\+::\+Color \&color)
+\item 
+\mbox{\hyperlink{classphysics_1_1Button_a2959d0f137fcd387a80abd4df9191ee5}{Button}} (\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}application, sf\+::\+Texture \texorpdfstring{$\ast$}{*}texture, sf\+::\+Texture \texorpdfstring{$\ast$}{*}pressed\+\_\+texture, const sf\+::\+Vector2f \&border\+\_\+size, sf\+::\+String text, const sf\+::\+Vector2f \&size, const sf\+::\+Vector2f margin=sf\+::\+Vector2f\{25.\+0f, 25.\+0f\})
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classphysics_1_1Button}{Button} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classphysics_1_1Label}{Label}} \& \mbox{\hyperlink{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}{Get\+Label}} ()
+\begin{DoxyCompactList}\small\item\em Get the \doxylink{classphysics_1_1Label}{Label} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}{Draw}} () override
+\begin{DoxyCompactList}\small\item\em Draws the element, utilizing the main application\textquotesingle{}s window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classphysics_1_1Button_a28dee4586bfc580ab3ddb685c991e35e}{Custom\+Update}} (float delta\+\_\+time) override
+\item 
+bool \mbox{\hyperlink{classphysics_1_1Button_a30c5aa38b2f1182d1c9b8725da20dcf4}{Is\+Hovered}} () const override
+\begin{DoxyCompactList}\small\item\em Checks if the button is hovered by the mouse cursor, must be called after \doxylink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update()} \end{DoxyCompactList}\item 
+\Hypertarget{classphysics_1_1Button_ad62eb47782e444a4264a574afcd2dd84}\label{classphysics_1_1Button_ad62eb47782e444a4264a574afcd2dd84} 
+\mbox{\hyperlink{classphysics_1_1Button}{Button}} \texorpdfstring{$\ast$}{*} {\bfseries Set\+Hover\+Color} (const sf\+::\+Color \&color)
+\item 
+\Hypertarget{classphysics_1_1Button_a27c0ea397cf931b31f2d70e597767ac5}\label{classphysics_1_1Button_a27c0ea397cf931b31f2d70e597767ac5} 
+\mbox{\hyperlink{classphysics_1_1Button}{Button}} \texorpdfstring{$\ast$}{*} {\bfseries Set\+Press\+Color} (const sf\+::\+Color \&color)
+\item 
+\Hypertarget{classphysics_1_1Button_a33c00b28b520fb88096d4bdeb5fe157d}\label{classphysics_1_1Button_a33c00b28b520fb88096d4bdeb5fe157d} 
+\mbox{\hyperlink{classphysics_1_1Button}{Button}} \texorpdfstring{$\ast$}{*} {\bfseries Set\+Button\+Colors} (const sf\+::\+Color \&color)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classphysics_1_1UIElement}{physics\+::\+UIElement$<$ Button $>$}}}
 \begin{DoxyCompactItemize}
@@ -88,7 +107,7 @@ const sf\+::\+Vector2f \& \mbox{\hyperlink{classphysics_1_1UIElementAbstract_aea
 const sf\+::\+Vector2f \& \mbox{\hyperlink{classphysics_1_1UIElementAbstract_a0bf338f748d38d3af231d8bca98cf524}{Get\+Margin}} () const
 \begin{DoxyCompactList}\small\item\em Get the Margin object. \end{DoxyCompactList}\item 
 const sf\+::\+Color \& \mbox{\hyperlink{classphysics_1_1UIElementAbstract_ae181d4b35b8a4edbf03685236c93ecbb}{Get\+Color}} () const
-\begin{DoxyCompactList}\small\item\em Get the Color object. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the \doxylink{structphysics_1_1Color}{Color} object. \end{DoxyCompactList}\item 
 const Anchor \& \mbox{\hyperlink{classphysics_1_1UIElementAbstract_a8a7f3e97b44efc391a3173901711a526}{Get\+Anchor}} () const
 \begin{DoxyCompactList}\small\item\em Get the Anchor object. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classphysics_1_1UIElementAbstract_a609fd4459005f25dc18ecfab55f0798f}{Get\+Pragma\+Updated}} () const
@@ -139,8 +158,29 @@ Basic button element, suitable for most cases.
 \Hypertarget{classphysics_1_1Button_ac78f9a1b6943e998c7585699164ac8d8}\label{classphysics_1_1Button_ac78f9a1b6943e998c7585699164ac8d8} 
 \index{physics::Button@{physics::Button}!Button@{Button}}
 \index{Button@{Button}!physics::Button@{physics::Button}}
-\doxysubsubsection{\texorpdfstring{Button()}{Button()}}
+\doxysubsubsection{\texorpdfstring{Button()}{Button()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily physics\+::\+Button\+::\+Button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}}]{application,  }\item[{const sf\+::\+String}]{text,  }\item[{const sf\+::\+Vector2f \&}]{size,  }\item[{const sf\+::\+Vector2f}]{margin = {\ttfamily sf\+:\+:Vector2f\{25.0f,~25.0f\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \doxylink{classphysics_1_1Button}{Button} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em application} & The main application \\
+\hline
+{\em text} & The title of the button \\
+\hline
+{\em size} & The size of the button \\
+\hline
+{\em margin} & Margin around the \doxylink{classphysics_1_1Button}{Button}, used by Layouts \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classphysics_1_1Button_a2959d0f137fcd387a80abd4df9191ee5}\label{classphysics_1_1Button_a2959d0f137fcd387a80abd4df9191ee5} 
+\index{physics::Button@{physics::Button}!Button@{Button}}
+\index{Button@{Button}!physics::Button@{physics::Button}}
+\doxysubsubsection{\texorpdfstring{Button()}{Button()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily physics\+::\+Button\+::\+Button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classphysics_1_1Application}{Application}} \texorpdfstring{$\ast$}{*}}]{application,  }\item[{sf\+::\+Texture \texorpdfstring{$\ast$}{*}}]{texture,  }\item[{sf\+::\+Texture \texorpdfstring{$\ast$}{*}}]{pressed\+\_\+texture,  }\item[{const sf\+::\+Vector2f \&}]{border\+\_\+size,  }\item[{sf\+::\+String}]{text,  }\item[{const sf\+::\+Vector2f \&}]{size,  }\item[{const sf\+::\+Vector2f}]{margin = {\ttfamily sf\+:\+:Vector2f\{25.0f,~25.0f\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -163,7 +203,17 @@ Construct a new \doxylink{classphysics_1_1Button}{Button} object.
 \Hypertarget{classphysics_1_1Button_a28dee4586bfc580ab3ddb685c991e35e}\label{classphysics_1_1Button_a28dee4586bfc580ab3ddb685c991e35e} 
 \index{physics::Button@{physics::Button}!CustomUpdate@{CustomUpdate}}
 \index{CustomUpdate@{CustomUpdate}!physics::Button@{physics::Button}}
-\doxysubsubsection{\texorpdfstring{CustomUpdate()}{CustomUpdate()}}
+\doxysubsubsection{\texorpdfstring{CustomUpdate()}{CustomUpdate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void physics\+::\+Button\+::\+Custom\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classphysics_1_1UIElement}{physics\+::\+UIElement$<$ Button $>$}}.
+
+\Hypertarget{classphysics_1_1Button_a28dee4586bfc580ab3ddb685c991e35e}\label{classphysics_1_1Button_a28dee4586bfc580ab3ddb685c991e35e} 
+\index{physics::Button@{physics::Button}!CustomUpdate@{CustomUpdate}}
+\index{CustomUpdate@{CustomUpdate}!physics::Button@{physics::Button}}
+\doxysubsubsection{\texorpdfstring{CustomUpdate()}{CustomUpdate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void physics\+::\+Button\+::\+Custom\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -173,7 +223,21 @@ Reimplemented from \mbox{\hyperlink{classphysics_1_1UIElement}{physics\+::\+UIEl
 \Hypertarget{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}\label{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4} 
 \index{physics::Button@{physics::Button}!Draw@{Draw}}
 \index{Draw@{Draw}!physics::Button@{physics::Button}}
-\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void physics\+::\+Button\+::\+Draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Draws the element, utilizing the main application\textquotesingle{}s window. 
+
+
+
+Implements \mbox{\hyperlink{classphysics_1_1UIElementAbstract_a710b1668d90f92015d18e291711f26a7}{physics\+::\+UIElement\+Abstract}}.
+
+\Hypertarget{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4}\label{classphysics_1_1Button_a356c33ba03827e8979f0b8daf5f1f6c4} 
+\index{physics::Button@{physics::Button}!Draw@{Draw}}
+\index{Draw@{Draw}!physics::Button@{physics::Button}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void physics\+::\+Button\+::\+Draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -187,7 +251,20 @@ Implements \mbox{\hyperlink{classphysics_1_1UIElementAbstract_a710b1668d90f92015
 \Hypertarget{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}\label{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af} 
 \index{physics::Button@{physics::Button}!GetLabel@{GetLabel}}
 \index{GetLabel@{GetLabel}!physics::Button@{physics::Button}}
-\doxysubsubsection{\texorpdfstring{GetLabel()}{GetLabel()}}
+\doxysubsubsection{\texorpdfstring{GetLabel()}{GetLabel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classphysics_1_1Label}{Label}} \& physics\+::\+Button\+::\+Get\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the \doxylink{classphysics_1_1Label}{Label} object. 
+
+\begin{DoxyReturn}{Returns}
+Mutable reference to the label 
+\end{DoxyReturn}
+\Hypertarget{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af}\label{classphysics_1_1Button_a48bda3a29f8faf4386bfa4757abe56af} 
+\index{physics::Button@{physics::Button}!GetLabel@{GetLabel}}
+\index{GetLabel@{GetLabel}!physics::Button@{physics::Button}}
+\doxysubsubsection{\texorpdfstring{GetLabel()}{GetLabel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classphysics_1_1Label}{Label}} \& physics\+::\+Button\+::\+Get\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -200,7 +277,24 @@ Mutable reference to the label
 \Hypertarget{classphysics_1_1Button_a30c5aa38b2f1182d1c9b8725da20dcf4}\label{classphysics_1_1Button_a30c5aa38b2f1182d1c9b8725da20dcf4} 
 \index{physics::Button@{physics::Button}!IsHovered@{IsHovered}}
 \index{IsHovered@{IsHovered}!physics::Button@{physics::Button}}
-\doxysubsubsection{\texorpdfstring{IsHovered()}{IsHovered()}}
+\doxysubsubsection{\texorpdfstring{IsHovered()}{IsHovered()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool physics\+::\+Button\+::\+Is\+Hovered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if the button is hovered by the mouse cursor, must be called after \doxylink{classphysics_1_1UIElement_a2cb02faa8ecd9d64c74f1724fdf93018}{Update()} 
+
+\begin{DoxyReturn}{Returns}
+The result of the test 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classphysics_1_1UIElementAbstract_ae6d693836d88fe535483001c67fb68c9}{physics\+::\+UIElement\+Abstract}}.
+
+\Hypertarget{classphysics_1_1Button_a30c5aa38b2f1182d1c9b8725da20dcf4}\label{classphysics_1_1Button_a30c5aa38b2f1182d1c9b8725da20dcf4} 
+\index{physics::Button@{physics::Button}!IsHovered@{IsHovered}}
+\index{IsHovered@{IsHovered}!physics::Button@{physics::Button}}
+\doxysubsubsection{\texorpdfstring{IsHovered()}{IsHovered()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily bool physics\+::\+Button\+::\+Is\+Hovered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -216,6 +310,7 @@ Implements \mbox{\hyperlink{classphysics_1_1UIElementAbstract_ae6d693836d88fe535
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/nephele/dev/physics/core/include/\+Physics/\+UI/Button.\+hpp\end{DoxyCompactItemize}
+/home/nephele/dev/physics/core/include/\+Physics/\+UI/Button.\+hpp\item 
+/home/nephele/dev/physics/core/include/\+Physics/\+UI/Texture\+Button.\+hpp\end{DoxyCompactItemize}
