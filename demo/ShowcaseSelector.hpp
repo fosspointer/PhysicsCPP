@@ -28,9 +28,9 @@ public:
         m_Grid = new physics::HGrid(m_Application, 3);
         m_Grid->SetAnchor(physics::Anchor::Center);
 
+        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/showcase.png", "Showcase"));        
         m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/bg_demo.png", "Background Demo"));        
         m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/cfg_demo.png", "Config Demo"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/showcase.png", "Showcase"));        
         m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
         m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
         m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
@@ -49,9 +49,9 @@ public:
 
             switch (index)
             {
-            case 0: app->PushState(new BackgroundDemo()); break;
-            case 1: app->PushState(new ConfigDemo()); break;
-            case 2: app->PushState(new Showcase()); break;
+            case 0: app->PushState(new Showcase()); break;
+            case 1: app->PushState(new BackgroundDemo()); break;
+            case 2: app->PushState(new ConfigDemo()); break;
             }
         });
     }

@@ -2,34 +2,34 @@
 
 namespace physics
 {
-    static float length(const sf::Vector2f& vector)
+    static float length(const Vector2f& vector)
     {
         return std::sqrt(vector.x * vector.x + vector.y * vector.y);
     }
 
-    static sf::Vector2f normalize(const sf::Vector2f& vector)
+    static sf::Vector2f normalize(const Vector2f& vector)
     {
         auto len = length(vector);
         return vector / len;
     }
 
-    Arrow::Arrow(float thickness, const sf::Vector2f& head_size, const sf::Color& color)
+    Arrow::Arrow(float thickness, const Vector2f& head_size, const Color& color)
         :m_Thickness(thickness), m_HeadSize(head_size), m_Vertices(sf::PrimitiveType::Triangles, 9), m_Color(color)
     {}
 
-    void Arrow::SetStartPoint(const sf::Vector2f& point)
+    void Arrow::SetStartPoint(const Vector2f& point)
     {
         m_StartPoint = point;
         UpdateVertices();
     }
 
-    void Arrow::SetEndPoint(const sf::Vector2f& point)
+    void Arrow::SetEndPoint(const Vector2f& point)
     {
         m_EndPoint = point;
         UpdateVertices();
     }
 
-    void Arrow::SetHeadSize(const sf::Vector2f& size)
+    void Arrow::SetHeadSize(const Vector2f& size)
     {
         m_HeadSize = size;
         UpdateVertices();
@@ -41,7 +41,7 @@ namespace physics
         UpdateVertices();
     }
 
-    void Arrow::SetColor(const sf::Color& color)
+    void Arrow::SetColor(const Color& color)
     {
         m_Color = color;
         UpdateVertices();

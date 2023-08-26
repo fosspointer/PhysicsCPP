@@ -33,17 +33,23 @@ namespace physics
             static_body->Update(delta_time);
 
         for(size_t i = 0; i < m_KinematicBodies.size(); i++)
+        {
+            auto& first = m_KinematicBodies[i];
+            bool free = true;
             for(size_t j = 0; j < m_KinematicBodies.size(); j++)
             {
                 if(i >= j) continue;
-                auto& first = m_KinematicBodies[i];
                 auto& second = m_KinematicBodies[j];
 
                 if(!first->CollidesWith(second)) continue;
 
+                free = false;
+
                 first->AddForce(-first->GetWeight(), "N");
                 second->AddForce(-second->GetWeight(), "N'");
             }
+            first->m_Free = free;
+        }
 
         for(const auto& kinematic_body : m_KinematicBodies)
         {
@@ -60,7 +66,7 @@ namespace physics
                 
                 kinematic_body->AddForce(friction, "T");
             }
-            kinematic_body->m_Free = free;
+            kinematic_body->m_Free = kinematic_body->m_Free && free;
         }
             
         for(auto& kinematic_body : m_KinematicBodies)

@@ -8,7 +8,9 @@
 #include <Physics/Physics/KinematicBody.hpp>
 #include <Physics/Physics/StaticBody.hpp>
 #include <Physics/Physics/BodyHandler.hpp>
+
 #include <Physics/System/Box.hpp>
+#include <Physics/System/TranslationControl.hpp>
 
 class Showcase : public physics::Application::State
 {
@@ -87,9 +89,8 @@ public:
             body->AddForce({mov * 700.0f, 0.0f}, "F");
 
             if(jump)
-                body->AddForce({0.0f, -500.0f});
-                // body->GetVelocity().y = -230.0f;
-            // else body->GetVelocity().y = 0.0f; 
+                body->GetVelocity().y = -230.0f;
+            else body->GetVelocity().y = 0.0f; 
         });
 
         m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkRed);
@@ -124,6 +125,11 @@ public:
         if(m_ViewProperties)
         {
             m_Body->DrawForces();
+            {
+                physics::TranslationControl control;
+                control.SetOrigin(m_Body->GetPosition());
+                m_Application->GetWindow().draw(control);
+            }
             m_PropertiesLayout->Update(delta_time);
             m_PropertiesLayout->Draw();
         }
