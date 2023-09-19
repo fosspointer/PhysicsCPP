@@ -13,6 +13,7 @@ public:
     ~ShowcaseSelector() noexcept
     {
         delete m_Grid;
+        delete m_BackButton;
     }
 
     void OnShow() override 
@@ -25,6 +26,15 @@ public:
 
     void OnCreate() override
     {
+        m_BackButton = new physics::Button(m_Application, "Back", {70.0f, 50.0f});
+        m_BackButton->SetAnchor(physics::Anchor::TopLeft)
+            ->SetButtonColors(physics::Color::White)
+            ->SetOutline(5)
+            ->AddClickCallback([](physics::Application* app, physics::Button* btn, MouseButton)
+            {
+                app->PushState(new TitleScreen());
+            });
+        
         m_Grid = new physics::HGrid(m_Application, 3);
         m_Grid->SetAnchor(physics::Anchor::Center);
 
@@ -60,7 +70,11 @@ public:
     {
         m_Grid->Update(delta_time);
         m_Grid->Draw();
+
+        m_BackButton->Update(delta_time);
+        m_BackButton->Draw();
     }
 private:
+    physics::Button* m_BackButton;
     physics::HGrid* m_Grid;
 };

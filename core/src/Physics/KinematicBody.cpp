@@ -23,17 +23,18 @@ namespace physics
         m_GravityAcceleration = g;
     }
 
-    const sf::Vector2f KinematicBody::GetTotalForce()
+    const Vector2f KinematicBody::GetTotalForce()
     {
-        sf::Vector2f res = Body::GetTotalForce();
+        Vector2f res = Body::GetTotalForce();
         res += GetWeight();
 
         return res;
     }
 
-
     void KinematicBody::Update(float delta_time)
     {
+        m_DeltaTime = delta_time;
+
         if(m_UpdateCallback)
             m_UpdateCallback(this, delta_time);
 
@@ -41,11 +42,11 @@ namespace physics
             m_Acceleration += force.Value / m_Mass;
 
         m_Velocity += m_Acceleration * delta_time * Units::GetPixelsPerMeter() + sf::Vector2f{0.0f, m_GravityAcceleration * Units::GetPixelsPerMeter()} * delta_time;
-        auto new_position = m_Rectangle.getPosition() + m_Velocity * delta_time + m_Acceleration * delta_time * delta_time * 0.5f;
+        sf::Vector2f new_position = m_Rectangle.getPosition() + (sf::Vector2f)m_Velocity * delta_time + (sf::Vector2f)m_Acceleration * delta_time * delta_time * 0.5f;
         m_Rectangle.setPosition(new_position);
         m_PreviousForces = m_Forces;
         m_Forces.clear();
-        m_Acceleration = sf::Vector2f{0.0f, 0.0f};
+        m_Acceleration = Vector2f::Zero();
     }
 
     void KinematicBody::DrawForces(float thickness) const

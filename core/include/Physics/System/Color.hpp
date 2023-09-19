@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
-#include <Physics/System/Exception.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <Physics/System/Exception.hpp>
 
 #define BRIGHT_DOM_HUE 168
 #define BRIGHT_SEC_HUE 24

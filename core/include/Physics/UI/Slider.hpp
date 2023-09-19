@@ -17,18 +17,20 @@ namespace physics
     {
     public:
         Slider(Application* application, float min, float max, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(application, sf::Vector2f{150.0f, 20.0f}, margin), 
-            m_MinValue(min), m_MaxValue(max), m_CurrentValue(min), m_Label(m_Application, to_string(min), 20u)
+            :UIElement(application, sf::Vector2f{150.0f, 20.0f}, margin),
+            m_MinValue(min), m_MaxValue(max), m_CurrentValue(min), m_Label(m_Application, to_string(min), 20u),
+            m_Interaction(false)
         {
             m_SelectedRectangle.setFillColor(Color::DarkGray);
         }
 
         virtual bool IsHovered() const override
         {
-            return AABB::RectangleToPoint(this, Mouse::GetPosition());
+            return AABB::RectangleToPoint(this, Mouse::GetPosition())
+                || AABB::RectangleToPoint(m_Knob, Mouse::GetPosition());
         }
 
-        virtual void Draw() override
+        virtual void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
             m_Application->GetWindow().draw(m_Rectangle);
             m_Application->GetWindow().draw(m_SelectedRectangle);
@@ -38,7 +40,7 @@ namespace physics
 
         void CustomUpdate(float delta_time) override
         {
-            if(IsPressed())
+            if(Interacted())
                 UpdatePercentage();
             UpdateSize();
             UpdatePositions();
@@ -69,7 +71,11 @@ namespace physics
             return this;
         }
 
-        void SetValue(float value) { m_CurrentValue = value; }
+        Slider* SetValue(float value) 
+        { 
+            UpdatePercentage(value);
+            return this;    
+        }
 
         inline const float& GetValue() const { return m_CurrentValue; }
     private:
@@ -89,15 +95,35 @@ namespace physics
             m_Label.SetPosition(sf::Vector2f{m_Position.x, m_Position.y + m_Rectangle.getSize().y / 2.0f});
         }
 
+        bool Interacted()
+        {
+            auto& mouse = Mouse::GetInstance();
+
+            if(IsHovered() && !mouse.PreviousState && mouse.CurrentState)
+                m_Interaction = true;
+            else if(!mouse.CurrentState) 
+                m_Interaction = false;
+            return m_Interaction;
+        }
+
         void UpdatePercentage()
         {   
             float size = std::clamp(Mouse::GetPosition().x - m_Rectangle.getPosition().x, 0.0f, m_Rectangle.getSize().x);
-            size = size < m_Rectangle.getSize().x * 0x1p-5f ? 0.0f : 
-                size > m_Rectangle.getSize().x * (1.0f - 0x1p-5f) ? m_Rectangle.getSize().x : size;
+            m_CurrentValue = (size / m_Rectangle.getSize().x) * (m_MaxValue - m_MinValue) + m_MinValue;
+            
             m_SelectedRectangle.setSize(sf::Vector2f{
                 size,
                 20.0f});
-            m_CurrentValue = (m_SelectedRectangle.getSize().x / m_Rectangle.getSize().x) * (m_MaxValue - m_MinValue) + m_MinValue;
+            m_Label.SetText(to_string(m_CurrentValue));
+        }
+
+        void UpdatePercentage(float value)
+        {
+            float size = (value - m_MinValue) / (m_MaxValue - m_MinValue) * m_Rectangle.getSize().x;
+            m_SelectedRectangle.setSize(sf::Vector2f{
+                size,
+                20.0f});
+            m_CurrentValue = value;
             m_Label.SetText(to_string(m_CurrentValue));
         }
 
@@ -109,6 +135,7 @@ namespace physics
             m_SelectedRectangle.setFillColor(m_Color); 
         }
 
+        bool m_Interaction;
         sf::Color m_KnobColor, m_OutlineColor, m_UnselectedColor;
         float m_MinValue, m_MaxValue, m_CurrentValue, m_KnobWidth;
         sf::RectangleShape m_Rectangle, m_SelectedRectangle, m_Knob;

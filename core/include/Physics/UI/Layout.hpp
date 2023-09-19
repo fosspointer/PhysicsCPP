@@ -1,9 +1,8 @@
 #pragma once
-#include "Physics/System/AABB.hpp"
-#include "Physics/UI/UIElementAbstract.hpp"
-#include "SFML/Graphics/RectangleShape.hpp"
-#include <Physics/UI/UIElement.hpp>
 #include <vector>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <Physics/System/AABB.hpp>
+#include <Physics/UI/UIElement.hpp>
 
 namespace physics
 {
@@ -36,13 +35,13 @@ namespace physics
                     delete m_Children[i];
         }
 
-        virtual void Draw() override
+        virtual void Draw(int8_t layer = PHYSICS_LAYER_UI_0) override
         {
             if(m_BackgroundVisible)
                 m_Application->GetWindow().draw(m_Background);
             
             for(ElementList::size_type i = 0; i < m_Children.size(); i++)
-                m_Children[i]->Draw();
+                m_Children[i]->Draw(PHYSICS_LAYER_UI_1);
         }
 
         template <class UIElementImpl>

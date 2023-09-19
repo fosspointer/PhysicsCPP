@@ -1,8 +1,8 @@
 #pragma once
 #include <functional>
+#include <SFML/System.hpp>
 #include <Physics/Physics/Units.hpp>
 #include <Physics/Physics/Body.hpp>
-#include <SFML/System.hpp>
 
 namespace physics
 {
@@ -22,7 +22,7 @@ namespace physics
         void SetGravityAcceleration(float g);
         inline const float& GetGravityAcceleration() const { return m_GravityAcceleration; }
 
-        virtual const sf::Vector2f GetTotalForce() override;
+        virtual const Vector2f GetTotalForce() override;
 
         void SetUpdateCallback(UpdateCallbackFunc func);
 

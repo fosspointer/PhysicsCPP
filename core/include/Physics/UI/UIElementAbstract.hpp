@@ -5,43 +5,38 @@
 
 namespace physics
 {
-    /**
-     * @brief Enum representing options for which UIElements can be anchored
-     */
+    
+    /// @brief Enum representing options for which UIElements can be anchored
     enum class Anchor : unsigned char
     {
         None, Center, Top, Bottom, Left, Right, TopLeft, TopRight, BottomLeft, BottomRight
     };
 
-    /**
-     * @brief Base of the UI system, polymorphic class, inheritted by UIElement<Impl> for dependency injection
-     */
+    
+    /// @brief Base of the UI system, polymorphic class, inheritted by UIElement<Impl> for dependency injection
+     
     class UIElementAbstract
     {
     public:
-        /**
-         * @brief UIElementAbstract constructor, must be called by classes deriving from here
-         * @param application pointer to the main application
-         * @param size the size of the ui element, use (-1, -1) if not yet calculated
-         * @param margin the element's margin, used by layouts
-         * @param color the color of the element
-         */
+        
+        /// @brief UIElementAbstract constructor, must be called by classes deriving from here
+        /// @param application pointer to the main application
+        /// @param size the size of the ui element, use (-1, -1) if not yet calculated
+        /// @param margin the element's margin, used by layouts
+        /// @param color the color of the element
         UIElementAbstract(Application* application, const sf::Vector2f& size, const sf::Vector2f& margin, const sf::Color& color)
             :m_Application(application), m_Position(), m_Size(size), m_Margin(margin),
             m_Anchor{Anchor::None}, m_Color(color), m_PragmaUpdated{true}, m_PreviousHovered{false}, m_CurrentHovered{false}
         {}
         
         virtual ~UIElementAbstract() = default;
+        
+        /// @brief Draws the element, utilizing the main application's window
+        virtual void Draw(int8_t layer) = 0;
 
-        /**
-         * @brief Draws the element, utilizing the main application's window
-         */
-        virtual void Draw() = 0;
-
-        /**
-         * @brief Checks if the element is hovered by the mouse cursor, must be called after Update()
-         * @return The result of the test
-         */
+        
+        /// @brief Checks if the element is hovered by the mouse cursor, must be called after Update()
+        /// @return The result of the test
         virtual bool IsHovered() const = 0;
 
         inline bool StoppedHover() const 
@@ -49,15 +44,13 @@ namespace physics
             return !m_CurrentHovered && m_PreviousHovered;
         }
 
-        /**
-         * @brief The element's update function
-         * @param delta_time Time elapsed since previous frame
-         */
+        
+        /// @brief The element's update function
+        /// @param delta_time Time elapsed since previous frame
         virtual void Update(float delta_time) = 0;
 
-        /**
-         * @brief Calculates the element's position for the specified Anchor enumerator
-         */
+        
+        /// @brief Calculates the element's position for the specified Anchor enumerator
         virtual void CalculateAnchor()
         {
             auto size = (sf::Vector2f)m_Application->GetWindow().getSize();
@@ -80,92 +73,74 @@ namespace physics
             }
         }
 
-        /**
-         * @brief Returns whether the element is being pressed by the specified button
-         * @param button Mouse button to test for
-         * @return The result of the test
-         */
+        
+        /// @brief Returns whether the element is being pressed by the specified button
+        /// @param button Mouse button to test for
+        /// @return The result of the test
         bool IsPressed(MouseButton button = MOUSE_LEFT) const
         {
             return IsHovered() && Mouse::GetInstance().CurrentState & button;
         } 
 
-        /**
-         * @brief Get the Position object
-         * @return Immutable reference to the element's position
-         */
+        
+        /// @brief Get the Position object
+        /// @return Immutable reference to the element's position
         inline const sf::Vector2f& GetPosition() const { return m_Position; }
-        /**
-         * @brief Get the Size object
-         * @return Immutable reference to the element's size
-         */
+        
+        /// @brief Get the Size object
+        /// @return Immutable reference to the element's size
         inline const sf::Vector2f& GetSize() const { return m_Size; }
-        /**
-         * @brief Get the Margin object
-         * @return Immutable reference to the element's margin
-         */
+        
+        /// @brief Get the Margin object
+        /// @return Immutable reference to the element's margin
         inline const sf::Vector2f& GetMargin() const { return m_Margin; }
-        /**
-         * @brief Get the Color object
-         * @return Immutable reference to the element's color
-         */
+        
+        /// @brief Get the Color object
+        /// @return Immutable reference to the element's color
         inline const sf::Color& GetColor() const { return m_Color; }
-        /**
-         * @brief Get the Anchor object
-         * @return Immutable reference to the element's anchor
-         */
+        
+        /// @brief Get the Anchor object
+        /// @return Immutable reference to the element's anchor
         inline const Anchor& GetAnchor() const { return m_Anchor; }
 
-        /**
-        * @brief Get the boolean corresponding to the pragma(size, position, anchor) updated 'event'
-        * @return Copy of the boolean member
-        */
+        /// @brief Get the boolean corresponding to the pragma(size, position, anchor) updated 'event'
+        /// @return Copy of the boolean member
         inline bool GetPragmaUpdated() const { return m_PragmaUpdated; }
-
-        /**
-         * @brief (INTERNAL FUNCTION) Sets the element's position
-         * @param position The new position
-         */
+        
+        /// @brief (INTERNAL FUNCTION) Sets the element's position
+        /// @param position The new position
         inline void AbstractSetPosition(const sf::Vector2f& position)
         {
             m_PragmaUpdated = true;
             m_Position = position;
             m_Anchor = Anchor::None;  
         }
-
-        /**
-         * @brief (INTERNAL FUNCTION) Sets the element's size
-         * @param position The new size
-         */
+        
+        /// @brief (INTERNAL FUNCTION) Sets the element's size
+        /// @param position The new size
         inline void AbstractSetSize(const sf::Vector2f& size)
         {
             m_PragmaUpdated = true;
             m_Size = size;
         }
-
-        /**
-         * @brief (INTERNAL FUNCTION) Sets the element's margin
-         * @param position The new margin
-         */
+        
+        /// @brief (INTERNAL FUNCTION) Sets the element's margin
+        /// @param position The new margin
         inline void AbstractSetMargin(const sf::Vector2f& margin)
         {
             m_PragmaUpdated = true;
             m_Margin = margin;
         }
-
-        /**
-         * @brief (INTERNAL FUNCTION) Sets the element's color
-         * @param position The new color
-         */
+        
+        /// @brief (INTERNAL FUNCTION) Sets the element's color
+        /// @param position The new color
         inline void AbstractSetColor(const sf::Color& color)
         {
             m_Color = color; 
         }
 
-        /**
-         * @brief (INTERNAL FUNCTION) Sets the element's anchor and calculates anchor
-         * @param position The new anchor
-         */
+        /// @brief (INTERNAL FUNCTION) Sets the element's anchor and calculates anchor
+        /// @param position The new anchor
         inline void AbstractSetAnchor(const Anchor& anchor)
         {
             m_PragmaUpdated = true;
@@ -184,7 +159,7 @@ namespace physics
     public:
         //Debug specific code, ignored by the preprocessor on release builds
     #ifdef PHYSICS_DEBUG
-        static bool DisplayBounds;
+        bool DisplayBounds = false;
     #endif
     };
 }

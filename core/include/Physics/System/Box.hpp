@@ -62,7 +62,8 @@ namespace physics
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
         {
-            states.texture = m_Texture;
+            if(m_Texture)
+                states.texture = m_Texture;
             target.draw(m_Vertices, states);
         }
 

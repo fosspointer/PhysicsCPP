@@ -2,6 +2,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <type_traits>
 #include <cmath>
+#include <iostream>
 
 namespace physics
 {
@@ -69,7 +70,7 @@ namespace physics
         }
 
         template <typename U>
-        constexpr operator sf::Vector2<U>()
+        constexpr operator sf::Vector2<U>() const
         {
             if constexpr (std::is_same<T, U>::value)
                 return sf::Vector2<U>(x, y);
@@ -155,6 +156,18 @@ namespace physics
         {
             *this = *this / scalar;
             return *this;
+        }
+
+        friend std::ostream& operator<<(std::ostream& os, const Vector2<T>& vector)
+        {
+            os << '[' << vector.x << ", " << vector.y << ']';
+            return os;
+        }
+
+        friend std::ostream& operator<<(std::ostream& os, const sf::Vector2<T>& vector)
+        {
+            os << '[' << vector.x << ", " << vector.y << ']';
+            return os;
         }
     };
 

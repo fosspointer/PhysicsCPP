@@ -1,11 +1,12 @@
+#include <exception>
 #include <Physics.hpp>
 #include <Physics/System/Application.hpp>
-#include <exception>
 
 namespace physics
 {
     Application::Application()
-        :m_BackgroundColor(physics::Color::Black), m_DeltaTime(0.0f), m_Resized(true)
+        :m_BackgroundColor(physics::Color::Black), m_DeltaTime(0.0f), m_Resized(true),
+        m_Renderer(m_Window)
     {
         srand(time(0));
         Mouse::s_Application = this;
@@ -40,16 +41,17 @@ namespace physics
                         m_Window.setView(sf::View(visibleArea));
                         m_Resized = true;
                     }
-                    else m_Resized = false;
+                    else [[likely]]
+                        m_Resized = false;
                 }
 
                 auto& mouse = Mouse::GetInstance();
 
                 mouse.PreviousState = mouse.CurrentState;
 
-                mouse.CurrentState = sf::Mouse::isButtonPressed(sf::Mouse::Left) * MOUSE_LEFT
-                    | sf::Mouse::isButtonPressed(sf::Mouse::Middle) * MOUSE_MIDDLE
-                    | sf::Mouse::isButtonPressed(sf::Mouse::Right) * MOUSE_RIGHT;
+                mouse.CurrentState = sf::Mouse::isButtonPressed(sf::Mouse::Left) << 2
+                    | sf::Mouse::isButtonPressed(sf::Mouse::Middle) << 1
+                    | sf::Mouse::isButtonPressed(sf::Mouse::Right);
 
                 mouse.ClickState = mouse.PreviousState & ~mouse.CurrentState;
 
@@ -58,6 +60,7 @@ namespace physics
                         
                 m_DeltaTime = std::chrono::duration<float>(m_CurrentTime - m_PreviousTime).count();    
 
+                m_Renderer.Clear();
                 m_Window.clear(m_BackgroundColor);
                 
                 OnUpdate(m_DeltaTime);
@@ -69,6 +72,8 @@ namespace physics
                     else [[likely]] 
                         m_States.top()->OnUpdate(m_DeltaTime);
                 }
+
+                m_Renderer.Draw();
 
                 m_Window.display();
             }
@@ -119,6 +124,11 @@ namespace physics
         state->OnShow();
 
         return state;
+    }
+
+    void Application::Draw(sf::Drawable* drawable, int8_t layer)
+    {
+        m_Renderer.Append(drawable, layer);
     }
 
     void Application::PopState()

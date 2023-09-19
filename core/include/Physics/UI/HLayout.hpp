@@ -1,5 +1,4 @@
 #pragma once
-#include "SFML/System/Vector2.hpp"
 #include <Physics/UI/Layout.hpp>
 
 namespace physics

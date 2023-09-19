@@ -1,8 +1,9 @@
 #pragma once
+#include <unordered_map>
 #include <SFML/System/String.hpp>
 #include <Physics/System/NonCopyable.hpp>
 #include <Physics/System/Exception.hpp>
-#include <unordered_map>
+
 #define PHYSICS_LANGUAGES_SUPPORTED 2
 #define PHYSICS_LANGUAGE_PAIR(key, map) {key, map}
 

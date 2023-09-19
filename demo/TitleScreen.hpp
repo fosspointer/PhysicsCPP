@@ -1,8 +1,9 @@
 #pragma once
-#include "Physics/UI/UIElementAbstract.hpp"
-#include "SFML/Graphics/Text.hpp"
+#include <SFML/Graphics/Text.hpp>
 #include <Physics.hpp>
 #include <Physics/System/Language.hpp>
+#include <Physics/UI/UIElementAbstract.hpp>
+#include <Physics/UI/TextureButton.hpp>
 
 class TitleScreen : public physics::Application::State
 {
@@ -28,13 +29,12 @@ public:
         m_TitleLabel = m_Layout->PushElement(new physics::Label(m_Application, "project_title_tmp", 34u))
             ->SetStyle((sf::Text::Style)(sf::Text::Bold | sf::Text::Underlined));
 
-        m_LanguageDropdown = m_Layout->PushElement(new physics::Dropdown(m_Application, "select_language_dropdown_tmp", 25.0f, "dropdown_placeholder_tmp", 300.0f, 20.0f, 20.0f))
+        m_LanguageDropdown = m_Layout->PushElement(new physics::Dropdown(m_Application, "select_language_dropdown_tmp", 25.0f, "dropdown_placeholder_tmp", {300.0f, 70.0f}, 20.0f))
             ->AddOption(L"Ελληνικά")
             ->AddOption("English")
             ->SetDropdownColors(physics::Color::White)
             ->SetOutline(5.0f)
             ->SetDirection(physics::Dropdown::Direction::Down)
-            ->SetMargin(sf::Vector2f{25.0f, 250.0f})
             ->AddClickCallback([this](physics::Application* app, physics::Dropdown* dropdown, MouseButton)
             {
                 auto index = dropdown->GetSelectionIndex();
@@ -44,10 +44,11 @@ public:
                 UpdateLanguages();
             });
         
-        m_NextButton = m_Layout->PushElement(new physics::Button(m_Application, "next_button_tmp", sf::Vector2f{300.0f, 70.0f}))
-            ->SetOutline(5)
-            ->SetButtonColors(physics::Color::White)
-            ->AddClickCallback([&](physics::Application* application, physics::Button*, MouseButton)
+        m_NextButton = m_Layout->PushElement(new physics::TextureButton(m_Application, 
+                physics::Textures::LoadTexture(PHYSICS_ASSETS_DIR "ui/button.png"), 
+                physics::Textures::LoadTexture(PHYSICS_ASSETS_DIR "ui/button_pressed.png"), 
+                "continue_tmp", {30.0f, 30.0f}, {30.0f, 30.0f}, {300.0f, 70.0f}))
+            ->AddClickCallback([&](physics::Application* application, physics::TextureButton*, MouseButton)
             {
                 SetToBeDestroyed();
             });
@@ -69,6 +70,9 @@ public:
 
     void OnUpdate(float delta_time) override
     {
+        static float time = 0.0f;
+        time += delta_time;
+
         m_Layout->Update(delta_time);
         m_Layout->UpdateSize();
         m_Layout->UpdatePositions();
@@ -88,7 +92,7 @@ public:
 private:
     physics::Label* m_TitleLabel;
     physics::Dropdown* m_LanguageDropdown;
-    physics::Button* m_NextButton;
+    physics::TextureButton* m_NextButton;
     physics::VLayout* m_Layout;
     physics::Button* m_ExitButton;
 };

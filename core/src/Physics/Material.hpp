@@ -5,6 +5,7 @@ namespace physics
 {
     struct Material
     {
+        
         float Density = 1.0f;
         operator float()
         {

@@ -2,9 +2,7 @@
 
 namespace physics
 {
-    /**
-     * @brief NonCopyable class, to be overriden by classes which need to be non-copyable (such as singletons)
-     */
+    /// @brief NonCopyable class, to be overriden by classes which need to be non-copyable (such as singletons)
     class NonCopyable
     {
     public:

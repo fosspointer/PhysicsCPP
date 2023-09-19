@@ -15,6 +15,7 @@ namespace physics
 
         void Update(float delta_time) override
         {
+            m_DeltaTime = delta_time;
             m_Forces.clear();
             m_PreviousForces = m_Forces;
         }

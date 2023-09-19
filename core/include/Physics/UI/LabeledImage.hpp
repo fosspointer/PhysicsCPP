@@ -35,10 +35,10 @@ namespace physics
             m_Label->Update(delta_time);
         }
 
-        void Draw() override
+        void Draw(int8_t layer = PHYSICS_LAYER_UI_2) override
         {
-            m_Image->Draw();
-            m_Label->Draw();
+            m_Image->Draw(layer);
+            m_Label->Draw(layer);
         }
 
         LabeledImage* SetOutline(float thickness, const sf::Color& color = sf::Color::Black)

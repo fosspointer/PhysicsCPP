@@ -9,7 +9,7 @@ namespace physics
         static sf::Texture* LoadTexture(const std::string& filepath) 
         {
             auto f = s_TextureCache.find(filepath);
-            
+
             if(f != s_TextureCache.end())
                 return f->second;
             else 
@@ -25,9 +25,7 @@ namespace physics
         static void ClearCache()
         {
             for(auto& item : s_TextureCache)
-            {
                 delete item.second;
-            }
 
             s_TextureCache.clear();
         }

@@ -12,6 +12,13 @@
 #include <Physics/System/Box.hpp>
 #include <Physics/System/TranslationControl.hpp>
 
+#include <Physics/System/Renderer.hpp>
+
+enum Mode
+{
+    Default, Properties, Transform
+};
+
 class Showcase : public physics::Application::State
 {
 public:
@@ -44,12 +51,14 @@ public:
         m_MassLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "mass_tmp", 25u));
         m_MassSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 40, 100))
             ->SetSliderColors(physics::Color::DarkGreen)
-            ->SetSliderSize({100, 30}, 20u, 20.0f);
+            ->SetSliderSize({100, 30}, 20u, 20.0f)
+            ->SetValue(60.0f);
 
         m_GravityAccelerationLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "gravity_accel_tmp", 25u));
         m_GravityAccelerationSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 1.62f, physics::Units::GetGravityAcceleration()))
             ->SetSliderColors(physics::Color::DarkBlue)
-            ->SetSliderSize({100, 30}, 20u, 20.0f);
+            ->SetSliderSize({100, 30}, 20u, 20.0f)
+            ->SetValue(9.81f);
 
         m_AirResistanceLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "air_resistance_tmp", 25u));
         m_AirResistanceSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 100.0f))
@@ -89,10 +98,10 @@ public:
             body->AddForce({mov * 700.0f, 0.0f}, "F");
 
             if(jump)
-                body->GetVelocity().y = -230.0f;
-            else body->GetVelocity().y = 0.0f; 
+                body->SetVelocity(physics::Vector2f{body->GetVelocity().x, -230.0f});
+            else body->SetVelocity(physics::Vector2f{body->GetVelocity().x, 0.0f}); 
         });
-
+    
         m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkRed);
         m_Ground->SetSize({700, 300});
         m_Ground->SetPosition(m_Body->GetPosition() + sf::Vector2f{0.0f, 300.0f});
@@ -105,10 +114,15 @@ public:
         m_GravityAccelerationLabel->SetText(physics::Language::GetTextSFML("gravitational_acceleration"));
         m_AirResistanceLabel->SetText(physics::Language::GetTextSFML("air_resistance"));
         m_FrictionLabel->SetText(physics::Language::GetTextSFML("friction_coefficient"));
+
+        std::cout << "pixels per meter: " << physics::Units::GetPixelsPerMeter() << '\n';
+        std::cout << "pixels per newton: " << physics::Units::GetPixelsPerNewton() << '\n';
     }
 
     void OnUpdate(float delta_time) override
     {
+        // std::cout << (physics::Vector2f)m_Body->GetPosition() << '\n';
+
         m_Body->SetMass(m_MassSlider->GetValue());
         m_Body->SetGravityAcceleration(m_GravityAccelerationSlider->GetValue());
         

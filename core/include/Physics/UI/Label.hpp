@@ -1,8 +1,8 @@
 #pragma once
-#include "SFML/System/Vector2.hpp"
+#include <cmath>
+#include <SFML/System/Vector2.hpp>
 #include <Physics/UI/UIElement.hpp>
 #include <Physics/System/Font.hpp>
-#include <cmath>
 
 namespace physics
 {
@@ -69,13 +69,13 @@ namespace physics
         const sf::String& GetText() const { return m_Text.getString(); }
         const sf::Uint32 GetStyle() const { return m_Text.getStyle(); }
 
-        void Draw() override
+        void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
             m_Text.setPosition(m_Position);
             m_Text.setFillColor(m_Color);
             m_Text.setOrigin(GetBoundSize() / 2.0f + GetBoundPosition());
 
-            m_Application->GetWindow().draw(m_Text);
+            m_Application->Draw(&m_Text, layer);
         }   
     private:
         void UpdateSize()

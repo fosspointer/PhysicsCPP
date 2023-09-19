@@ -1,6 +1,5 @@
 #pragma once
-#include "Physics/System/AABB.hpp"
-#include "SFML/System/Vector2.hpp"
+#include <Physics/System/AABB.hpp>
 #include <Physics/UI/UIElement.hpp>
 
 namespace physics
@@ -11,9 +10,8 @@ namespace physics
         Image(Application* application, const sf::String& filepath, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
             :UIElement(application, sf::Vector2f{0.0f, 0.0f}, margin, sf::Color::White)
         {
-            m_ImageTexture.loadFromFile(filepath);
-            m_Image.setTexture(&m_ImageTexture);
-            m_Size = (sf::Vector2f)m_ImageTexture.getSize();
+            m_Image.setTexture(physics::Textures::LoadTexture(filepath));
+            m_Size = (sf::Vector2f)m_Image.getTexture()->getSize();
         }
 
         bool IsHovered() const override
@@ -21,7 +19,7 @@ namespace physics
             return AABB::RectangleToPoint(m_Image, Mouse::GetPosition());
         }
 
-        void Draw() override
+        void Draw(int8_t layer = PHYSICS_LAYER_UI_2) override
         {
             m_Image.setPosition(m_Position - m_Size / 2.0f);
             m_Image.setSize(m_Size);
@@ -49,6 +47,5 @@ namespace physics
         }
     private:
         sf::RectangleShape m_Image;
-        sf::Texture m_ImageTexture;
     };
 }

@@ -1,22 +1,22 @@
 #include <Physics/Physics/Body.hpp>
 
-inline static float vector_length(const sf::Vector2f& vector)
+inline static float vector_length(const physics::Vector2f& vector)
 {
     return std::sqrt(vector.x * vector.x + vector.y * vector.y);
 }
 
-inline static sf::Vector2f vector_normalize(const sf::Vector2f& vector)
+inline static physics::Vector2f vector_normalize(const physics::Vector2f& vector)
 {
     return vector / vector_length(vector);
 }
 
 namespace physics
 {
-    Body::Body(Application* application, const sf::Color& color)
+    Body::Body(Application* application, const Color& color)
         :m_Application(application)
     {
         m_Rectangle.setFillColor(color);
-        SetSize(sf::Vector2f{50.0f, 50.0f});
+        SetSize(Vector2f{50.0f, 50.0f});
         Initialize();
     }
 
@@ -24,7 +24,7 @@ namespace physics
         :m_Application(application)
     {
         SetTexture(filepath);
-        SetSize((sf::Vector2f)m_Texture.getSize());
+        SetSize((Vector2f)m_Texture.getSize());
         Initialize();
     }
 
@@ -34,24 +34,24 @@ namespace physics
         m_Rectangle.setTexture(&m_Texture);
     }
 
-    void Body::SetPosition(const sf::Vector2f& position)
+    void Body::SetPosition(const Vector2f& position)
     {
-        m_Rectangle.setPosition(position);
+        m_Rectangle.setPosition((sf::Vector2f)position);
     }
 
-    void Body::SetVelocity(const sf::Vector2f& velocity)
+    void Body::SetVelocity(const Vector2f& velocity)
     {
         m_Velocity = velocity;
     }
 
-    void Body::SetAcceleration(const sf::Vector2f& acceleration)
+    void Body::SetAcceleration(const Vector2f& acceleration)
     {
         m_Acceleration = acceleration;
     }
 
-    void Body::SetSize(const sf::Vector2f& size, bool set_collider)
+    void Body::SetSize(const Vector2f& size, bool set_collider)
     {
-        m_Rectangle.setSize(size);
+        m_Rectangle.setSize((sf::Vector2f)size);
         m_Rectangle.setOrigin(size / 2.0f);
         if(set_collider)
         {
@@ -60,7 +60,7 @@ namespace physics
         }
     }
 
-    void Body::SetCollider(const sf::Vector2f& offset, const sf::Vector2f& size)
+    void Body::SetCollider(const Vector2f& offset, const Vector2f& size)
     {
         m_Collider.Position = offset;
         m_Collider.Size = size;
@@ -74,15 +74,19 @@ namespace physics
         );
     }
 
-    void Body::AddForce(const sf::Vector2f& force, sf::String name)
+    void Body::AddForce(const Vector2f& force, sf::String name)
     {
-        name = name == "__default" ? sf::String("F") + std::to_string(m_Forces.size()) : name;
         m_Forces.push_back(Force{force, name});
     }
 
-    const sf::Vector2f Body::GetTotalForce()
+    void Body::AddForce(const Vector2f& force)
     {
-        sf::Vector2f res {0.0f, 0.0f};
+        m_Forces.push_back(Force{force, "F" + std::to_string(m_Forces.size())});
+    }
+
+    const Vector2f Body::GetTotalForce()
+    {
+        Vector2f res {0.0f, 0.0f};
 
         for(auto& force : m_PreviousForces)
             res += force.Value;    
@@ -101,11 +105,11 @@ namespace physics
         m_Application->GetWindow().draw(m_Rectangle);
     }
 
-    void Body::DrawForce(const Force& force, const sf::Color& color) const
+    void Body::DrawForce(const Force& force, const Color& color) const
     {
         Arrow arrow(5.0f);
         arrow.SetStartPoint(m_Rectangle.getPosition());
-        arrow.SetEndPoint(m_Rectangle.getPosition() + force.Value * Units::GetPixelsPerNewton());
+        arrow.SetEndPoint((Vector2f)m_Rectangle.getPosition() + force.Value * Units::GetPixelsPerNewton());
         arrow.SetColor(color);
         m_Application->GetWindow().draw(arrow);
 
@@ -119,20 +123,20 @@ namespace physics
         m_Application->GetWindow().draw(force_text);
     }
 
-    sf::Vector2f Body::GetBoundSize(const sf::Text& text) const
+    Vector2f Body::GetBoundSize(const sf::Text& text) const
     {
-        return sf::Vector2f{text.getLocalBounds().width, text.getLocalBounds().height};
+        return Vector2f{text.getLocalBounds().width, text.getLocalBounds().height};
     }
 
-    sf::Vector2f Body::GetBoundPosition(const sf::Text& text) const
+    Vector2f Body::GetBoundPosition(const sf::Text& text) const
     {
-        return sf::Vector2f{text.getLocalBounds().left, text.getLocalBounds().top};
+        return Vector2f{text.getLocalBounds().left, text.getLocalBounds().top};
     }
 
     void Body::Initialize()
     {
-        SetPosition((sf::Vector2f)m_Application->GetWindow().getSize() / 2.0f);
+        SetPosition((Vector2f)m_Application->GetWindow().getSize() / 2.0f);
         m_Collider.Size = m_Rectangle.getSize();
-        m_Collider.Position = sf::Vector2f{0.0f, 0.0f};
+        m_Collider.Position = Vector2f{0.0f, 0.0f};
     }
 }

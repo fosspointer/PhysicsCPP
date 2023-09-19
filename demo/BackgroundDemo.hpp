@@ -1,3 +1,4 @@
+#include <unordered_map>
 #include <Physics/System/Application.hpp>
 #include <Physics/System/Color.hpp>
 #include <Physics/System/Mouse.hpp>
@@ -6,7 +7,6 @@
 #include <Physics.hpp>
 #include <Physics/UI/LabeledImage.hpp>
 #include <Physics/UI/Slider.hpp>
-#include <unordered_map>
 #include <Physics/System/Textures.hpp>
 #include <Physics/System/Box.hpp>
 

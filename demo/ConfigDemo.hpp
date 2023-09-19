@@ -1,5 +1,5 @@
-#include <Physics.hpp>
 #include <unordered_map>
+#include <Physics.hpp>
 #include <Physics/System/Language.hpp>
 
 class ConfigDemo : public physics::Application::State
@@ -22,7 +22,7 @@ public:
         m_Layout->PushElement(new physics::Button(m_Application, "continue_tmp", {200, 130}));
         m_Layout->SetAnchor(physics::Anchor::Center);
 
-        m_LanguageDropdown = new physics::Dropdown(m_Application, "select_language_tmp", 25, "placeholder_tmp", 300, 20, 10.0f);
+        m_LanguageDropdown = new physics::Dropdown(m_Application, "select_language_tmp", 25, "placeholder_tmp", {300.0f, 70.0f}, 10.0f);
         UpdateLanguages();
         m_LanguageDropdown
             ->AddOption(L"Ελληνικά")

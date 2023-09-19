@@ -1,39 +1,30 @@
 #pragma once
-#include "Physics/System/AABB.hpp"
 #include <Physics/System/Color.hpp>
 #include <Physics/UI/UIElement.hpp>
 #include <Physics/UI/Label.hpp>
 
 namespace physics
 {
-    /**
-     * @brief Basic button element, suitable for most cases
-     */
+    /// @brief Basic button element, suitable for most cases
     class Button : public UIElement<Button>
     {
     public:
-
-        /**
-         * @brief Construct a new Button object
-         * 
-         * @param application The main application
-         * @param text The title of the button 
-         * @param size The size of the button
-         * @param margin Margin around the Button, used by Layouts
-         */
-        Button(Application* application, const sf::String text, const sf::Vector2f& size, const sf::Vector2f margin = sf::Vector2f{25.0f, 25.0f})
+        /// @brief Construct a new Button object
+        /// @param application The main application
+        /// @param text The title of the button 
+        /// @param size The size of the button
+        /// @param margin Margin around the Button, used by layouts
+        Button(Application* application, const sf::String& text, const sf::Vector2f& size, const sf::Vector2f margin = sf::Vector2f{25.0f, 25.0f})
             :m_Label(application, text, 25.0f, sf::Vector2f{0.0f, 0.0f}), UIElement(application, size, margin)
         {
             SetButtonColors(physics::Color::White);
         }
 
-        /**
-         * @brief Get the Label object
-         * @return Mutable reference to the label
-         */
+        /// @brief Get the Label object
+        /// @return Mutable reference to the label
         inline Label& GetLabel() { return m_Label; }
 
-        void Draw() override
+        void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
             m_ButtonBox.setPosition(m_Position - m_Size / 2.0f);
             m_ButtonBox.setSize(m_Size);
@@ -46,10 +37,10 @@ namespace physics
             }
             else 
                 m_ButtonBox.setFillColor(m_Color);
-            m_Application->GetWindow().draw(m_ButtonBox);
+            m_Application->Draw(&m_ButtonBox, layer);
             
             m_Label.SetPosition(m_Position);
-            m_Label.Draw();
+            m_Label.Draw(layer);
         }
 
         void CustomUpdate(float delta_time) override
@@ -57,13 +48,17 @@ namespace physics
             m_Label.Update(delta_time);
         }
 
-        /**
-         * @brief Checks if the button is hovered by the mouse cursor, must be called after Update()
-         * @return The result of the test
-         */
+        /// @brief Checks if the button is hovered by the mouse cursor, must be called after Update()
+        /// @return The result of the test
         bool IsHovered() const override 
         {
             return AABB::RectangleToPoint(m_ButtonBox, Mouse::GetPosition());
+        }
+
+        Button* SetFontSize(unsigned int size) 
+        {
+            m_Label.SetFontSize(size);
+            return this;
         }
 
         Button* SetHoverColor(const sf::Color& color)

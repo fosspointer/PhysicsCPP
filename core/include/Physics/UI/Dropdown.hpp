@@ -1,11 +1,11 @@
 #pragma once
-#include <Physics/UI/UIElement.hpp>
-#include <Physics/System/Application.hpp>
-#include <Physics/UI/Label.hpp>
-#include <Physics/System/Color.hpp>
 #include <cmath>
 #include <cstdlib>
 #include <vector>
+#include <Physics/System/Color.hpp>
+#include <Physics/System/Application.hpp>
+#include <Physics/UI/UIElement.hpp>
+#include <Physics/UI/Label.hpp>
 
 namespace physics
 {
@@ -21,11 +21,11 @@ namespace physics
             Down, Up
         };
 
-        Dropdown(Application* m_Application, const sf::String& title, unsigned int title_font_size, const sf::String& placeholder, float width, unsigned int font_size, float text_padding = 5.0f, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(m_Application, sf::Vector2f{width, -1.0f}, margin, physics::Color::White),
+        Dropdown(Application* m_Application, const sf::String& title, unsigned int title_font_size, const sf::String& placeholder, const Vector2f& box_size, float text_padding = 5.0f, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
+            :UIElement(m_Application, box_size, margin, physics::Color::White),
             m_Expanded(false), m_Hovered(false), m_OptionColor(physics::Color::LightGray), m_HoverColor(physics::Color::Gray), m_OutlineColor(physics::Color::Black),
-            m_TitleLabel(m_Application, title, title_font_size, sf::Vector2f{0.0f, 10.0f}), m_SelectionLabel(m_Application, placeholder, font_size, sf::Vector2f{0.0f, 0.0f}),
-            m_TextPadding(text_padding), m_SelectionIndex(-1), m_Direction(Direction::Down)
+            m_TitleLabel(m_Application, title, title_font_size, sf::Vector2f{0.0f, 10.0f}), m_SelectionLabel(m_Application, placeholder, 25, sf::Vector2f{0.0f, 0.0f}),
+            m_TextPadding(text_padding), m_SelectionIndex(-1), m_Direction(Direction::Down), m_BoxSize(box_size)
         {
             m_TitleLabel.SetStyle(sf::Text::Bold);
             UpdateSize();
@@ -47,10 +47,8 @@ namespace physics
             });
         }
 
-        /**
-         * @brief Checks if the dropdown is hovered by the mouse cursor, must be called after Update()
-         * @return The result of the test
-         */
+        /// @brief Checks if the dropdown is hovered by the mouse cursor, must be called after Update()
+        /// @return The result of the test
         bool IsHovered() const override
         {
             auto mouse = (sf::Vector2f)sf::Mouse::getPosition(m_Application->GetWindow());
@@ -58,23 +56,23 @@ namespace physics
                 || (m_Expanded && AABB::RectangleToPoint(m_OptionBox, Mouse::GetPosition()));
         }
 
-        void Draw() override
+        void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
             if(m_Expanded)
             {
-                m_Application->GetWindow().draw(m_OptionBox);
+                m_Application->Draw(&m_OptionBox, PHYSICS_LAYER_FLOATING_0);
 
                 if(m_Hovered)
-                    m_Application->GetWindow().draw(m_HoverOptionBox);
-
+                    m_Application->GetRenderer().Append(&m_HoverOptionBox, PHYSICS_LAYER_FLOATING_0);
+                    
                 for(auto& label : m_Options)
-                    label.Draw();
+                    label.Draw(PHYSICS_LAYER_FLOATING_0);
             }
 
-            m_TitleLabel.Draw();
+            m_TitleLabel.Draw(layer);
 
-            m_Application->GetWindow().draw(m_SelectionBox);
-            m_SelectionLabel.Draw();
+            m_Application->Draw(&m_SelectionBox, layer);
+            m_SelectionLabel.Draw(layer);
         }
 
         inline const sf::Color& GetOptionColor() const { return m_OptionColor; }
@@ -84,6 +82,12 @@ namespace physics
 
         inline Label& GetOption(LabelListSize index) { return m_Options.at(index); }
         
+        Dropdown* SetFontSize(unsigned int size) 
+        {
+            m_SelectionLabel.SetFontSize(size);
+            return this;
+        }
+
         Dropdown* AddOption(const sf::String& text)
         {
             m_Options.push_back(physics::Label(m_Application, text, m_SelectionLabel.GetFontSize()));
@@ -169,31 +173,31 @@ namespace physics
 
         void UpdateSize()
         {
-            m_Size.y = m_SelectionLabel.GetSize().y + m_TitleLabel.GetMargin().y + m_TitleLabel.GetSize().y;
-            m_SelectionBox.setSize(sf::Vector2f{m_Size.x, m_SelectionLabel.GetSize().y + 2.0f * m_TextPadding});
+            m_Size = Vector2f{std::max(m_BoxSize.x, m_TitleLabel.GetSize().x), m_BoxSize.y + m_Margin.y + m_TitleLabel.GetMargin().y + m_TitleLabel.GetSize().y};
+            m_SelectionBox.setSize(sf::Vector2f{m_BoxSize.x, m_BoxSize.y});
             m_HoverOptionBox.setSize(m_SelectionBox.getSize());
-            m_OptionBox.setSize(sf::Vector2f{m_Size.x, m_SelectionBox.getSize().y * m_Options.size()});
+            m_OptionBox.setSize(sf::Vector2f{m_BoxSize.x, m_BoxSize.y * m_Options.size()});
         }
 
         void UpdatePositions()
         {
-            auto mouse = (sf::Vector2f)sf::Mouse::getPosition(m_Application->GetWindow());
-            
-            m_SelectionLabel.SetPosition(m_SelectionBox.getPosition() + m_SelectionBox.getSize() / 2.0f);
+            auto mouse = Mouse::GetPosition();
             
             switch(m_Direction)
             {
             case Direction::Down:
-                m_TitleLabel.SetPosition(sf::Vector2f{m_Position.x, m_Position.y - m_TitleLabel.GetMargin().y / 2.0f - m_TitleLabel.GetSize().y / 2.0f});
+                m_TitleLabel.SetPosition(sf::Vector2f{m_Position.x, m_Position.y - m_Margin.y / 2.0f - m_TitleLabel.GetSize().y / 2.0f});
                 m_SelectionBox.setPosition(sf::Vector2f{m_Position.x - m_SelectionBox.getSize().x / 2.0f, m_Position.y + m_TitleLabel.GetMargin().y / 2.0f});
                 m_OptionBox.setPosition(m_SelectionBox.getPosition() + sf::Vector2f{0.0f, m_SelectionBox.getSize().y});
                 break;
             case Direction::Up:
-                m_TitleLabel.SetPosition(sf::Vector2f{m_Position.x, m_Position.y + m_TitleLabel.GetMargin().y / 2.0f + m_TitleLabel.GetSize().y / 2.0f});
+                m_TitleLabel.SetPosition(sf::Vector2f{m_Position.x, m_Position.y + m_Margin.y / 2.0f + m_TitleLabel.GetSize().y / 2.0f});
                 m_SelectionBox.setPosition(sf::Vector2f{m_Position.x - m_SelectionBox.getSize().x / 2.0f, m_Position.y - m_TitleLabel.GetMargin().y / 2.0f - m_SelectionBox.getSize().y});
                 m_OptionBox.setPosition(m_SelectionBox.getPosition() - sf::Vector2f{-0.0f, (float)m_Options.size() * m_SelectionBox.getSize().y});
                 break;
             }
+
+            m_SelectionLabel.SetPosition(m_SelectionBox.getPosition() + m_SelectionBox.getSize() / 2.0f);
 
             if(m_Expanded)
             {
@@ -212,7 +216,7 @@ namespace physics
                 {
                     m_Hovered = true;
                     auto hover_index = GetHoverIndexFloat();
-                    m_HoverOptionBox.setPosition(sf::Vector2f{m_Position.x - m_Size.x / 2.0f, m_OptionBox.getPosition().y + hover_index * m_SelectionBox.getSize().y});
+                    m_HoverOptionBox.setPosition(sf::Vector2f{m_OptionBox.getPosition().x, m_OptionBox.getPosition().y + hover_index * m_SelectionBox.getSize().y});
                 }
                 else m_Hovered = false;
             }
@@ -250,5 +254,6 @@ namespace physics
         sf::RectangleShape m_SelectionBox, m_OptionBox, m_HoverOptionBox;
         LabelList m_Options;
         Direction m_Direction;
+        Vector2f m_BoxSize;
     };
 }

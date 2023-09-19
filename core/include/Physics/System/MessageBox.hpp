@@ -20,7 +20,6 @@ namespace physics
             :m_MainWindow(main_window), m_MessageText(message, Font::GetDefault().Get(), 30), m_Margin(margin), m_Title(title)
         {}
 
-        
         /// @brief displays message box and "pauses" execution until it the message box is closed
          
         void Show()
