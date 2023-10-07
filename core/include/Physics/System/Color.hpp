@@ -48,12 +48,12 @@ namespace physics
             :type(type), r(first), g(second), b(third), a(alpha)
         {}
 
-        constexpr Color FromRGB(float red, float green, float blue, float alpha = 1.0f) const
+        constexpr static Color FromRGB(float red, float green, float blue, float alpha = 1.0f)
         {
             return Color(Type::RGB, red, green, blue, alpha);
         }
 
-        constexpr Color FromHSV(float hue, float saturation, float value, float alpha = 1.0f) const
+        constexpr static Color FromHSV(float hue, float saturation, float value, float alpha = 1.0f)
         {
             return Color(Type::HSV, hue, saturation, value, alpha);
         }
@@ -107,6 +107,40 @@ namespace physics
         Color MultiplyAlpha(float coefficient) const
         {
             return Color(type, r, g, b, a * coefficient);
+        }
+
+        Color operator*(float value) const
+        {
+            switch(type)
+            {
+            case RGB: return FromRGB(value * r, value * g, value * b, a);
+            case HSV: return FromHSV(h, s, value * v, a);
+            }
+        }
+
+        Color operator/(float value) const
+        {
+            switch(type)
+            {
+            case RGB: return FromRGB(value / r, value / g, value / b, a);
+            case HSV: return FromHSV(h, s, value / v, a);
+            }
+        }
+
+        Color operator*(const Color& other)
+        {
+            auto other_rgb = other.type == HSV? other.ToRGB(): other;
+            auto this_rgb = this->type == HSV? this->ToRGB(): *this; 
+
+            return FromRGB(this_rgb.r * other_rgb.r, this_rgb.g * other_rgb.g, this_rgb.b * other_rgb.b, this_rgb.a * other_rgb.a);
+        }
+
+        Color operator/(const Color& other)
+        {
+            auto other_rgb = other.type == HSV? other.ToRGB(): other;
+            auto this_rgb = this->type == HSV? this->ToRGB(): *this; 
+
+            return FromRGB(this_rgb.r / other_rgb.r, this_rgb.g / other_rgb.g, this_rgb.b / other_rgb.b, this_rgb.a / other_rgb.a);
         }
 
         static const Color 

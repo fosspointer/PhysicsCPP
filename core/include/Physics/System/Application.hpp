@@ -93,6 +93,11 @@ namespace physics
         /// @brief Get the boolean corresponding to the window resize event
         /// @return Copy of the boolean
         inline bool GetResized() const { return m_Resized; }
+
+        /// @brief Returns true if a 'floating' element is on screen, such as Dropdown lists, to discard any click events to
+        // non floating elements
+        /// @return Copy of the member boolean 
+        inline bool HasFloating() const { return m_HasFloating; }
         
         /// @brief Get the Background Color object
         /// @return Immutable reference to the window's background color
@@ -102,15 +107,20 @@ namespace physics
         /// @return Immutable reference to the renderer
         inline const Renderer& GetRenderer() const { return m_Renderer; }
 
+        /// @brief Set the background color of the application window
+        /// @param color The color to use (SFML, 8-bit RGB)
         void SetBackgroundColor(const sf::Color& color);
+
+        /// @brief Set the 'HasFloating' state, so that any floating elements can own any mouse events
+        void SetFloating();
     private:
         Renderer m_Renderer;
-        bool m_Resized = false;
+        bool m_Resized{false}, m_HasFloating{false};
         std::stack<State*> m_States;
         sf::RenderWindow m_Window;
         std::chrono::steady_clock::time_point m_PreviousTime;
         std::chrono::steady_clock::time_point m_CurrentTime;
-        float m_DeltaTime = 0.0f;
+        float m_DeltaTime{0.0f};
         sf::Color m_BackgroundColor = sf::Color::Black;
     };
 }

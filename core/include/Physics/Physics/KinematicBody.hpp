@@ -19,6 +19,9 @@ namespace physics
         void SetMass(float mass);
         inline const float& GetMass() const { return m_Mass; }
 
+        void AddMomentum(const Vector2f& momentum);
+        Vector2f GetMomentum() const { return m_Velocity / m_Mass; }
+
         void SetGravityAcceleration(float g);
         inline const float& GetGravityAcceleration() const { return m_GravityAcceleration; }
 

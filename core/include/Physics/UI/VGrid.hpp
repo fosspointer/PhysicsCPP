@@ -6,8 +6,8 @@ namespace physics
     class VGrid : public Layout
     {
     public:
-        VGrid(Application* application, const size_t column_count, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :Layout(application, margin), m_ColumnCount(column_count)
+        VGrid(Application* application, const size_t column_count)
+            :Layout(application), m_ColumnCount(column_count)
         {}
 
         virtual void UpdateSize() override

@@ -19,10 +19,11 @@ public:
     {
         m_Layout = new physics::VLayout(m_Application);
         m_Layout->PushElement(new physics::Label(m_Application, "project_name_tmp", 20u));
-        m_Layout->PushElement(new physics::Button(m_Application, "continue_tmp", {200, 130}));
+        m_Layout->PushElement(new physics::Button(m_Application))
+            ->SetSize({200.0f, 130.0f});
         m_Layout->SetAnchor(physics::Anchor::Center);
 
-        m_LanguageDropdown = new physics::Dropdown(m_Application, "select_language_tmp", 25, "placeholder_tmp", {300.0f, 70.0f}, 10.0f);
+        m_LanguageDropdown = new physics::Dropdown(m_Application, "select_language_tmp", 25, "placeholder_tmp", {300.0f, 70.0f});
         UpdateLanguages();
         m_LanguageDropdown
             ->AddOption(L"Ελληνικά")
@@ -40,8 +41,10 @@ public:
                 UpdateLanguages();
             });
 
-        m_ExitButton = new physics::Button(m_Application, "X", {50, 50});
+        m_ExitButton = new physics::Button(m_Application);
         m_ExitButton
+            ->SetTitle("X")
+            ->SetSize({50.0f, 50.0f})
             ->SetButtonColors(physics::Color::White)
             ->SetOutline(5)
             ->SetAnchor(physics::Anchor::TopLeft);

@@ -10,19 +10,43 @@ namespace physics
     class Box : public sf::Drawable
     {
     public:
+        struct Border
+        {
+            sf::Vector2f Start, End;
+        };
+
+        struct Props
+        {
+            Border border;
+            sf::Texture* texture;
+        };
+
         Box(sf::Texture* texture = nullptr)
-            :m_Texture(texture), m_Vertices(sf::Quads, BOX_VERTICES)
+            :m_Texture(texture)
         {}
 
-        void SetTexture(sf::Texture* texture, const sf::Vector2f& border_size)
+        Box(sf::Texture* texture, const Border& border)
+            :m_Texture(texture), m_Border(border)
+        {}
+
+        Box(const Props& props)
+            :m_Texture(props.texture), m_Border(props.border)
+        {}
+
+        void SetTexture(sf::Texture* texture, const Border& border)
         {
             m_Texture = texture;
-            SetBorder(border_size);
+            SetBorder(border);
         }
 
-        void SetBorder(const sf::Vector2f& border_size)
+        inline void SetTexture(sf::Texture* texture)
         {
-            m_Border = border_size;
+            m_Texture = texture;
+        }
+
+        void SetBorder(const Border& border)
+        {
+            m_Border = border;
             UpdateVertices();
         }
 
@@ -56,14 +80,15 @@ namespace physics
 
         const sf::Vector2f& GetPosition() const { return m_Position; }
         const sf::Vector2f& GetSize() const { return m_Size; }
-        const sf::Vector2f& GetBorder() const { return m_Border; }
+        const Border& GetBorder() const { return m_Border; }
+        const sf::Vector2f& GetBorderStart() const { return m_Border.Start; }
+        const sf::Vector2f& GetBorderEnd() const { return m_Border.End; }
         const Color& GetColor() const { return m_Color; }
 
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
         {
-            if(m_Texture)
-                states.texture = m_Texture;
+            states.texture = m_Texture;
             target.draw(m_Vertices, states);
         }
 
@@ -71,21 +96,22 @@ namespace physics
         {   
             size_t index = 0;
 
-            auto t_size = m_Texture ? (Vector2f)m_Texture->getSize() : Vector2f{0.0f};
-            auto t_border = t_size - m_Border;
-            auto s_border = m_Size - m_Border;
-
-            UpdateQuad(&index, Vector2f::Zero(), m_Border, Vector2f::Zero(), m_Border);
-            UpdateQuad(&index, Vector2f{m_Border.x, 0.0f}, Vector2f{s_border.x, m_Border.y}, Vector2f{m_Border.x, 0.0f}, Vector2f{t_border.x, m_Border.y});
-            UpdateQuad(&index, Vector2f{s_border.x, 0.0f}, Vector2f{m_Size.x, m_Border.y}, Vector2f{t_border.x, 0.0f}, Vector2f{t_size.x, m_Border.y});
+            auto texture_size = m_Texture ? (Vector2f)m_Texture->getSize() : Vector2f{0.0f};
             
-            UpdateQuad(&index, Vector2f{0.0f, m_Border.y}, sf::Vector2f{m_Border.x, s_border.y}, Vector2f{0.0f, m_Border.y}, sf::Vector2f{m_Border.x, t_border.y});
-            UpdateQuad(&index, m_Border, s_border, m_Border, t_border);
-            UpdateQuad(&index, Vector2f{s_border.x, m_Border.y}, Vector2f{m_Size.x, s_border.y}, Vector2f{t_border.x, m_Border.y}, Vector2f{t_size.x, t_border.y});
+            auto texture_minus_border = texture_size - m_Border.End;
+            auto size_minus_border = m_Size - m_Border.End;
 
-            UpdateQuad(&index, Vector2f{0.0f, s_border.y}, sf::Vector2f{m_Border.x, m_Size.y}, Vector2f{0.0f, t_border.y}, sf::Vector2f{m_Border.x, t_size.y});
-            UpdateQuad(&index, Vector2f{m_Border.x, s_border.y}, Vector2f{s_border.x, m_Size.y}, Vector2f{m_Border.x, t_border.y}, Vector2f{t_border.x, t_size.y});
-            UpdateQuad(&index, s_border, m_Size, t_border, t_size);
+            UpdateQuad(&index, Vector2f::Zero(), m_Border.Start, Vector2f::Zero(), m_Border.Start);
+            UpdateQuad(&index, Vector2f::X(m_Border.Start.x), Vector2f{size_minus_border.x, m_Border.Start.y}, Vector2f::X(m_Border.Start.x), Vector2f{texture_minus_border.x, m_Border.Start.y});
+            UpdateQuad(&index, Vector2f::X(size_minus_border.x), Vector2f{m_Size.x, m_Border.Start.y}, Vector2f::X(texture_minus_border.x), Vector2f{texture_size.x, m_Border.Start.y});
+            
+            UpdateQuad(&index, Vector2f::Y(m_Border.Start.y), sf::Vector2f{m_Border.Start.x, size_minus_border.y}, Vector2f::Y(m_Border.Start.y), sf::Vector2f{m_Border.Start.x, texture_minus_border.y});
+            UpdateQuad(&index, m_Border.Start, size_minus_border, m_Border.Start, texture_minus_border);
+            UpdateQuad(&index, Vector2f{size_minus_border.x, m_Border.Start.y}, Vector2f{m_Size.x, size_minus_border.y}, Vector2f{texture_minus_border.x, m_Border.Start.y}, Vector2f{texture_size.x, texture_minus_border.y});
+
+            UpdateQuad(&index, Vector2f::Y(size_minus_border.y), sf::Vector2f{m_Border.Start.x, m_Size.y}, Vector2f::Y(texture_minus_border.y), sf::Vector2f{m_Border.Start.x, texture_size.y});
+            UpdateQuad(&index, Vector2f{m_Border.Start.x, size_minus_border.y}, Vector2f{size_minus_border.x, m_Size.y}, Vector2f{m_Border.Start.x, texture_minus_border.y}, Vector2f{texture_minus_border.x, texture_size.y});
+            UpdateQuad(&index, size_minus_border, m_Size, texture_minus_border, texture_size);
         }
 
         void UpdateQuad(size_t* index, const sf::Vector2f& start_position, const sf::Vector2f& end_position, const sf::Vector2f& start_tex_coords, const sf::Vector2f& end_tex_coords)
@@ -102,9 +128,10 @@ namespace physics
             (*index)+=4;
         }
 
-        sf::Vector2f m_Position, m_Size, m_Border;
+        sf::Vector2f m_Position, m_Size;
+        Border m_Border;
         Color m_Color;
         sf::Texture* m_Texture;
-        sf::VertexArray m_Vertices;
+        sf::VertexArray m_Vertices{sf::Quads, BOX_VERTICES};
     };
 }

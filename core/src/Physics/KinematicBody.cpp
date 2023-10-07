@@ -18,6 +18,11 @@ namespace physics
         m_Mass = mass;
     }
 
+    void KinematicBody::AddMomentum(const Vector2f& momentum)
+    {
+        m_Velocity += momentum / m_Mass;
+    }
+
     void KinematicBody::SetGravityAcceleration(float g)
     {
         m_GravityAcceleration = g;

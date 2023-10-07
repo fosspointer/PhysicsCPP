@@ -7,6 +7,10 @@ namespace physics
     class Arrow : public sf::Drawable
     {
     public:
+        /// @brief Arrow constructor
+        /// @param thickness thickness of the arrow
+        /// @param head_size length of the arrow's head
+        /// @param color the arrow's color
         Arrow(float thickness = 5.0f, const Vector2f& head_size = Vector2f{16.0f, 10.0f}, const Color& color = Color::White);
 
         void SetStartPoint(const Vector2f& point);

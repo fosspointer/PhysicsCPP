@@ -7,8 +7,8 @@ namespace physics
     class VLayout : public Layout
     {
     public:
-        VLayout(Application* application, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :Layout(application, margin)
+        VLayout(Application* application)
+            :Layout(application)
         {}
 
         virtual void UpdateSize() override

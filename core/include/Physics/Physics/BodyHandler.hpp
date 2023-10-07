@@ -5,10 +5,13 @@
 #include <Physics/Physics/StaticBody.hpp>
 #include <Physics/System/Application.hpp>
 
+#define PHYSICS_COEFFICIENT_OF_RESTITUTION 50.0f
+
 namespace physics 
 {
-    Vector2f CalculateFriction(float friction_coefficient, const Vector2f& velocity, float normal_force);
-    Vector2f CalculateDrag(float drag_coefficient, const Vector2f& velocity, const Vector2f& normal_force, float area);
+    Vector2f CalculateFriction(float friction_coefficient, const Vector2f& velocity, const Vector2f& normal_force);
+    Vector2f CalculateDrag(float drag_coefficient, float density, const Vector2f& velocity, float area);
+    void HandleImpulse(KinematicBody* kinematic_body, StaticBody* static_body);
 
     class BodyHandler
     {
@@ -36,8 +39,5 @@ namespace physics
     private:
         std::vector<KinematicBody*> m_KinematicBodies;
         std::vector<StaticBody*> m_StaticBodies;
-
-        static float length(const sf::Vector2f& vec);
-        static sf::Vector2f normalize(const sf::Vector2f& vec);
     };
-}
+}  

@@ -6,8 +6,8 @@ namespace physics
     class HGrid : public Layout
     {
     public:
-        HGrid(Application* application, const size_t row_count, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :Layout(application, margin), m_RowCount(row_count)
+        HGrid(Application* application, const size_t row_count)
+            :Layout(application), m_RowCount(row_count)
         {
             if(row_count == 0)
                 throw PHYSICS_EXCEPTION("A grid cannot be composed of 0 rows!");

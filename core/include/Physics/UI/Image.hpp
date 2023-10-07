@@ -1,5 +1,5 @@
 #pragma once
-#include <Physics/System/AABB.hpp>
+#include <Physics/System/RectangleShape.hpp>
 #include <Physics/UI/UIElement.hpp>
 
 namespace physics
@@ -7,45 +7,39 @@ namespace physics
     class Image : public UIElement<Image> 
     {
     public:
-        Image(Application* application, const sf::String& filepath, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(application, sf::Vector2f{0.0f, 0.0f}, margin, sf::Color::White)
+        Image(Application* application, const sf::String& filepath)
+            :UIElement(application), m_Image(m_Application->GetWindow())
         {
-            m_Image.setTexture(physics::Textures::LoadTexture(filepath));
-            m_Size = (sf::Vector2f)m_Image.getTexture()->getSize();
+            m_Image.SetTexture(physics::Textures::Load(filepath));
+            m_Size = (sf::Vector2f)m_Image.GetTexture()->getSize();
         }
 
         bool IsHovered() const override
         {
-            return AABB::RectangleToPoint(m_Image, Mouse::GetPosition());
+            return AABB::RectangleToPoint((sf::FloatRect)m_Image, Mouse::GetPosition());
+        }
+
+        Image* SetShader(sf::Shader* shader)
+        {
+            m_Image.SetShader(shader);
+            return this;
+        }
+
+        template <typename T>
+        Image* SetUniform(const std::string& name, T value)
+        {
+            m_Image.GetShader()->setUniform(name, value);
+            return this;
         }
 
         void Draw(int8_t layer = PHYSICS_LAYER_UI_2) override
         {
-            m_Image.setPosition(m_Position - m_Size / 2.0f);
-            m_Image.setSize(m_Size);
-            m_Image.setFillColor(m_Color);
-            m_Application->GetWindow().draw(m_Image);
-        }
-
-        Image* SetOutline(float thickness, const sf::Color& color = sf::Color::Black)
-        {
-            m_Image.setOutlineThickness(thickness);
-            m_Image.setOutlineColor(color);
-            return this;
-        }
-
-        Image* SetOutlineColor(const sf::Color& color)
-        {
-            m_Image.setOutlineColor(color);
-            return this;
-        }
-
-        Image* SetOutlineThickness(float thickness)
-        {
-            m_Image.setOutlineThickness(thickness);
-            return this;
+            m_Image.SetPosition(m_Position);
+            m_Image.SetSize(m_Size);
+            m_Image.SetColor(m_Color);
+            m_Application->Draw(&m_Image, layer);
         }
     private:
-        sf::RectangleShape m_Image;
+        RectangleShape m_Image;
     };
 }

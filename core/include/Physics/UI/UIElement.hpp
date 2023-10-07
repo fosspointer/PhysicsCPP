@@ -27,17 +27,10 @@ namespace physics
     class UIElement : public UIElementAbstract
     {
     public:
-        /// @brief UIElement constructor
+        /// @brief UIElement constructor, must be called by classes deriving from here, with defaults
         /// @param application pointer to the main application
-        /// @param size the size of the ui element, use (-1, -1) if not yet calculated
-        /// @param margin the element's margin, used by layouts
-        /// @param color the color of the element
-        UIElement(Application* application, const sf::Vector2f& size, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f}, const sf::Color& color = sf::Color::White)
-            :UIElementAbstract(application, size, margin, color)
-        //Debug specific code, ignored by the preprocessor on release builds
-        #ifdef PHYSICS_DEBUG 
-            , m_DebugModeColor(rand() % 255, rand() % 255, rand() % 255, 255)
-        #endif
+        UIElement(Application* application, bool floating_element = false)
+            :UIElementAbstract(application, Vector2f{-1.0f, -1.0f}, Vector2f{25.0f, 25.0f}, Color::White, floating_element)
         {}
 
         virtual ~UIElement() = default;
@@ -69,7 +62,7 @@ namespace physics
             if(m_Application->GetResized())
                 CalculateAnchor();
 
-            if(!IsHovered() && !StoppedHover()) return; //The below code is for handling click and hover events.
+            if((!IsHovered() && !StoppedHover()) || (m_Application->HasFloating() && !m_FloatingElement)) return; //The below code is for handling click and hover events.
             //Hence, if IsHovered() returns false, execution is stopped
             for(const auto& func : m_HoverCallbackFunctions)
                 func(m_Application, dynamic_cast<UIElementImpl*>(this), StoppedHover());
@@ -166,7 +159,7 @@ namespace physics
         virtual void CustomUpdate(float delta_time) {}
     private:
     #ifdef PHYSICS_DEBUG
-        sf::Color m_DebugModeColor;
+        sf::Color m_DebugModeColor{rand() % 255, rand() % 255, rand() % 255};
     #endif
         std::vector<HoverCallbackFunc<UIElementImpl>> m_HoverCallbackFunctions;
         std::vector<ClickCallbackFunc<UIElementImpl>> m_ClickCallbackFunctions;

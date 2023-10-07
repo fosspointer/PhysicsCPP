@@ -52,6 +52,11 @@ namespace physics
             {
                 m_Drawables.clear();
             }
+
+            inline size_t GetDrawableCount() const 
+            {
+                return m_Drawables.size();
+            }
         private:
             virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
             {
@@ -63,7 +68,11 @@ namespace physics
         };
         Renderer(sf::RenderWindow& window)
             :m_Window(window)
+        {}
+
+        bool Occupied(uint8_t index) const
         {
+            return m_Layers[index].GetDrawableCount() > 0;
         }
 
         void Append(sf::Drawable* drawable, uint8_t index) const

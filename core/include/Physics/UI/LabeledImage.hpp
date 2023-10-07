@@ -8,11 +8,11 @@ namespace physics
     class LabeledImage : public UIElement<LabeledImage> 
     {
     public:
-        LabeledImage(Application* application, const sf::String& filepath, const sf::String& label, unsigned char font_size = 20u, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(application, sf::Vector2f{0.0f, 0.0f}, margin)
+        LabeledImage(Application* application, const sf::String& filepath, const sf::String& label, unsigned char font_size = 20u)
+            :UIElement(application)
         {
-            m_Image = new physics::Image(application, filepath, sf::Vector2f{0.0f, 7.0f});
-            m_Label = new physics::Label(application, label, font_size, sf::Vector2f{0.0f, 0.0f});
+            m_Image = new physics::Image(application, filepath);
+            m_Label = new physics::Label(application, label, font_size);
             UpdateSize();
             UpdatePositions();
         }
@@ -41,21 +41,16 @@ namespace physics
             m_Label->Draw(layer);
         }
 
-        LabeledImage* SetOutline(float thickness, const sf::Color& color = sf::Color::Black)
+        LabeledImage* SetShader(sf::Shader* shader)
         {
-            m_Image->SetOutline(thickness, color);
+            m_Image->SetShader(shader);
             return this;
         }
 
-        LabeledImage* SetOutlineColor(const sf::Color& color)
+        template <typename T>
+        LabeledImage* SetUniform(const std::string& name, T value)
         {
-            m_Image->SetOutlineColor(color);
-            return this;
-        }
-
-        LabeledImage* SetOutlineThickness(float thickness)
-        {
-            m_Image->SetOutlineThickness(thickness);
+            m_Image->SetUniform(name, value);
             return this;
         }
 

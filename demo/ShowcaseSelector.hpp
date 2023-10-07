@@ -1,11 +1,13 @@
 #include <Physics.hpp>
 #include <Physics/System/Language.hpp>
+#include <Physics/System/RectangleShape.hpp>
 #include <Physics/UI/LabeledImage.hpp>
 #include <Physics/UI/HGrid.hpp>
 #include <Physics/UI/Slider.hpp>
 #include "ConfigDemo.hpp"
 #include "BackgroundDemo.hpp"
-#include "Showcase.hpp"
+#include "FrictionDemo.hpp"
+#include "DragDemo.hpp"
 
 class ShowcaseSelector : public physics::Application::State
 {
@@ -19,39 +21,36 @@ public:
     void OnShow() override 
     {
         m_Application->SetBackgroundColor(physics::Color::LightGray);
-
-        for(size_t i = 3; i < 9; i++)
-            dynamic_cast<physics::LabeledImage*>(m_Grid->GetElement(i))->GetLabel()->SetText(physics::Language::GetTextSFML("unavailable"));
+        m_BackButton->SetTitle(physics::Language::GetTextSFML("back"));
+        dynamic_cast<physics::LabeledImage*>(m_Grid->GetElement(0))->GetLabel()->SetText(physics::Language::GetTextSFML("friction"));
+        dynamic_cast<physics::LabeledImage*>(m_Grid->GetElement(1))->GetLabel()->SetText(physics::Language::GetTextSFML("drag"));
     }
 
     void OnCreate() override
     {
-        m_BackButton = new physics::Button(m_Application, "Back", {70.0f, 50.0f});
-        m_BackButton->SetAnchor(physics::Anchor::TopLeft)
-            ->SetButtonColors(physics::Color::White)
-            ->SetOutline(5)
-            ->AddClickCallback([](physics::Application* app, physics::Button* btn, MouseButton)
+        m_BackButton = new physics::Textured::Button(m_Application);
+        m_BackButton
+            ->SetSize({80.0f, 60.0f})
+            ->SetAnchor(physics::Anchor::TopLeft)
+            ->SetButtonColors(physics::Color::DarkCyan)
+            ->AddClickCallback([](physics::Application* app, physics::Textured::Button* btn, MouseButton)
             {
                 app->PushState(new TitleScreen());
             });
         
-        m_Grid = new physics::HGrid(m_Application, 3);
+        m_Grid = new physics::HGrid(m_Application, 2);
         m_Grid->SetAnchor(physics::Anchor::Center);
 
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/showcase.png", "Showcase"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/bg_demo.png", "Background Demo"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/cfg_demo.png", "Config Demo"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
-        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/test.png", "unavailable_tmp"));        
+        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/demonstration_friction.png", ""));        
+        m_Grid->PushElement(new physics::LabeledImage(m_Application, PHYSICS_ASSETS_DIR "images/demonstration_drag.png", ""));
     
-        m_Grid->AddElementHoverCallback([](physics::Application*, physics::Layout* grid, physics::ElementListSize index, bool stopped)
+        for(size_t i = 0; i < m_Grid->GetElementCount(); i++)
         {
-            grid->GetElement(index)->AbstractSetColor(stopped ? physics::Color::White : physics::Color::Gray);
-        });
+            auto* image = dynamic_cast<physics::LabeledImage*>(m_Grid->GetElement(i));
+            image->SetShader(physics::Shaders::Load(PHYSICS_ASSETS_DIR "shaders/circle.frag", sf::Shader::Fragment));
+            if(i == 0)
+                image->SetUniform("u_Smooth", 0.1f);
+        }
 
         m_Grid->AddElementClickCallback([](physics::Application* app, physics::Layout* grid, physics::ElementListSize index, MouseButton btn)
         {
@@ -59,9 +58,8 @@ public:
 
             switch (index)
             {
-            case 0: app->PushState(new Showcase()); break;
-            case 1: app->PushState(new BackgroundDemo()); break;
-            case 2: app->PushState(new ConfigDemo()); break;
+            case 0: app->PushState(new FrictionDemo()); break;
+            case 1: app->PushState(new DragDemo()); break;
             }
         });
     }
@@ -75,6 +73,6 @@ public:
         m_BackButton->Draw();
     }
 private:
-    physics::Button* m_BackButton;
+    physics::Textured::Button* m_BackButton;
     physics::HGrid* m_Grid;
 };

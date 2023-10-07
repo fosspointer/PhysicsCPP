@@ -13,9 +13,8 @@ namespace physics
         /// @param application The main application
         /// @param text The title of the button 
         /// @param size The size of the button
-        /// @param margin Margin around the Button, used by layouts
-        Button(Application* application, const sf::String& text, const sf::Vector2f& size, const sf::Vector2f margin = sf::Vector2f{25.0f, 25.0f})
-            :m_Label(application, text, 25.0f, sf::Vector2f{0.0f, 0.0f}), UIElement(application, size, margin)
+        Button(Application* application)
+            :m_Label(application, "Button", 25.0f), UIElement(application)
         {
             SetButtonColors(physics::Color::White);
         }
@@ -53,6 +52,12 @@ namespace physics
         bool IsHovered() const override 
         {
             return AABB::RectangleToPoint(m_ButtonBox, Mouse::GetPosition());
+        }
+
+        Button* SetTitle(const sf::String& title)
+        {
+            m_Label.SetText(title);
+            return this;
         }
 
         Button* SetFontSize(unsigned int size) 

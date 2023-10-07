@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <Physics/System/AABB.hpp>
+#include <Physics/System/Box.hpp>
 #include <Physics/UI/UIElement.hpp>
 
 namespace physics
@@ -9,23 +10,19 @@ namespace physics
     using ElementList = std::vector<UIElementAbstract*>;
     using ElementListSize = std::vector<UIElementAbstract*>::size_type;
 
-    /**
-     * @brief UIElement hover callback function pointer type
-     * @tparam UIElementImpl 
-     */
+    // @brief UIElement hover callback function pointer type
+    // @tparam UIElementImpl 
     using ElementHoverCallbackFunc = std::function<void(Application*, class Layout*, ElementListSize, bool)>;
     
-    /**
-     * @brief UIElement click callback function pointer type
-     * @tparam UIElementImpl 
-     */
+    // @brief UIElement click callback function pointer type
+    // @tparam UIElementImpl  
     using ElementClickCallbackFunc = std::function<void(Application*, class Layout*, ElementListSize, MouseButton)>;
 
     class Layout : public UIElement<Layout>
     {
     public:
-        Layout(Application* application, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(application, sf::Vector2f{0.0f, 0.0f}, margin), m_BackgroundVisible(false)
+        Layout(Application* application)
+            :UIElement(application), m_BackgroundVisible(false)
         {}
 
         virtual ~Layout()
@@ -38,7 +35,7 @@ namespace physics
         virtual void Draw(int8_t layer = PHYSICS_LAYER_UI_0) override
         {
             if(m_BackgroundVisible)
-                m_Application->GetWindow().draw(m_Background);
+                m_Application->Draw(&m_Background, layer);
             
             for(ElementList::size_type i = 0; i < m_Children.size(); i++)
                 m_Children[i]->Draw(PHYSICS_LAYER_UI_1);
@@ -52,6 +49,7 @@ namespace physics
             UpdatePositions();
             return element;
         }
+
 
         ElementList& GetElements()
         {
@@ -96,8 +94,8 @@ namespace physics
                     element->DisplayBounds = true;
             }
         #endif
-            m_Background.setPosition(m_Position - m_Size / 2.0f);
-            m_Background.setSize(m_Size);
+            m_Background.SetPosition(m_Position);
+            m_Background.SetSize(m_Size + Vector2f{m_BackgroundGrowth});
             for(auto& element : m_Children)
                 element->Update(delta_time);
             
@@ -145,6 +143,24 @@ namespace physics
             return AABB::RectangleToPoint(this, Mouse::GetPosition());
         }
 
+        Layout* SetTexture(sf::Texture* texture)
+        {
+            m_Background.SetTexture(texture);
+            return this;
+        }
+
+        Layout* SetBorder(const Box::Border& border)
+        {
+            m_Background.SetBorder(border);
+            return this;
+        }
+
+        Layout* SetBorder(const Vector2f& border_start, const Vector2f& border_end)
+        {
+            m_Background.SetBorder(Box::Border{border_start, border_end});
+            return this;
+        }
+
         Layout* SetBackgroundVisible(bool option = true)
         {
             m_BackgroundVisible = option;
@@ -153,14 +169,13 @@ namespace physics
 
         Layout* SetBackgroundColor(const sf::Color& color)
         {
-            m_Background.setFillColor(color);
-            m_Background.setOutlineColor(color);
+            m_Background.SetColor(color);
             return this;
         }
 
         Layout* SetBackgroundGrowth(float growth)
         {
-            m_Background.setOutlineThickness(growth);
+            m_BackgroundGrowth = growth;
             return this;
         }
 
@@ -169,25 +184,6 @@ namespace physics
             return SetBackgroundColor(color)
                 ->SetBackgroundGrowth(growth)
                 ->SetBackgroundVisible(true);
-        }
-
-        Layout* SetOutline(float thickness, const sf::Color& color = sf::Color::Black)
-        {
-            m_Background.setOutlineThickness(thickness);
-            m_Background.setOutlineColor(color);
-            return this;
-        }
-
-        Layout* SetOutlineColor(const sf::Color& color)
-        {
-            m_Background.setOutlineColor(color);
-            return this;
-        }
-
-        Layout* SetOutlineThickness(float thickness)
-        {
-            m_Background.setOutlineThickness(thickness);
-            return this;
         }
 
         Layout* AddElementClickCallback(ElementClickCallbackFunc func)
@@ -209,7 +205,8 @@ namespace physics
     private:
         std::vector<ElementClickCallbackFunc> m_ElementClickCallbackFunctions;
         std::vector<ElementHoverCallbackFunc> m_ElementHoverCallbackFunctions;
-        sf::RectangleShape m_Background;
+        Box m_Background;
+        float m_BackgroundGrowth{0.0f};
         bool m_BackgroundVisible;
     };
 }

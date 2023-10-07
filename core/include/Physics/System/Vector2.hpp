@@ -77,8 +77,9 @@ namespace physics
             else return sf::Vector2<U>(static_cast<U>(x), static_cast<U>(y));
         }
 
-        constexpr operator bool() const
+        explicit constexpr operator bool() const
         {
+            std::cout << "asdf\n";
             if constexpr (std::is_same<T, float>::value)
                 return *this != Vector2{-1, -1};
             else return *this == Vector2{static_cast<T>(-1), static_cast<T>(-1)};
@@ -97,6 +98,16 @@ namespace physics
         constexpr T length() const
         {
             return std::sqrt(dot());
+        }
+
+        constexpr Vector2 abs() const
+        {
+            return Vector2{std::abs(x), std::abs(y)};
+        }
+
+        constexpr Vector2 clamp(const Vector2 min, const Vector2 max) const
+        {
+            return Vector2{std::clamp(x, min.x, max.x), std::clamp(y, min.y, max.y)};
         }
 
         constexpr Vector2 normalize() const
@@ -124,6 +135,16 @@ namespace physics
             return Vector2{x - other.x, y - other.y};
         }
 
+        constexpr Vector2 operator*(const Vector2& other) const
+        {
+            return Vector2{x * other.x, y * other.y};
+        }
+
+        constexpr Vector2 operator/(const Vector2& other) const
+        {
+            return Vector2{x / other.x, y / other.y};
+        }
+
         constexpr Vector2 operator*(T scalar) const
         {
             return Vector2{x * scalar, y * scalar};
@@ -134,25 +155,25 @@ namespace physics
             return Vector2{x / scalar, y / scalar};
         }
 
-        constexpr Vector2& operator+=(const Vector2& other)
+        Vector2& operator+=(const Vector2& other)
         {
             *this = *this + other;
             return *this;
         }
 
-        constexpr Vector2& operator-=(const Vector2& other)
+        Vector2& operator-=(const Vector2& other)
         {
             *this = *this - other;
             return *this;
         }
 
-        constexpr Vector2& operator*=(T scalar) const
+        Vector2& operator*=(T scalar)
         {
             *this = *this * scalar;
             return *this;
         }
 
-        constexpr Vector2& operator/=(T scalar) const
+        Vector2& operator/=(T scalar)
         {
             *this = *this / scalar;
             return *this;

@@ -1,7 +1,25 @@
 #include <Physics/Physics/BodyHandler.hpp>
+#include <Physics/Physics/FrictionCoefficients.hpp>
 
 namespace physics
-{   
+{
+    static float length(const Vector2f& vec)
+    {
+        return std::sqrt(vec.x * vec.x + vec.y * vec.y);
+    }
+
+    static Vector2f calculateNormal(Body* first, Body* second)
+    {
+        auto dist = first->GetPosition() - second->GetPosition();
+        auto half_size = (first->GetSize() + second->GetSize()) / 2.0f;
+        auto diff = Vector2f{dist.x / half_size.x, dist.y / half_size.y};
+
+        if(std::abs(diff.x) > std::abs(diff.y))
+            return diff.x > 0.0f ? Vector2f{1.0f, 0.0f} : Vector2f{-1.0f, 0.0f};
+        else
+            return diff.y > 0.0f ? Vector2f{0.0f, 1.0f} : Vector2f{0.0f, -1.0f};
+    }
+
     BodyHandler::~BodyHandler()
     {
         for(const auto& body : m_StaticBodies)
@@ -62,8 +80,13 @@ namespace physics
 
                 kinematic_body->AddForce(-kinematic_body->GetWeight(), "N");
 
-                auto friction = CalculateFriction(0.25f, kinematic_body->GetVelocity(), length(kinematic_body->GetWeight()));
+                auto normal = calculateNormal(kinematic_body, static_body) * length(kinematic_body->GetWeight());
+                auto friction_coefficient = FrictionCoefficients::Get(kinematic_body->GetMaterial(), static_body->GetMaterial());
                 
+                HandleImpulse(kinematic_body, static_body);
+                
+                auto friction = CalculateFriction(friction_coefficient, kinematic_body->GetVelocity(), normal);
+
                 kinematic_body->AddForce(friction, "T");
             }
             kinematic_body->m_Free = kinematic_body->m_Free && free;
@@ -73,23 +96,22 @@ namespace physics
             kinematic_body->Update(delta_time);
     }
 
-    float BodyHandler::length(const sf::Vector2f& vec)
+    Vector2f CalculateFriction(float friction_coefficient, const Vector2f& velocity, const Vector2f& normal)
     {
-        return std::sqrt(vec.x * vec.x + vec.y + vec.y);
+        return -Vector2f{normal.y, normal.x}.abs() * velocity * friction_coefficient * 0.1f;
     }
 
-    sf::Vector2f BodyHandler::normalize(const sf::Vector2f& vec)
+    Vector2f CalculateDrag(float drag_coefficient, float density, const Vector2f& velocity, float area)
     {
-        return vec / length(vec);
+        return velocity.normalize() * density * velocity.length() * velocity.length() * area * drag_coefficient * -0.5f;
     }
 
-    Vector2f CalculateFriction(float friction_coefficient, const Vector2f& velocity, float normal)
+    void HandleImpulse(KinematicBody* kinematic_body, StaticBody* static_body)
     {
-        return velocity * -1.0f * friction_coefficient * normal;
-    }
-
-    Vector2f CalculateDrag(float drag_coefficient, const sf::Vector2f& velocity, const sf::Vector2f& normal_force, float area)
-    {
-        return {0.0f, 0.0f};
+        const Vector2f normal = calculateNormal(kinematic_body, static_body);
+        const float mass = kinematic_body->GetMass();
+        const float dot = kinematic_body->GetMomentum().dot(normal);
+        const float impulse = -dot * (1.0f + PHYSICS_COEFFICIENT_OF_RESTITUTION) * kinematic_body->GetMass();
+        kinematic_body->AddMomentum(normal * impulse);
     }
 }

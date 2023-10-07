@@ -49,6 +49,11 @@ namespace physics
         m_Acceleration = acceleration;
     }
 
+    void Body::SetMaterial(Material* material)
+    {
+        m_Material = material;
+    }
+
     void Body::SetSize(const Vector2f& size, bool set_collider)
     {
         m_Rectangle.setSize((sf::Vector2f)size);
@@ -138,5 +143,6 @@ namespace physics
         SetPosition((Vector2f)m_Application->GetWindow().getSize() / 2.0f);
         m_Collider.Size = m_Rectangle.getSize();
         m_Collider.Position = Vector2f{0.0f, 0.0f};
+        m_Material = Materials::Get("default");
     }
 }

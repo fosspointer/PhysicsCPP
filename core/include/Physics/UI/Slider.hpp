@@ -16,8 +16,8 @@ namespace physics
     class Slider : public UIElement<Slider>
     {
     public:
-        Slider(Application* application, float min, float max, const sf::Vector2f& margin = sf::Vector2f{25.0f, 25.0f})
-            :UIElement(application, sf::Vector2f{150.0f, 20.0f}, margin),
+        Slider(Application* application, float min, float max)
+            :UIElement(application),
             m_MinValue(min), m_MaxValue(max), m_CurrentValue(min), m_Label(m_Application, to_string(min), 20u),
             m_Interaction(false)
         {
@@ -119,7 +119,7 @@ namespace physics
 
         void UpdatePercentage(float value)
         {
-            float size = (value - m_MinValue) / (m_MaxValue - m_MinValue) * m_Rectangle.getSize().x;
+            float size = (value - m_MinValue) / (m_MaxValue - m_MinValue) * m_Size.x;
             m_SelectedRectangle.setSize(sf::Vector2f{
                 size,
                 20.0f});

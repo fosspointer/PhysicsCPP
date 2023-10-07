@@ -6,6 +6,7 @@
 #include <Physics/System/Color.hpp>
 #include <Physics/System/Application.hpp>
 #include <Physics/System/Arrow.hpp>
+#include <Physics/Physics/Materials.hpp>
 
 namespace physics
 {
@@ -29,6 +30,7 @@ namespace physics
         void SetPosition(const Vector2f& position);
         void SetVelocity(const Vector2f& velocity);
         void SetAcceleration(const Vector2f& acceleration);
+        void SetMaterial(Material* material);
         
         void SetSize(const Vector2f& size, bool set_collider = true);
         void SetCollider(const Vector2f& offset, const Vector2f& size);
@@ -41,6 +43,7 @@ namespace physics
         inline const sf::Vector2f& GetSize() const { return m_Rectangle.getSize(); }
         inline const Vector2f& GetVelocity() const { return m_Velocity; }
         inline const Vector2f& GetAcceleration() const { return m_Acceleration; }
+        inline Material* GetMaterial() const { return m_Material; }
 
         inline Vector2f& GetVelocity() { return m_Velocity; }
         inline Vector2f& GetAcceleration() { return m_Acceleration; }
@@ -63,6 +66,7 @@ namespace physics
         Vector2f m_Velocity{0.0f};
         Vector2f m_Acceleration{0.0f};
         std::vector<Force> m_Forces, m_PreviousForces;
+        Material* m_Material;
 
         Vector2f GetBoundSize(const sf::Text& text) const;
         Vector2f GetBoundPosition(const sf::Text& text) const;

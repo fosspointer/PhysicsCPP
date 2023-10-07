@@ -13,16 +13,16 @@
 #include <Physics/System/TranslationControl.hpp>
 
 #include <Physics/System/Renderer.hpp>
+#include <Physics/System/Sizes.hpp>
 
-enum Mode
-{
-    Default, Properties, Transform
-};
+#include <Physics/Physics/Materials.hpp>
+#include <Physics/Physics/FrictionCoefficients.hpp>
 
-class Showcase : public physics::Application::State
+
+class DragDemo : public physics::Application::State
 {
 public:
-    ~Showcase() noexcept
+    ~DragDemo() noexcept
     {
         delete m_ExitButton;
         delete m_PropertiesButton;
@@ -34,8 +34,10 @@ public:
     {
         physics::Units::SetPixelsPerMeter(150.0f / 1.7f);
 
-        m_ExitButton = new physics::Button(m_Application, "X", {50, 50});
+        m_ExitButton = new physics::Button(m_Application);
         m_ExitButton
+            ->SetTitle("X")
+            ->SetSize({50.0f, 50.0f})
             ->SetButtonColors(physics::Color::White)
             ->SetOutline(5)
             ->SetAnchor(physics::Anchor::TopLeft);
@@ -48,32 +50,34 @@ public:
         m_PropertiesLayout = new physics::VLayout(m_Application);
         m_PropertiesLayout->SetBackground(physics::Color::White.ChangeAlpha(0.25f), 10.0f);
 
-        m_MassLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "mass_tmp", 25u));
+        m_MassLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
         m_MassSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 40, 100))
             ->SetSliderColors(physics::Color::DarkGreen)
             ->SetSliderSize({100, 30}, 20u, 20.0f)
             ->SetValue(60.0f);
 
-        m_GravityAccelerationLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "gravity_accel_tmp", 25u));
+        m_GravityAccelerationLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
         m_GravityAccelerationSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 1.62f, physics::Units::GetGravityAcceleration()))
             ->SetSliderColors(physics::Color::DarkBlue)
             ->SetSliderSize({100, 30}, 20u, 20.0f)
             ->SetValue(9.81f);
 
-        m_AirResistanceLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "air_resistance_tmp", 25u));
+        m_AirResistanceLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
         m_AirResistanceSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 100.0f))
             ->SetSliderColors(physics::Color::DarkYellow)
             ->SetSliderSize({100, 30}, 20u, 20.0f);
 
-        m_FrictionLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application, "friction_tmp", 25u));
+        m_FrictionLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
         m_FrictionSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 0.7f))
             ->SetSliderColors(physics::Color::DarkRed)
-            ->SetSliderSize({100, 30}, 20u, 20.0f);
+            ->SetSliderSize({100, 30}, 20u, 20.0f)
+            ->SetValue(0.25f);
         
         m_PropertiesLayout->SetAnchor(physics::Anchor::Right);
 
-        m_PropertiesButton = new physics::Button(m_Application, "properties_tmp", sf::Vector2f{512.0f, 100.0f});
+        m_PropertiesButton = new physics::Button(m_Application);
         m_PropertiesButton
+            ->SetSize({512.0f, 100.0f})
             ->SetAnchor(physics::Anchor::BottomRight)
             ->SetOutline(5)
             ->AddClickCallback([this](physics::Application*, physics::Button*, MouseButton)
@@ -99,12 +103,29 @@ public:
 
             if(jump)
                 body->SetVelocity(physics::Vector2f{body->GetVelocity().x, -230.0f});
-            else body->SetVelocity(physics::Vector2f{body->GetVelocity().x, 0.0f}); 
         });
+        m_Body->SetPosition(sf::Vector2f{m_Application->GetWindow().getSize()} / 2.0f - sf::Vector2f{0.0f, 100.0f});
+        m_Body->SetMaterial(physics::Materials::Get("human"));
     
-        m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkRed);
+        m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkGray);
         m_Ground->SetSize({700, 300});
-        m_Ground->SetPosition(m_Body->GetPosition() + sf::Vector2f{0.0f, 300.0f});
+        m_Ground->SetPosition(sf::Vector2f{m_Application->GetWindow().getSize()} / 2.0f + sf::Vector2f{0.0f, 300.0f});
+        m_Ground->SetMaterial(physics::Materials::Get("concrete"));
+
+        m_Rod1 = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkGray);
+        m_Rod1->SetSize({20.0f, 100.0f});
+        m_Rod1->SetPosition(m_Ground->GetPosition() - m_Ground->GetSize() / 2.0f + sf::Vector2f{50.0f, -50.0f});
+        m_Rod1->SetMaterial(physics::Materials::Get("concrete"));
+
+        m_Rod2 = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkGray);
+        m_Rod2->SetSize({20.0f, 100.0f});
+        m_Rod2->SetPosition(m_Ground->GetPosition() - m_Ground->GetSize() / 2.0f + sf::Vector2f{470.0f, -50.0f});
+        m_Rod2->SetMaterial(physics::Materials::Get("concrete"));
+
+        m_Liquid = m_BodyHandler->AddStaticBody(m_Application, physics::Color::White.ChangeAlpha(0.25f));
+        m_Liquid->SetSize({400.0f, 100.0f});
+        m_Liquid->SetPosition(m_Rod1->GetPosition() + sf::Vector2f{m_Rod1->GetSize().x / 2.0f + 200.0f, 0.0f});
+        m_Liquid->SetMaterial(physics::Materials::Get("water"));
     }
 
     void OnShow() override
@@ -114,15 +135,11 @@ public:
         m_GravityAccelerationLabel->SetText(physics::Language::GetTextSFML("gravitational_acceleration"));
         m_AirResistanceLabel->SetText(physics::Language::GetTextSFML("air_resistance"));
         m_FrictionLabel->SetText(physics::Language::GetTextSFML("friction_coefficient"));
-
-        std::cout << "pixels per meter: " << physics::Units::GetPixelsPerMeter() << '\n';
-        std::cout << "pixels per newton: " << physics::Units::GetPixelsPerNewton() << '\n';
     }
 
     void OnUpdate(float delta_time) override
     {
-        // std::cout << (physics::Vector2f)m_Body->GetPosition() << '\n';
-
+        physics::FrictionCoefficients::Set("human", "concrete", m_FrictionSlider->GetValue());
         m_Body->SetMass(m_MassSlider->GetValue());
         m_Body->SetGravityAcceleration(m_GravityAccelerationSlider->GetValue());
         
@@ -139,11 +156,6 @@ public:
         if(m_ViewProperties)
         {
             m_Body->DrawForces();
-            {
-                physics::TranslationControl control;
-                control.SetOrigin(m_Body->GetPosition());
-                m_Application->GetWindow().draw(control);
-            }
             m_PropertiesLayout->Update(delta_time);
             m_PropertiesLayout->Draw();
         }
@@ -171,7 +183,7 @@ private:
     physics::Slider* m_FrictionSlider;
 
     physics::KinematicBody* m_Body;
-    physics::StaticBody* m_Ground;
+    physics::StaticBody* m_Ground, *m_Rod1, *m_Rod2, *m_Liquid;
     
     physics::BodyHandler* m_BodyHandler;
 };

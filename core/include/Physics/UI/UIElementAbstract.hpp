@@ -1,39 +1,34 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include <Physics/System/Vector2.hpp>
+#include <Physics/System/Color.hpp>
 #include <Physics/System/Application.hpp>
 #include <Physics/System/Mouse.hpp>
 
 namespace physics
 {
-    
     /// @brief Enum representing options for which UIElements can be anchored
     enum class Anchor : unsigned char
     {
         None, Center, Top, Bottom, Left, Right, TopLeft, TopRight, BottomLeft, BottomRight
     };
-
     
     /// @brief Base of the UI system, polymorphic class, inheritted by UIElement<Impl> for dependency injection
-     
     class UIElementAbstract
     {
     public:
-        
-        /// @brief UIElementAbstract constructor, must be called by classes deriving from here
+        /// @brief UIElementAbstract constructor, is called by UIElement
         /// @param application pointer to the main application
-        /// @param size the size of the ui element, use (-1, -1) if not yet calculated
+        /// @param size the size of the ui element, use -1 where not calculated (e.g. [width, -1], [-1, -1], etc...)
         /// @param margin the element's margin, used by layouts
         /// @param color the color of the element
-        UIElementAbstract(Application* application, const sf::Vector2f& size, const sf::Vector2f& margin, const sf::Color& color)
-            :m_Application(application), m_Position(), m_Size(size), m_Margin(margin),
-            m_Anchor{Anchor::None}, m_Color(color), m_PragmaUpdated{true}, m_PreviousHovered{false}, m_CurrentHovered{false}
+        UIElementAbstract(Application* application, const Vector2f& size, const Vector2f& margin, const sf::Color& color, bool floating_element)
+            :m_Application(application), m_Size(size), m_Margin(margin), m_Color(color), m_FloatingElement(floating_element)
         {}
         
         virtual ~UIElementAbstract() = default;
         
         /// @brief Draws the element, utilizing the main application's window
         virtual void Draw(int8_t layer) = 0;
-
         
         /// @brief Checks if the element is hovered by the mouse cursor, must be called after Update()
         /// @return The result of the test
@@ -44,16 +39,14 @@ namespace physics
             return !m_CurrentHovered && m_PreviousHovered;
         }
 
-        
         /// @brief The element's update function
         /// @param delta_time Time elapsed since previous frame
         virtual void Update(float delta_time) = 0;
-
         
         /// @brief Calculates the element's position for the specified Anchor enumerator
         virtual void CalculateAnchor()
         {
-            auto size = (sf::Vector2f)m_Application->GetWindow().getSize();
+            auto size = (Vector2f)m_Application->GetWindow().getSize();
             auto center = size / 2.0f;
             auto space = m_Margin + m_Size / 2.0f;
             auto space_inverse = size - space;
@@ -73,31 +66,29 @@ namespace physics
             }
         }
 
-        
         /// @brief Returns whether the element is being pressed by the specified button
         /// @param button Mouse button to test for
         /// @return The result of the test
         bool IsPressed(MouseButton button = MOUSE_LEFT) const
         {
-            return IsHovered() && Mouse::GetInstance().CurrentState & button;
+            return (IsHovered() && Mouse::GetInstance().CurrentState & button) && (m_FloatingElement || !m_Application->HasFloating());
         } 
-
         
         /// @brief Get the Position object
         /// @return Immutable reference to the element's position
-        inline const sf::Vector2f& GetPosition() const { return m_Position; }
+        inline const Vector2f& GetPosition() const { return m_Position; }
         
         /// @brief Get the Size object
         /// @return Immutable reference to the element's size
-        inline const sf::Vector2f& GetSize() const { return m_Size; }
+        inline const Vector2f& GetSize() const { return m_Size; }
         
         /// @brief Get the Margin object
         /// @return Immutable reference to the element's margin
-        inline const sf::Vector2f& GetMargin() const { return m_Margin; }
+        inline const Vector2f& GetMargin() const { return m_Margin; }
         
         /// @brief Get the Color object
         /// @return Immutable reference to the element's color
-        inline const sf::Color& GetColor() const { return m_Color; }
+        inline const Color& GetColor() const { return m_Color; }
         
         /// @brief Get the Anchor object
         /// @return Immutable reference to the element's anchor
@@ -148,11 +139,12 @@ namespace physics
             CalculateAnchor();
         }
     protected:
-        bool m_PragmaUpdated, m_PreviousHovered, m_CurrentHovered;
+        bool m_PragmaUpdated{true}, m_PreviousHovered{false}, m_CurrentHovered{false};
+        const bool m_FloatingElement;
         Application* m_Application;
-        sf::Vector2f m_Position, m_Size, m_Margin;
-        sf::Color m_Color;
-        Anchor m_Anchor;
+        Vector2f m_Position, m_Size, m_Margin;
+        Color m_Color;
+        Anchor m_Anchor{Anchor::None};
         friend class Layout;
         friend class HLayout;
         friend class VLayout;

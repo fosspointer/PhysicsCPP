@@ -23,7 +23,9 @@ namespace physics
     {
         try
         {
-            m_Window.create(sf::VideoMode(size.x, size.y), title, style);   
+            sf::ContextSettings settings;
+            settings.antialiasingLevel = 8.0f;
+            m_Window.create(sf::VideoMode(size.x, size.y), title, style, settings);   
 
             Mouse::s_Application = this;
             OnCreate();
@@ -59,6 +61,8 @@ namespace physics
                 m_CurrentTime = std::chrono::steady_clock::now();
                         
                 m_DeltaTime = std::chrono::duration<float>(m_CurrentTime - m_PreviousTime).count();    
+
+                m_HasFloating = false;
 
                 m_Renderer.Clear();
                 m_Window.clear(m_BackgroundColor);
@@ -147,6 +151,11 @@ namespace physics
     void Application::SetBackgroundColor(const sf::Color& color)
     {
         m_BackgroundColor = color;
+    }
+
+    void Application::SetFloating()
+    {
+        m_HasFloating = true;
     }
 
     void Application::Rename(const sf::String& title)
