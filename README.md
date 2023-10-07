@@ -31,6 +31,7 @@ For CMake generator examples, see [Link to the CMake manual](https://cmake.org/c
 
 - Active support (through Issues)
 - Feedback is always taken into account
+- Use of the GPL v3.0
 
 ## Pros for developers
 
@@ -54,7 +55,7 @@ For CMake generator examples, see [Link to the CMake manual](https://cmake.org/c
 
 ## Personal coding environment
 
-See [my user repository](https://github.com/undefinedpp)
+See [my GitHub profile](https://github.com/fosspointer)
 
 ## Future plans
 
