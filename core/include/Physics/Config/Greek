@@ -3,7 +3,7 @@ PHYSICS_LANGUAGE_PAIR("select_language", U"Επιλογή προτεινόμεν
 PHYSICS_LANGUAGE_PAIR("dropdown_placeholder", U"Παρακαλείσθε να επιλέξετε"),
 PHYSICS_LANGUAGE_PAIR("continue", U"Συνέχεια"),
 PHYSICS_LANGUAGE_PAIR("unavailable", U"Μη διαθέσιμο!"),
-PHYSICS_LANGUAGE_PAIR("properties", U"Εμφάνιση/Εξαφάνιση Ιδιοτήτων"),
+PHYSICS_LANGUAGE_PAIR("properties", U"Ιδιότητες"),
 PHYSICS_LANGUAGE_PAIR("mass", U"Μάζα:"),
 PHYSICS_LANGUAGE_PAIR("gravitational_acceleration", U"Επιτάχυνση Βαρύτητας:"),
 PHYSICS_LANGUAGE_PAIR("air_resistance", U"Αντίσταση Αέρα:"),

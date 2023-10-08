@@ -38,15 +38,14 @@ public:
     {
         physics::Units::SetPixelsPerMeter(150.0f / 1.7f);
 
-        m_ExitButton = new physics::Button(m_Application);
+        m_ExitButton = new physics::Textured::Button(m_Application);
         m_ExitButton
             ->SetTitle("X")
-            ->SetSize({50.0f, 50.0f})
-            ->SetButtonColors(physics::Color::White)
-            ->SetOutline(5)
+            ->SetSize({50.0f, 60.0f})
+            ->SetButtonColors(physics::Color::DarkCyan)
             ->SetAnchor(physics::Anchor::TopLeft);
 
-        m_ExitButton->AddClickCallback([](physics::Application* app, physics::Button* btn, MouseButton)
+        m_ExitButton->AddClickCallback([](physics::Application* app, physics::Textured::Button* btn, MouseButton)
         {
             app->GetState()->SetToBeDestroyed();
         });
@@ -79,12 +78,12 @@ public:
         
         m_PropertiesLayout->SetAnchor(physics::Anchor::Right);
 
-        m_PropertiesButton = new physics::Button(m_Application);
+        m_PropertiesButton = new physics::Textured::Button(m_Application);
         m_PropertiesButton
-            ->SetSize({512.0f, 100.0f})
+            ->SetButtonColors(physics::Color::DarkCyan)
+            ->SetSize({175.0f, 80.0f})
             ->SetAnchor(physics::Anchor::BottomRight)
-            ->SetOutline(5)
-            ->AddClickCallback([this](physics::Application*, physics::Button*, MouseButton)
+            ->AddClickCallback([this](physics::Application*, physics::Textured::Button*, MouseButton)
             {
                 m_ViewProperties = !m_ViewProperties;
             });
@@ -153,9 +152,9 @@ public:
     }
 private:
     bool m_ViewProperties = false;
-    physics::Button* m_ExitButton;
+    physics::Textured::Button* m_ExitButton;
+    physics::Textured::Button* m_PropertiesButton;
     physics::VLayout* m_PropertiesLayout;
-    physics::Button* m_PropertiesButton;
 
     physics::Label* m_MassLabel;
     physics::Slider* m_MassSlider;

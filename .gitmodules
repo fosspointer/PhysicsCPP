@@ -2,3 +2,6 @@
 	path = ext/SFML
 	url = https://github.com/SFML/SFML.git
 	branch = 2.5.x
+[submodule "code_standard"]
+	path = code_standard
+	url = https://github.com/fosspointer/code_standard

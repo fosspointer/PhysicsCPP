@@ -73,5 +73,5 @@ See [my GitHub profile](https://github.com/fosspointer)
 - Improve the consistency of the documentation.
 - Translate the client for more language (only English and Greek are currently supported).
 - Move all implementations into .cpp files (getting rid of header implementations wherever possible).
-- Adjust to the FossPointer standard (link to the GitHub repository soon).
+- Adjust to the FossPointer standard (included as submodule, [link to the GitHub Repository](https://github.com/fosspointer/code_standard)).
 
