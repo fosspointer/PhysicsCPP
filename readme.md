@@ -2,8 +2,8 @@
 
 This project was presented at the '13th Panhellenic/International Conference "ICT in Education"'.
 
-<img src="./docs/screenshot_title.png" alt="Titlescreen Screenshot" height=200 />
-<img src="./docs/screenshot_main.png" alt="Main Screenshot" height=200 />
+<img src="./assets/images/screenshot_title.png" alt="Titlescreen Screenshot" height=200 />
+<img src="./assets/images/screenshot_main.png" alt="Main Screenshot" height=200 />
 
 ## External dependencies
 
