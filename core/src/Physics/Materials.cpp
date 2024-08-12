@@ -2,5 +2,5 @@
 
 namespace physics
 {
-    std::unordered_map<std::string, Material*> Materials::s_Materials;
+    std::unordered_map<std::string, Material*> Materials::s_materials;
 }

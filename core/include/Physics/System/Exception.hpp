@@ -17,26 +17,26 @@ namespace physics
         /// @param line Line where the exception is thrown
         /// @param message Message to be displayed (optional) 
         Exception(const std::string& function, const std::string& file, int line, const std::string& message = "") noexcept
-            :m_Function(function), m_File(file), m_Line(line), m_Message(message)
+            :m_function(function), m_file(file), m_line(line), m_message(message)
         {}
 
-        /// @brief Gets information about the exception
-        std::string Info() const noexcept
+        /// @brief gets information about the exception
+        std::string info() const noexcept
         {
-            std::string message = m_Message != "" ? ". Error message: \"" + m_Message + '"' : ""; 
-            return m_File + ":" + std::to_string(m_Line) + " -> exception thrown in function "
-                + m_Function + message;
+            std::string message = m_message != "" ? ". Error message: \"" + m_message + '"' : ""; 
+            return m_file + ":" + std::to_string(m_line) + " -> exception thrown in function "
+                + m_function + message;
         }
 
         /// @brief Used to append the exception's information to a standard output stream
         /// @return A reference to the resulting ostream so it can be chained with '<<'
         friend std::ostream& operator <<(std::ostream& os, const Exception& exception) noexcept
         {
-            os << exception.Info();
+            os << exception.info();
             return os;
         }
     private:
-        std::string m_Function, m_File, m_Message;
-        int m_Line;
+        std::string m_function, m_file, m_message;
+        int m_line;
     };
 }

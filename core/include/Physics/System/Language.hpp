@@ -31,7 +31,7 @@ namespace physics
         /// @param language Enumerator representing the language for which to return the property
         /// @return String representing the property's value 
          
-        static String GetTextSTD(const char* name, const Option& language = SelectedLanguage)
+        static String getTextSTD(const char* name, const Option& language = SelectedLanguage)
         {
             static CharMap greek_map = {
                 #include <Physics/Config/Greek>
@@ -50,17 +50,17 @@ namespace physics
         }
 
         
-        /// @brief Does the same as GetStringSTD(), but converts the string to the sfml format before returning
+        /// @brief Does the same as getStringSTD(), but converts the string to the sfml format before returning
         /// @param name The name of the relative in snake_case and lowercase alphanumeric (plus '_') characters 
         /// @param language Enumerator representing the language for which to return the property
         /// @return sf::String representing the property's value
          
-        static sf::String GetTextSFML(const char* name, const Option& language = SelectedLanguage)
+        static sf::String getTextSFML(const char* name, const Option& language = SelectedLanguage)
         {
-            String str = GetTextSTD(name, language);
+            String str = getTextSTD(name, language);
             return sf::String::fromUtf32(str.begin(), str.end());
         }
         static Option SelectedLanguage;
     };
-    Language::Option Language::SelectedLanguage = Option::Greek;
+    Language::Option Language::SelectedLanguage = Option::English;
 }

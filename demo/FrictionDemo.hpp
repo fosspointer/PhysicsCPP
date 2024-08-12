@@ -20,7 +20,7 @@
 
 enum Mode
 {
-    Default, Properties, Transform
+    Default, Properties, Bodies
 };
 
 class FrictionDemo : public physics::Application::State
@@ -28,148 +28,236 @@ class FrictionDemo : public physics::Application::State
 public:
     ~FrictionDemo() noexcept
     {
-        delete m_ExitButton;
-        delete m_PropertiesButton;
-        delete m_PropertiesLayout;
-        delete m_BodyHandler;
+        delete m_exitButton;
+        delete m_propertiesLayout;
+        delete m_bodyHandler;
+        delete m_buttonLayout;
+        delete m_controlLayout;
     }
 
-    void OnCreate() override
+    void onCreate() override
     {
-        physics::Units::SetPixelsPerMeter(150.0f / 1.7f);
+        physics::Units::setPixelsPerMeter(150.0f / 1.7f);
 
-        m_ExitButton = new physics::Textured::Button(m_Application);
-        m_ExitButton
-            ->SetTitle("X")
-            ->SetSize({50.0f, 60.0f})
-            ->SetButtonColors(physics::Color::DarkCyan)
-            ->SetAnchor(physics::Anchor::TopLeft);
+        m_exitButton = new physics::Textured::Button(m_application);
+        m_exitButton
+            ->setTitle("X")
+            ->setSize({50.0f, 60.0f})
+            ->setButtonColors(physics::Color::DarkCyan)
+            ->setAnchor(physics::Anchor::TopLeft);
 
-        m_ExitButton->AddClickCallback([](physics::Application* app, physics::Textured::Button* btn, MouseButton)
+        m_exitButton->addClickCallback([](physics::Application* app, physics::Textured::Button* btn, MouseButton)
         {
-            app->GetState()->SetToBeDestroyed();
+            app->getState()->setToBeDestroyed();
         });
 
-        m_PropertiesLayout = new physics::VLayout(m_Application);
-        m_PropertiesLayout->SetBackground(physics::Color::White.ChangeAlpha(0.25f), 10.0f);
+        m_propertiesLayout = new physics::VLayout(m_application);
+        m_propertiesLayout
+            ->setBackground(physics::Color::White.changeAlpha(0.25f), 10.0f)
+            ->setTexture(physics::Textures::button())
+            ->setBorder(physics::Sizes::borderButton());
 
-        m_MassLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
-        m_MassSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 40, 100))
-            ->SetSliderColors(physics::Color::DarkGreen)
-            ->SetSliderSize({100, 30}, 20u, 20.0f)
-            ->SetValue(60.0f);
+        m_massLabel = m_propertiesLayout->pushElement(new physics::Label(m_application));
+        m_massSlider = m_propertiesLayout->pushElement(new physics::Slider(m_application, 40, 100))
+            ->setSliderColors(physics::Color::DarkGreen)
+            ->setSliderSize({100, 30}, 20u, 20.0f)
+            ->setValue(60.0f);
 
-        m_GravityAccelerationLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
-        m_GravityAccelerationSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 1.62f, physics::Units::GetGravityAcceleration()))
-            ->SetSliderColors(physics::Color::DarkBlue)
-            ->SetSliderSize({100, 30}, 20u, 20.0f)
-            ->SetValue(9.81f);
+        m_gravityAccelerationLabel = m_propertiesLayout->pushElement(new physics::Label(m_application));
+        m_gravityAccelerationSlider = m_propertiesLayout->pushElement(new physics::Slider(m_application, 1.62f, physics::Units::getGravityAcceleration()))
+            ->setSliderColors(physics::Color::DarkBlue)
+            ->setSliderSize({100, 30}, 20u, 20.0f)
+            ->setValue(9.81f);
 
-        m_AirResistanceLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
-        m_AirResistanceSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 100.0f))
-            ->SetSliderColors(physics::Color::DarkYellow)
-            ->SetSliderSize({100, 30}, 20u, 20.0f);
+        m_airResistanceLabel = m_propertiesLayout->pushElement(new physics::Label(m_application));
+        m_airResistanceSlider = m_propertiesLayout->pushElement(new physics::Slider(m_application, 0.0f, 100.0f))
+            ->setSliderColors(physics::Color::DarkYellow)
+            ->setSliderSize({100, 30}, 20u, 20.0f);
 
-        m_FrictionLabel = m_PropertiesLayout->PushElement(new physics::Label(m_Application));
-        m_FrictionSlider = m_PropertiesLayout->PushElement(new physics::Slider(m_Application, 0.0f, 0.7f))
-            ->SetSliderColors(physics::Color::DarkRed)
-            ->SetSliderSize({100, 30}, 20u, 20.0f)
-            ->SetValue(0.25f);
+        m_frictionLabel = m_propertiesLayout->pushElement(new physics::Label(m_application));
+        m_frictionSlider = m_propertiesLayout->pushElement(new physics::Slider(m_application, 0.0f, 0.7f))
+            ->setSliderColors(physics::Color::DarkRed)
+            ->setSliderSize({100, 30}, 20u, 20.0f)
+            ->setValue(0.25f);
         
-        m_PropertiesLayout->SetAnchor(physics::Anchor::Right);
+        m_propertiesLayout->setAnchor(physics::Anchor::Right);
 
-        m_PropertiesButton = new physics::Textured::Button(m_Application);
-        m_PropertiesButton
-            ->SetButtonColors(physics::Color::DarkCyan)
-            ->SetSize({175.0f, 80.0f})
-            ->SetAnchor(physics::Anchor::BottomRight)
-            ->AddClickCallback([this](physics::Application*, physics::Textured::Button*, MouseButton)
+        m_buttonLayout = new physics::HLayout(m_application);
+        m_buttonLayout->setAnchor(physics::Anchor::BottomRight);
+
+        m_controlLayout = new physics::HLayout(m_application);
+        m_controlLayout->setAnchor(physics::Anchor::BottomLeft)->pushElement(new physics::Textured::Button(m_application))
+            ->setTitle("<")
+            ->setButtonColors(physics::Color::DarkCyan)
+            ->setSize({64.0f, 64.0f})
+            ->addClickCallback([this](physics::Application*, physics::Textured::Button*, MouseButton)
             {
-                m_ViewProperties = !m_ViewProperties;
+                m_moveLeftTimer = 0.0f;
             });
 
-        m_BodyHandler = new physics::BodyHandler;
+        m_controlLayout->pushElement(new physics::Textured::Button(m_application))
+            ->setTitle("^")
+            ->setButtonColors(physics::Color::DarkCyan)
+            ->setSize({64.0f, 64.0f});
+
+        m_controlLayout->pushElement(new physics::Textured::Button(m_application))
+            ->setTitle(">")
+            ->setButtonColors(physics::Color::DarkCyan)
+            ->setSize({64.0f, 64.0f})
+            ->addClickCallback([this](physics::Application*, physics::Textured::Button*, MouseButton)
+            {
+                m_moveRightTimer = 0.0f;
+            });
+
+        m_propertiesButton = m_buttonLayout->pushElement(new physics::Textured::Button(m_application))
+            ->setButtonColors(physics::Color::DarkCyan)
+            ->setSize({175.0f, 80.0f})
+            ->addClickCallback([this](physics::Application*, physics::Textured::Button*, MouseButton)
+            {
+                m_mode != Mode::Properties? m_mode = Mode::Properties : m_mode = Mode::Default;
+            });
+
+        m_bodyButton = m_buttonLayout->pushElement(new physics::Textured::Button(m_application))
+            ->setButtonColors(physics::Color::DarkCyan)
+            ->setSize({175.0f, 80.0f})
+            ->addClickCallback([this](physics::Application*, physics::Textured::Button*, MouseButton)
+            {
+                m_mode != Mode::Bodies? m_mode = Mode::Bodies : m_mode = Mode::Default;
+            });
+
+        m_bodyHandler = new physics::BodyHandler;
         
-        m_Body = m_BodyHandler->AddKinematicBody(m_Application, PHYSICS_ASSETS_DIR "images/person.png");
-        m_Body->SetCollider({0.0f, 0.0f}, {20.0f, 150.0f});
-        m_Body->SetUpdateCallback([](physics::KinematicBody* body, float delta)
+        m_body = m_bodyHandler->addKinematicBody(m_application, PHYSICS_ASSETS_DIR "images/person.png");
+        m_body->setCollider({0.0f, 0.0f}, {20.0f, 150.0f});
+        m_body->setUpdateCallback([this](physics::KinematicBody* body, float delta)
         {
-            if(body->GetFree()) return;
+            if(body->getFree()) return;
 
-            auto mov = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) * 1.0f + 
-            sf::Keyboard::isKeyPressed(sf::Keyboard::Left) * -1.0f;
+            auto left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || m_moveLeftTimer < 1.0f;
+            auto right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || m_moveRightTimer < 1.0f;
+            auto movement = right * 1.0f + left * -1.0f;
 
-            auto jump = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || 
-            sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+            auto jump = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
+                || m_controlLayout->getElement(1)->isPressed();
 
-            body->AddForce({mov * 700.0f, 0.0f}, "F");
+            body->addForce({movement * 700.0f, 0.0f}, "F");
 
             if(jump)
-                body->SetVelocity(physics::Vector2f{body->GetVelocity().x, -230.0f});
+                body->addMomentum(sf::Vector2f{0.0f, -20000.0f});
         });
-        m_Body->SetMaterial(physics::Materials::Get("human"));
+        m_body->setMaterial(physics::Materials::get("human"));
     
-        m_Ground = m_BodyHandler->AddStaticBody(m_Application, physics::Color::DarkGray);
-        m_Ground->SetSize({700, 300});
-        m_Ground->SetPosition(m_Body->GetPosition() + sf::Vector2f{0.0f, 300.0f});
-        m_Ground->SetMaterial(physics::Materials::Get("concrete"));
+        m_ground = m_bodyHandler->addStaticBody(m_application, physics::Color::DarkGray);
+        m_ground->setSize({700, 300});
+        m_ground->setPosition(m_body->getPosition() + sf::Vector2f{0.0f, 300.0f});
+        m_ground->setMaterial(physics::Materials::get("concrete"));
     }
 
-    void OnShow() override
+    void onShow() override
     {
-        m_PropertiesButton->GetLabel().SetText(physics::Language::GetTextSFML("properties"));
-        m_MassLabel->SetText(physics::Language::GetTextSFML("mass"));
-        m_GravityAccelerationLabel->SetText(physics::Language::GetTextSFML("gravitational_acceleration"));
-        m_AirResistanceLabel->SetText(physics::Language::GetTextSFML("air_resistance"));
-        m_FrictionLabel->SetText(physics::Language::GetTextSFML("friction_coefficient"));
+        m_propertiesButton->getLabel().setText(physics::Language::getTextSFML("properties"));
+        m_massLabel->setText(physics::Language::getTextSFML("mass"));
+        m_gravityAccelerationLabel->setText(physics::Language::getTextSFML("gravitational_acceleration"));
+        m_airResistanceLabel->setText(physics::Language::getTextSFML("air_resistance"));
+        m_frictionLabel->setText(physics::Language::getTextSFML("friction_coefficient"));
+        m_bodyButton->setTitle(physics::Language::getTextSFML("bodies"));
     }
 
-    void OnUpdate(float delta_time) override
+    void onUpdate(float delta_time) override
     {
-        physics::FrictionCoefficients::Set("human", "concrete", m_FrictionSlider->GetValue());
-        m_Body->SetMass(m_MassSlider->GetValue());
-        m_Body->SetGravityAcceleration(m_GravityAccelerationSlider->GetValue());
+        m_moveLeftTimer += delta_time;
+        m_moveRightTimer += delta_time;
+
+        physics::FrictionCoefficients::set("human", "concrete", m_frictionSlider->getValue());
+        m_body->setMass(m_massSlider->getValue());
+        m_body->setGravityAcceleration(m_gravityAccelerationSlider->getValue());
         
         // Demo
-
-        m_BodyHandler->Draw();
-        m_BodyHandler->Update(delta_time);
+        m_bodyHandler->draw();
+        m_bodyHandler->update(delta_time);
 
         // UI
-
-        m_ExitButton->Update(delta_time);
-        m_ExitButton->Draw();
+        m_exitButton->update(delta_time);
+        m_exitButton->draw();
         
-        if(m_ViewProperties)
+        if(m_mode == Mode::Properties)
         {
-            m_Body->DrawForces();
-            m_PropertiesLayout->Update(delta_time);
-            m_PropertiesLayout->Draw();
+            m_bodyHandler->drawForces();
+            m_propertiesLayout->update(delta_time);
+            m_propertiesLayout->draw();
+        }
+        else if(m_mode == Mode::Bodies)
+        {
+            physics::TranslationControl control;
+            control.setOrigin(m_body->getPosition());
+
+            if(physics::Mouse::getInstance().currentState && !physics::Mouse::getInstance().previousState)
+            {
+                auto mouse_position = physics::Mouse::getPosition();
+                if(control.collidesSquare(mouse_position))
+                    m_mouseDistance = mouse_position - m_body->getPosition();
+                
+                else m_mouseDistance = physics::Vector2f{
+                    control.collidesHorizontal(mouse_position)? mouse_position.x - m_body->getPosition().x: 0.0f, 
+                    control.collidesVertical(mouse_position)? mouse_position.y - m_body->getPosition().y: 0.0f};
+            }
+            else if(!physics::Mouse::getInstance().currentState)
+                m_mouseDistance = physics::Vector2f::zero();
+            else if(physics::AABB::rectangleToPoint(m_body->getOutterAABB(), physics::Mouse::getPosition()))
+                m_body->setVelocity(physics::Vector2f::zero());
+
+            if(m_mouseDistance.x != 0.0f)
+            {
+                m_body->setPosition(physics::Vector2f{physics::Mouse::getPosition().x - m_mouseDistance.x, m_body->getPosition().y});
+                control.setHorizontalColor(physics::Color::White);
+            }
+            if(m_mouseDistance.y != 0.0f)
+            {
+                m_body->setPosition(physics::Vector2f{m_body->getPosition().x, physics::Mouse::getPosition().y - m_mouseDistance.y});
+                control.setVerticalColor(physics::Color::White);
+            }
+
+            if(m_mouseDistance.x != 0.0f && m_mouseDistance.y != 0.0f)
+                control.setSquareColor(physics::Color::White);
+
+            m_application->getWindow().draw(control);
         }
 
-        m_PropertiesButton->Update(delta_time);
-        m_PropertiesButton->Draw();
+        m_buttonLayout->update(delta_time);
+        m_buttonLayout->draw();
+
+        m_controlLayout->update(delta_time);
+        m_controlLayout->draw();
     }
 private:
-    bool m_ViewProperties = false;
-    physics::Textured::Button* m_ExitButton;
-    physics::Textured::Button* m_PropertiesButton;
-    physics::VLayout* m_PropertiesLayout;
+    float m_moveLeftTimer, m_moveRightTimer;
 
-    physics::Label* m_MassLabel;
-    physics::Slider* m_MassSlider;
+    physics::Vector2f m_mouseDistance;
 
-    physics::Label* m_GravityAccelerationLabel;
-    physics::Slider* m_GravityAccelerationSlider;
+    physics::Textured::Button* m_exitButton;
 
-    physics::Label* m_AirResistanceLabel;
-    physics::Slider* m_AirResistanceSlider;
-
-    physics::Label* m_FrictionLabel;
-    physics::Slider* m_FrictionSlider;
-
-    physics::KinematicBody* m_Body;
-    physics::StaticBody* m_Ground;
+    physics::HLayout* m_buttonLayout, *m_controlLayout;
     
-    physics::BodyHandler* m_BodyHandler;
+    physics::Textured::Button* m_propertiesButton, *m_bodyButton;
+    
+    physics::VLayout* m_propertiesLayout;
+
+    physics::Label* m_massLabel;
+    physics::Slider* m_massSlider;
+
+    physics::Label* m_gravityAccelerationLabel;
+    physics::Slider* m_gravityAccelerationSlider;
+
+    physics::Label* m_airResistanceLabel;
+    physics::Slider* m_airResistanceSlider;
+
+    physics::Label* m_frictionLabel;
+    physics::Slider* m_frictionSlider;
+
+    physics::KinematicBody* m_body;
+    physics::StaticBody* m_ground;
+    
+    physics::BodyHandler* m_bodyHandler;
+
+    Mode m_mode{Mode::Default};
 };

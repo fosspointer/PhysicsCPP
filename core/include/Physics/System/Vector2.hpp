@@ -49,14 +49,16 @@ namespace physics
             :x(x), y(y)
         {}
 
-        static constexpr Vector2 Zero()
+        static const Vector2& zero()
         {
-            return Vector2(0); 
+            static const Vector2 _zero{0, 0};
+            return _zero; 
         }
 
-        static constexpr Vector2 One()
+        static const Vector2& one()
         {
-            return Vector2(1); 
+            static const Vector2 _one{1, 1};
+            return _one;
         }
 
         static constexpr Vector2 X(T value)
@@ -153,6 +155,16 @@ namespace physics
         constexpr Vector2 operator/(T scalar) const
         {
             return Vector2{x / scalar, y / scalar};
+        }
+
+        bool operator==(const Vector2& other) const
+        {
+            return x == other.x && y == other.y;
+        }
+        
+        bool operator!=(const Vector2& other) const
+        {
+            return x != other.x || y != other.y;
         }
 
         Vector2& operator+=(const Vector2& other)

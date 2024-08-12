@@ -19,7 +19,7 @@ if(generate_docs)
 
     if(DOXYGEN_FOUND)
         set(DOXYGEN_IN ${DOXYGEN_DIR}/Doxyfile.in)
-        set(DOXYGEN_OUT ${DOXYGEN_DIR}/docs/Doxyfile.out)
+        set(DOXYGEN_OUT ${DOXYGEN_DIR}/Doxyfile.out)
 
         configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
         message("Attempting to build documentation")

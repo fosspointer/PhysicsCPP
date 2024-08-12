@@ -10,40 +10,40 @@ namespace physics
             :Layout(application)
         {}
 
-        virtual void UpdateSize() override
+        virtual void updateSize() override
         {
-            if(m_Children.size() == 0) return;
+            if(m_children.size() == 0) return;
 
             ElementList::size_type max_size_y_index = 0;
             float size_x = 0.0f;
-            for(ElementList::size_type i = 0; i < m_Children.size(); i++)
+            for(ElementList::size_type i = 0; i < m_children.size(); i++)
             {
-                auto& child = m_Children[i];
-                auto& max_y_child = m_Children[max_size_y_index];
+                auto& child = m_children[i];
+                auto& max_y_child = m_children[max_size_y_index];
 
-                if(child->GetSize().y + child->GetMargin().y > max_y_child->GetSize().y + max_y_child->GetMargin().y)
+                if(child->getSize().y + child->getMargin().y > max_y_child->getSize().y + max_y_child->getMargin().y)
                     max_size_y_index = i;
                 
-                size_x += m_Children[i]->GetSize().x;
-                if(i == m_Children.size() - 1 || i == 0)
-                    size_x += m_Children[i]->GetMargin().x / 2.0f;
-                else size_x += m_Children[i]->GetMargin().x;
+                size_x += m_children[i]->getSize().x;
+                if(i == m_children.size() - 1 || i == 0)
+                    size_x += m_children[i]->getMargin().x / 2.0f;
+                else size_x += m_children[i]->getMargin().x;
             }
-            auto& max_y_child = m_Children[max_size_y_index];
-            m_Size = sf::Vector2f{size_x, max_y_child->GetSize().y + max_y_child->GetMargin().y};
+            auto& max_y_child = m_children[max_size_y_index];
+            m_size = sf::Vector2f{size_x, max_y_child->getSize().y + max_y_child->getMargin().y};
         }
 
-        virtual void UpdatePositions() override
+        virtual void updatePositions() override
         {
-            if(m_Children.size() == 0) return;
+            if(m_children.size() == 0) return;
 
-            float child_position_x = m_Position.x - m_Size.x / 2.0f + m_Children[0]->GetSize().x / 2.0f;
+            float child_position_x = m_position.x - m_size.x / 2.0f + m_children[0]->getSize().x / 2.0f;
             
-            for(ElementList::size_type i = 0; i < m_Children.size(); i++)
+            for(ElementList::size_type i = 0; i < m_children.size(); i++)
             {
-                m_Children[i]->AbstractSetPosition(sf::Vector2f{child_position_x, m_Position.y});
-                float next_size_x = m_Children.size() > i + 1 ? m_Children[i + 1]->GetSize().x / 2.0f + m_Children[i + 1]->GetMargin().x / 2.0f: 0.0f;
-                child_position_x += m_Children[i]->GetSize().x / 2.0f + m_Children[i]->GetMargin().x / 2.0f + next_size_x;
+                m_children[i]->abstractSetPosition(sf::Vector2f{child_position_x, m_position.y});
+                float next_size_x = m_children.size() > i + 1 ? m_children[i + 1]->getSize().x / 2.0f + m_children[i + 1]->getMargin().x / 2.0f: 0.0f;
+                child_position_x += m_children[i]->getSize().x / 2.0f + m_children[i]->getMargin().x / 2.0f + next_size_x;
             }
         }
     };

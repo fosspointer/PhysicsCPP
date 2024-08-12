@@ -22,10 +22,10 @@ namespace physics::Textured
         /// @param size The size of the button
         Button(Application* application, sf::Texture* texture, sf::Texture* pressed_texture, 
             const Box::Border& border, const Box::Border& border_pressed)
-            :m_Label(application, "Button", 25.0f), UIElement(application), m_Texture(texture), m_PressedTexture(pressed_texture), 
-            m_Border(border), m_BorderPressed(border_pressed)
+            :m_label(application, "Button", 25.0f), UIElement(application), m_texture(texture), m_pressedTexture(pressed_texture), 
+            m_border(border), m_borderPressed(border_pressed)
         {
-            SetSize({300.0f, 70.0f});
+            setSize({300.0f, 70.0f});
         }
 
         /// @brief Construct a new Button object
@@ -34,86 +34,86 @@ namespace physics::Textured
         /// @param size The size of the button
         /// @param margin Margin around the Button, used by layouts
         Button(Application* application)
-            :m_Label(application, "Button", 25.0f), UIElement(application), 
-            m_Border(Sizes::BorderButton()), m_BorderPressed(Sizes::BorderButtonPressed()),
-            m_Texture(Textures::Button()), m_PressedTexture(Textures::ButtonPressed())
+            :m_label(application, "Button", 25.0f), UIElement(application), 
+            m_border(Sizes::borderButton()), m_borderPressed(Sizes::borderButtonPressed()),
+            m_texture(Textures::button()), m_pressedTexture(Textures::buttonPressed())
         {
-            SetSize({300.0f, 70.0f});
+            setSize({300.0f, 70.0f});
         }
 
         /// @brief Get the Label object
         /// @return Mutable reference to the label
-        inline Label& GetLabel() { return m_Label; }
+        inline Label& getLabel() { return m_label; }
 
-        float GetVerticalOffset() const { return m_VerticalOffset; }
-        float GetVerticalOffsetPressed() const { return m_VerticalOffsetPressed; }
+        float getVerticalOffset() const { return m_verticalOffset; }
+        float getVerticalOffsetPressed() const { return m_verticalOffsetPressed; }
 
-        void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
+        void draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
-            m_ButtonBox.SetPosition(m_Position);
-            m_ButtonBox.SetSize(m_Size);
-            if(IsPressed())
-                m_ButtonBox.SetTexture(m_PressedTexture, m_BorderPressed);
+            m_buttonBox.setPosition(m_position);
+            m_buttonBox.setSize(m_size);
+            if(isPressed())
+                m_buttonBox.setTexture(m_pressedTexture, m_borderPressed);
             else
-                m_ButtonBox.SetTexture(m_Texture, m_Border);
+                m_buttonBox.setTexture(m_texture, m_border);
 
-            m_Label.SetColor(m_LabelColor);
-            m_ButtonBox.SetColor(IsHovered()? m_HoveredBoxColor: m_IdleBoxColor);
-            m_Application->Draw(&m_ButtonBox, layer);
+            m_label.setColor(m_labelColor);
+            m_buttonBox.setColor(isHovered()? m_hoveredBoxColor: m_idleBoxColor);
+            m_application->draw(&m_buttonBox, layer);
             
-            auto mod = Vector2f::Y(IsPressed()? m_VerticalOffsetPressed: m_VerticalOffset);
-            m_Label.SetPosition((Vector2f)m_ButtonBox.GetPosition() + mod);
-            m_Label.Draw();
+            auto mod = Vector2f::Y(isPressed()? m_verticalOffsetPressed: m_verticalOffset);
+            m_label.setPosition((Vector2f)m_buttonBox.getPosition() + mod);
+            m_label.draw();
         }
 
-        void CustomUpdate(float delta_time) override
+        void customUpdate(float delta_time) override
         {
-            m_Label.Update(delta_time);
+            m_label.update(delta_time);
         }
 
-        Button* SetVerticalOffset(float offset)
+        Button* setVerticalOffset(float offset)
         {
-            m_VerticalOffset = offset;
+            m_verticalOffset = offset;
             return this;
         }
 
-        Button* SetVerticalOffsetPressed(float offset)
+        Button* setVerticalOffsetPressed(float offset)
         {
-            m_VerticalOffsetPressed = offset;
+            m_verticalOffsetPressed = offset;
             return this;
         }
 
-        Button* SetButtonColors(const Color& box_color, const Color& label_color = Color::White)
+        Button* setButtonColors(const Color& box_color, const Color& label_color = Color::White)
         {
-            m_IdleBoxColor = box_color; m_HoveredBoxColor = box_color * 1.5f;
-            m_LabelColor = label_color;
+            m_idleBoxColor = box_color; m_hoveredBoxColor = box_color * 1.5f;
+            m_labelColor = label_color;
             return this;
         }
         
-        /// @brief Checks if the button is hovered by the mouse cursor, must be called after Update()
+        /// @brief Checks if the button is hovered by the mouse cursor, must be called after update()
         /// @return The result of the test
-        bool IsHovered() const override 
+        bool isHovered() const override 
         {
-            return AABB::RectangleToPoint(m_ButtonBox, Mouse::GetPosition());
+            return AABB::rectangleToPoint(m_buttonBox, Mouse::getPosition());
         }
 
-        Button* SetTitle(const sf::String& title)
+        Button* setTitle(const sf::String& title)
         {
-            m_Label.SetText(title);
+            m_label.setText(title);
             return this;
         }
 
-        Button* SetFontSize(unsigned int size) 
+        Button* setFontSize(unsigned int size) 
         {
-            m_Label.SetFontSize(size);
+            m_label.setFontSize(size);
             return this;
         }
     private:
-        Color m_IdleBoxColor{Color::White}, m_HoveredBoxColor{Color::LightGray}, m_LabelColor{Color::Black};
-        float m_VerticalOffset{-6.0f}, m_VerticalOffsetPressed{3.5f};
-        sf::Texture* m_Texture, *m_PressedTexture;
-        Label m_Label;
-        Box m_ButtonBox;
-        Box::Border m_Border, m_BorderPressed;
+        Color m_idleBoxColor{Color::White}, m_hoveredBoxColor{Color::LightGray}, m_labelColor{Color::Black};
+        float m_verticalOffset{-6.0f}, m_verticalOffsetPressed{3.5f};
+        sf::Texture* m_texture, *m_pressedTexture;
+        Label m_label;
+        Box m_buttonBox;
+        Box::Border m_border, m_borderPressed;
     };
 }

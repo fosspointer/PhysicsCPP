@@ -3,142 +3,140 @@
 
 namespace physics
 {
-
-    template <typename T>
-    static std::string to_string(const T value, const int precision = 2)
-    {
-        std::ostringstream out;
-        out.precision(precision);
-        out << std::fixed << value;
-        return std::move(out).str();
-    }
-
-    class Slider : public UIElement<Slider>
+    class Slider final : public UIElement<Slider>
     {
     public:
         Slider(Application* application, float min, float max)
             :UIElement(application),
-            m_MinValue(min), m_MaxValue(max), m_CurrentValue(min), m_Label(m_Application, to_string(min), 20u),
-            m_Interaction(false)
+            m_minValue(min), m_maxValue(max), m_currentValue(min), m_label(m_application, toPrecisionString(min), 20u)
         {
-            m_SelectedRectangle.setFillColor(Color::DarkGray);
+            m_selected.setFillColor(Color::DarkGray);
         }
 
-        virtual bool IsHovered() const override
+        virtual bool isHovered() const override final
         {
-            return AABB::RectangleToPoint(this, Mouse::GetPosition())
-                || AABB::RectangleToPoint(m_Knob, Mouse::GetPosition());
+            return AABB::rectangleToPoint(this, Mouse::getPosition())
+                || AABB::rectangleToPoint(m_knob, Mouse::getPosition());
         }
 
-        virtual void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
+        virtual void draw(int8_t layer = PHYSICS_LAYER_UI_1) override final
         {
-            m_Application->GetWindow().draw(m_Rectangle);
-            m_Application->GetWindow().draw(m_SelectedRectangle);
-            m_Application->GetWindow().draw(m_Knob);
-            m_Label.Draw();
+            m_application->draw(&m_base, layer);
+            m_application->draw(&m_selected, layer);
+            m_application->draw(&m_knob, layer);
+            m_label.draw(layer);
         }
 
-        void CustomUpdate(float delta_time) override
+        virtual void customUpdate(float delta_time) override final
         {
-            if(Interacted())
-                UpdatePercentage();
-            UpdateSize();
-            UpdatePositions();
+            if(interacted())
+                updatePercentage();
+            updateSize();
+            updatePositions();
         }
 
-        Slider* SetSliderColors(const sf::Color& color)
+        Slider* setSliderColors(const Color& color)
         {
-            m_Color = color;
-            m_KnobColor = sf::Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
-            m_UnselectedColor = sf::Color(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a);
-            m_OutlineColor = sf::Color(color.r * 0.125f, color.g * 0.125f, color.b * 0.125f, color.a);
-            m_Label.SetColor(Color::Black);
-            UpdateColors();
+            m_color = color;
+            m_knobColor = Color::fromRGB(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
+            m_unselectedColor = Color::fromRGB(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a);
+            m_outlineColor = Color::fromRGB(color.r * 0.125f, color.g * 0.125f, color.b * 0.125f, color.a);
+            m_label.setColor(Color::Black);
+            updateColors();
             return this;
         }
 
-        Slider* SetOutlineThickness(float thickness)
+        Slider* setOutlineThickness(float thickness)
         {
-            m_Rectangle.setOutlineThickness(thickness);
+            m_base.setOutlineThickness(thickness);
             return this;
         }
 
-        Slider* SetSliderSize(const sf::Vector2f& size, float label_font_size, float control_knob_width)
+        Slider* setSliderSize(const sf::Vector2f& size, float label_font_size, float control_knob_width)
         {
-            m_Label.SetFontSize(label_font_size);
-            m_Size = sf::Vector2f{size.x, size.y + m_Label.GetSize().y + 20.0f};
-            m_KnobWidth = control_knob_width;
+            m_label.setFontSize(label_font_size);
+            m_size = Vector2f{size.x, size.y + m_label.getSize().y + 20.0f};
+            m_knobWidth = control_knob_width;
             return this;
         }
 
-        Slider* SetValue(float value) 
+        Slider* setValue(float value) 
         { 
-            UpdatePercentage(value);
+            updatePercentage(value);
             return this;    
         }
 
-        inline const float& GetValue() const { return m_CurrentValue; }
+        inline const float& getValue() const { return m_currentValue; }
     private:
-        void UpdateSize()
+        template <typename T>
+        static std::string toPrecisionString(const T value, const int precision = 2)
         {
-            m_Rectangle.setSize(sf::Vector2f{m_Size.x, m_Size.y - m_Label.GetSize().y - 20.0f});
-            m_SelectedRectangle.setSize({m_SelectedRectangle.getSize().x, m_Rectangle.getSize().y});
-            m_Knob.setSize(sf::Vector2f{m_KnobWidth, m_Rectangle.getSize().y * 1.5f});
+            std::ostringstream out;
+            out.precision(precision);
+            out << std::fixed << value;
+            return std::move(out).str();
         }
 
-        void UpdatePositions()
+        void updateSize()
         {
-            m_Rectangle.setPosition(m_Position - m_Size / 2.0f);
-            m_SelectedRectangle.setPosition(m_Position - m_Size / 2.0f);
-            m_Knob.setPosition(m_Rectangle.getPosition() + sf::Vector2f{m_SelectedRectangle.getSize().x, m_SelectedRectangle.getSize().y / 2.0f});
-            m_Knob.setOrigin(m_Knob.getSize() / 2.0f);
-            m_Label.SetPosition(sf::Vector2f{m_Position.x, m_Position.y + m_Rectangle.getSize().y / 2.0f});
+            m_base.setSize(sf::Vector2f{m_size.x, m_size.y - m_label.getSize().y - 20.0f});
+            m_selected.setSize({m_selected.getSize().x, m_base.getSize().y});
+            m_knob.setSize(sf::Vector2f{m_knobWidth, m_base.getSize().y * 1.5f});
         }
 
-        bool Interacted()
+        void updatePositions()
         {
-            auto& mouse = Mouse::GetInstance();
-
-            if(IsHovered() && !mouse.PreviousState && mouse.CurrentState)
-                m_Interaction = true;
-            else if(!mouse.CurrentState) 
-                m_Interaction = false;
-            return m_Interaction;
+            m_base.setPosition(m_position - m_size / 2.0f);
+            m_selected.setPosition(m_position - m_size / 2.0f);
+            m_knob.setPosition(m_base.getPosition() + sf::Vector2f{m_selected.getSize().x, m_selected.getSize().y / 2.0f});
+            m_knob.setOrigin(m_knob.getSize() / 2.0f);
+            m_label.setPosition(sf::Vector2f{m_position.x, m_position.y + m_base.getSize().y / 2.0f});
         }
 
-        void UpdatePercentage()
+        bool interacted()
+        {
+            auto& mouse = Mouse::getInstance();
+
+            if(isHovered() && !mouse.previousState && mouse.currentState)
+                m_interaction = true;
+            else if(!mouse.currentState) 
+                m_interaction = false;
+            return m_interaction;
+        }
+
+        void updatePercentage()
         {   
-            float size = std::clamp(Mouse::GetPosition().x - m_Rectangle.getPosition().x, 0.0f, m_Rectangle.getSize().x);
-            m_CurrentValue = (size / m_Rectangle.getSize().x) * (m_MaxValue - m_MinValue) + m_MinValue;
+            float size = std::clamp(Mouse::getPosition().x - m_base.getPosition().x, 0.0f, m_base.getSize().x);
+            m_currentValue = (size / m_base.getSize().x) * (m_maxValue - m_minValue) + m_minValue;
             
-            m_SelectedRectangle.setSize(sf::Vector2f{
+            m_selected.setSize(sf::Vector2f{
                 size,
                 20.0f});
-            m_Label.SetText(to_string(m_CurrentValue));
+            m_label.setText(toPrecisionString(m_currentValue));
         }
 
-        void UpdatePercentage(float value)
+        void updatePercentage(float value)
         {
-            float size = (value - m_MinValue) / (m_MaxValue - m_MinValue) * m_Size.x;
-            m_SelectedRectangle.setSize(sf::Vector2f{
+            float size = (value - m_minValue) / (m_maxValue - m_minValue) * m_size.x;
+            m_selected.setSize(sf::Vector2f{
                 size,
                 20.0f});
-            m_CurrentValue = value;
-            m_Label.SetText(to_string(m_CurrentValue));
+            m_currentValue = value;
+            m_label.setText(toPrecisionString(m_currentValue));
         }
 
-        void UpdateColors()
+        void updateColors()
         {
-            m_Rectangle.setFillColor(m_UnselectedColor);
-            m_Rectangle.setOutlineColor(m_OutlineColor);
-            m_Knob.setFillColor(m_KnobColor);
-            m_SelectedRectangle.setFillColor(m_Color); 
+            m_base.setFillColor(m_unselectedColor);
+            m_base.setOutlineColor(m_outlineColor);
+            m_knob.setFillColor(m_knobColor);
+            m_selected.setFillColor(m_color); 
         }
 
-        bool m_Interaction;
-        sf::Color m_KnobColor, m_OutlineColor, m_UnselectedColor;
-        float m_MinValue, m_MaxValue, m_CurrentValue, m_KnobWidth;
-        sf::RectangleShape m_Rectangle, m_SelectedRectangle, m_Knob;
-        Label m_Label;
+        bool m_interaction{false};
+        Color m_knobColor, m_outlineColor, m_unselectedColor;
+        float m_minValue, m_maxValue, m_currentValue, m_knobWidth;
+        sf::RectangleShape m_base, m_selected, m_knob;
+        Label m_label;
     };
 }

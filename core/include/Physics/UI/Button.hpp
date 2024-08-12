@@ -14,93 +14,93 @@ namespace physics
         /// @param text The title of the button 
         /// @param size The size of the button
         Button(Application* application)
-            :m_Label(application, "Button", 25.0f), UIElement(application)
+            :m_label(application, "Button", 25.0f), UIElement(application)
         {
-            SetButtonColors(physics::Color::White);
+            setButtonColors(physics::Color::White);
         }
 
         /// @brief Get the Label object
         /// @return Mutable reference to the label
-        inline Label& GetLabel() { return m_Label; }
+        inline Label& getLabel() { return m_label; }
 
-        void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
+        void draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
-            m_ButtonBox.setPosition(m_Position - m_Size / 2.0f);
-            m_ButtonBox.setSize(m_Size);
+            m_buttonBox.setPosition(m_position - m_size / 2.0f);
+            m_buttonBox.setSize(m_size);
 
-            if(IsHovered())
+            if(isHovered())
             {
-                if(Mouse::GetInstance().CurrentState)
-                    m_ButtonBox.setFillColor(m_PressColor);
-                else m_ButtonBox.setFillColor(m_HoverColor);
+                if(Mouse::getInstance().currentState)
+                    m_buttonBox.setFillColor(m_pressColor);
+                else m_buttonBox.setFillColor(m_hoverColor);
             }
             else 
-                m_ButtonBox.setFillColor(m_Color);
-            m_Application->Draw(&m_ButtonBox, layer);
+                m_buttonBox.setFillColor(m_color);
+            m_application->draw(&m_buttonBox, layer);
             
-            m_Label.SetPosition(m_Position);
-            m_Label.Draw(layer);
+            m_label.setPosition(m_position);
+            m_label.draw(layer);
         }
 
-        void CustomUpdate(float delta_time) override
+        void customUpdate(float delta_time) override
         {
-            m_Label.Update(delta_time);
+            m_label.update(delta_time);
         }
 
-        /// @brief Checks if the button is hovered by the mouse cursor, must be called after Update()
+        /// @brief Checks if the button is hovered by the mouse cursor, must be called after update()
         /// @return The result of the test
-        bool IsHovered() const override 
+        bool isHovered() const override 
         {
-            return AABB::RectangleToPoint(m_ButtonBox, Mouse::GetPosition());
+            return AABB::rectangleToPoint(m_buttonBox, Mouse::getPosition());
         }
 
-        Button* SetTitle(const sf::String& title)
+        Button* setTitle(const sf::String& title)
         {
-            m_Label.SetText(title);
+            m_label.setText(title);
             return this;
         }
 
-        Button* SetFontSize(unsigned int size) 
+        Button* setFontSize(unsigned int size) 
         {
-            m_Label.SetFontSize(size);
+            m_label.setFontSize(size);
             return this;
         }
 
-        Button* SetHoverColor(const sf::Color& color)
+        Button* setHoverColor(const sf::Color& color)
         {
-            m_HoverColor = color;
+            m_hoverColor = color;
             return this;
         }
 
-        Button* SetPressColor(const sf::Color& color)
+        Button* setPressColor(const sf::Color& color)
         {
-            m_PressColor = color;
+            m_pressColor = color;
             return this;
         }
 
-        Button* SetOutlineColor(const sf::Color& color)
+        Button* setOutlineColor(const sf::Color& color)
         {
-            m_ButtonBox.setOutlineColor(color);
+            m_buttonBox.setOutlineColor(color);
             return this;
         }
 
-        Button* SetOutline(unsigned int size)
+        Button* setOutline(unsigned int size)
         {
-            m_ButtonBox.setOutlineThickness(size);
+            m_buttonBox.setOutlineThickness(size);
             return this;
         }
 
-        Button* SetButtonColors(const sf::Color& color)
+        Button* setButtonColors(const sf::Color& color)
         {
-            m_Color = color;
-            m_HoverColor = sf::Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f, color.a);
-            m_PressColor = sf::Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
-            m_ButtonBox.setOutlineColor(sf::Color(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a));
+            m_color = color;
+            m_hoverColor = sf::Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f, color.a);
+            m_pressColor = sf::Color(color.r * 0.5f, color.g * 0.5f, color.b * 0.5f, color.a);
+            m_buttonBox.setOutlineColor(sf::Color(color.r * 0.25f, color.g * 0.25f, color.b * 0.25f, color.a));
             return this;
         }
     private:
-        Label m_Label;
-        sf::Color m_HoverColor = physics::Color::LightGray, m_PressColor = physics::Color::Gray;
-        sf::RectangleShape m_ButtonBox;
+        Label m_label;
+        sf::Color m_hoverColor = physics::Color::LightGray, m_pressColor = physics::Color::Gray;
+        sf::RectangleShape m_buttonBox;
     };
 }

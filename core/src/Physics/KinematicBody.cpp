@@ -6,62 +6,62 @@
 namespace physics
 {
     KinematicBody::KinematicBody(Application* application, const sf::Color& color, float gravity_acceleration)
-        :Body(application, color), m_GravityAcceleration(gravity_acceleration)
+        :Body(application, color), m_gravityAcceleration(gravity_acceleration)
     {}
 
     KinematicBody::KinematicBody(Application* application, const sf::String& filepath, float gravity_acceleration)
-        :Body(application, filepath), m_GravityAcceleration(gravity_acceleration)
+        :Body(application, filepath), m_gravityAcceleration(gravity_acceleration)
     {}
 
-    void KinematicBody::SetMass(float mass)
+    void KinematicBody::setMass(float mass)
     {
-        m_Mass = mass;
+        m_mass = mass;
     }
 
-    void KinematicBody::AddMomentum(const Vector2f& momentum)
+    void KinematicBody::addMomentum(const Vector2f& momentum)
     {
-        m_Velocity += momentum / m_Mass;
+        m_velocity += momentum / m_mass;
     }
 
-    void KinematicBody::SetGravityAcceleration(float g)
+    void KinematicBody::setGravityAcceleration(float g)
     {
-        m_GravityAcceleration = g;
+        m_gravityAcceleration = g;
     }
 
-    const Vector2f KinematicBody::GetTotalForce()
+    const Vector2f KinematicBody::getTotalForce()
     {
-        Vector2f res = Body::GetTotalForce();
-        res += GetWeight();
+        Vector2f res = Body::getTotalForce();
+        res += getWeight();
 
         return res;
     }
 
-    void KinematicBody::Update(float delta_time)
+    void KinematicBody::update(float delta_time)
     {
-        m_DeltaTime = delta_time;
+        m_deltaTime = delta_time;
 
-        if(m_UpdateCallback)
-            m_UpdateCallback(this, delta_time);
+        if(m_updateCallback)
+            m_updateCallback(this, delta_time);
 
-        for(auto& force : m_Forces)
-            m_Acceleration += force.Value / m_Mass;
+        for(auto& force : m_forces)
+            m_acceleration += force.value / m_mass;
 
-        m_Velocity += m_Acceleration * delta_time * Units::GetPixelsPerMeter() + sf::Vector2f{0.0f, m_GravityAcceleration * Units::GetPixelsPerMeter()} * delta_time;
-        sf::Vector2f new_position = m_Rectangle.getPosition() + (sf::Vector2f)m_Velocity * delta_time + (sf::Vector2f)m_Acceleration * delta_time * delta_time * 0.5f;
-        m_Rectangle.setPosition(new_position);
-        m_PreviousForces = m_Forces;
-        m_Forces.clear();
-        m_Acceleration = Vector2f::Zero();
+        m_velocity += m_acceleration * delta_time * Units::getPixelsPerMeter() + sf::Vector2f{0.0f, m_gravityAcceleration * Units::getPixelsPerMeter()} * delta_time;
+        sf::Vector2f new_position = m_rectangle.getPosition() + (sf::Vector2f)m_velocity * delta_time + (sf::Vector2f)m_acceleration * delta_time * delta_time * 0.5f;
+        m_rectangle.setPosition(new_position);
+        m_previousForces = m_forces;
+        clearForces();
+        m_acceleration = Vector2f::zero();
     }
 
-    void KinematicBody::DrawForces(float thickness) const
+    void KinematicBody::drawForces(bool ignore_zero, float thickness) const
     {
-        Body::DrawForces(thickness);
-        DrawForce(Force{GetWeight(), "w"}, physics::Color::Red);
+        Body::drawForces(ignore_zero, thickness);
+        drawForce(Force{getWeight(), "w"}, ignore_zero, physics::Color::Red);
     }
 
-    void KinematicBody::SetUpdateCallback(UpdateCallbackFunc func)
+    void KinematicBody::setUpdateCallback(updateCallbackFunc func)
     {
-        m_UpdateCallback = func;
+        m_updateCallback = func;
     }
 }

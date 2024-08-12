@@ -43,61 +43,61 @@ namespace physics
         class Layer : public sf::Drawable
         {
         public:
-            void Append(sf::Drawable* drawable) const
+            void append(sf::Drawable* drawable) const
             {
-                m_Drawables.push_back(drawable);
+                m_drawables.push_back(drawable);
             }
 
-            void Clear() const
+            void clear() const
             {
-                m_Drawables.clear();
+                m_drawables.clear();
             }
 
-            inline size_t GetDrawableCount() const 
+            inline size_t getDrawableCount() const 
             {
-                return m_Drawables.size();
+                return m_drawables.size();
             }
         private:
             virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
             {
-                for(const auto& drawable : m_Drawables)
+                for(const auto& drawable : m_drawables)
                     target.draw(*drawable);
-                m_Drawables.clear();
+                m_drawables.clear();
             }
-            mutable std::vector<sf::Drawable*> m_Drawables;
+            mutable std::vector<sf::Drawable*> m_drawables;
         };
         Renderer(sf::RenderWindow& window)
-            :m_Window(window)
+            :m_window(window)
         {}
 
-        bool Occupied(uint8_t index) const
+        bool occupied(uint8_t index) const
         {
-            return m_Layers[index].GetDrawableCount() > 0;
+            return m_layers[index].getDrawableCount() > 0;
         }
 
-        void Append(sf::Drawable* drawable, uint8_t index) const
+        void append(sf::Drawable* drawable, uint8_t index) const
         {
-            m_Layers[index].Append(drawable);
+            m_layers[index].append(drawable);
         }
 
-        void Clear(uint8_t index) const
+        void clear(uint8_t index) const
         {
-            m_Layers[index].Clear();
+            m_layers[index].clear();
         }
 
-        void Clear() const
+        void clear() const
         {
-            for(auto& layer : m_Layers)
-                layer.Clear();
+            for(auto& layer : m_layers)
+                layer.clear();
         }
 
-        void Draw() const
+        void draw() const
         {
-            for(const auto& layer : m_Layers)
-                m_Window.draw(layer);
+            for(const auto& layer : m_layers)
+                m_window.draw(layer);
         }
     private:
-        mutable std::array<Layer, PHYSICS_LAYER_COUNT> m_Layers;
-        sf::RenderWindow& m_Window;
+        mutable std::array<Layer, PHYSICS_LAYER_COUNT> m_layers;
+        sf::RenderWindow& m_window;
     };
 }

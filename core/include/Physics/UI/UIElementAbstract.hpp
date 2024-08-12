@@ -22,136 +22,136 @@ namespace physics
         /// @param margin the element's margin, used by layouts
         /// @param color the color of the element
         UIElementAbstract(Application* application, const Vector2f& size, const Vector2f& margin, const sf::Color& color, bool floating_element)
-            :m_Application(application), m_Size(size), m_Margin(margin), m_Color(color), m_FloatingElement(floating_element)
+            :m_application(application), m_size(size), m_margin(margin), m_color(color), m_floatingElement(floating_element)
         {}
         
         virtual ~UIElementAbstract() = default;
         
         /// @brief Draws the element, utilizing the main application's window
-        virtual void Draw(int8_t layer) = 0;
+        virtual void draw(int8_t layer) = 0;
         
-        /// @brief Checks if the element is hovered by the mouse cursor, must be called after Update()
+        /// @brief Checks if the element is hovered by the mouse cursor, must be called after update()
         /// @return The result of the test
-        virtual bool IsHovered() const = 0;
+        virtual bool isHovered() const = 0;
 
-        inline bool StoppedHover() const 
+        inline bool stoppedHover() const 
         {
-            return !m_CurrentHovered && m_PreviousHovered;
+            return !m_currentHovered && m_previousHovered;
         }
 
         /// @brief The element's update function
         /// @param delta_time Time elapsed since previous frame
-        virtual void Update(float delta_time) = 0;
+        virtual void update(float delta_time) = 0;
         
         /// @brief Calculates the element's position for the specified Anchor enumerator
-        virtual void CalculateAnchor()
+        virtual void calculateAnchor()
         {
-            auto size = (Vector2f)m_Application->GetWindow().getSize();
+            auto size = (Vector2f)m_application->getWindow().getSize();
             auto center = size / 2.0f;
-            auto space = m_Margin + m_Size / 2.0f;
+            auto space = m_margin + m_size / 2.0f;
             auto space_inverse = size - space;
 
-            switch(m_Anchor)
+            switch(m_anchor)
             {
             case Anchor::None: break;
-            case Anchor::Center: m_Position = center; break;
-            case Anchor::Top:   m_Position = sf::Vector2f{center.x, space.y}; break;
-            case Anchor::Bottom: m_Position = sf::Vector2f{center.x, space_inverse.y}; break;
-            case Anchor::Left: m_Position = sf::Vector2f{space.x, center.y}; break;
-            case Anchor::Right: m_Position = sf::Vector2f{space_inverse.x, center.y}; break;
-            case Anchor::TopLeft: m_Position = space; break;
-            case Anchor::TopRight: m_Position = sf::Vector2f{space_inverse.x, space.y}; break;
-            case Anchor::BottomLeft: m_Position = sf::Vector2f{space.x, space_inverse.y}; break;
-            case Anchor::BottomRight: m_Position = space_inverse; break;
+            case Anchor::Center: m_position = center; break;
+            case Anchor::Top:   m_position = sf::Vector2f{center.x, space.y}; break;
+            case Anchor::Bottom: m_position = sf::Vector2f{center.x, space_inverse.y}; break;
+            case Anchor::Left: m_position = sf::Vector2f{space.x, center.y}; break;
+            case Anchor::Right: m_position = sf::Vector2f{space_inverse.x, center.y}; break;
+            case Anchor::TopLeft: m_position = space; break;
+            case Anchor::TopRight: m_position = sf::Vector2f{space_inverse.x, space.y}; break;
+            case Anchor::BottomLeft: m_position = sf::Vector2f{space.x, space_inverse.y}; break;
+            case Anchor::BottomRight: m_position = space_inverse; break;
             }
         }
 
         /// @brief Returns whether the element is being pressed by the specified button
         /// @param button Mouse button to test for
         /// @return The result of the test
-        bool IsPressed(MouseButton button = MOUSE_LEFT) const
+        bool isPressed(MouseButton button = MOUSE_LEFT) const
         {
-            return (IsHovered() && Mouse::GetInstance().CurrentState & button) && (m_FloatingElement || !m_Application->HasFloating());
+            return (isHovered() && Mouse::getInstance().currentState & button) && (m_floatingElement || !m_application->hasFloating());
         } 
         
         /// @brief Get the Position object
         /// @return Immutable reference to the element's position
-        inline const Vector2f& GetPosition() const { return m_Position; }
+        inline const Vector2f& getPosition() const { return m_position; }
         
         /// @brief Get the Size object
         /// @return Immutable reference to the element's size
-        inline const Vector2f& GetSize() const { return m_Size; }
+        inline const Vector2f& getSize() const { return m_size; }
         
         /// @brief Get the Margin object
         /// @return Immutable reference to the element's margin
-        inline const Vector2f& GetMargin() const { return m_Margin; }
+        inline const Vector2f& getMargin() const { return m_margin; }
         
         /// @brief Get the Color object
         /// @return Immutable reference to the element's color
-        inline const Color& GetColor() const { return m_Color; }
+        inline const Color& getColor() const { return m_color; }
         
         /// @brief Get the Anchor object
         /// @return Immutable reference to the element's anchor
-        inline const Anchor& GetAnchor() const { return m_Anchor; }
+        inline const Anchor& getAnchor() const { return m_anchor; }
 
         /// @brief Get the boolean corresponding to the pragma(size, position, anchor) updated 'event'
         /// @return Copy of the boolean member
-        inline bool GetPragmaUpdated() const { return m_PragmaUpdated; }
+        inline bool getPragmaUpdated() const { return m_pragmaUpdated; }
         
-        /// @brief (INTERNAL FUNCTION) Sets the element's position
+        /// @brief (INTERNAL FUNCTION) sets the element's position
         /// @param position The new position
-        inline void AbstractSetPosition(const sf::Vector2f& position)
+        inline void abstractSetPosition(const sf::Vector2f& position)
         {
-            m_PragmaUpdated = true;
-            m_Position = position;
-            m_Anchor = Anchor::None;  
+            m_pragmaUpdated = true;
+            m_position = position;
+            m_anchor = Anchor::None;  
         }
         
-        /// @brief (INTERNAL FUNCTION) Sets the element's size
+        /// @brief (INTERNAL FUNCTION) sets the element's size
         /// @param position The new size
-        inline void AbstractSetSize(const sf::Vector2f& size)
+        inline void abstractSetSize(const sf::Vector2f& size)
         {
-            m_PragmaUpdated = true;
-            m_Size = size;
+            m_pragmaUpdated = true;
+            m_size = size;
         }
         
-        /// @brief (INTERNAL FUNCTION) Sets the element's margin
+        /// @brief (INTERNAL FUNCTION) sets the element's margin
         /// @param position The new margin
-        inline void AbstractSetMargin(const sf::Vector2f& margin)
+        inline void abstractSetMargin(const sf::Vector2f& margin)
         {
-            m_PragmaUpdated = true;
-            m_Margin = margin;
+            m_pragmaUpdated = true;
+            m_margin = margin;
         }
         
-        /// @brief (INTERNAL FUNCTION) Sets the element's color
+        /// @brief (INTERNAL FUNCTION) sets the element's color
         /// @param position The new color
-        inline void AbstractSetColor(const sf::Color& color)
+        inline void abstractSetColor(const sf::Color& color)
         {
-            m_Color = color; 
+            m_color = color; 
         }
 
-        /// @brief (INTERNAL FUNCTION) Sets the element's anchor and calculates anchor
+        /// @brief (INTERNAL FUNCTION) sets the element's anchor and calculates anchor
         /// @param position The new anchor
-        inline void AbstractSetAnchor(const Anchor& anchor)
+        inline void abstractSetAnchor(const Anchor& anchor)
         {
-            m_PragmaUpdated = true;
-            m_Anchor = anchor;
-            CalculateAnchor();
+            m_pragmaUpdated = true;
+            m_anchor = anchor;
+            calculateAnchor();
         }
     protected:
-        bool m_PragmaUpdated{true}, m_PreviousHovered{false}, m_CurrentHovered{false};
-        const bool m_FloatingElement;
-        Application* m_Application;
-        Vector2f m_Position, m_Size, m_Margin;
-        Color m_Color;
-        Anchor m_Anchor{Anchor::None};
+        bool m_pragmaUpdated{true}, m_previousHovered{false}, m_currentHovered{false};
+        const bool m_floatingElement;
+        Application* m_application;
+        Vector2f m_position, m_size, m_margin;
+        Color m_color;
+        Anchor m_anchor{Anchor::None};
         friend class Layout;
         friend class HLayout;
         friend class VLayout;
     public:
         //Debug specific code, ignored by the preprocessor on release builds
     #ifdef PHYSICS_DEBUG
-        bool DisplayBounds = false;
+        bool displayBounds = false;
     #endif
     };
 }

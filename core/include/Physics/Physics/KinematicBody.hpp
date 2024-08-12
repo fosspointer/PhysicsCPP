@@ -9,40 +9,40 @@ namespace physics
     class KinematicBody : public Body
     {
     public: 
-        using UpdateCallbackFunc = std::function<void(KinematicBody*, float)>;
-        KinematicBody(Application* application, const sf::Color& color, float gravity_acceleration = Units::GetGravityAcceleration());
-        KinematicBody(Application* application, const sf::String& filepath, float gravity_acceleration = Units::GetGravityAcceleration());
+        using updateCallbackFunc = std::function<void(KinematicBody*, float)>;
+        KinematicBody(Application* application, const sf::Color& color, float gravity_acceleration = Units::getGravityAcceleration());
+        KinematicBody(Application* application, const sf::String& filepath, float gravity_acceleration = Units::getGravityAcceleration());
 
-        virtual void Update(float delta_time) override;
-        virtual void DrawForces(float thickness = 5.0f) const override;
+        virtual void update(float delta_time) override;
+        virtual void drawForces(bool ignore_zero = false, float thickness = 5.0f) const override;
         
-        void SetMass(float mass);
-        inline const float& GetMass() const { return m_Mass; }
+        void setMass(float mass);
+        inline const float& getMass() const { return m_mass; }
 
-        void AddMomentum(const Vector2f& momentum);
-        Vector2f GetMomentum() const { return m_Velocity / m_Mass; }
+        void addMomentum(const Vector2f& momentum);
+        Vector2f getMomentum() const { return m_velocity / m_mass; }
 
-        void SetGravityAcceleration(float g);
-        inline const float& GetGravityAcceleration() const { return m_GravityAcceleration; }
+        void setGravityAcceleration(float g);
+        inline const float& getGravityAcceleration() const { return m_gravityAcceleration; }
 
-        virtual const Vector2f GetTotalForce() override;
+        virtual const Vector2f getTotalForce() override;
 
-        void SetUpdateCallback(UpdateCallbackFunc func);
+        void setUpdateCallback(updateCallbackFunc func);
 
-        inline sf::Vector2f GetWeight() const
+        inline sf::Vector2f getWeight() const
         {
-            return sf::Vector2f{0.0f, m_GravityAcceleration} * m_Mass;
+            return sf::Vector2f{0.0f, m_gravityAcceleration} * m_mass;
         }
 
-        inline bool GetFree() const 
+        inline bool getFree() const 
         {
-            return m_Free;
+            return m_free;
         }
 
     private:
-        bool m_Free = false;
+        bool m_free = false;
         friend class BodyHandler;
-        UpdateCallbackFunc m_UpdateCallback;
-        float m_Mass = 1.0f, m_GravityAcceleration;
+        updateCallbackFunc m_updateCallback;
+        float m_mass = 1.0f, m_gravityAcceleration;
     };
 }

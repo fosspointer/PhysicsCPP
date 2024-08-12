@@ -6,73 +6,73 @@ namespace physics
     class Textures
     {
     public:
-        static sf::Texture* Load(const std::string& filepath) 
+        static sf::Texture* load(const std::string& filepath) 
         {
-            auto f = s_TextureCache.find(filepath);
+            auto f = s_textureCache.find(filepath);
 
-            if(f != s_TextureCache.end())
+            if(f != s_textureCache.end())
                 return f->second;
             else 
             {
                 auto* texture = new sf::Texture;
                 texture->loadFromFile(filepath);
                 texture->setSmooth(true);
-                s_TextureCache[filepath] = texture;
+                s_textureCache[filepath] = texture;
 
                 return texture;
             }
         }
 
-        static sf::Texture* Button()
+        static sf::Texture* button()
         {
-            return Load(
+            return load(
                 #include <Physics/Config/TextureButton>
             );
         }
 
-        static sf::Texture* ButtonPressed()
+        static sf::Texture* buttonPressed()
         {
-            return Load(
+            return load(
                 #include <Physics/Config/TextureButtonPressed>
             );
         }
 
-        static sf::Texture* DropdownHead()
+        static sf::Texture* dropdownHead()
         {
-            return Load(
+            return load(
                 #include <Physics/Config/TextureDropdownHead>
             );
         }
 
-        static sf::Texture* DropdownHeadExpanded()
+        static sf::Texture* dropdownHeadExpanded()
         {
-            return Load(
+            return load(
                 #include <Physics/Config/TextureDropdownHeadExpanded>
             );
         }
 
-        static sf::Texture* DropdownOption()
+        static sf::Texture* dropdownOption()
         {
-            return Load(
+            return load(
                 #include <Physics/Config/TextureDropdownOption>
             );
         }
 
-        static sf::Texture* DropdownOptionLast()
+        static sf::Texture* dropdownOptionLast()
         {
-            return Load(
+            return load(
                 #include <Physics/Config/TextureDropdownOptionLast>
             );
         }
 
-        static void ClearCache()
+        static void clearCache()
         {
-            for(auto& item : s_TextureCache)
+            for(auto& item : s_textureCache)
                 delete item.second;
 
-            s_TextureCache.clear();
+            s_textureCache.clear();
         }
     private:
-        static std::unordered_map<std::string, sf::Texture*> s_TextureCache;
+        static std::unordered_map<std::string, sf::Texture*> s_textureCache;
     };
 }

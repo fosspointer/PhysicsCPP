@@ -7,75 +7,75 @@ class ConfigDemo : public physics::Application::State
 public:
     ~ConfigDemo() noexcept
     {
-        delete m_LanguageDropdown;
+        delete m_languageDropdown;
     }
 
-    void OnShow() override
+    void onShow() override
     {
-        m_Application->SetBackgroundColor(physics::Color::DarkMagenta);
+        m_application->setBackgroundColor(physics::Color::DarkMagenta);
     }
 
-    void OnCreate() override
+    void onCreate() override
     {
-        m_Layout = new physics::VLayout(m_Application);
-        m_Layout->PushElement(new physics::Label(m_Application, "project_name_tmp", 20u));
-        m_Layout->PushElement(new physics::Button(m_Application))
-            ->SetSize({200.0f, 130.0f});
-        m_Layout->SetAnchor(physics::Anchor::Center);
+        m_layout = new physics::VLayout(m_application);
+        m_layout->pushElement(new physics::Label(m_application, "project_name_tmp", 20u));
+        m_layout->pushElement(new physics::Button(m_application))
+            ->setSize({200.0f, 130.0f});
+        m_layout->setAnchor(physics::Anchor::Center);
 
-        m_LanguageDropdown = new physics::Dropdown(m_Application, "select_language_tmp", 25, "placeholder_tmp", {300.0f, 70.0f});
-        UpdateLanguages();
-        m_LanguageDropdown
-            ->AddOption(L"Ελληνικά")
-            ->AddOption("English")
-            ->SetDirection(physics::Dropdown::Direction::Up)
-            ->SetAnchor(physics::Anchor::BottomRight)
-            ->SetDropdownColors(physics::Color::Magenta)
-            ->SetOutline(5)
-            ->AddClickCallback([this](physics::Application* app, physics::Dropdown* dropdown, MouseButton)
+        m_languageDropdown = new physics::Dropdown(m_application, "select_language_tmp", 25, "placeholder_tmp", {300.0f, 70.0f});
+        updateLanguages();
+        m_languageDropdown
+            ->addOption(L"Ελληνικά")
+            ->addOption("English")
+            ->setDirection(physics::Dropdown::Direction::Up)
+            ->setAnchor(physics::Anchor::BottomRight)
+            ->setDropdownColors(physics::Color::Magenta)
+            ->setOutline(5)
+            ->addClickCallback([this](physics::Application* app, physics::Dropdown* dropdown, MouseButton)
             {
-                auto index = dropdown->GetSelectionIndex();
+                auto index = dropdown->getSelectionIndex();
                 if(index <= 0) return;
                 
-                physics::Language::SelectedLanguage = (physics::Language::Option)(dropdown->GetSelectionIndex() - 1);
-                UpdateLanguages();
+                physics::Language::SelectedLanguage = (physics::Language::Option)(dropdown->getSelectionIndex() - 1);
+                updateLanguages();
             });
 
-        m_ExitButton = new physics::Button(m_Application);
-        m_ExitButton
-            ->SetTitle("X")
-            ->SetSize({50.0f, 50.0f})
-            ->SetButtonColors(physics::Color::White)
-            ->SetOutline(5)
-            ->SetAnchor(physics::Anchor::TopLeft);
+        m_exitButton = new physics::Button(m_application);
+        m_exitButton
+            ->setTitle("X")
+            ->setSize({50.0f, 50.0f})
+            ->setButtonColors(physics::Color::White)
+            ->setOutline(5)
+            ->setAnchor(physics::Anchor::TopLeft);
 
-        m_ExitButton->AddClickCallback([](physics::Application* app, physics::Button* btn, MouseButton)
+        m_exitButton->addClickCallback([](physics::Application* app, physics::Button* btn, MouseButton)
         {
-            app->GetState()->SetToBeDestroyed();
+            app->getState()->setToBeDestroyed();
         });
     }
 
-    void UpdateLanguages()
+    void updateLanguages()
     {
-        m_LanguageDropdown->SetPlaceHolder(physics::Language::GetTextSFML("dropdown_placeholder"));
-        m_LanguageDropdown->SetTitle(physics::Language::GetTextSFML("select_language"));
-        dynamic_cast<physics::Label*>(m_Layout->GetElement(0))->SetText(physics::Language::GetTextSFML("project_name"));
-        dynamic_cast<physics::Button*>(m_Layout->GetElement(1))->GetLabel().SetText(physics::Language::GetTextSFML("continue"));
+        m_languageDropdown->setPlaceHolder(physics::Language::getTextSFML("dropdown_placeholder"));
+        m_languageDropdown->setTitle(physics::Language::getTextSFML("select_language"));
+        dynamic_cast<physics::Label*>(m_layout->getElement(0))->setText(physics::Language::getTextSFML("project_name"));
+        dynamic_cast<physics::Button*>(m_layout->getElement(1))->getLabel().setText(physics::Language::getTextSFML("continue"));
     }
 
-    void OnUpdate(float delta_time) override
+    void onUpdate(float delta_time) override
     {
-        m_LanguageDropdown->Update(delta_time);
-        m_LanguageDropdown->Draw();
+        m_languageDropdown->update(delta_time);
+        m_languageDropdown->draw();
 
-        m_Layout->Update(delta_time);
-        m_Layout->Draw();
+        m_layout->update(delta_time);
+        m_layout->draw();
 
-        m_ExitButton->Update(delta_time);
-        m_ExitButton->Draw();
+        m_exitButton->update(delta_time);
+        m_exitButton->draw();
     }
 private:
-    physics::VLayout* m_Layout;
-    physics::Dropdown* m_LanguageDropdown;
-    physics::Button* m_ExitButton;
+    physics::VLayout* m_layout;
+    physics::Dropdown* m_languageDropdown;
+    physics::Button* m_exitButton;
 };

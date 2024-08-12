@@ -15,45 +15,45 @@ namespace physics
     public:
         using Pair = std::pair<Material, Material>;
         Material(const std::string& name)
-            :m_Name(stringToLower(name))
+            :m_name(stringToLower(name))
         {}
 
         Material(const std::string& name, float density)
-            :m_Name(stringToLower(name)), m_Density(density)
+            :m_name(stringToLower(name)), m_density(density)
         {}
 
-        Material* SetDensity(float density)
+        Material* setDensity(float density)
         {
-            m_Density = density;
+            m_density = density;
             return this;
         }
 
         operator int() const
         {
-            return int(m_Density * 10);
+            return int(m_density * 10);
         }
 
-        inline float GetDensity() const { return m_Density; }
-        const std::string& GetName() const { return m_Name; }
+        inline float getDensity() const { return m_density; }
+        const std::string& getName() const { return m_name; }
 
     private:
-        const std::string m_Name;
-        float m_Density{1.0f};
+        const std::string m_name;
+        float m_density{1.0f};
     };
     
     class Materials
     {
     public:
-        static Material* Get(const std::string& name)
+        static Material* get(const std::string& name)
         {
-            auto f = s_Materials.find(name);
+            auto f = s_materials.find(name);
 
-            if(f != s_Materials.end())
+            if(f != s_materials.end())
                 return f->second;
             else
-                return s_Materials[name] = new Material(name);
+                return s_materials[name] = new Material(name);
         }
     private:
-        static std::unordered_map<std::string, Material*> s_Materials;
+        static std::unordered_map<std::string, Material*> s_materials;
     };
 }

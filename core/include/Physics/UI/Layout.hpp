@@ -22,191 +22,190 @@ namespace physics
     {
     public:
         Layout(Application* application)
-            :UIElement(application), m_BackgroundVisible(false)
+            :UIElement(application), m_backgroundVisible(false)
         {}
 
         virtual ~Layout()
         {
-            for(ElementList::size_type i = 0; i < m_Children.size(); i++)
-                if(m_Children[i])
-                    delete m_Children[i];
+            for(ElementList::size_type i = 0; i < m_children.size(); i++)
+                if(m_children[i])
+                    delete m_children[i];
         }
 
-        virtual void Draw(int8_t layer = PHYSICS_LAYER_UI_0) override
+        virtual void draw(int8_t layer = PHYSICS_LAYER_UI_0) override
         {
-            if(m_BackgroundVisible)
-                m_Application->Draw(&m_Background, layer);
+            if(m_backgroundVisible)
+                m_application->draw(&m_background, layer);
             
-            for(ElementList::size_type i = 0; i < m_Children.size(); i++)
-                m_Children[i]->Draw(PHYSICS_LAYER_UI_1);
+            for(ElementList::size_type i = 0; i < m_children.size(); i++)
+                m_children[i]->draw(PHYSICS_LAYER_UI_1);
         }
 
         template <class UIElementImpl>
-        UIElementImpl* PushElement(UIElementImpl* element)
+        UIElementImpl* pushElement(UIElementImpl* element)
         {
-            m_Children.push_back(element);
-            UpdateSize();
-            UpdatePositions();
+            m_children.push_back(element);
+            updateSize();
+            updatePositions();
             return element;
         }
 
 
-        ElementList& GetElements()
+        ElementList& getElements()
         {
-            return m_Children;
+            return m_children;
         }
 
-        const ElementList& GetElements() const
+        const ElementList& getElements() const
         {
-            return m_Children;
+            return m_children;
         }
 
-        UIElementAbstract* GetElement(ElementList::size_type index) const
+        UIElementAbstract* getElement(ElementList::size_type index) const
         {
-            return m_Children[index];
+            return m_children[index];
         }
 
-        ElementList::size_type GetElementCount() const
+        ElementList::size_type getElementCount() const
         {
-            return m_Children.size();
+            return m_children.size();
         }
 
-        void CustomUpdate(float delta_time) override final
+        void customUpdate(float delta_time) override final
         {
             bool pragma_updated = false;
 
-            for(auto& element : m_Children)
-                if(element->GetPragmaUpdated())
+            for(auto& element : m_children)
+                if(element->getPragmaUpdated())
                     pragma_updated = true;
                 
-            if(GetPragmaUpdated())
-                pragma_updated = true;
+            pragma_updated |= getPragmaUpdated();
 
-            if(m_Application->GetResized() || pragma_updated)
-            {
-                UpdateSize();
-                UpdatePositions();
-            }
+            // if(m_application->getResized() || pragma_updated)
+            // {
+                updateSize();
+                updatePositions();
+            // }
         #ifdef PHYSICS_DEBUG
-            if(DisplayBounds)
+            if(displayBounds)
             {
-                for(auto& element : m_Children)
-                    element->DisplayBounds = true;
+                for(auto& element: m_children)
+                    element->displayBounds = true;
             }
         #endif
-            m_Background.SetPosition(m_Position);
-            m_Background.SetSize(m_Size + Vector2f{m_BackgroundGrowth});
-            for(auto& element : m_Children)
-                element->Update(delta_time);
+            m_background.setPosition(m_position);
+            m_background.setSize(m_size + Vector2f{m_backgroundGrowth});
+            for(auto& element : m_children)
+                element->update(delta_time);
             
-            if(!IsHovered() && !StoppedHover()) return; //The below code is for handling click and hover events.
-            //Hence, if IsHovered() returns false, execution is stopped
+            if(!isHovered() && !stoppedHover()) return; //The below code is for handling click and hover events.
+            //Hence, if isHovered() returns false, execution is stopped
             
-            auto& mouse_state = Mouse::GetInstance().ClickState;
+            auto& mouse_state = Mouse::getInstance().clickState;
 
-            for(ElementListSize i = 0; i < m_Children.size(); i++)
+            for(ElementListSize i = 0; i < m_children.size(); i++)
             {
-                auto& child = m_Children[i];
+                auto& child = m_children[i];
 
-                if(!child->m_CurrentHovered && !child->m_PreviousHovered) continue;
+                if(!child->m_currentHovered && !child->m_previousHovered) continue;
                 
-                for(const auto& func : m_ElementHoverCallbackFunctions)
-                    func(m_Application, this, i, child->StoppedHover());
+                for(const auto& func : m_elementHoverCallbackFunctions)
+                    func(m_application, this, i, child->stoppedHover());
 
                 //Bitwise arithmetic and function callback iterators
                 //Note: State & MOUSE_<BUTTON> means that <BUTTON> is 'enabled' for the state
 
-                if(!child->m_CurrentHovered) continue;
+                if(!child->m_currentHovered) continue;
 
                 if(mouse_state & MOUSE_LEFT)
-                    for(const auto& func : m_ElementClickCallbackFunctions)
-                        func(m_Application, this, i, MOUSE_LEFT);
+                    for(const auto& func : m_elementClickCallbackFunctions)
+                        func(m_application, this, i, MOUSE_LEFT);
 
                 if(mouse_state & MOUSE_MIDDLE)
-                    for(const auto& func : m_ElementClickCallbackFunctions)
-                        func(m_Application, this, i, MOUSE_MIDDLE);
+                    for(const auto& func : m_elementClickCallbackFunctions)
+                        func(m_application, this, i, MOUSE_MIDDLE);
 
                 if(mouse_state & MOUSE_RIGHT)
-                    for(const auto& func : m_ElementClickCallbackFunctions)
-                        func(m_Application, this, i, MOUSE_RIGHT);
+                    for(const auto& func : m_elementClickCallbackFunctions)
+                        func(m_application, this, i, MOUSE_RIGHT);
 
             }
         }
 
-        UIElementAbstract* GetElement(ElementListSize index)
+        UIElementAbstract* getElement(ElementListSize index)
         {
-            return m_Children.at(index);
+            return m_children.at(index);
         }
 
-        virtual bool IsHovered() const override
+        virtual bool isHovered() const override
         {
-            return AABB::RectangleToPoint(this, Mouse::GetPosition());
+            return AABB::rectangleToPoint(this, Mouse::getPosition());
         }
 
-        Layout* SetTexture(sf::Texture* texture)
+        Layout* setTexture(sf::Texture* texture)
         {
-            m_Background.SetTexture(texture);
+            m_background.setTexture(texture);
             return this;
         }
 
-        Layout* SetBorder(const Box::Border& border)
+        Layout* setBorder(const Box::Border& border)
         {
-            m_Background.SetBorder(border);
+            m_background.setBorder(border);
             return this;
         }
 
-        Layout* SetBorder(const Vector2f& border_start, const Vector2f& border_end)
+        Layout* setBorder(const Vector2f& border_start, const Vector2f& border_end)
         {
-            m_Background.SetBorder(Box::Border{border_start, border_end});
+            m_background.setBorder(Box::Border{border_start, border_end});
             return this;
         }
 
-        Layout* SetBackgroundVisible(bool option = true)
+        Layout* setBackgroundVisible(bool option = true)
         {
-            m_BackgroundVisible = option;
+            m_backgroundVisible = option;
             return this;
         }
 
-        Layout* SetBackgroundColor(const sf::Color& color)
+        Layout* setBackgroundColor(const sf::Color& color)
         {
-            m_Background.SetColor(color);
+            m_background.setColor(color);
             return this;
         }
 
-        Layout* SetBackgroundGrowth(float growth)
+        Layout* setBackgroundGrowth(float growth)
         {
-            m_BackgroundGrowth = growth;
+            m_backgroundGrowth = growth;
             return this;
         }
 
-        Layout* SetBackground(const sf::Color& color, float growth)
+        Layout* setBackground(const sf::Color& color, float growth)
         {
-            return SetBackgroundColor(color)
-                ->SetBackgroundGrowth(growth)
-                ->SetBackgroundVisible(true);
+            return setBackgroundColor(color)
+                ->setBackgroundGrowth(growth)
+                ->setBackgroundVisible(true);
         }
 
-        Layout* AddElementClickCallback(ElementClickCallbackFunc func)
+        Layout* addElementClickCallback(ElementClickCallbackFunc func)
         {
-            m_ElementClickCallbackFunctions.push_back(func);
+            m_elementClickCallbackFunctions.push_back(func);
             return this;
         }
 
-        Layout* AddElementHoverCallback(ElementHoverCallbackFunc func)
+        Layout* addElementHoverCallback(ElementHoverCallbackFunc func)
         {
-            m_ElementHoverCallbackFunctions.push_back(func);
+            m_elementHoverCallbackFunctions.push_back(func);
             return this;
         }
 
-        virtual void UpdateSize() = 0;
-        virtual void UpdatePositions() = 0;
+        virtual void updateSize() = 0;
+        virtual void updatePositions() = 0;
     protected:
-        ElementList m_Children;
+        ElementList m_children;
     private:
-        std::vector<ElementClickCallbackFunc> m_ElementClickCallbackFunctions;
-        std::vector<ElementHoverCallbackFunc> m_ElementHoverCallbackFunctions;
-        Box m_Background;
-        float m_BackgroundGrowth{0.0f};
-        bool m_BackgroundVisible;
+        std::vector<ElementClickCallbackFunc> m_elementClickCallbackFunctions;
+        std::vector<ElementHoverCallbackFunc> m_elementHoverCallbackFunctions;
+        Box m_background;
+        float m_backgroundGrowth{0.0f};
+        bool m_backgroundVisible;
     };
 }

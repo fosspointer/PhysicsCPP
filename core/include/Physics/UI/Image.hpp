@@ -8,38 +8,38 @@ namespace physics
     {
     public:
         Image(Application* application, const sf::String& filepath)
-            :UIElement(application), m_Image(m_Application->GetWindow())
+            :UIElement(application), m_image(m_application->getWindow())
         {
-            m_Image.SetTexture(physics::Textures::Load(filepath));
-            m_Size = (sf::Vector2f)m_Image.GetTexture()->getSize();
+            m_image.setTexture(physics::Textures::load(filepath));
+            m_size = (sf::Vector2f)m_image.getTexture()->getSize();
         }
 
-        bool IsHovered() const override
+        bool isHovered() const override
         {
-            return AABB::RectangleToPoint((sf::FloatRect)m_Image, Mouse::GetPosition());
+            return AABB::rectangleToPoint((sf::FloatRect)m_image, Mouse::getPosition());
         }
 
-        Image* SetShader(sf::Shader* shader)
+        Image* setShader(sf::Shader* shader)
         {
-            m_Image.SetShader(shader);
+            m_image.setShader(shader);
             return this;
         }
 
         template <typename T>
-        Image* SetUniform(const std::string& name, T value)
+        Image* setUniform(const std::string& name, T value)
         {
-            m_Image.GetShader()->setUniform(name, value);
+            m_image.getShader()->setUniform(name, value);
             return this;
         }
 
-        void Draw(int8_t layer = PHYSICS_LAYER_UI_2) override
+        void draw(int8_t layer = PHYSICS_LAYER_UI_2) override
         {
-            m_Image.SetPosition(m_Position);
-            m_Image.SetSize(m_Size);
-            m_Image.SetColor(m_Color);
-            m_Application->Draw(&m_Image, layer);
+            m_image.setPosition(m_position);
+            m_image.setSize(m_size);
+            m_image.setColor(m_color);
+            m_application->draw(&m_image, layer);
         }
     private:
-        RectangleShape m_Image;
+        RectangleShape m_image;
     };
 }

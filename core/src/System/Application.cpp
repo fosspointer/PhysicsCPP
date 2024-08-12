@@ -5,81 +5,81 @@
 namespace physics
 {
     Application::Application()
-        :m_BackgroundColor(physics::Color::Black), m_DeltaTime(0.0f), m_Resized(true),
-        m_Renderer(m_Window)
+        :m_backgroundColor(physics::Color::Black), m_deltaTime(0.0f), m_resized(true),
+        m_renderer(m_window)
     {
         srand(time(0));
-        Mouse::s_Application = this;
-        m_PreviousTime = m_CurrentTime = std::chrono::steady_clock::now();
+        Mouse::s_application = this;
+        m_previousTime = m_currentTime = std::chrono::steady_clock::now();
     }
 
     Application::~Application()
     {
-        while(!m_States.empty())
-            PopState();
+        while(!m_states.empty())
+            popState();
     }
 
-    int Application::Start(const sf::Vector2u& size, const sf::String& title, sf::Uint32 style)
+    int Application::start(const sf::Vector2u& size, const sf::String& title, sf::Uint32 style)
     {
         try
         {
             sf::ContextSettings settings;
             settings.antialiasingLevel = 8.0f;
-            m_Window.create(sf::VideoMode(size.x, size.y), title, style, settings);   
+            m_window.create(sf::VideoMode(size.x, size.y), title, style, settings);   
 
-            Mouse::s_Application = this;
-            OnCreate();
+            Mouse::s_application = this;
+            onCreate();
 
-            while(m_Window.isOpen()) [[likely]]
+            while(m_window.isOpen()) [[likely]]
             {
                 sf::Event e;
-                while(m_Window.pollEvent(e))
+                while(m_window.pollEvent(e))
                 {
                     if(e.type == sf::Event::Closed) [[unlikely]]
-                        m_Window.close();
+                        m_window.close();
                     else if(e.type == sf::Event::Resized)
                     {
                         sf::FloatRect visibleArea(0.0f, 0.0f, e.size.width, e.size.height);
-                        m_Window.setView(sf::View(visibleArea));
-                        m_Resized = true;
+                        m_window.setView(sf::View(visibleArea));
+                        m_resized = true;
                     }
                     else [[likely]]
-                        m_Resized = false;
+                        m_resized = false;
                 }
 
-                auto& mouse = Mouse::GetInstance();
+                auto& mouse = Mouse::getInstance();
 
-                mouse.PreviousState = mouse.CurrentState;
+                mouse.previousState = mouse.currentState;
 
-                mouse.CurrentState = sf::Mouse::isButtonPressed(sf::Mouse::Left) << 2
+                mouse.currentState = sf::Mouse::isButtonPressed(sf::Mouse::Left) << 2
                     | sf::Mouse::isButtonPressed(sf::Mouse::Middle) << 1
                     | sf::Mouse::isButtonPressed(sf::Mouse::Right);
 
-                mouse.ClickState = mouse.PreviousState & ~mouse.CurrentState;
+                mouse.clickState = mouse.previousState & ~mouse.currentState;
 
-                m_PreviousTime = m_CurrentTime;
-                m_CurrentTime = std::chrono::steady_clock::now();
+                m_previousTime = m_currentTime;
+                m_currentTime = std::chrono::steady_clock::now();
                         
-                m_DeltaTime = std::chrono::duration<float>(m_CurrentTime - m_PreviousTime).count();    
+                m_deltaTime = std::chrono::duration<float>(m_currentTime - m_previousTime).count();    
 
-                m_HasFloating = false;
+                m_hasFloating = false;
 
-                m_Renderer.Clear();
-                m_Window.clear(m_BackgroundColor);
+                m_renderer.clear();
+                m_window.clear(m_backgroundColor);
                 
-                OnUpdate(m_DeltaTime);
+                onUpdate(m_deltaTime);
                 
-                if(!m_States.empty())
+                if(!m_states.empty())
                 {
-                    if (m_States.top()->m_ToBeDestroyed) [[unlikely]]
-                        PopState();
+                    if (m_states.top()->m_toBeDestroyed) [[unlikely]]
+                        popState();
                     else [[likely]] 
-                        m_States.top()->OnUpdate(m_DeltaTime);
+                        m_states.top()->onUpdate(m_deltaTime);
                 }
 
-                m_Renderer.Draw();
+                m_renderer.draw();
 
-                m_Window.display();
+                m_window.display();
             }
         }
         catch(const physics::Exception& e)
@@ -101,65 +101,71 @@ namespace physics
         return RETURN_SUCCESS;
     }
 
-    auto Application::PushState(State* state) -> State*
+    auto Application::pushState(State* state) -> State*
     {
-        if(!m_States.empty())
-            m_States.top()->OnHide();
-        m_States.push(state);
-        state->m_Application = this;
-        state->OnCreate();
-        state->OnShow();
-        return state;
-    }
+        m_statesUpdated = true;
 
-    auto Application::ChangeState(State* state) -> State*
-    {
-        if(!m_States.empty())
-        {
-            m_States.top()->OnHide();
-            m_States.top()->OnDestroy();
-            delete m_States.top();
-            m_States.pop();
-        }
-
-        m_States.push(state);
-        state->m_Application = this;
-        state->OnCreate();
-        state->OnShow();
+        if(!m_states.empty())
+            m_states.top()->onHide();
+        m_states.push(state);
+        state->m_application = this;
+        state->onCreate();
+        state->onShow();
 
         return state;
     }
 
-    void Application::Draw(sf::Drawable* drawable, int8_t layer)
+    auto Application::changeState(State* state) -> State*
     {
-        m_Renderer.Append(drawable, layer);
-    }
+        m_statesUpdated = true;
 
-    void Application::PopState()
-    {
-        if(!m_States.empty())
+        if(!m_states.empty())
         {
-            m_States.top()->OnDestroy();
-            delete m_States.top();
-            m_States.pop();
+            m_states.top()->onHide();
+            m_states.top()->onDestroy();
+            delete m_states.top();
+            m_states.pop();
         }
 
-        if(!m_States.empty())
-            m_States.top()->OnShow();
+        m_states.push(state);
+        state->m_application = this;
+        state->onCreate();
+        state->onShow();
+
+        return state;
     }
 
-    void Application::SetBackgroundColor(const sf::Color& color)
+    void Application::popState()
     {
-        m_BackgroundColor = color;
+        m_statesUpdated = true;
+        if(!m_states.empty())
+        {
+            m_states.top()->onDestroy();
+            delete m_states.top();
+            m_states.pop();
+        }
+
+        if(!m_states.empty())
+            m_states.top()->onShow();
     }
 
-    void Application::SetFloating()
+    void Application::draw(sf::Drawable* drawable, int8_t layer)
     {
-        m_HasFloating = true;
+        m_renderer.append(drawable, layer);
     }
 
-    void Application::Rename(const sf::String& title)
+    void Application::setBackgroundColor(const sf::Color& color)
     {
-        m_Window.setTitle(title);
+        m_backgroundColor = color;
+    }
+
+    void Application::setFloating()
+    {
+        m_hasFloating = true;
+    }
+
+    void Application::rename(const sf::String& title)
+    {
+        m_window.setTitle(title);
     }
 }

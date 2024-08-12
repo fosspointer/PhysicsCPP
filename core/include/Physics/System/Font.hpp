@@ -12,12 +12,12 @@ namespace physics
         /// @param filepath path to the file
         Font(const sf::String& filepath)
         {
-            m_Font.loadFromFile(filepath);
+            m_font.loadFromFile(filepath);
         }
         
         /// @brief Loads and returns the default font as set in "Physics/Config/Font" (relative filepath)
         /// @return Font& 
-        static Font& GetDefault()
+        static Font& getDefault()
         {
             static Font font(
                 #include <Physics/Config/Font>
@@ -25,17 +25,16 @@ namespace physics
             return font;
         }
 
-        
         /// @brief Get the sf::Font object (mutable)
         /// @return Mutable reference to the font
          
-        sf::Font& Get() { return m_Font; }
+        sf::Font& get() { return m_font; }
         
         /// @brief Get the sf::Font object (immutable)
         /// @return Immutable reference to the font
          
-        const sf::Font& Get() const { return m_Font; }
+        const sf::Font& get() const { return m_font; }
     private:
-        sf::Font m_Font;
+        sf::Font m_font;
     };
 }

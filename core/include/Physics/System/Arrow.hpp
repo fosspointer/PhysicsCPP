@@ -13,26 +13,27 @@ namespace physics
         /// @param color the arrow's color
         Arrow(float thickness = 5.0f, const Vector2f& head_size = Vector2f{16.0f, 10.0f}, const Color& color = Color::White);
 
-        void SetStartPoint(const Vector2f& point);
-        void SetEndPoint(const Vector2f& point);
-        void SetHeadSize(const Vector2f& size);
-        void SetThickness(float thickness);
-        void SetColor(const Color& color);
+        void setStartPoint(const Vector2f& point);
+        void setEndPoint(const Vector2f& point);
+        void setHeadSize(const Vector2f& size);
+        void setThickness(float thickness);
+        void setColor(const Color& color);
 
-        inline const Color& GetColor() const { return m_Color; }
-        inline float GetThickness() const { return m_Thickness; }
-        inline const Vector2f& GetHeadSize() const { return m_HeadSize; }
-        inline const Vector2f& GetStartPoint() const { return m_StartPoint; }
-        inline const Vector2f& GetEndPoint() const { return m_EndPoint; }
+        inline const Color& getColor() const { return m_color; }
+        inline float getThickness() const { return m_thickness; }
+        inline const Vector2f& getHeadSize() const { return m_headSize; }
+        inline const Vector2f& getStartPoint() const { return m_startPoint; }
+        inline const Vector2f& getEndPoint() const { return m_endPoint; }
 
+        bool collides(const Vector2f& point) const;
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-        void UpdateVertices();
+        void updateVertices();
 
-        Color m_Color;
-        Vector2f m_StartPoint, m_EndPoint, m_HeadSize;
-        float m_Thickness;
-        sf::VertexArray m_Vertices;
+        Color m_color;
+        Vector2f m_startPoint, m_endPoint, m_headSize;
+        float m_thickness;
+        sf::VertexArray m_vertices;
     };
 }

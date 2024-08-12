@@ -48,17 +48,17 @@ namespace physics
             :type(type), r(first), g(second), b(third), a(alpha)
         {}
 
-        constexpr static Color FromRGB(float red, float green, float blue, float alpha = 1.0f)
+        constexpr static Color fromRGB(float red, float green, float blue, float alpha = 1.0f)
         {
             return Color(Type::RGB, red, green, blue, alpha);
         }
 
-        constexpr static Color FromHSV(float hue, float saturation, float value, float alpha = 1.0f)
+        constexpr static Color fromHSV(float hue, float saturation, float value, float alpha = 1.0f)
         {
             return Color(Type::HSV, hue, saturation, value, alpha);
         }
 
-        const Color ToRGB() const
+        const Color toRGB() const
         {
             float hue, value, saturation, alpha;
             if(this->type == Type::RGB)
@@ -95,16 +95,16 @@ namespace physics
 
         constexpr operator sf::Color() const
         {
-            Color color = type == Type::HSV ? this->ToRGB() : *this;
+            Color color = type == Type::HSV ? this->toRGB() : *this;
             return sf::Color(DENORMALIZE(color.r), DENORMALIZE(color.g), DENORMALIZE(color.b), DENORMALIZE(color.a));
         }
 
-        Color ChangeAlpha(float alpha) const 
+        Color changeAlpha(float alpha) const 
         {
             return Color(type, r, g, b, alpha);
         }
 
-        Color MultiplyAlpha(float coefficient) const
+        Color multiplyAlpha(float coefficient) const
         {
             return Color(type, r, g, b, a * coefficient);
         }
@@ -113,8 +113,8 @@ namespace physics
         {
             switch(type)
             {
-            case RGB: return FromRGB(value * r, value * g, value * b, a);
-            case HSV: return FromHSV(h, s, value * v, a);
+            case RGB: return fromRGB(value * r, value * g, value * b, a);
+            case HSV: return fromHSV(h, s, value * v, a);
             }
         }
 
@@ -122,25 +122,25 @@ namespace physics
         {
             switch(type)
             {
-            case RGB: return FromRGB(value / r, value / g, value / b, a);
-            case HSV: return FromHSV(h, s, value / v, a);
+            case RGB: return fromRGB(value / r, value / g, value / b, a);
+            case HSV: return fromHSV(h, s, value / v, a);
             }
         }
 
         Color operator*(const Color& other)
         {
-            auto other_rgb = other.type == HSV? other.ToRGB(): other;
-            auto this_rgb = this->type == HSV? this->ToRGB(): *this; 
+            auto other_rgb = other.type == HSV? other.toRGB(): other;
+            auto this_rgb = this->type == HSV? this->toRGB(): *this; 
 
-            return FromRGB(this_rgb.r * other_rgb.r, this_rgb.g * other_rgb.g, this_rgb.b * other_rgb.b, this_rgb.a * other_rgb.a);
+            return fromRGB(this_rgb.r * other_rgb.r, this_rgb.g * other_rgb.g, this_rgb.b * other_rgb.b, this_rgb.a * other_rgb.a);
         }
 
         Color operator/(const Color& other)
         {
-            auto other_rgb = other.type == HSV? other.ToRGB(): other;
-            auto this_rgb = this->type == HSV? this->ToRGB(): *this; 
+            auto other_rgb = other.type == HSV? other.toRGB(): other;
+            auto this_rgb = this->type == HSV? this->toRGB(): *this; 
 
-            return FromRGB(this_rgb.r / other_rgb.r, this_rgb.g / other_rgb.g, this_rgb.b / other_rgb.b, this_rgb.a / other_rgb.a);
+            return fromRGB(this_rgb.r / other_rgb.r, this_rgb.g / other_rgb.g, this_rgb.b / other_rgb.b, this_rgb.a / other_rgb.a);
         }
 
         static const Color 

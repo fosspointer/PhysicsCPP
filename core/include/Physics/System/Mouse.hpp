@@ -17,16 +17,16 @@ namespace physics
     class Mouse : public NonCopyable
     {
     public:
-        static Mouse& GetInstance();
-        static sf::Vector2f GetPosition();
+        static Mouse& getInstance();
+        static sf::Vector2f getPosition();
 
-        MouseButton CurrentState, PreviousState, ClickState;
+        MouseButton currentState, previousState, clickState;
     private:
         Mouse()
-            :CurrentState(0), PreviousState(0)
+            :currentState(0), previousState(0)
         {}
 
-        static Application* s_Application;
+        static Application* s_application;
         friend class Application;
     };
 }

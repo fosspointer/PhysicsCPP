@@ -2,5 +2,5 @@
 
 namespace physics
 {
-    std::unordered_map<std::string, sf::Texture*> Textures::s_TextureCache;
+    std::unordered_map<std::string, sf::Texture*> Textures::s_textureCache;
 }

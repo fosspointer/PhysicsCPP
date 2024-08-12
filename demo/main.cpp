@@ -5,18 +5,18 @@
 class Demo : public physics::Application
 {
 public:
-    void OnCreate() override
+    void onCreate() override
     {
-        PushState(new ShowcaseSelector());
-        PushState(new TitleScreen());
+        pushState(new ShowcaseSelector());
+        pushState(new TitleScreen());
     }
 
-    void OnUpdate(float dt) override {}
+    void onUpdate(float dt) override {}
 private:
 };
 
 int main()
 {
     Demo application;
-    return application.Start(sf::Vector2u{800, 600}, "");
+    return application.start(sf::Vector2u{800, 600}, "");
 }

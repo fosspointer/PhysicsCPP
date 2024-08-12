@@ -8,3 +8,5 @@
 *.obj
 *.o
 /.cache
+/.vscode
+/docs

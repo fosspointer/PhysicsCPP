@@ -12,7 +12,7 @@ namespace physics
     public:
         struct Border
         {
-            sf::Vector2f Start, End;
+            sf::Vector2f start, end;
         };
 
         struct Props
@@ -22,55 +22,55 @@ namespace physics
         };
 
         Box(sf::Texture* texture = nullptr)
-            :m_Texture(texture)
+            :m_texture(texture)
         {}
 
         Box(sf::Texture* texture, const Border& border)
-            :m_Texture(texture), m_Border(border)
+            :m_texture(texture), m_border(border)
         {}
 
         Box(const Props& props)
-            :m_Texture(props.texture), m_Border(props.border)
+            :m_texture(props.texture), m_border(props.border)
         {}
 
-        void SetTexture(sf::Texture* texture, const Border& border)
+        void setTexture(sf::Texture* texture, const Border& border)
         {
-            m_Texture = texture;
-            SetBorder(border);
+            m_texture = texture;
+            setBorder(border);
         }
 
-        inline void SetTexture(sf::Texture* texture)
+        inline void setTexture(sf::Texture* texture)
         {
-            m_Texture = texture;
+            m_texture = texture;
         }
 
-        void SetBorder(const Border& border)
+        void setBorder(const Border& border)
         {
-            m_Border = border;
-            UpdateVertices();
+            m_border = border;
+            updateVertices();
         }
 
-        void SetPosition(const sf::Vector2f& position)
+        void setPosition(const sf::Vector2f& position)
         {
-            m_Position = position;
-            UpdateVertices();
+            m_position = position;
+            updateVertices();
         }
 
-        void SetSize(const sf::Vector2f& size)
+        void setSize(const sf::Vector2f& size)
         {
-            m_Size = size;
-            UpdateVertices();
+            m_size = size;
+            updateVertices();
         }
 
-        void SetColor(const Color& color)
+        void setColor(const Color& color)
         {
-            m_Color = color;
-            UpdateVertices();
+            m_color = color;
+            updateVertices();
         }
         
         operator sf::FloatRect() const
         {
-            return sf::FloatRect(m_Position - m_Size / 2.0f, m_Size);
+            return sf::FloatRect(m_position - m_size / 2.0f, m_size);
         }
 
         operator AABB() const
@@ -78,60 +78,60 @@ namespace physics
             return AABB((sf::FloatRect)(*this));
         }
 
-        const sf::Vector2f& GetPosition() const { return m_Position; }
-        const sf::Vector2f& GetSize() const { return m_Size; }
-        const Border& GetBorder() const { return m_Border; }
-        const sf::Vector2f& GetBorderStart() const { return m_Border.Start; }
-        const sf::Vector2f& GetBorderEnd() const { return m_Border.End; }
-        const Color& GetColor() const { return m_Color; }
+        const sf::Vector2f& getPosition() const { return m_position; }
+        const sf::Vector2f& getSize() const { return m_size; }
+        const Border& getBorder() const { return m_border; }
+        const sf::Vector2f& getBorderStart() const { return m_border.start; }
+        const sf::Vector2f& getBorderEnd() const { return m_border.end; }
+        const Color& getColor() const { return m_color; }
 
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
         {
-            states.texture = m_Texture;
-            target.draw(m_Vertices, states);
+            states.texture = m_texture;
+            target.draw(m_vertices, states);
         }
 
-        void UpdateVertices()
+        void updateVertices()
         {   
             size_t index = 0;
 
-            auto texture_size = m_Texture ? (Vector2f)m_Texture->getSize() : Vector2f{0.0f};
+            auto texture_size = m_texture? (Vector2f)m_texture->getSize(): Vector2f{0.0f};
             
-            auto texture_minus_border = texture_size - m_Border.End;
-            auto size_minus_border = m_Size - m_Border.End;
+            auto texture_minus_border = texture_size - m_border.end;
+            auto size_minus_border = m_size - m_border.end;
 
-            UpdateQuad(&index, Vector2f::Zero(), m_Border.Start, Vector2f::Zero(), m_Border.Start);
-            UpdateQuad(&index, Vector2f::X(m_Border.Start.x), Vector2f{size_minus_border.x, m_Border.Start.y}, Vector2f::X(m_Border.Start.x), Vector2f{texture_minus_border.x, m_Border.Start.y});
-            UpdateQuad(&index, Vector2f::X(size_minus_border.x), Vector2f{m_Size.x, m_Border.Start.y}, Vector2f::X(texture_minus_border.x), Vector2f{texture_size.x, m_Border.Start.y});
+            updateQuad(&index, Vector2f::zero(), m_border.start, Vector2f::zero(), m_border.start);
+            updateQuad(&index, Vector2f::X(m_border.start.x), Vector2f{size_minus_border.x, m_border.start.y}, Vector2f::X(m_border.start.x), Vector2f{texture_minus_border.x, m_border.start.y});
+            updateQuad(&index, Vector2f::X(size_minus_border.x), Vector2f{m_size.x, m_border.start.y}, Vector2f::X(texture_minus_border.x), Vector2f{texture_size.x, m_border.start.y});
             
-            UpdateQuad(&index, Vector2f::Y(m_Border.Start.y), sf::Vector2f{m_Border.Start.x, size_minus_border.y}, Vector2f::Y(m_Border.Start.y), sf::Vector2f{m_Border.Start.x, texture_minus_border.y});
-            UpdateQuad(&index, m_Border.Start, size_minus_border, m_Border.Start, texture_minus_border);
-            UpdateQuad(&index, Vector2f{size_minus_border.x, m_Border.Start.y}, Vector2f{m_Size.x, size_minus_border.y}, Vector2f{texture_minus_border.x, m_Border.Start.y}, Vector2f{texture_size.x, texture_minus_border.y});
+            updateQuad(&index, Vector2f::Y(m_border.start.y), sf::Vector2f{m_border.start.x, size_minus_border.y}, Vector2f::Y(m_border.start.y), sf::Vector2f{m_border.start.x, texture_minus_border.y});
+            updateQuad(&index, m_border.start, size_minus_border, m_border.start, texture_minus_border);
+            updateQuad(&index, Vector2f{size_minus_border.x, m_border.start.y}, Vector2f{m_size.x, size_minus_border.y}, Vector2f{texture_minus_border.x, m_border.start.y}, Vector2f{texture_size.x, texture_minus_border.y});
 
-            UpdateQuad(&index, Vector2f::Y(size_minus_border.y), sf::Vector2f{m_Border.Start.x, m_Size.y}, Vector2f::Y(texture_minus_border.y), sf::Vector2f{m_Border.Start.x, texture_size.y});
-            UpdateQuad(&index, Vector2f{m_Border.Start.x, size_minus_border.y}, Vector2f{size_minus_border.x, m_Size.y}, Vector2f{m_Border.Start.x, texture_minus_border.y}, Vector2f{texture_minus_border.x, texture_size.y});
-            UpdateQuad(&index, size_minus_border, m_Size, texture_minus_border, texture_size);
+            updateQuad(&index, Vector2f::Y(size_minus_border.y), sf::Vector2f{m_border.start.x, m_size.y}, Vector2f::Y(texture_minus_border.y), sf::Vector2f{m_border.start.x, texture_size.y});
+            updateQuad(&index, Vector2f{m_border.start.x, size_minus_border.y}, Vector2f{size_minus_border.x, m_size.y}, Vector2f{m_border.start.x, texture_minus_border.y}, Vector2f{texture_minus_border.x, texture_size.y});
+            updateQuad(&index, size_minus_border, m_size, texture_minus_border, texture_size);
         }
 
-        void UpdateQuad(size_t* index, const sf::Vector2f& start_position, const sf::Vector2f& end_position, const sf::Vector2f& start_tex_coords, const sf::Vector2f& end_tex_coords)
+        void updateQuad(size_t* index, const sf::Vector2f& start_position, const sf::Vector2f& end_position, const sf::Vector2f& start_tex_coords, const sf::Vector2f& end_tex_coords)
         {
-            auto top_left = m_Position - m_Size / 2.0f;
+            auto top_left = m_position - m_size / 2.0f;
             auto actual_start_position = top_left + start_position;
             auto actual_end_position = top_left + end_position;
 
-            m_Vertices[*index    ] = sf::Vertex{sf::Vector2f{actual_start_position.x, actual_start_position.y}, m_Color, sf::Vector2f{start_tex_coords.x, start_tex_coords.y}};
-            m_Vertices[*index + 1] = sf::Vertex{sf::Vector2f{actual_end_position.x, actual_start_position.y}, m_Color, sf::Vector2f{end_tex_coords.x, start_tex_coords.y}};
-            m_Vertices[*index + 2] = sf::Vertex{sf::Vector2f{actual_end_position.x, actual_end_position.y}, m_Color, sf::Vector2f{end_tex_coords.x, end_tex_coords.y}};
-            m_Vertices[*index + 3] = sf::Vertex{sf::Vector2f{actual_start_position.x, actual_end_position.y}, m_Color, sf::Vector2f{start_tex_coords.x, end_tex_coords.y}};
+            m_vertices[*index    ] = sf::Vertex{sf::Vector2f{actual_start_position.x, actual_start_position.y}, m_color, sf::Vector2f{start_tex_coords.x, start_tex_coords.y}};
+            m_vertices[*index + 1] = sf::Vertex{sf::Vector2f{actual_end_position.x, actual_start_position.y}, m_color, sf::Vector2f{end_tex_coords.x, start_tex_coords.y}};
+            m_vertices[*index + 2] = sf::Vertex{sf::Vector2f{actual_end_position.x, actual_end_position.y}, m_color, sf::Vector2f{end_tex_coords.x, end_tex_coords.y}};
+            m_vertices[*index + 3] = sf::Vertex{sf::Vector2f{actual_start_position.x, actual_end_position.y}, m_color, sf::Vector2f{start_tex_coords.x, end_tex_coords.y}};
 
             (*index)+=4;
         }
 
-        sf::Vector2f m_Position, m_Size;
-        Border m_Border;
-        Color m_Color;
-        sf::Texture* m_Texture;
-        sf::VertexArray m_Vertices{sf::Quads, BOX_VERTICES};
+        sf::Vector2f m_position, m_size;
+        Border m_border;
+        Color m_color;
+        sf::Texture* m_texture;
+        sf::VertexArray m_vertices{sf::Quads, BOX_VERTICES};
     };
 }

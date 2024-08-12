@@ -2,5 +2,5 @@
 
 namespace physics
 {
-    std::unordered_map<std::string, sf::Shader*> Shaders::s_ShaderCache;
+    std::unordered_map<std::string, sf::Shader*> Shaders::s_shaderCache;
 }

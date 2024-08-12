@@ -9,9 +9,9 @@
 
 namespace physics 
 {
-    Vector2f CalculateFriction(float friction_coefficient, const Vector2f& velocity, const Vector2f& normal_force);
-    Vector2f CalculateDrag(float drag_coefficient, float density, const Vector2f& velocity, float area);
-    void HandleImpulse(KinematicBody* kinematic_body, StaticBody* static_body);
+    Vector2f calculateFriction(float friction_coefficient, const Vector2f& velocity, const Vector2f& normal_force);
+    Vector2f calculateDrag(float drag_coefficient, float density, const Vector2f& velocity, float area);
+    void handleImpulse(KinematicBody* kinematic_body, StaticBody* static_body);
 
     class BodyHandler
     {
@@ -19,25 +19,25 @@ namespace physics
         BodyHandler() = default;
         ~BodyHandler();
 
-        void Update(float delta_time);
-        void Draw();
-        void DrawForces();
+        void update(float delta_time);
+        void draw();
+        void drawForces();
 
         template <class... Args>
-        KinematicBody* AddKinematicBody(Application* application, Args... args)
+        KinematicBody* addKinematicBody(Application* application, Args... args)
         {
-            m_KinematicBodies.push_back(new KinematicBody(application, args...));
-            return m_KinematicBodies.back();
+            m_kinematicBodies.push_back(new KinematicBody(application, args...));
+            return m_kinematicBodies.back();
         }
 
         template <class... Args>
-        StaticBody* AddStaticBody(Application* application, Args... args)
+        StaticBody* addStaticBody(Application* application, Args... args)
         {
-            m_StaticBodies.push_back(new StaticBody(application, args...));
-            return m_StaticBodies.back();
+            m_staticBodies.push_back(new StaticBody(application, args...));
+            return m_staticBodies.back();
         }
     private:
-        std::vector<KinematicBody*> m_KinematicBodies;
-        std::vector<StaticBody*> m_StaticBodies;
+        std::vector<KinematicBody*> m_kinematicBodies;
+        std::vector<StaticBody*> m_staticBodies;
     };
 }  

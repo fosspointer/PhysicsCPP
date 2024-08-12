@@ -33,22 +33,22 @@ namespace physics
         /// @param rectangle The rectangle
         template <class T>
         AABB(const sf::Rect<T>& rectangle)
-            :Position((float)rectangle.left + (float)rectangle.width / 2.0f, (float)rectangle.top + (float)rectangle.height / 2.0f),
-            Size((float)rectangle.width, (float)rectangle.height)
+            :position((float)rectangle.left + (float)rectangle.width / 2.0f, (float)rectangle.top + (float)rectangle.height / 2.0f),
+            size((float)rectangle.width, (float)rectangle.height)
         {}
 
         /// @brief Function to test collision-intersection between a rectangle and a point
         /// @param rect The rectangle, only position and size are accounted for
         /// @param point The point
         /// @return Boolean representing the collision test result
-        static bool RectangleToPoint(const AABB& rect, const sf::Vector2f& point);
+        static bool rectangleToPoint(const AABB& rect, const sf::Vector2f& point);
 
-        ///@brief Function to test collision-intersection between two rectangles
-        ///@param rect The first rectangle, only position and size are accounted for
-        ///@param point The second rectangle, only position and size are accounted for
-        ///@return Boolean representing the collision test result
-        static bool RectangleToRectangle(const AABB& first, const AABB& second);
+        /// @brief Function to test collision-intersection between two rectangles
+        /// @param rect The first rectangle, only position and size are accounted for
+        /// @param point The second rectangle, only position and size are accounted for
+        /// @return Boolean representing the collision test result
+        static bool rectangleToRectangle(const AABB& first, const AABB& second);
 
-        sf::Vector2f Position, Size;
+        sf::Vector2f position, size;
     };
 }

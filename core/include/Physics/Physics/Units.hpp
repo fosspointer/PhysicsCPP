@@ -6,20 +6,20 @@ namespace physics
     class Units
     {
     public:
-        static void SetPixelsPerMeter(float value) { s_PixelsPerMeter = value; }
-        static inline const float& GetPixelsPerMeter() { return s_PixelsPerMeter; }
+        static void setPixelsPerMeter(float value) { s_pixelsPerMeter = value; }
+        static inline const float& getPixelsPerMeter() { return s_pixelsPerMeter; }
 
-        static void SetPixelsPerNewton(float value) { s_PixelsPerNewton = value; }
-        static inline const float& GetPixelsPerNewton() { return s_PixelsPerNewton; }
+        static void setPixelsPerNewton(float value) { s_pixelsPerNewton = value; }
+        static inline const float& getPixelsPerNewton() { return s_pixelsPerNewton; }
 
-        static void SetGravityAcceleration(float value) { s_GravityAcceleration = value; }
-        static inline const float& GetGravityAcceleration() { return s_GravityAcceleration; }
+        static void setGravityAcceleration(float value) { s_gravityAcceleration = value; }
+        static inline const float& getGravityAcceleration() { return s_gravityAcceleration; }
 
 
-        static const float& PI() { return s_PI; }
-        static const float& DegreesPerRadian() { return s_DegreesPerRadian; }
+        static const float& PI() { return s_pI; }
+        static const float& DegreesPerRadian() { return s_degreesPerRadian; }
     private:
-        static float s_PixelsPerMeter, s_PixelsPerNewton, s_GravityAcceleration;
-        const static float s_DegreesPerRadian, s_PI;
+        static float s_pixelsPerMeter, s_pixelsPerNewton, s_gravityAcceleration;
+        const static float s_degreesPerRadian, s_pI;
     };
 }

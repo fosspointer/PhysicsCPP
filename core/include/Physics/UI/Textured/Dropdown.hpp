@@ -11,7 +11,6 @@
 
 namespace physics::Textured
 {
-
     class Dropdown : public UIElement<Dropdown>
     {
     public:
@@ -26,244 +25,244 @@ namespace physics::Textured
         using OptionListSize = OptionList::size_type;
 
         Dropdown(Application* application)
-            :UIElement(application, true), m_TitleLabel(application), m_SelectionLabel(application),
-            m_Head(Textures::DropdownHead(), Sizes::BorderDropdownHead()),
-            m_TextureOptionLast(Textures::DropdownOptionLast()), m_BorderOptionLast(Sizes::BorderDropdownOptionLast()),
-            m_TextureHead(Textures::DropdownHead()), m_TextureHeadExpanded(Textures::DropdownHeadExpanded()),
-            m_TextureOption(Textures::DropdownOption()), m_BorderOption(Sizes::BorderDropdownOption())
+            :UIElement(application, true), m_titleLabel(application), m_selectionLabel(application),
+            m_head(Textures::dropdownHead(), Sizes::borderDropdownHead()),
+            m_textureOptionLast(Textures::dropdownOptionLast()), m_borderOptionLast(Sizes::borderDropdownOptionLast()),
+            m_textureHead(Textures::dropdownHead()), m_textureHeadExpanded(Textures::dropdownHeadExpanded()),
+            m_textureOption(Textures::dropdownOption()), m_borderOption(Sizes::borderDropdownOption())
         {
-            m_SelectionLabel.SetColor(Color::White);
-            m_TitleLabel.SetStyle(sf::Text::Bold);
-            AddOption("Placeholder");
-            AddClickCallback([&](Application* application, Dropdown* dropdown, MouseButton){
-                if(dropdown->IsHovered())
+            m_selectionLabel.setColor(Color::White);
+            m_titleLabel.setStyle(sf::Text::Bold);
+            addOption("Placeholder");
+            addClickCallback([&](Application* application, Dropdown* dropdown, MouseButton){
+                if(dropdown->isHovered())
                 {
-                    dropdown->m_SelectionIndex = dropdown->GetHoverIndex();
-                    if(dropdown->m_SelectionIndex != -1)
+                    dropdown->m_selectionIndex = dropdown->getHoverIndex();
+                    if(dropdown->m_selectionIndex != -1)
                     {
-                        dropdown->m_SelectionLabel.SetText(dropdown->m_Options[dropdown->m_SelectionIndex].label.GetText());
-                        if(dropdown->m_SelectionCallbackFunction)
-                            dropdown->m_SelectionCallbackFunction(application, dropdown, dropdown->m_SelectionIndex);
+                        dropdown->m_selectionLabel.setText(dropdown->m_options[dropdown->m_selectionIndex].label.getText());
+                        if(dropdown->m_selectionCallbackFunction)
+                            dropdown->m_selectionCallbackFunction(application, dropdown, dropdown->m_selectionIndex);
                     }
                 }    
-                dropdown->m_Expanded = !dropdown->m_Expanded;
+                dropdown->m_expanded = !dropdown->m_expanded;
             });
         }
 
-        bool IsHovered() const override
+        bool isHovered() const override
         {
-            auto mouse = (sf::Vector2f)sf::Mouse::getPosition(m_Application->GetWindow());
-            return AABB::RectangleToPoint(m_Head, Mouse::GetPosition())
-                || (m_Expanded && AABB::RectangleToPoint(GetOptionAABB(), Mouse::GetPosition()));
+            auto mouse = (sf::Vector2f)sf::Mouse::getPosition(m_application->getWindow());
+            return AABB::rectangleToPoint(m_head, Mouse::getPosition())
+                || (m_expanded && AABB::rectangleToPoint(getOptionAABB(), Mouse::getPosition()));
         }
 
-        void Draw(int8_t layer = PHYSICS_LAYER_UI_1) override
+        void draw(int8_t layer = PHYSICS_LAYER_UI_1) override
         {
-            m_TitleLabel.Draw(layer);
-            m_Application->Draw(&m_Head, layer);
-            m_SelectionLabel.Draw(layer);
+            m_titleLabel.draw(layer);
+            m_application->draw(&m_head, layer);
+            m_selectionLabel.draw(layer);
 
-            if(!m_Expanded) return;
+            if(!m_expanded) return;
             
-            for(auto& option: m_Options)
+            for(auto& option: m_options)
             {
-                m_Application->Draw(&option.box, PHYSICS_LAYER_FLOATING_0);
-                option.label.Draw(PHYSICS_LAYER_FLOATING_0);
+                m_application->draw(&option.box, PHYSICS_LAYER_FLOATING_0);
+                option.label.draw(PHYSICS_LAYER_FLOATING_0);
             }
         }
 
-        inline Option& GetOption(OptionListSize index) { return m_Options.at(index); }
-        inline Label& GetOptionLabel(OptionListSize index) { return m_Options.at(index).label; }
-        inline Box& GetOptionBox(OptionListSize index) { return m_Options.at(index).box; }
+        inline Option& getOption(OptionListSize index) { return m_options.at(index); }
+        inline Label& getOptionLabel(OptionListSize index) { return m_options.at(index).label; }
+        inline Box& getOptionBox(OptionListSize index) { return m_options.at(index).box; }
 
-        Dropdown* SetDropdownColors(const Color& box_color, const Color& label_color = Color::White)
+        Dropdown* setDropdownColors(const Color& box_color, const Color& label_color = Color::White)
         {
-            m_IdleBoxColor = box_color; m_HoveredBoxColor = box_color * 2.0f;
-            m_IdleLabelColor = label_color * 0.75f; m_HoveredLabelColor = label_color;
+            m_idleBoxColor = box_color; m_hoveredBoxColor = box_color * 2.0f;
+            m_idleLabelColor = label_color * 0.75f; m_hoveredLabelColor = label_color;
             return this;
         }
 
-        Dropdown* SetFontSize(unsigned int size)
+        Dropdown* setFontSize(unsigned int size)
         {
-            m_SelectionLabel.SetFontSize(size);
+            m_selectionLabel.setFontSize(size);
             return this;
         }
 
-        Dropdown* AddOption(const sf::String& text)
+        Dropdown* addOption(const sf::String& text)
         {
-            m_Options.push_back(Option{Label(m_Application, text, m_SelectionLabel.GetFontSize()), Box(m_TextureOption)});
-            m_Options[m_Options.size() - 1].box.SetBorder(m_BorderOption);
-            UpdateSize();
+            m_options.push_back(Option{Label(m_application, text, m_selectionLabel.getFontSize()), Box(m_textureOption)});
+            m_options[m_options.size() - 1].box.setBorder(m_borderOption);
+            updateSize();
             return this;
         }
 
-        Dropdown* SetOption(OptionListSize index, const sf::String& text)
+        Dropdown* setOption(OptionListSize index, const sf::String& text)
         {
-            m_Options[index].label.SetText(text);
-            UpdateText();
+            m_options[index].label.setText(text);
+            updateText();
             return this;
         }
 
-        Dropdown* SetPlaceHolder(const sf::String& text)
+        Dropdown* setPlaceHolder(const sf::String& text)
         {
-            m_Options[0].label.SetText(text);
-            UpdateText();
-            UpdateSize();
+            m_options[0].label.setText(text);
+            updateText();
+            updateSize();
             return this;
         }
 
-        Dropdown* SetSelectionCallback(SelectionCallbackFunc func)
+        Dropdown* setSelectionCallback(SelectionCallbackFunc func)
         {
-            m_SelectionCallbackFunction = func;
+            m_selectionCallbackFunction = func;
             return this;
         }
 
-        Dropdown* SetTitle(const sf::String& text)
+        Dropdown* setTitle(const sf::String& text)
         {
-            m_TitleLabel.SetText(text);
-            UpdateSize();
+            m_titleLabel.setText(text);
+            updateSize();
             return this;
         }
 
-        Dropdown* SetBoxSize(const Vector2f& size)
+        Dropdown* setBoxSize(const Vector2f& size)
         {
-            m_BoxSize = size;
+            m_boxSize = size;
             return this;
         }
 
-        int64_t GetHoverIndex()
+        int64_t getHoverIndex()
         {
-            OptionListSize index = (OptionListSize)GetHoverIndexFloat();
-            return index < m_Options.size() ? index : -1;
+            OptionListSize index = (OptionListSize)getHoverIndexFloat();
+            return index < m_options.size() ? index : -1;
         }
 
-        int64_t GetSelectionIndex()
+        int64_t getSelectionIndex()
         {
-            return m_SelectionIndex;
+            return m_selectionIndex;
         }
     private:
-        Vector2f GetOptionSize() const
+        Vector2f getOptionSize() const
         {
-            return sf::Vector2f{m_BoxSize.x, m_BoxSize.y - m_RemovedBesel};
+            return sf::Vector2f{m_boxSize.x, m_boxSize.y - m_removedBesel};
         }
 
-        AABB GetOptionAABB() const
+        AABB getOptionAABB() const
         {
-            return AABB{sf::FloatRect{m_Head.GetPosition() + sf::Vector2f{-m_Head.GetSize().x / 2.0f, m_Head.GetSize().y / 2.0f}, sf::Vector2f{GetOptionSize().x, GetOptionSize().y * m_Options.size()}}};
+            return AABB{sf::FloatRect{m_head.getPosition() + sf::Vector2f{-m_head.getSize().x / 2.0f, m_head.getSize().y / 2.0f}, sf::Vector2f{getOptionSize().x, getOptionSize().y * m_options.size()}}};
         }
 
-        void CustomUpdate(float delta_time) override
+        void customUpdate(float delta_time) override
         {
-            if(m_Expanded)
-                m_Application->SetFloating();
+            if(m_expanded)
+                m_application->setFloating();
         
-            m_TitleLabel.Update(delta_time);
-            m_SelectionLabel.Update(delta_time);
+            m_titleLabel.update(delta_time);
+            m_selectionLabel.update(delta_time);
             
-            for(auto& option : m_Options)
-                option.label.Update(delta_time);
+            for(auto& option : m_options)
+                option.label.update(delta_time);
             
-            m_Head.SetTexture(m_Expanded? m_TextureHeadExpanded: m_TextureHead);
+            m_head.setTexture(m_expanded? m_textureHeadExpanded: m_textureHead);
             
-            UpdateOptions();
-            UpdatePositions();
-            UpdateColors();
+            updateOptions();
+            updatePositions();
+            updateColors();
         }
 
-        void UpdateOptions()
+        void updateOptions()
         {
-            for(OptionListSize i = 0; i < m_Options.size(); i++)
+            for(OptionListSize i = 0; i < m_options.size(); i++)
             {
-                if(i == m_Options.size() - 1)
+                if(i == m_options.size() - 1)
                 {
-                    m_Options[i].box.SetTexture(m_TextureOptionLast);
-                    m_Options[i].box.SetBorder(m_BorderOptionLast);
-                    m_Options[i].box.SetSize(GetOptionSize() + sf::Vector2f{0.0f, 6.0f});
-                    m_Options[i].box.SetPosition(m_Options[i - 1].box.GetPosition() + sf::Vector2f{0.0f, GetOptionSize().y / 2.0f + m_Options[i].box.GetSize().y / 2.0f});
+                    m_options[i].box.setTexture(m_textureOptionLast);
+                    m_options[i].box.setBorder(m_borderOptionLast);
+                    m_options[i].box.setSize(getOptionSize() + sf::Vector2f{0.0f, 6.0f});
+                    m_options[i].box.setPosition(m_options[i - 1].box.getPosition() + sf::Vector2f{0.0f, getOptionSize().y / 2.0f + m_options[i].box.getSize().y / 2.0f});
                 }
                 else 
                 {
-                    m_Options[i].box.SetTexture(m_TextureOption);
-                    m_Options[i].box.SetBorder(m_BorderOption);
-                    m_Options[i].box.SetSize(GetOptionSize());
-                    m_Options[i].box.SetPosition(m_Head.GetPosition() + sf::Vector2f{0.0f, (m_Head.GetSize().y + GetOptionSize().y) / 2.0f + GetOptionSize().y * i});
+                    m_options[i].box.setTexture(m_textureOption);
+                    m_options[i].box.setBorder(m_borderOption);
+                    m_options[i].box.setSize(getOptionSize());
+                    m_options[i].box.setPosition(m_head.getPosition() + sf::Vector2f{0.0f, (m_head.getSize().y + getOptionSize().y) / 2.0f + getOptionSize().y * i});
                 }
             }
         }
 
-        void UpdateSize()
+        void updateSize()
         {
-            auto options = m_Options.size();
-            m_Size = Vector2f{std::max(m_BoxSize.x, m_TitleLabel.GetSize().x), m_BoxSize.y + m_Margin.y + m_TitleLabel.GetMargin().y + m_TitleLabel.GetSize().y};
+            auto options = m_options.size();
+            m_size = Vector2f{std::max(m_boxSize.x, m_titleLabel.getSize().x), m_boxSize.y + m_margin.y + m_titleLabel.getMargin().y + m_titleLabel.getSize().y};
             
-            m_Head.SetSize(m_BoxSize);
+            m_head.setSize(m_boxSize);
         }
 
-        void UpdatePositions()
+        void updatePositions()
         {
-            auto mouse = Mouse::GetPosition();
-            auto last_option_box = m_Options[m_Options.size() - 1].box;
+            auto mouse = Mouse::getPosition();
+            auto last_option_box = m_options[m_options.size() - 1].box;
 
-            m_TitleLabel.SetPosition(sf::Vector2f{m_Position.x, m_Position.y - (m_Margin.y - m_TitleLabel.GetSize().y) / 2.0f});
-            m_Head.SetPosition(sf::Vector2f{m_Position.x, m_Position.y + (m_Head.GetSize().y + m_TitleLabel.GetMargin().y) / 2.0f});
+            m_titleLabel.setPosition(sf::Vector2f{m_position.x, m_position.y - (m_margin.y - m_titleLabel.getSize().y) / 2.0f});
+            m_head.setPosition(sf::Vector2f{m_position.x, m_position.y + (m_head.getSize().y + m_titleLabel.getMargin().y) / 2.0f});
 
-            auto mod = Vector2f{-m_Head.GetBorderEnd().x / 2.0f, -6.0f};
-            m_SelectionLabel.SetPosition((Vector2f)m_Head.GetPosition() + mod);
+            auto mod = Vector2f{-m_head.getBorderEnd().x / 2.0f, -6.0f};
+            m_selectionLabel.setPosition((Vector2f)m_head.getPosition() + mod);
             
-            if(m_Expanded)
-                for(OptionListSize i = 0; i < m_Options.size(); i++)
-                    m_Options[i].label.SetPosition(m_Options[i].box.GetPosition());
+            if(m_expanded)
+                for(OptionListSize i = 0; i < m_options.size(); i++)
+                    m_options[i].label.setPosition(m_options[i].box.getPosition());
         }
 
-        void UpdateText()
+        void updateText()
         {
-            UpdateSize();
-            if(m_SelectionIndex != -1)
-                m_SelectionLabel.SetText(m_Options[m_SelectionIndex].label.GetText());
-            else m_SelectionLabel.SetText(m_Options[0].label.GetText());
+            updateSize();
+            if(m_selectionIndex != -1)
+                m_selectionLabel.setText(m_options[m_selectionIndex].label.getText());
+            else m_selectionLabel.setText(m_options[0].label.getText());
         }
 
-        void UpdateColors()
+        void updateColors()
         {
-            m_Head.SetColor(AABB::RectangleToPoint(m_Head, Mouse::GetPosition())? m_HoveredBoxColor * 0.75f: m_IdleBoxColor);
+            m_head.setColor(AABB::rectangleToPoint(m_head, Mouse::getPosition())? m_hoveredBoxColor * 0.75f: m_idleBoxColor);
 
-            auto index = GetHoverIndex();
-            if(!IsHovered() && !Mouse::GetInstance().ClickState) return;
+            auto index = getHoverIndex();
+            if(!isHovered() && !Mouse::getInstance().clickState) return;
 
-            for(OptionListSize i = 0; i < m_Options.size(); i++)
+            for(OptionListSize i = 0; i < m_options.size(); i++)
             {
                 if(i == index)
                 {
-                    m_Options[i].box.SetColor(m_HoveredBoxColor);
-                    m_Options[i].label.SetColor(m_HoveredLabelColor);
+                    m_options[i].box.setColor(m_hoveredBoxColor);
+                    m_options[i].label.setColor(m_hoveredLabelColor);
                 }
                 else
                 {
-                    m_Options[i].box.SetColor(m_IdleBoxColor);
-                    m_Options[i].label.SetColor(m_IdleLabelColor);
+                    m_options[i].box.setColor(m_idleBoxColor);
+                    m_options[i].label.setColor(m_idleLabelColor);
                 } 
             }
         }
 
-        float GetHoverIndexFloat() const
+        float getHoverIndexFloat() const
         {
-            return std::floor((Mouse::GetPosition().y - m_Head.GetPosition().y - m_Head.GetSize().y / 2.0f) / GetOptionSize().y);
+            return std::floor((Mouse::getPosition().y - m_head.getPosition().y - m_head.getSize().y / 2.0f) / getOptionSize().y);
         }
 
-        Box m_Head;
-        Label m_TitleLabel, m_SelectionLabel;
-        OptionList m_Options;
+        Box m_head;
+        Label m_titleLabel, m_selectionLabel;
+        OptionList m_options;
         
-        Box::Border m_BorderOption, m_BorderOptionLast;
-        sf::Texture* m_TextureHead, *m_TextureHeadExpanded, *m_TextureOption, *m_TextureOptionLast;
-        SelectionCallbackFunc m_SelectionCallbackFunction;
+        Box::Border m_borderOption, m_borderOptionLast;
+        sf::Texture* m_textureHead, *m_textureHeadExpanded, *m_textureOption, *m_textureOptionLast;
+        SelectionCallbackFunc m_selectionCallbackFunction;
 
-        Color m_IdleBoxColor, m_HoveredBoxColor, m_IdleLabelColor, m_HoveredLabelColor;
+        Color m_idleBoxColor, m_hoveredBoxColor, m_idleLabelColor, m_hoveredLabelColor;
 
-        float m_RemovedBesel{24.0f};
-        int64_t m_SelectionIndex{-1};
-        bool m_Expanded{false};
+        float m_removedBesel{24.0f};
+        int64_t m_selectionIndex{-1};
+        bool m_expanded{false};
         
-        Vector2f m_BoxSize{300.0f, 70.0f};
+        Vector2f m_boxSize{300.0f, 70.0f};
     };
 }

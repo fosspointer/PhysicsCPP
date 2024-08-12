@@ -13,136 +13,155 @@ inline static physics::Vector2f vector_normalize(const physics::Vector2f& vector
 namespace physics
 {
     Body::Body(Application* application, const Color& color)
-        :m_Application(application)
+        :m_application(application)
     {
-        m_Rectangle.setFillColor(color);
-        SetSize(Vector2f{50.0f, 50.0f});
-        Initialize();
+        m_rectangle.setFillColor(color);
+        setSize(Vector2f{50.0f, 50.0f});
+        initialize();
     }
 
     Body::Body(Application* application, const sf::String& filepath)
-        :m_Application(application)
+        :m_application(application)
     {
-        SetTexture(filepath);
-        SetSize((Vector2f)m_Texture.getSize());
-        Initialize();
+        setTexture(filepath);
+        setSize((Vector2f)m_texture.getSize());
+        initialize();
     }
 
-    void Body::SetTexture(const sf::String& filepath)
+    void Body::setTexture(const sf::String& filepath)
     {
-        m_Texture.loadFromFile(filepath);
-        m_Rectangle.setTexture(&m_Texture);
+        m_texture.loadFromFile(filepath);
+        m_rectangle.setTexture(&m_texture);
     }
 
-    void Body::SetPosition(const Vector2f& position)
+    void Body::setPosition(const Vector2f& position)
     {
-        m_Rectangle.setPosition((sf::Vector2f)position);
+        m_rectangle.setPosition((sf::Vector2f)position);
     }
 
-    void Body::SetVelocity(const Vector2f& velocity)
+    void Body::setVelocity(const Vector2f& velocity)
     {
-        m_Velocity = velocity;
+        m_velocity = velocity;
     }
 
-    void Body::SetAcceleration(const Vector2f& acceleration)
+    void Body::setAcceleration(const Vector2f& acceleration)
     {
-        m_Acceleration = acceleration;
+        m_acceleration = acceleration;
     }
 
-    void Body::SetMaterial(Material* material)
+    void Body::setMaterial(Material* material)
     {
-        m_Material = material;
+        m_material = material;
     }
 
-    void Body::SetSize(const Vector2f& size, bool set_collider)
+    void Body::setSize(const Vector2f& size, bool set_collider)
     {
-        m_Rectangle.setSize((sf::Vector2f)size);
-        m_Rectangle.setOrigin(size / 2.0f);
+        m_rectangle.setSize((sf::Vector2f)size);
+        m_rectangle.setOrigin(size / 2.0f);
         if(set_collider)
         {
-            m_Collider.Position = {0.0f, 0.0f};
-            m_Collider.Size = m_Rectangle.getSize(); 
+            m_collider.position = {0.0f, 0.0f};
+            m_collider.size = m_rectangle.getSize(); 
         }
     }
 
-    void Body::SetCollider(const Vector2f& offset, const Vector2f& size)
+    void Body::setCollider(const Vector2f& offset, const Vector2f& size)
     {
-        m_Collider.Position = offset;
-        m_Collider.Size = size;
+        m_collider.position = offset;
+        m_collider.size = size;
     }
 
-    bool Body::CollidesWith(const Body* other) const
+    bool Body::collidesWith(const Body* other) const
     {
-        return AABB::RectangleToRectangle(
-            AABB(m_Rectangle.getPosition() + m_Collider.Position, m_Collider.Size),
-            AABB(other->m_Rectangle.getPosition() + other->m_Collider.Position, other->m_Collider.Size)
+        return AABB::rectangleToRectangle(
+            AABB(m_rectangle.getPosition() + m_collider.position, m_collider.size),
+            AABB(other->m_rectangle.getPosition() + other->m_collider.position, other->m_collider.size)
         );
     }
 
-    void Body::AddForce(const Vector2f& force, sf::String name)
+    void Body::addForce(const Vector2f& force, sf::String name)
     {
-        m_Forces.push_back(Force{force, name});
+        auto find = m_forceNames.find(name);
+        
+        if(find == m_forceNames.end())
+        {
+            m_forceNames.insert(std::pair(name, 0ul));
+            m_forces.push_back(Force{force, name, 0ul});
+            return;
+        }
+        
+        m_forces.push_back(Force{force, name, ++find->second});
     }
 
-    void Body::AddForce(const Vector2f& force)
+    void Body::addForce(const Vector2f& force)
     {
-        m_Forces.push_back(Force{force, "F" + std::to_string(m_Forces.size())});
+        addForce(force, std::string{1ul, 'F'});
     }
 
-    const Vector2f Body::GetTotalForce()
+    const Vector2f Body::getTotalForce()
     {
-        Vector2f res {0.0f, 0.0f};
+        Vector2f res = Vector2f::zero();
 
-        for(auto& force : m_PreviousForces)
-            res += force.Value;    
+        for(auto& force: m_previousForces)
+            res += force.value;    
 
         return res;
     }
 
-    void Body::DrawForces(float thickness) const
+    void Body::drawForces(bool ignore_zero, float thickness) const
     {
-        for(auto& force : m_PreviousForces)
-            DrawForce(force);
+        for(auto& force: m_previousForces)
+            drawForce(force, ignore_zero);
     }
 
-    void Body::Draw()
+    void Body::draw()
     {
-        m_Application->GetWindow().draw(m_Rectangle);
+        m_application->getWindow().draw(m_rectangle);
     }
 
-    void Body::DrawForce(const Force& force, const Color& color) const
+    void Body::drawForce(const Force& force, bool ignore_zero, const Color& color) const
     {
         Arrow arrow(5.0f);
-        arrow.SetStartPoint(m_Rectangle.getPosition());
-        arrow.SetEndPoint((Vector2f)m_Rectangle.getPosition() + force.Value * Units::GetPixelsPerNewton());
-        arrow.SetColor(color);
-        m_Application->GetWindow().draw(arrow);
+        arrow.setStartPoint(m_rectangle.getPosition());
+        arrow.setEndPoint((Vector2f)m_rectangle.getPosition() + force.value * Units::getPixelsPerNewton());
+        arrow.setColor(color);
+        m_application->getWindow().draw(arrow);
 
-        sf::Text force_text(force.Name, Font::GetDefault().Get(), 30u);
-        auto diff = arrow.GetEndPoint() - arrow.GetStartPoint();
+        sf::Text force_text(force.name, Font::getDefault().get(), 30u);
+        auto diff = arrow.getEndPoint() - arrow.getStartPoint();
         force_text.setPosition(
-            arrow.GetStartPoint() + vector_normalize(diff) * (vector_length(diff) + 20.0f)
+            arrow.getStartPoint() + vector_normalize(diff) * (vector_length(diff) + 20.0f)
         );
-        force_text.setOrigin(GetBoundSize(force_text) / 2.0f + GetBoundPosition(force_text));
+        force_text.setOrigin(getBoundSize(force_text) / 2.0f + getBoundPosition(force_text));
         force_text.setFillColor(physics::Color::White);
-        m_Application->GetWindow().draw(force_text);
+        m_application->getWindow().draw(force_text);
+
+        if(ignore_zero && !force.subscript) return;
+
+        sf::Text force_subscript(std::to_string(force.subscript), Font::getDefault().get(), 15u);
+
+        force_subscript.setPosition(sf::Vector2f{force_text.getGlobalBounds().left + force_text.getGlobalBounds().width, 
+            force_text.getGlobalBounds().top + force_text.getGlobalBounds().height});
+
+        force_subscript.setFillColor(physics::Color::White);
+        m_application->getWindow().draw(force_subscript);
     }
 
-    Vector2f Body::GetBoundSize(const sf::Text& text) const
+    Vector2f Body::getBoundSize(const sf::Text& text) const
     {
         return Vector2f{text.getLocalBounds().width, text.getLocalBounds().height};
     }
 
-    Vector2f Body::GetBoundPosition(const sf::Text& text) const
+    Vector2f Body::getBoundPosition(const sf::Text& text) const
     {
         return Vector2f{text.getLocalBounds().left, text.getLocalBounds().top};
     }
 
-    void Body::Initialize()
+    void Body::initialize()
     {
-        SetPosition((Vector2f)m_Application->GetWindow().getSize() / 2.0f);
-        m_Collider.Size = m_Rectangle.getSize();
-        m_Collider.Position = Vector2f{0.0f, 0.0f};
-        m_Material = Materials::Get("default");
+        setPosition((Vector2f)m_application->getWindow().getSize() / 2.0f);
+        m_collider.size = m_rectangle.getSize();
+        m_collider.position = Vector2f{0.0f, 0.0f};
+        m_material = Materials::get("default");
     }
 }

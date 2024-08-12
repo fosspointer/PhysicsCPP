@@ -11,68 +11,68 @@ namespace physics
         LabeledImage(Application* application, const sf::String& filepath, const sf::String& label, unsigned char font_size = 20u)
             :UIElement(application)
         {
-            m_Image = new physics::Image(application, filepath);
-            m_Label = new physics::Label(application, label, font_size);
-            UpdateSize();
-            UpdatePositions();
+            m_image = new physics::Image(application, filepath);
+            m_label = new physics::Label(application, label, font_size);
+            updateSize();
+            updatePositions();
         }
 
-        bool IsHovered() const override
+        bool isHovered() const override
         {
-            return AABB::RectangleToPoint(this, Mouse::GetPosition());
+            return AABB::rectangleToPoint(this, Mouse::getPosition());
         }
 
-        void CustomUpdate(float delta_time) override
+        void customUpdate(float delta_time) override
         {
-            if(!m_Application->GetResized() && !m_PragmaUpdated && !m_Image->GetPragmaUpdated() && !m_Label->GetPragmaUpdated()) return;
+            if(!m_application->getResized() && !m_pragmaUpdated && !m_image->getPragmaUpdated() && !m_label->getPragmaUpdated()) return;
 
-            UpdateSize();
-            UpdatePositions();
+            updateSize();
+            updatePositions();
 
-            m_Image->SetColor(m_Color);
+            m_image->setColor(m_color);
 
-            m_Image->Update(delta_time);
-            m_Label->Update(delta_time);
+            m_image->update(delta_time);
+            m_label->update(delta_time);
         }
 
-        void Draw(int8_t layer = PHYSICS_LAYER_UI_2) override
+        void draw(int8_t layer = PHYSICS_LAYER_UI_2) override
         {
-            m_Image->Draw(layer);
-            m_Label->Draw(layer);
+            m_image->draw(layer);
+            m_label->draw(layer);
         }
 
-        LabeledImage* SetShader(sf::Shader* shader)
+        LabeledImage* setShader(sf::Shader* shader)
         {
-            m_Image->SetShader(shader);
+            m_image->setShader(shader);
             return this;
         }
 
         template <typename T>
-        LabeledImage* SetUniform(const std::string& name, T value)
+        LabeledImage* setUniform(const std::string& name, T value)
         {
-            m_Image->SetUniform(name, value);
+            m_image->setUniform(name, value);
             return this;
         }
 
-        inline Label* GetLabel() { return m_Label; }
-        inline const Label* GetLabel() const { return m_Label; }
+        inline Label* getLabel() { return m_label; }
+        inline const Label* getLabel() const { return m_label; }
 
-        inline Image* GetImage() { return m_Image; }
-        inline const Image* GetImage() const { return m_Image; }
+        inline Image* getImage() { return m_image; }
+        inline const Image* getImage() const { return m_image; }
     private:
-        void UpdatePositions()
+        void updatePositions()
         {
-            m_Image->SetPosition(sf::Vector2f{m_Position.x, m_Position.y - m_Size.y / 2.0f + m_Image->GetSize().y / 2.0f});
-            m_Label->SetPosition(sf::Vector2f{m_Position.x, m_Image->GetPosition().y + m_Image->GetSize().y / 2.0f + m_Image->GetMargin().y / 2.0f + m_Label->GetSize().y / 2.0f});
+            m_image->setPosition(sf::Vector2f{m_position.x, m_position.y - m_size.y / 2.0f + m_image->getSize().y / 2.0f});
+            m_label->setPosition(sf::Vector2f{m_position.x, m_image->getPosition().y + m_image->getSize().y / 2.0f + m_image->getMargin().y / 2.0f + m_label->getSize().y / 2.0f});
         }
 
-        void UpdateSize()
+        void updateSize()
         {
-            m_Size.x = std::max(m_Image->GetSize().x, m_Label->GetSize().x);
-            m_Size.y = m_Image->GetSize().y + m_Label->GetSize().y + m_Image->GetMargin().y / 2.0f + m_Label->GetMargin().y / 2.0f;
+            m_size.x = std::max(m_image->getSize().x, m_label->getSize().x);
+            m_size.y = m_image->getSize().y + m_label->getSize().y + m_image->getMargin().y / 2.0f + m_label->getMargin().y / 2.0f;
         }
 
-        Image* m_Image;
-        Label* m_Label;
+        Image* m_image;
+        Label* m_label;
     };
 }

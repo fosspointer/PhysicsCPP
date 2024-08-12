@@ -15,10 +15,10 @@ namespace physics
         }
     };
 
-    static Material::Pair OrderedPair(Material* first, Material* second)
+    static Material::Pair orderedPair(Material* first, Material* second)
     {
-        const auto& first_name = first->GetName();
-        const auto& second_name = second->GetName();
+        const auto& first_name = first->getName();
+        const auto& second_name = second->getName();
         auto comparison = first_name.compare(second_name);
 
         if(comparison > 0)
@@ -31,31 +31,31 @@ namespace physics
     {
     public:
 
-        static void Set(Material* first, Material* second, float value)
+        static void set(Material* first, Material* second, float value)
         {
-            s_FrictionMap[OrderedPair(first, second)] = value;
+            s_frictionMap[orderedPair(first, second)] = value;
         }
 
-        static void Set(const std::string& first, const std::string& second, float value)
+        static void set(const std::string& first, const std::string& second, float value)
         {
-            Set(Materials::Get(first), Materials::Get(second), value);
+            set(Materials::get(first), Materials::get(second), value);
         }
 
-        static float& Get(Material* first, Material* second)
+        static float& get(Material* first, Material* second)
         {
-            auto pair = OrderedPair(first, second);
-            auto f = s_FrictionMap.find(pair);
-            if(f != s_FrictionMap.end())
+            auto pair = orderedPair(first, second);
+            auto f = s_frictionMap.find(pair);
+            if(f != s_frictionMap.end())
                 return f->second;
             
-            return s_FrictionMap[pair] = PHYSICS_FRICTION_DEFAULT;
+            return s_frictionMap[pair] = PHYSICS_FRICTION_DEFAULT;
         }
 
-        static float& Get(const std::string& first, const std::string& second)
+        static float& get(const std::string& first, const std::string& second)
         {
-            return Get(Materials::Get(first), Materials::Get(second));
+            return get(Materials::get(first), Materials::get(second));
         }
     private:
-        static std::unordered_map<Material::Pair, float, PairHash<Material>> s_FrictionMap; 
+        static std::unordered_map<Material::Pair, float, PairHash<Material>> s_frictionMap; 
     };
 }
